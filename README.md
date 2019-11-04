@@ -1,4 +1,4 @@
-# GameAladdin_SE102_K11
+# Nhập môn phát triển game SE102.K11 - Game Aladdin
 Description: Remake game Aladdin genesis (Scene: Sultan's Dungeon &amp; Boss: Jafar's Palace)
 ## Thành viên:
 <pre>
