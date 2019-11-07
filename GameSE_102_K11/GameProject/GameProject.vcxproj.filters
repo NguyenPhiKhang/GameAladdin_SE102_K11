@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{0507eadb-312c-4306-b217-7c7f8098d680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WinMain">
+      <UniqueIdentifier>{e7d9433d-cfd9-4770-934f-272b8de4affa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Debug">
+      <UniqueIdentifier>{e997cea6-c84b-40a6-8128-2cfd0d84d647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Define">
+      <UniqueIdentifier>{147618c2-b922-4eca-a7b4-e188bec103d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Define\Enum">
+      <UniqueIdentifier>{7661310f-00e5-4229-917e-803ce005e902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Define\Constants">
+      <UniqueIdentifier>{7df049a4-7068-49e1-ab99-2e4ff3d9435b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{de584ca4-c9e6-4df1-bf9f-318edb2384af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Entity">
+      <UniqueIdentifier>{ecb0714f-0011-4f2e-a506-5892c92bab50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Sound">
+      <UniqueIdentifier>{99e63e08-de9b-4fdf-9391-6bffdbc42e2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Keyboard">
+      <UniqueIdentifier>{c4aa6758-8974-428d-b584-f0d926fb6894}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\TextureManager">
+      <UniqueIdentifier>{0d139db3-47eb-4a85-a6e8-2774227608ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\DirectX">
+      <UniqueIdentifier>{8173f6a8-33c4-47b8-9053-5961db0325e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{11b0f52b-2fca-4f5e-8b1b-de0c0bbe952c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Map">
+      <UniqueIdentifier>{607b3d16-4a23-41fc-bcd3-ea255fe162a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Camera">
+      <UniqueIdentifier>{26432141-f8b5-4fa7-9d93-b688c8a895f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Grid">
+      <UniqueIdentifier>{c1e73d02-856a-420e-a77c-d77a2b6f3bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters">
+      <UniqueIdentifier>{8ac0c2a3-22f0-448d-b2d3-c73b1e436fb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\ThirdParty">
+      <UniqueIdentifier>{eab18578-199f-4b50-b0df-fdfbfe089a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Collision">
+      <UniqueIdentifier>{fff050b6-5145-438c-bcca-d872a5cc1464}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Font">
+      <UniqueIdentifier>{88da164e-6de0-4d20-b17a-7a6525bc11c3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="debug.h">
+      <Filter>Framework\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="enum.h">
+      <Filter>Framework\Define\Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Framework\Define\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Framework\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Framework\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Framework\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Framework\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>Framework\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="dsutil.h">
+      <Filter>Framework\ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Framework\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Framework\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Framework\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="MapGame.h">
+      <Filter>Framework\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Framework\Collision</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>WinMain</Filter>
+    </ClCompile>
+    <ClCompile Include="debug.cpp">
+      <Filter>Framework\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Framework\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Framework\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Framework\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Framework\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Framework\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="dsutil.cpp">
+      <Filter>Framework\ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Framework\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Framework\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Framework\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="MapGame.cpp">
+      <Filter>Framework\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Dependencies\JsonCpp\jsoncpp.cpp">
+      <Filter>Framework\ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Framework\Collision</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
