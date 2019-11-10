@@ -49,9 +49,6 @@
     <Filter Include="Framework\Grid">
       <UniqueIdentifier>{c1e73d02-856a-420e-a77c-d77a2b6f3bff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Characters">
-      <UniqueIdentifier>{8ac0c2a3-22f0-448d-b2d3-c73b1e436fb4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\ThirdParty">
       <UniqueIdentifier>{eab18578-199f-4b50-b0df-fdfbfe089a7d}</UniqueIdentifier>
     </Filter>
@@ -60,6 +57,18 @@
     </Filter>
     <Filter Include="Framework\Font">
       <UniqueIdentifier>{88da164e-6de0-4d20-b17a-7a6525bc11c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\IntroScene">
+      <UniqueIdentifier>{f5a76635-e2be-4083-a385-b17f0662c048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\MainScene">
+      <UniqueIdentifier>{fca65795-ccf4-4f68-91bb-dd00dcff6dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Characters">
+      <UniqueIdentifier>{8ac0c2a3-22f0-448d-b2d3-c73b1e436fb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Items">
+      <UniqueIdentifier>{0d3c77b0-d488-407f-9391-c7eef1575102}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +123,18 @@
     <ClInclude Include="Collision.h">
       <Filter>Framework\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="SceneGame.h">
+      <Filter>Scenes\MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="AppleItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Aladdin.h">
+      <Filter>Entities\Characters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -166,6 +187,18 @@
     </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Framework\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGame.cpp">
+      <Filter>Scenes\MainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="AppleItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Aladdin.cpp">
+      <Filter>Entities\Characters</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

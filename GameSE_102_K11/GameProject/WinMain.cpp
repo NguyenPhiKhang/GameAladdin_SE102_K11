@@ -4,6 +4,7 @@
 #include <Windows.h>
 #include <stdlib.h>             // for detecting memory leaks
 #include <crtdbg.h>             // for detecting memory leaks
+#include "SceneManager.h"
 #include "Game.h"
 
 // Function prototypes
@@ -13,7 +14,7 @@ LRESULT WINAPI WinProc(HWND, UINT, WPARAM, LPARAM);
 
 // Game pointer
 HWND hwnd = NULL;
-Game* game = NULL;
+SceneManager* sceneGame = NULL;
 
 //=============================================================================
 // Starting point for a Windows application
@@ -27,10 +28,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 #endif
 
 	MSG msg;
-
+	sceneGame = SceneManager::getInstance();
+	sceneGame->setScene(new SceneGame());
+	
 	// Create the window
 	if (!CreateMainWindow(hwnd, hInstance, nCmdShow))
 		return 1;
+
+	sceneGame->initialize(hwnd);
 
 	// main message loop
 	int done = 0;
@@ -49,30 +54,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		}
 		else
 		{
-			//game->run(hwnd);    // run the game loop
+			sceneGame->run(hwnd);    // run the game loop
 			/*sprintf_s(fps, "%s || FPS: %.0f", GAME_TITLE, game->getFPS());
 			SetWindowTextA(hwnd, fps);*/
 		}
 
 	}
-	safeDelete(game);     // free memory before exit
+	safeDelete(sceneGame);     // free memory before exit
 	return msg.wParam;
-	/*}*/
-	//catch (const GameError& err)
-	//{
-	//	game->deleteAll();
-	//	DestroyWindow(hwnd);
-	//	MessageBox(NULL, err.getMessage(), "Error", MB_OK);
-	//}
-	//catch (...)
-	//{
-	//	game->deleteAll();
-	//	DestroyWindow(hwnd);
-	//	MessageBox(NULL, "Unknown error occured in game.", "Error", MB_OK);
-	//}
-
-	//SAFE_DELETE(game);     // free memory before exit
-	//return 0;
 }
 
 //=============================================================================
@@ -80,7 +69,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 //=============================================================================
 LRESULT WINAPI WinProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	return (game->messageHandler(hwnd, msg, wParam, lParam));
+	return (sceneGame->getScene()->messageHandler(hwnd, msg, wParam, lParam));
 }
 
 //=============================================================================
@@ -144,8 +133,8 @@ bool CreateMainWindow(HWND& hwnd, HINSTANCE hInstance, int nCmdShow)
 		MoveWindow(hwnd,
 			GAME_POSX,                                           // Left
 			GAME_POSY,                                           // Top
-			2 * GAME_WIDTH /*+ (GAME_WIDTH - clientRect.right)*/,    // Right
-			2 * GAME_HEIGHT + 80 /*+ (GAME_HEIGHT - clientRect.bottom)*/, // Bottom
+			2*GAME_WIDTH /*+ (GAME_WIDTH - clientRect.right)*/,    // Right
+			2*GAME_HEIGHT /*+ (GAME_HEIGHT - clientRect.bottom)*/, // Bottom
 			TRUE);                                       // Repaint the window
 	}
 

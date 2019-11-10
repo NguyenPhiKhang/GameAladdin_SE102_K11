@@ -16,7 +16,7 @@ private:
 public:
 	~TextureManager();
 	static TextureManager* getIntance();
-	void AddTexture(eType type, LPTEXTURE texture);
+	void addTexture(eType type, LPTEXTURE texture);
 	LPTEXTURE getTexture(eType type);
 
 	// Load all texture in game

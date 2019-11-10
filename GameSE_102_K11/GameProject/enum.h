@@ -9,7 +9,15 @@
     ((COLOR_ARGB)((((a)&0xff)<<24)|(((r)&0xff)<<16)|(((g)&0xff)<<8)|((b)&0xff)))
 
 enum eType {
+	// main character
+	ALADDIN_IDLE = 11,
+	ALADDIN_RUN = 12,
 
+	// items
+	APPLES = 1000,
+
+	// maps
+	MAP_SULTAN = 21,
 };
 
 namespace graphicsNS

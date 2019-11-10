@@ -13,6 +13,9 @@ Game::Game()
 	initialized = false;
 	fpsOn = false;
 	fps = 0.0f;
+
+	/*graphics = Graphics::getInstance();
+	input = Input::getInstance();*/
 }
 
 //=============================================================================
@@ -38,9 +41,11 @@ LRESULT Game::messageHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			return 0;
 		case WM_KEYDOWN: case WM_SYSKEYDOWN:    // key down
 			Input::getInstance()->keyDown(wParam);
+			DebugOut("[INFO] KEY Down %d...\n", wParam);
 			return 0;
 		case WM_KEYUP: case WM_SYSKEYUP:        // key up 
 			Input::getInstance()->keyUp(wParam);
+			DebugOut("[INFO] KEY Up %d...\n", wParam);
 			return 0;
 		case WM_CHAR:                           // character entered
 			Input::getInstance()->keyIn(wParam);

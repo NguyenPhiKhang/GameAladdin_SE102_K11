@@ -15,17 +15,20 @@
 // SpriteData: The properties required by Graphics::drawSprite to draw a sprite
 struct SpriteData
 {
-	int         width;      // width of sprite in pixels
-	int         height;     // height of sprite in pixels
-	float       x;          // screen location (top left corner of sprite)
-	float       y;
-	float       scale;      // <1 smaller, >1 bigger
-	float       angle;      // rotation angle in radians
-	RECT        rect;       // used to select an image from a larger texture
-	LPDIRECT3DTEXTURE9  texture;    // pointer to texture
-	bool        flipHorizontal; // true to flip sprite horizontally (mirror)
-	bool        flipVertical;   // true to flip sprite vertically
-	int			direction;
+	int					id;				// id of entity to distinguish other entity
+	int					width;			// width of sprite in pixels
+	int					height;			// height of sprite in pixels
+	float				x;				// screen location (top left corner of sprite)
+	float				y;
+	float				scale;			// <1 smaller, >1 bigger
+	float				angle;			// rotation angle in radians
+	RECT				rect;			// used to select an image from a larger texture
+	bool				flipHorizontal; // true to flip sprite horizontally (mirror)
+	bool				flipVertical;   // true to flip sprite vertically
+	int					direction;		// direction of sprite
+	float				xViewport;		// position of sprite in viewport(camera)
+	float				yViewport;
+	LPDIRECT3DTEXTURE9  texture;		// pointer to texture
 };
 //typedef SpriteData* LPSPRITEDATA;
 

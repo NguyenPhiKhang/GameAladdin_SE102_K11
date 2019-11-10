@@ -5,9 +5,8 @@
 #include "constants.h"
 #include "image.h"
 #include <fstream>
-#include "textureManager.h"
 #include "Camera.h"
-#include "Graphics.h"
+#include "Texture.h"
 
 // for convenience
 
@@ -27,8 +26,8 @@ class MapGame
 private:
 	Image* map;
 
-	int ColumnsMap, RowsMap;
-	int tileWidth, tileHeight;
+	int ColumnsMap, RowsMap; 
+	int tileWidth, tileHeight; // width & height of map frame
 	int bankMapWidth, bankMapHeight;
 
 	int tileMap[142][284];
@@ -36,7 +35,7 @@ private:
 public:
 	MapGame();
 	~MapGame();
-	bool initialize(Graphics* graphics, TextureManager* texture);
+	void LoadMap(eType type);
 	void ReadMapJSON(std::string filename);
 	void Render(Camera* camera);
 };

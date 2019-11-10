@@ -22,6 +22,8 @@ protected:
 	HRESULT hr;             // standard return type
 	bool    active;         // only active entities may collide
 
+	int state;
+
 	float dx, dy;
 
 public:
@@ -56,6 +58,9 @@ public:
 	// Return health;
 	virtual float getHealth()         const { return health; }
 
+	// Return State
+	virtual int getState()			  const { return state; }
+
 	virtual float getDX() { return dx; }
 	virtual float getDY() { return dy; }
 	virtual void getBoundingBox(float& left, float& top, float& right, float& bottom);
@@ -87,6 +92,8 @@ public:
 	virtual void setDX(float dx) { this->dx = dx; }
 	virtual void setDY(float dy) { this->dy = dy; }
 
+	// Set state
+	virtual void setState(int state) { this->state = state; }
 	////////////////////////////////////////
 	//         Other functions            //
 	////////////////////////////////////////

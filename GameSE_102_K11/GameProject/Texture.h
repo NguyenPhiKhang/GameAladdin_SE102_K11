@@ -36,13 +36,13 @@ public:
 	UINT getCols() const { return cols; }
 
 	// Initialize the textureManager
-	bool initialize(std::string filename);
+	void initialize(std::string filename);
 
-	// Release resources
-	void onLostDevice();
+	//// Release resources
+	//void onLostDevice();
 
-	// Restore resourses
-	void onResetDevice();
+	//// Restore resourses
+	//void onResetDevice();
 };
 
 typedef CTexture* LPTEXTURE;

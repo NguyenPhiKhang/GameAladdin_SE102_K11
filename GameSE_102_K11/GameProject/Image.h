@@ -37,63 +37,72 @@ public:
 	// Return reference to SpriteData structure.
 	const virtual SpriteData& getSpriteInfo() { return spriteData; }	// for backward compatibility
 
+	virtual int			getID() { return spriteData.id; }
+
 	// Return visible parameter.
-	virtual bool  getVisible() { return visible; }
+	virtual bool		getVisible() { return visible; }
 
 	// Return X position.
-	virtual float getX() { return spriteData.x; }
+	virtual float		getX() { return spriteData.x; }
 
 	// Return Y position.
-	virtual float getY() { return spriteData.y; }
+	virtual float		getY() { return spriteData.y; }
 
 	// Return scale factor.
-	virtual float getScale() { return spriteData.scale; }
+	virtual float		getScale() { return spriteData.scale; }
 
 	// Return width.
-	virtual int   getWidth() { return spriteData.width; }
+	virtual int			getWidth() { return spriteData.width; }
 
 	// Return height.
-	virtual int   getHeight() { return spriteData.height; }
+	virtual int			getHeight() { return spriteData.height; }
 
 	// Return center X.
-	virtual float getCenterX() { return spriteData.x + spriteData.width / 2 * getScale(); }
+	virtual float		getCenterX() { return spriteData.x + spriteData.width / 2 * getScale(); }
 
 	// Return center Y.
-	virtual float getCenterY() { return spriteData.y + spriteData.height / 2 * getScale(); }
+	virtual float		getCenterY() { return spriteData.y + spriteData.height / 2 * getScale(); }
 
 	// Return rotation angle in degrees.
-	virtual float getDegrees() { return spriteData.angle * (180.0f / (float)PI); }
+	virtual float		getDegrees() { return spriteData.angle * (180.0f / (float)PI); }
 
 	// Return rotation angle in radians.
-	virtual float getRadians() { return spriteData.angle; }
+	virtual float		getRadians() { return spriteData.angle; }
 
 	// Return delay between frames of animation.
-	virtual float getFrameDelay() { return frameDelay; }
+	virtual float		getFrameDelay() { return frameDelay; }
 
 	// Return number of starting frame.
-	virtual int   getStartFrame() { return startFrame; }
+	virtual int			getStartFrame() { return startFrame; }
 
 	// Return number of ending frame.
-	virtual int   getEndFrame() { return endFrame; }
+	virtual int			getEndFrame() { return endFrame; }
 
 	// Return number of current frame.
-	virtual int   getCurrentFrame() { return currentFrame; }
+	virtual int			getCurrentFrame() { return currentFrame; }
 
 	// Return RECT structure of Image.
-	virtual RECT  getSpriteDataRect() { return spriteData.rect; }
+	virtual RECT		getSpriteDataRect() { return spriteData.rect; }
 
 	// Return state of animation complete.
-	virtual bool  getAnimationComplete() { return animComplete; }
+	virtual bool		getAnimationComplete() { return animComplete; }
 
 	// Return colorFilter.
-	virtual COLOR_ARGB getColorFilter() { return colorFilter; }
+	virtual COLOR_ARGB	getColorFilter() { return colorFilter; }
 
 	// Return direction
-	virtual int		getDirection() { return spriteData.direction; }
+	virtual int			getDirection() { return spriteData.direction; }
+
+	//Return position of sprite in Viewport
+	virtual float		getXViewport() { return spriteData.xViewport; }
+	virtual float		getYViewport() { return spriteData.yViewport; }
 
 	////////////////////////////////////////
 	//           Set functions            //
 	////////////////////////////////////////
+
+	//Set ID
+	virtual void setID(int id) { spriteData.id = id; }
 
 	// Set X location.
 	virtual void setX(float newX) { spriteData.x = newX; }
@@ -148,6 +157,11 @@ public:
 
 	// Set direction
 	virtual void setDirection(int _direction) { spriteData.direction = _direction; }
+
+	// Set position of Sprite in Viewport
+	virtual void setViewport(D3DXVECTOR2 pos) { spriteData.xViewport = pos.x; spriteData.yViewport = pos.y; }
+	virtual void setXViewport(float x) { spriteData.xViewport = x; }
+	virtual void setYViewport(float y) { spriteData.yViewport = y; }
 
 	////////////////////////////////////////
 	//         Other functions            //

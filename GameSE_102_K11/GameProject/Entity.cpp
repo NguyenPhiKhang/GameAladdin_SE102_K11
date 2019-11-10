@@ -48,8 +48,6 @@ void Entity::update(float frameTime)
 	velocity += deltaV;
 	deltaV.x = 0;
 	deltaV.y = 0;
-	dx = frameTime * velocity.x;
-	dy = frameTime * velocity.y;
 	Image::update(frameTime);
 }
 

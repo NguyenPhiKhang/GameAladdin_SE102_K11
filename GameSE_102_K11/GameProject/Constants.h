@@ -6,12 +6,15 @@
 //-----------------------------------------------
 //                  Constants
 //-----------------------------------------------
-// graphic images
-const char SQUARE_IMAGE[] = "./Resources/square.png";
+// textures images
+const char SULTAN_MAP_BANK_TEXTURE[] = "Resources\\Maps\\SultansDungeon\\Sultans_Dungeon_Map_bank.png";
+const char APPLEITEM_TEXTURE[] = "Resources\\Items\\AppleItems\\appleItem.png";
+const char ALADDIN_IDLE_TEXTURE[] = "Resources\\Aladdin\\IDLE\\animation_aladdin_idle.png";
+const char ALADDIN_RUN_TEXTURE[] = "Resources\\Aladdin\\RUN\\animation_aladdin_run.png";
 
-//file json
-const char SULTAN_TILE_FILE[] = "Resources\\Map\\SultansDungeon\\tiledMap_SultansDungeon.json";
-const char SULTAN_ITEM[] = "Resources\\Map\\SultansDungeon\\item.json";
+//files json
+const char SULTAN_TILEMAP[] = "Resources\\Maps\\SultansDungeon\\tiledMap_SultansDungeon.json";
+const char APPLEITEM_POSITION[] = "Resources\\Items\\AppleItems\\appleItem_position.json";
 
 // window
 const char CLASS_NAME[] = "ALADDIN";
@@ -35,6 +38,10 @@ const float MAX_FRAME_TIME = 1.0f / MIN_FRAME_RATE; // maximum time used in calc
 const UCHAR ESC_KEY = VK_ESCAPE;   // escape key
 const UCHAR ALT_KEY = VK_MENU;     // Alt key
 const UCHAR ENTER_KEY = VK_RETURN;   // Enter key
+const UCHAR ALADDIN_UP_KEY = VK_UP;
+const UCHAR ALADDIN_DOWN_KEY = VK_DOWN;
+const UCHAR ALADDIN_LEFT_KEY = VK_LEFT;
+const UCHAR ALADDIN_RIGHT_KEY = VK_RIGHT;
 
 
 //=============================================================================
