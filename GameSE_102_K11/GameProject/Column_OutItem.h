@@ -8,7 +8,7 @@ class Column_OutItem : public Entity
 private:
 
 public:
-	Column_OutItem(float x, float y);
+	Column_OutItem(float x, float y, int type);
 	~Column_OutItem();
 };
 

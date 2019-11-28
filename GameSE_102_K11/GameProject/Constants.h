@@ -43,8 +43,7 @@ const char GENIETEM_TEXTURE[] = "Resources\\Items\\GenieItems\\animation_genie.p
 const char HEART_BALLOONITEM_TEXTURE[] = "Resources\\Items\\Heart_BalloonItems\\animation_heart-balloon.png";
 const char PODIUMITEM_TEXTURE[] = "Resources\\Items\\PodiumItems\\animation_podium.png";
 
-const char SKELETON_LEFTITEM_TEXTURE[] = "Resources\\Items\\SkeletonItems\\skeleton-left.png";
-const char SKELETON_RIGHTITEM_TEXTURE[] = "Resources\\Items\\SkeletonItems\\skeleton-right.png";
+const char SKELETON_ITEM_TEXTURE[] = "Resources\\Items\\SkeletonItems\\skeleton-right.png";
 const char SPEARITEM_TEXTURE[] = "Resources\\Items\\SpearItems\\animation_spear.png";
 const char VASEITEM_TEXTURE[] = "Resources\\Items\\VaseItems\\animation_vase.png";
 const char STALLITEM_TEXTURE[] = "Resources\\Items\\Stall\\stall.png";
@@ -57,6 +56,7 @@ const char NAHBIITEM_TEXTURE[] = "Resources\\Items\\Nahbi\\nahbi.png";
 //files json
 const char SULTAN_TILEMAP[] = "Resources\\Maps\\SultansDungeon\\tiledMap_SultansDungeon.json";
 const char OBJECT_MAP1_POSITION[] = "Resources\\Items\\objects_map1.json";
+const char OBJECT_GRID_MAP1[] = "Resources\\Items\\objects_grid_map1.json";
 // window
 const char CLASS_NAME[] = "ALADDIN";
 const char GAME_TITLE[] = "ALADDIN";

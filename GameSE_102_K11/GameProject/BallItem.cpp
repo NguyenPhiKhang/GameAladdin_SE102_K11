@@ -4,6 +4,7 @@ BallItem::BallItem(float x, float y):Entity()
 {
 	spriteData.x = x;
 	spriteData.y = y;
+	type = eType::BALLS;
 }
 
 BallItem::~BallItem()

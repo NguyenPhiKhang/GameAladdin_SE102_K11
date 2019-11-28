@@ -81,8 +81,8 @@ void TextureManager::LoadResources()
 	addTexture(eType::HEART_BALLOON, new CTexture(HEART_BALLOONITEM_TEXTURE, 8, 19, 25));
 	addTexture(eType::PODIUM, new CTexture(PODIUMITEM_TEXTURE, 8, 40, 24));
 
-	addTexture(eType::SKELETONLEFT, new CTexture(SKELETON_LEFTITEM_TEXTURE));
-	addTexture(eType::SKELETONRIGHT, new CTexture(SKELETON_RIGHTITEM_TEXTURE));
+	//addTexture(eType::SKELETONLEFT, new CTexture(SKELETON_LEFTITEM_TEXTURE));
+	addTexture(eType::SKELETON, new CTexture(SKELETON_ITEM_TEXTURE));
 	addTexture(eType::SPEAR, new CTexture(SPEARITEM_TEXTURE, 14, 49, 35));
 	addTexture(eType::VASE, new CTexture(VASEITEM_TEXTURE, 10, 34, 34));
 	addTexture(eType::STALL, new CTexture(STALLITEM_TEXTURE));

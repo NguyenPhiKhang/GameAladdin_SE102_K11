@@ -6,11 +6,13 @@ Grid::Grid()
 
 Grid::~Grid()
 {
-	for (int i = 0; i < GRID_CELL_MAX_ROW; i++)
-		for (int j = 0; j < GRID_CELL_MAX_COLUMN; j++)
-		{
-			cells[i][j].clear();
-		}
+	for (auto& x : cells)
+	{
+		for (int i = 0; i < x.second.size(); i++)
+			x.second.clear();
+	}
+	cells.clear();
+
 }
 
 void Grid::SetFile(std::string str)
@@ -20,11 +22,13 @@ void Grid::SetFile(std::string str)
 
 void Grid::ReloadGrid()
 {
-	for (int i = 0; i < GRID_CELL_MAX_ROW; i++)
-		for (int j = 0; j < GRID_CELL_MAX_COLUMN; j++)
-		{
-			cells[i][j].clear();
-		}
+
+	for (auto& x : cells)
+	{
+		for (int i = 0; i < x.second.size(); i++)
+			x.second.clear();
+	}
+	cells.clear();
 
 
 	int id, type, w, h, n;
@@ -35,18 +39,23 @@ void Grid::ReloadGrid()
 	Json::Value root;
 	reader.parse(ifs, root);
 
-	Json::Value mapItem = root["mapItems"];
-	n = mapItem["n"].asInt();
+	Json::Value mapItem = root["map_grid"];
+	n = mapItem.size();
 
 	for (int i = 0; i < n; i++)
 	{
-		id = mapItem["imagelayer"][i]["_id"].asInt();
-		type = mapItem["imagelayer"][i]["_type"].asInt();
-		x = std::floorf(mapItem["imagelayer"][i]["_offsetx"].asFloat());
-		y = std::floorf(mapItem["imagelayer"][i]["_offsety"].asFloat());
-		w = mapItem["imagelayer"][i]["_width"].asInt();
-		h = mapItem["imagelayer"][i]["_height"].asInt();
-		Insert(id, type, x, y, w, h);
+		for (int j = 0; j < mapItem[i]["array_items"].size(); j++)
+		{
+			id = mapItem[i]["array_items"][j]["_id"].asInt();
+			type = mapItem[i]["array_items"][j]["_type"].asInt();
+			x = mapItem[i]["array_items"][j]["_x"].asFloat();
+			y = mapItem[i]["array_items"][j]["_y"].asFloat();
+			w = mapItem[i]["array_items"][j]["_width"].asInt();
+			h = mapItem[i]["array_items"][j]["_height"].asInt();
+			Entity* ent = GetNewEntity(id, type, x, y, w, h);
+			ent->setID(id);
+			cells[mapItem[i]["id_cell"].asInt()].push_back(ent);
+		}
 	}
 	ifs.close();
 
@@ -62,9 +71,10 @@ void Grid::ReloadGrid()
 				for(int x=0;x<cells[i][j].size();x++)
 				{
 					if(x==cells[i][j].size()-1)
-						ofs << "{\n'id': " << cells[i][j].at(x)->getID() << "\n,'type': " << cells[i][j].at(x)->getType() << ",\n'x': " << cells[i][j].at(x)->getX() 
-						<< ",\n'y': " << cells[i][j].at(x)->getY() <<",\n'_width': "<< cells[i][j].at(x)->getWidth() <<"\n}";
-					else ofs << "{\n'id': " << cells[i][j].at(x)->getID() << "\n,'type': " << cells[i][j].at(x)->getType() << ",\n'x': " << cells[i][j].at(x)->getX() << ",\n'y': " << cells[i][j].at(x)->getY() << "\n},";
+						ofs << "{\n'_id': " << cells[i][j].at(x)->getID() << ",\n'_type': " << cells[i][j].at(x)->getType() << ",\n'_x': " << cells[i][j].at(x)->getX() 
+						<< ",\n'_y': " << cells[i][j].at(x)->getY() <<",\n'_width': "<< cells[i][j].at(x)->getWidth() <<",\n'_height': " << cells[i][j].at(x)->getHeight()<<"\n}";
+					else ofs << "{\n'id': " << cells[i][j].at(x)->getID() << ",\n'type': " << cells[i][j].at(x)->getType() << ",\n'x': " << cells[i][j].at(x)->getX() 
+						<< ",\n'y': " << cells[i][j].at(x)->getY() << ",\n'_width': "<< cells[i][j].at(x)->getWidth() << ",\n'_height': "<< cells[i][j].at(x)->getHeight()<< "\n},";
 				}
 				ofs << "\n]\n},";
 			}
@@ -113,25 +123,25 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 	}
 	case COLUMN1:
 	{
-		Column_OutItem* column = new Column_OutItem(x, y);
+		Column_OutItem* column = new Column_OutItem(x, y, type);
 		column->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
 		return column;
 	}
 	case COLUMN2:
 	{
-		Column_OutItem* column = new Column_OutItem(x, y);
+		Column_OutItem* column = new Column_OutItem(x, y, type);
 		column->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
 		return column;
 	}
 	case COLUMN3:
 	{
-		Column_OutItem* column = new Column_OutItem(x, y);
+		Column_OutItem* column = new Column_OutItem(x, y, type);
 		column->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
 		return column;
 	}
 	case COLUMN4:
 	{
-		Column_OutItem* column = new Column_OutItem(x, y);
+		Column_OutItem* column = new Column_OutItem(x, y, type);
 		column->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
 		return column;
 	}
@@ -179,13 +189,7 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 		podium->setFrames(0, 7);
 		return podium;
 	}
-	case SKELETONLEFT:
-	{
-		SkeletonItem* ent = new SkeletonItem(x, y);
-		ent->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
-		return ent;
-	}
-	case SKELETONRIGHT:
+	case SKELETON:
 	{
 		SkeletonItem* ent = new SkeletonItem(x, y);
 		ent->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
@@ -268,17 +272,17 @@ void Grid::GetListEntity(std::vector<Entity*>& ListObj, Camera* camera)
 
 	for (int i = top; i <= bottom; i++)
 		for (int j = left; j <= right; j++)
-			for (UINT k = 0; k < cells[i][j].size(); k++)
+			for (auto k: cells[i*29 + j + 1])
 			{
-				if (mapObject.find(cells[i][j].at(k)->getID()) == mapObject.end())
-					mapObject[cells[i][j].at(k)->getID()] = cells[i][j].at(k);
+				if (mapObject.find(k->getID()) == mapObject.end())
+					mapObject[k->getID()] = k;
 			}
 	for (auto& x : mapObject)
 	{
 		ListObj.push_back(x.second);
 	}
 
-	for (auto& x : ListObj)
+	/*for (auto& x : ListObj)
 	{
 		bool flag = false;
 		for (auto y : list)
@@ -291,22 +295,22 @@ void Grid::GetListEntity(std::vector<Entity*>& ListObj, Camera* camera)
 		}
 		if (flag == false)
 			x->setCurrentFrame(0);
-	}
+	}*/
 }
 
-void Grid::Insert(int id, int type, float x, float y, int w, int h)
-{
-	int top = (int)(y / GRID_CELL_HEIGHT);
-	int bottom = (int)((y + h) / GRID_CELL_HEIGHT);
-	int left = (int)(x / GRID_CELL_WIDTH);
-	int right = (int)((x + w) / GRID_CELL_WIDTH);
-
-	Entity* ent = GetNewEntity(id, type, x, y, w, h);
-	if (ent == NULL)
-		return;
-	ent->setID(id);
-
-	for (int i = top; i <= bottom; i++)
-		for (int j = left; j <= right; j++)
-			cells[i][j].push_back(ent);
-}
+//void Grid::Insert(int id, int type, float x, float y, int w, int h)
+//{
+//	int top = (int)(y / GRID_CELL_HEIGHT);
+//	int bottom = (int)((y + h) / GRID_CELL_HEIGHT);
+//	int left = (int)(x / GRID_CELL_WIDTH);
+//	int right = (int)((x + w) / GRID_CELL_WIDTH);
+//
+//	Entity* ent = GetNewEntity(id, type, x, y, w, h);
+//	if (ent == NULL)
+//		return;
+//	ent->setID(id);
+//
+//	/*for (int i = top; i <= bottom; i++)
+//		for (int j = left; j <= right; j++)
+//			cells[i][j].push_back(ent);*/
+//}

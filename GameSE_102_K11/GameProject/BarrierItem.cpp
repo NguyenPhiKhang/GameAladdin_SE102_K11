@@ -4,6 +4,7 @@ BarrierItem::BarrierItem(float x, float y)
 {
 	spriteData.x = x;
 	spriteData.y = y;
+	type = eType::BARRIERS;
 }
 
 BarrierItem::~BarrierItem()

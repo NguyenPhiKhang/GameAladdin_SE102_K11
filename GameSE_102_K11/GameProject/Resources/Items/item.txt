@@ -1,0 +1,27 @@
+﻿apple-201 // táo
+ball-202 // kim cương
+barrier-203 // rào chắn
+bat-204 // dơi
+buttress-205 // trụ
+chain-206 // xích
+column_out1-207 // cột 1
+column_out2-208 // cột 2
+column_out3-209 // cột 3
+column_out4-210 // cột 4
+exit-211 // kết thúc màn
+genie-212 // thần đèn
+heart-balloon-213 // bong bóng trái tim
+iron-step-214 // bậc sắt
+podium-215 // bục đá (thụt ra thụt vào)
+skeleton-right-216 // bộ xương -- > id 257; 258 quay trái
+
+spear-218 // mũi chông
+vase-219 // bình 
+wood-220 // khúc gỗ 
+stall-221 // gian hàng
+peddler-222 // người bán hàng rong
+---------------------------------------
+nahbi-301 // enemy mập
+---------------------------------------
+hakim-401 // enemy gầy
+---------------------------------------

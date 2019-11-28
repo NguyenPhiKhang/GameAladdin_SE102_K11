@@ -35,7 +35,7 @@ void SceneGame::initialize(HWND hwnd)
 
 	camera->setPositionCam(24.0f, 894.0f);
 
-	grid->SetFile(OBJECT_MAP1_POSITION);
+	grid->SetFile(OBJECT_GRID_MAP1);
 	grid->ReloadGrid();
 
 	aladdin->setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_IDLE));
