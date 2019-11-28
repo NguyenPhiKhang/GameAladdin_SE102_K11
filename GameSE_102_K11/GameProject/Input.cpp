@@ -233,3 +233,16 @@ void Input::vibrateControllers(float frameTime)
 		}
 	}
 }
+
+bool Input::wasUpKeyGame()
+{
+	if (!keysDown[37] && 
+		!keysDown[38] && 
+		!keysDown[39] && 
+		!keysDown[40] && 
+		!keysDown[90] && 
+		!keysDown[67] && 
+		!keysDown[88])
+		return true;
+	return false;
+}

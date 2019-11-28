@@ -5,6 +5,24 @@
 #include "image.h"
 #include "input.h"
 #include "game.h"
+#include "Camera.h"
+#include <algorithm>
+
+class Entity;
+
+struct CCollisionEvent;
+typedef CCollisionEvent* LPCOLLISIONEVENT;
+
+struct CCollisionEvent
+{
+	Entity* entity;
+	float t, nx, ny;
+	CCollisionEvent(float t, float nx, float ny, Entity* entity = NULL);
+
+	static bool compare(const LPCOLLISIONEVENT& a, LPCOLLISIONEVENT& b) {
+		return a->t < b->t;
+	}
+};
 
 class Entity : public Image
 {
@@ -23,6 +41,8 @@ protected:
 	bool    active;         // only active entities may collide
 
 	int state;
+
+	int type;
 
 	float dx, dy;
 
@@ -63,7 +83,11 @@ public:
 
 	virtual float getDX() { return dx; }
 	virtual float getDY() { return dy; }
+
+	virtual int   getType() { return type; }
+
 	virtual void getBoundingBox(float& left, float& top, float& right, float& bottom);
+	virtual void RenderBoundingBox(Camera* camera);
 
 	////////////////////////////////////////
 	//           Set functions            //
@@ -111,6 +135,33 @@ public:
 
 	// Damage this Entity with weapon.
 	virtual void damage(int weapon);
+
+
+	LPCOLLISIONEVENT SweptAABBEx(Entity* ent1, Entity* ent2, float frameTime);
+
+	void SweptAABB(
+		float ml, //move left
+		float mt, //move top
+		float mr, //move right
+		float mb, //move bottom
+		float dx,
+		float dy,
+		float sl, //static left
+		float st, //static top
+		float sr, //static right
+		float sb, //static bottom
+		float& t,
+		float& nx,
+		float& ny);
+
+	void CalcPotentialCollisions(Entity* ent, std::vector<Entity*>* coEntities, std::vector<LPCOLLISIONEVENT>& coEvents, float frameTime);
+	void FilterCollision(
+		std::vector<LPCOLLISIONEVENT>& coEvents,
+		std::vector<LPCOLLISIONEVENT>& coEventsResult,
+		float& min_tx,
+		float& min_ty,
+		float& nx,
+		float& ny);
 };
 
 #endif

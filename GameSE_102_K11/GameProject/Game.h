@@ -11,6 +11,7 @@
 class Game
 {
 protected:
+	Input* input;
 	HWND    hwnd;               // window handle
 	HRESULT hr;                 // standard return type
 	LARGE_INTEGER timeStart;    // Performance Counter start value
@@ -22,7 +23,18 @@ protected:
 	DWORD   sleepTime;          // number of milli-seconds to sleep between frames
 	bool    paused;             // true if game is paused
 	bool    initialized;
-	bool	checkKeyDown;
+
+	//bool	checkKeyDown;		
+	bool	isPress;			// check key state down ( up, down, right, left, x, z, c)
+
+	int		CountKeyAttack;		// don't allow attack when hold key
+	int		CountKeyThrow;		// don't allow throw when hold key
+	int		CountKeyJump;		// don't allow jump when hold key
+	float	sumTimeKeyUp;		
+	float	sumTimeKeyDown;
+
+	bool	isDebugRenderBBox;
+
 public:
 	// Constructor
 	Game();
@@ -81,6 +93,21 @@ public:
 	// Call graphics->spriteEnd();
 	//   draw non-sprites
 	virtual void render() = 0;
+
+	// set key press is true if isPress true
+	void setIsPress(bool isPress) { this->isPress = isPress; };
+	// return true if has any key down satisfy key states
+	bool getIsPress() { return isPress; }
+	// return count Key attack
+	int getCountKeyAttack() { return CountKeyAttack; }
+	// return count key throw
+	int getCountKeyThrow() { return CountKeyThrow; }
+	//return count key jump
+	int getCountKeyJump() { return CountKeyJump; }
+	//
+	float getSumTimeKeyUp() { return sumTimeKeyUp; }
+	//
+	float getSumTimeKeyDown() { return sumTimeKeyDown; }
 };
 
 #endif

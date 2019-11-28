@@ -6,6 +6,7 @@
 #include "MapGame.h"
 #include "Grid.h"
 #include "Aladdin.h"
+#include "Ground.h"
 
 class SceneGame: public Game
 {
@@ -16,12 +17,17 @@ private:
 
 	Aladdin* aladdin;
 
+	//Ground* ground;
+
 	std::vector<Entity*> listEntity;
+
+	std::vector<Entity*> listColumns;
 
 	float posX;
 	float posY;
 	float verticalX;
 	float verticalY;
+
 public:
 	SceneGame();
 	~SceneGame();
@@ -29,6 +35,7 @@ public:
 	void initialize(HWND hwnd);
 	void update(float frameTime);
 	void render();
+
 };
 
 #endif // !_SCENE_GAME_H

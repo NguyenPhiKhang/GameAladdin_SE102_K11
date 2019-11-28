@@ -16,8 +16,8 @@ namespace MapNS {
 	const int MAP_HEIGHT_1 = 1134;
 	const int MAP_WIDTH_1 = 2270;
 	const int MAX_SPEED_KEYB = 500;
-	const float POSX_KEYB = 160.0f;
-	const float POSY_KEYB = 120.0f;
+	const int POSX_KEYB = 160;
+	const int POSY_KEYB = 120;
 }
 
 

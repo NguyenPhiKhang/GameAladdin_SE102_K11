@@ -3,6 +3,15 @@
 
 #include <d3dx9.h>
 
+namespace cameraNS {
+	const int marginLeft = 60;
+	const int marginRight = 130;
+	const int marginVertical = 60;
+	const int marginWhenJump = 10;
+	const int marginWhenGlance = 133;
+	const int marginWhenSit = -60;
+}
+
 class Camera
 {
 private:

@@ -338,6 +338,38 @@ void Graphics::drawSprite(const SpriteData& spriteData, COLOR_ARGB color)
 	spriteHandler->Draw(spriteData.texture, &spriteData.rect, NULL, NULL, color);
 }
 
+void Graphics::drawSprite(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, COLOR_ARGB color_filter)
+{
+	if (texture == NULL)      // if no texture
+		return;
+
+	RECT r;
+	r.left = left;
+	r.top = top;
+	r.right = right;
+	r.bottom = bottom;
+
+	// Screen position of the sprite
+	D3DXVECTOR2 translate = D3DXVECTOR2((float)x, (float)y);
+
+	//Create a matrix to rotate, scale and position our sprite
+	D3DXMATRIX matrix;
+	D3DXMatrixTransformation2D(
+		&matrix,                // the matrix
+		NULL,                   // keep origin at top left when scaling
+		0.0f,                   // no scaling rotation
+		NULL,               // scale amount
+		NULL,          // rotation center
+		0.0f,  // rotation angle
+		&translate);            // X,Y location
+
+	// Tell the sprite about the matrix "Hello Neo"
+	spriteHandler->SetTransform(&matrix);
+
+	// Draw the sprite
+	spriteHandler->Draw(texture, &r, NULL, NULL, color_filter);
+}
+
 //=============================================================================
 // Test for lost device
 //=============================================================================

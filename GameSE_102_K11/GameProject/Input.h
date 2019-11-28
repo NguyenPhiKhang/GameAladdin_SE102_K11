@@ -110,6 +110,9 @@ public:
 
 	// Vibrates the connected controllers for the desired time.
 	void vibrateControllers(float frameTime);
+
+	bool wasUpKeyGame();
+
 };
 
 

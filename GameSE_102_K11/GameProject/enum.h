@@ -10,14 +10,68 @@
 
 enum eType {
 	// main character
-	ALADDIN_IDLE = 11,
-	ALADDIN_RUN = 12,
+	// animation idle
+	ALADDIN					= 100,
+	ALADDIN_IDLE			= 111,
+	ALADDIN_ATTACK			= 112,
+	ALADDIN_THROW			= 113,
+
+	// animation run
+	ALADDIN_RUN				= 121,
+	ALADDIN_STOP_INERTIA	= 122,
+	ALADDIN_RUN_ATTACK		= 123,
+	ALADDIN_RUN_THROW		= 124,
+	ALADDIN_RUN_JUMP		= 125,
+	/*ALADDIN_RUN_JUMP_ATTACK	= 126,
+	ALADDIN_RUN_JUMP_THROW	= 127,*/
+
+	// animation glance up
+	ALADDIN_GLANCE_UP		= 131,
+	ALADDIN_GLANCE_ATTACK	= 132,
+
+	// animation jump
+	ALADDIN_JUMP			= 141,
+	ALADDIN_JUMP_ATTACK		= 142,
+	ALADDIN_JUMP_THROW		= 143,
+
+	// animation sit
+	ALADDIN_SIT				= 151,
+	ALADDIN_SIT_ATTACK		= 152,
+	ALADDIN_SIT_THROW		= 153,
+
+	//ground
+	GROUND					= 200,
 
 	// items
-	APPLES = 1000,
+	APPLES					= 201,
+	BALLS					= 202,
+	BARRIERS				= 203,
+	BATS					= 204,
+	BUTTRESS				= 205,
+	CHAINS					= 206,
+	COLUMN1					= 207,
+	COLUMN2					= 208,
+	COLUMN3					= 209,
+	COLUMN4					= 210,
+	EXITS					= 211,
+	GENIES					= 212,
+	HEART_BALLOON			= 213,
+	IRON_STEP				= 214,
+	PODIUM					= 215,
+	SKELETONLEFT			= 216,
+	SKELETONRIGHT			= 217,
+	SPEAR					= 218,
+	VASE					= 219,
+	WOOD					= 220,
+	STALL					= 221,
+	PEDDLER					= 222,
+	NAHBI					= 301,
+	HAKIM					= 401,
 
 	// maps
-	MAP_SULTAN = 21,
+	MAP_SULTAN				= 21,
+
+	BBOX					= 31,
 };
 
 namespace graphicsNS

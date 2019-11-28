@@ -70,6 +70,9 @@
     <Filter Include="Entities\Items">
       <UniqueIdentifier>{0d3c77b0-d488-407f-9391-c7eef1575102}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities\Ground">
+      <UniqueIdentifier>{1216362b-cb8c-4bb1-852d-87454e73653a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="debug.h">
@@ -135,6 +138,66 @@
     <ClInclude Include="Aladdin.h">
       <Filter>Entities\Characters</Filter>
     </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="BallItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BarrierItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BatItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtressItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ChainItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Column_OutItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ExitItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="GenieItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="HakimItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Heart_BalloonItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Iron_StepItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="NahbiItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="PeddlerItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="PodiumItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletonItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="SpearItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="StallItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="VaseItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="WoodItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -199,6 +262,66 @@
     </ClCompile>
     <ClCompile Include="Aladdin.cpp">
       <Filter>Entities\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="BallItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="BarrierItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="BatItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtressItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ChainItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Column_OutItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ExitItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="GenieItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="HakimItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Heart_BalloonItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Iron_StepItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="NahbiItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="PeddlerItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="PodiumItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="SkeletonItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="SpearItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="StallItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="VaseItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="WoodItem.cpp">
+      <Filter>Entities\Items</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -8,6 +8,27 @@
 #include "Camera.h"
 #include "constants.h"
 #include "AppleItem.h"
+#include "BallItem.h"
+#include "BarrierItem.h"
+#include "BatItem.h"
+#include "ButtressItem.h"
+#include "ChainItem.h"
+#include "Column_OutItem.h"
+#include "ExitItem.h"
+#include "GenieItem.h"
+#include "Heart_BalloonItem.h"
+#include "PodiumItem.h"
+#include "SkeletonItem.h"
+#include "VaseItem.h"
+#include "WoodItem.h"
+#include "SpearItem.h"
+#include "StallItem.h"
+#include "PeddlerItem.h"
+#include "NahbiItem.h"
+#include "HakimItem.h"
+#include "Ground.h"
+#include "Iron_StepItem.h"
+
 
 namespace gridNS {
 	const int GRID_CELL_WIDTH = GAME_WIDTH / 4;
@@ -33,7 +54,7 @@ public:
 	void ReloadGrid();
 
 
-	Entity* GetNewEntity(int type, float x, float y);
+	Entity* GetNewEntity(int id, int type, float x, float y, int width, int height);
 	void Insert(int id, int type, float x, float y, int w, int h); //Thêm object vào grid
 	void GetListEntity(std::vector<Entity*>& ListObj, Camera* camera);
 

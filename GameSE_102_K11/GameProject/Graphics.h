@@ -111,7 +111,9 @@ public:
 	//      spriteData.rect.right must be right edge + 1
 	//      spriteData.rect.bottom must be bottom edge + 1
 	void    drawSprite(const SpriteData& spriteData,           // sprite to draw
-		COLOR_ARGB color = graphicsNS::WHITE);      // default to white color filter (no change)
+		COLOR_ARGB color = graphicsNS::BLUE);      // default to white color filter (no change)
+
+	void	drawSprite(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, COLOR_ARGB color_filter);
 
 	// Reset the graphics device.
 	HRESULT reset();

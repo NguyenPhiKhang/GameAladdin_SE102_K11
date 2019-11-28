@@ -1,0 +1,32 @@
+* Muốn ngước lên:
+- phải nhấn key up
+- không thực hiện khi đang ở trạng thái đang chạy( gồm run, run_attack, run_jump)
+- không thực hiện khi đang ở trạng thái đang nhảy ( gồm jump, jump_attack, jump_throw)
+- không thực hiện khi đang ở trạng thái đang cúi người( gồm sit, sit_attack, sit_throw)
+- bao gồm các animation khác:
+	+ xoay phải/trái khi nhấn key right/left
+	+ chém liên tục khi nhấn key X
+	+ bỏ ném, jump ở trạng thái này
+
+* Muốn chạy:
+- phải nhấn key left or key right
+- không thực hiện khi đang ở trạng thái ngước lên ( còn giữ key up)
+- không thực hiện khi đang ở trạng thái jump ( bao gồm jump, jump_attack, jump_throw)
+- bao gồm các animation khác:
+	+ xoay trái/phải khi nhấn key left/right
+	+ chém khi nhấn key X ( phải chém hết vòng thì mới nhận key X mới, nếu giữ key X thì sẽ về state Run)
+	+ nhảy khi nhấn key C ( phải nhảy tiếp đất mới nhận key C mới, nếu giữ key C thì sẽ về state Run) và trong lúc còn state run_jump nếu nhấn key X thì sẽ chuyển qua animation run_jump_attack(...// tương tự 'chém khi nhấn key X) và trong lúc còn run_jump thì nhấn key Z thì sẽ chuyển qua animation run_jump_throw ( tương tự như trên...)
+- khi chạy xong sẽ load animation stop_inertia
+
+* Muốn nhảy:
+- phải nhấn key C
+- không thực hiện khi đang ở trạng thái glance, glance_attack + holdkeyUP, run, run_attack, run_jump, run_jump_attack, run_jump_throw.
+- bao gồm animation khác:
+	+ xoay trái/ phải khi nhấn key right/left, đồng thời sẽ dịch chuyển một khoảng dx
+	+ chém khi nhảy
+	+ ném táo khi nhảy
+
+* Muốn cúi người:
+
+
+	

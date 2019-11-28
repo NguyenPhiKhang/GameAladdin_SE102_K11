@@ -8,14 +8,55 @@
 //-----------------------------------------------
 // textures images
 const char SULTAN_MAP_BANK_TEXTURE[] = "Resources\\Maps\\SultansDungeon\\Sultans_Dungeon_Map_bank.png";
+const char BOUNDING_BOX_TEXTURE[] = "Resources\\bbox.png";
 const char APPLEITEM_TEXTURE[] = "Resources\\Items\\AppleItems\\appleItem.png";
-const char ALADDIN_IDLE_TEXTURE[] = "Resources\\Aladdin\\IDLE\\animation_aladdin_idle.png";
-const char ALADDIN_RUN_TEXTURE[] = "Resources\\Aladdin\\RUN\\animation_aladdin_run.png";
+const char ALADDIN_IDLE_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_idle.png";
+const char ALADDIN_RUN_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_run.png";
+const char ALADDIN_STOP_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_stop_inertia.png";
+const char ALADDIN_ATTACK_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_attack.png";
+const char ALADDIN_THROW_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_throw.png";
+const char ALADDIN_GLANCE_UP_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_glance_up.png";
+const char ALADDIN_RUN_ATTACK_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_run_attack.png";
+const char ALADDIN_GLANCE_ATTACK_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_glance_attack.png";
+const char ALADDIN_JUMP_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_jump.png";
+const char ALADDIN_JUMP_ATTACK_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_jump_attack.png";
+const char ALADDIN_RUN_JUMP_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_run_jump.png";
+const char ALADDIN_JUMP_THROW_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_jump_throw.png";
+const char ALADDIN_RUN_THROW_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_run_throw.png";
+const char ALADDIN_SIT_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_sit.png";
+const char ALADDIN_SIT_ATTACK_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_sit_attack.png";
+const char ALADDIN_SIT_THROW_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_sit_throw.png";
+
+
+// items object
+const char BALLITEM_TEXTURE[] = "Resources\\Items\\BallItems\\animation_ball.png";
+const char BATITEM_TEXTURE[] = "Resources\\Items\\BatItems\\bat.png";
+//const char BARRIERITEM_TEXTURE[] = "Resources\\Items\\BarrierItems\\barrierItem.png";
+const char BUTTRESSITEM_TEXTURE[] = "Resources\\Items\\ButtressItems\\animation_buttress2.png";
+//const char CHAINITEM_TEXTURE[] = "Resources\\Items\\ChainItems\\chain.png";
+const char COLUMN1_OUTITEM_TEXTURE[] = "Resources\\Items\\Column_OutItems\\column1.png";
+const char COLUMN2_OUTITEM_TEXTURE[] = "Resources\\Items\\Column_OutItems\\column2.png";
+const char COLUMN3_OUTITEM_TEXTURE[] = "Resources\\Items\\Column_OutItems\\column3.png";
+const char COLUMN4_OUTITEM_TEXTURE[] = "Resources\\Items\\Column_OutItems\\column4.png";
+const char EXITITEM_TEXTURE[] = "Resources\\Items\\ExitItems\\exititem.png";
+const char GENIETEM_TEXTURE[] = "Resources\\Items\\GenieItems\\animation_genie.png";
+const char HEART_BALLOONITEM_TEXTURE[] = "Resources\\Items\\Heart_BalloonItems\\animation_heart-balloon.png";
+const char PODIUMITEM_TEXTURE[] = "Resources\\Items\\PodiumItems\\animation_podium.png";
+
+const char SKELETON_LEFTITEM_TEXTURE[] = "Resources\\Items\\SkeletonItems\\skeleton-left.png";
+const char SKELETON_RIGHTITEM_TEXTURE[] = "Resources\\Items\\SkeletonItems\\skeleton-right.png";
+const char SPEARITEM_TEXTURE[] = "Resources\\Items\\SpearItems\\animation_spear.png";
+const char VASEITEM_TEXTURE[] = "Resources\\Items\\VaseItems\\animation_vase.png";
+const char STALLITEM_TEXTURE[] = "Resources\\Items\\Stall\\stall.png";
+const char PEDDLERITEM_TEXTURE[] = "Resources\\Items\\Peddler\\animation_peddler.png";
+const char HAKIMRITEM_TEXTURE[] = "Resources\\Items\\Hakim\\hakim.png";
+const char NAHBIITEM_TEXTURE[] = "Resources\\Items\\Nahbi\\nahbi.png";
+
+
 
 //files json
 const char SULTAN_TILEMAP[] = "Resources\\Maps\\SultansDungeon\\tiledMap_SultansDungeon.json";
-const char APPLEITEM_POSITION[] = "Resources\\Items\\AppleItems\\appleItem_position.json";
-
+const char OBJECT_MAP1_POSITION[] = "Resources\\Items\\objects_map1.json";
 // window
 const char CLASS_NAME[] = "ALADDIN";
 const char GAME_TITLE[] = "ALADDIN";
@@ -42,6 +83,9 @@ const UCHAR ALADDIN_UP_KEY = VK_UP;
 const UCHAR ALADDIN_DOWN_KEY = VK_DOWN;
 const UCHAR ALADDIN_LEFT_KEY = VK_LEFT;
 const UCHAR ALADDIN_RIGHT_KEY = VK_RIGHT;
+const UCHAR ALADDIN_ATTACK_KEY = 'X';
+const UCHAR ALADDIN_THROW_KEY = 'Z';
+const UCHAR ALADDIN_JUMP_KEY = 'C';
 
 
 //=============================================================================

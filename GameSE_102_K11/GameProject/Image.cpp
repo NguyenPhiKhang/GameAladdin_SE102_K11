@@ -19,13 +19,12 @@ Image::Image()
 	spriteData.texture = NULL;      // the sprite texture (picture)
 	spriteData.flipHorizontal = false;
 	spriteData.flipVertical = false;
-	//spriteData.direction = D_RIGHT;
 	cols = 1;
 	startFrame = 0;
 	endFrame = 0;
 	currentFrame = 0;
-	frameDelay = 1.0;               // default to 1 second per frame of animation
-	animTimer = 0.0;
+	frameDelay = 1.0f;               // default to 1 second per frame of animation
+	animTimer = 0.0f;
 	visible = true;                 // the image is visible
 	loop = true;                    // loop frames
 	animComplete = false;
@@ -118,7 +117,7 @@ void Image::update(float frameTime)
 		animTimer += frameTime;             // total elapsed time
 		if (animTimer > frameDelay)
 		{
-			animTimer -= frameDelay;
+			animTimer = 0.0f;
 			currentFrame++;
 			if (currentFrame < startFrame || currentFrame > endFrame)
 			{

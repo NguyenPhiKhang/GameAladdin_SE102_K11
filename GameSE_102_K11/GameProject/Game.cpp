@@ -13,9 +13,17 @@ Game::Game()
 	initialized = false;
 	fpsOn = false;
 	fps = 0.0f;
+	isPress = false;
+	CountKeyAttack = -1;
+	CountKeyThrow = -1;
+	CountKeyJump = -1;
+	sumTimeKeyUp = 0.0f;
+	sumTimeKeyDown = 0.0f;
 
-	/*graphics = Graphics::getInstance();
-	input = Input::getInstance();*/
+	isDebugRenderBBox = false;
+
+	/*graphics = Graphics::getInstance();*/
+	input = Input::getInstance();
 }
 
 //=============================================================================
@@ -40,18 +48,53 @@ LRESULT Game::messageHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			PostQuitMessage(0);					  //tell Windows to kill this program
 			return 0;
 		case WM_KEYDOWN: case WM_SYSKEYDOWN:    // key down
-			Input::getInstance()->keyDown(wParam);
-			DebugOut("[INFO] KEY Down %d...\n", wParam);
+			input->keyDown(wParam);
+			if ((int)wParam == 39 || (int)wParam == 37 ||
+				(int)wParam == 38 || (int)wParam == 40 ||
+				(int)wParam == 88 || (int)wParam == 67 ||
+				(int)wParam == 90)
+			{
+				isPress = true;
+			}
+			else isPress = false;
+			if ((int)wParam == 88)
+				CountKeyAttack++;
+			if ((int)wParam == 90)
+				CountKeyThrow++;
+			if ((int)wParam == 67)
+				CountKeyJump++;
+			if ((int)wParam == 38)
+				sumTimeKeyUp += frameTime;
+			if ((int)wParam == 40)
+				sumTimeKeyDown += frameTime;
+			if ((int)wParam == 82)
+				isDebugRenderBBox = !isDebugRenderBBox;
+
+			//DebugOut("Debug RenderBounding Box: %d\n", isDebugRenderBBox);
+
 			return 0;
 		case WM_KEYUP: case WM_SYSKEYUP:        // key up 
-			Input::getInstance()->keyUp(wParam);
-			DebugOut("[INFO] KEY Up %d...\n", wParam);
+			input->keyUp(wParam);
+			if (input->wasUpKeyGame())
+				isPress = false;
+			if ((int)wParam == 88)
+				CountKeyAttack = -1;
+			if ((int)wParam == 90)
+				CountKeyThrow = -1;
+			if ((int)wParam == 67)
+				CountKeyJump = -1;
+			if ((int)wParam == 38)
+				sumTimeKeyUp = 0.0f;
+			if ((int)wParam == 40)
+				sumTimeKeyDown = 0.0f;
+
+			//DebugOut("[KEY UP]: %d\n", CountKeyAttack);
 			return 0;
 		case WM_CHAR:                           // character entered
-			Input::getInstance()->keyIn(wParam);
+			input->keyIn(wParam);
 			return 0;
 		case WM_DEVICECHANGE:                   // check for controller insert
-			Input::getInstance()->checkControllers();
+			input->checkControllers();
 			return 0;
 		}
 	}
@@ -71,7 +114,7 @@ void Game::initialize(HWND hw)
 	Graphics::getInstance()->initialize(hwnd, GAME_WIDTH, GAME_HEIGHT, FULLSCREEN);
 
 	// initialize input, do not capture mouse
-	Input::getInstance()->initialize(hwnd, false);             // throws GameError
+	input->initialize(hwnd, false);             // throws GameError
 
 	// attempt to set up high resolution timer
 	if (QueryPerformanceFrequency(&timerFreq) == false)
@@ -143,6 +186,7 @@ void Game::setDisplayMode(graphicsNS::DISPLAY_MODE mode)
 	resetAll();                     // recreate surfaces
 }
 
+
 //=============================================================================
 // Call repeatedly by the main message loop in WinMain
 //=============================================================================
@@ -180,23 +224,23 @@ void Game::run(HWND hwnd)
 		update(frameTime);                   // update all game items
 		//ai();                       // artificial intelligence
 		//collisions();               // handle collisions
-		Input::getInstance()->vibrateControllers(frameTime); // handle controller vibration
+		input->vibrateControllers(frameTime); // handle controller vibration
 	}
 	renderGame();                   // draw all game items
-	Input::getInstance()->readControllers();       // read state of controllers
+	input->readControllers();       // read state of controllers
 
 	// if Alt+Enter toggle fullscreen/window
-	if (Input::getInstance()->isKeyDown(ALT_KEY) && Input::getInstance()->wasKeyPressed(ENTER_KEY))
+	if (input->isKeyDown(ALT_KEY) && input->wasKeyPressed(ENTER_KEY))
 		setDisplayMode(graphicsNS::TOGGLE); // toggle fullscreen/window
 
 	// if Esc key, set window mode 
-	if (Input::getInstance()->isKeyDown(ESC_KEY))
+	if (input->isKeyDown(ESC_KEY))
 		//setDisplayMode(graphicsNS::WINDOW); // set window mode
 		exitGame();
 
 	// Clear input
 	// Call this after all key checks are done
-	Input::getInstance()->clear(inputNS::KEYS_PRESSED);
+	input->clear(inputNS::KEYS_PRESSED);
 }
 
 //=============================================================================
@@ -218,8 +262,8 @@ void Game::resetAll()
 void Game::deleteAll()
 {
 	releaseAll();               // call onLostDevice() for every graphics item
-	/*safeDelete(graphics);
-	safeDelete(input);*/
+	/*safeDelete(graphics);*/
+	safeDelete(input);
 	initialized = false;
 }
 
