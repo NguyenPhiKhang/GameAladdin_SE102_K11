@@ -1,0 +1,148 @@
+{
+  "cols_grid": 11,
+  "map_grid": [
+    {
+      "id_cell": 67,
+      "array_items": [
+        {
+          "_id": 0,
+          "_type": 200,
+          "_x": 0,
+          "_y": 370,
+          "_width": 832,
+          "_height": 10
+        }
+      ]
+    },
+    {
+      "id_cell": 68,
+      "array_items": [
+        {
+          "_id": 0,
+          "_type": 200,
+          "_x": 0,
+          "_y": 370,
+          "_width": 832,
+          "_height": 10
+        }
+      ]
+    },
+    {
+      "id_cell": 69,
+      "array_items": [
+        {
+          "_id": 0,
+          "_type": 200,
+          "_x": 0,
+          "_y": 370,
+          "_width": 832,
+          "_height": 10
+        }
+      ]
+    },
+    {
+      "id_cell": 70,
+      "array_items": [
+        {
+          "_id": 0,
+          "_type": 200,
+          "_x": 0,
+          "_y": 370,
+          "_width": 832,
+          "_height": 10
+        }
+      ]
+    },
+    {
+      "id_cell": 71,
+      "array_items": [
+        {
+          "_id": 0,
+          "_type": 200,
+          "_x": 0,
+          "_y": 370,
+          "_width": 832,
+          "_height": 10
+        }
+      ]
+    },
+    {
+      "id_cell": 72,
+      "array_items": [
+        {
+          "_id": 0,
+          "_type": 200,
+          "_x": 0,
+          "_y": 370,
+          "_width": 832,
+          "_height": 10
+        }
+      ]
+    },
+    {
+      "id_cell": 73,
+      "array_items": [
+        {
+          "_id": 0,
+          "_type": 200,
+          "_x": 0,
+          "_y": 370,
+          "_width": 832,
+          "_height": 10
+        }
+      ]
+    },
+    {
+      "id_cell": 74,
+      "array_items": [
+        {
+          "_id": 0,
+          "_type": 200,
+          "_x": 0,
+          "_y": 370,
+          "_width": 832,
+          "_height": 10
+        }
+      ]
+    },
+    {
+      "id_cell": 75,
+      "array_items": [
+        {
+          "_id": 0,
+          "_type": 200,
+          "_x": 0,
+          "_y": 370,
+          "_width": 832,
+          "_height": 10
+        }
+      ]
+    },
+    {
+      "id_cell": 76,
+      "array_items": [
+        {
+          "_id": 0,
+          "_type": 200,
+          "_x": 0,
+          "_y": 370,
+          "_width": 832,
+          "_height": 10
+        }
+      ]
+    },
+    {
+      "id_cell": 77,
+      "array_items": [
+        {
+          "_id": 0,
+          "_type": 200,
+          "_x": 0,
+          "_y": 370,
+          "_width": 832,
+          "_height": 10
+        }
+      ]
+    }
+  ]
+}

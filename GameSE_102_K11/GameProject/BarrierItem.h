@@ -8,8 +8,9 @@ class BarrierItem : public Entity
 private:
 
 public:
-	BarrierItem(float x, float y);
+	BarrierItem(float x, float y, int width, int height);
 	~BarrierItem();
+	void getBoundingBox(float& left, float& top, float& right, float& bottom);
 };
 
 #endif

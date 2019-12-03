@@ -7,7 +7,14 @@
 //                  Constants
 //-----------------------------------------------
 // textures images
+
+//MAP
 const char SULTAN_MAP_BANK_TEXTURE[] = "Resources\\Maps\\SultansDungeon\\Sultans_Dungeon_Map_bank.png";
+const char SULTAN_FRONT_BACKGROUND[] = "Resources\\Maps\\SultansDungeon\\Front_Background_Map.png";
+const char JAFAR_MAP_BANK_TEXTURE[] = "Resources\\Maps\\JafarsPalace\\Jafars_Palace_Map_bank.png";
+const char JAFAR_PILLAR_SNAKE[] = "Resources\\Maps\\JafarsPalace\\pillar_snake.png";
+
+//ALADDIN
 const char BOUNDING_BOX_TEXTURE[] = "Resources\\bbox.png";
 const char APPLEITEM_TEXTURE[] = "Resources\\Items\\AppleItems\\appleItem.png";
 const char ALADDIN_IDLE_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_idle.png";
@@ -26,14 +33,13 @@ const char ALADDIN_RUN_THROW_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_
 const char ALADDIN_SIT_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_sit.png";
 const char ALADDIN_SIT_ATTACK_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_sit_attack.png";
 const char ALADDIN_SIT_THROW_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_sit_throw.png";
+const char ALADDIN_PUSH_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_push.png";
 
 
-// items object
+// ITEM + ENEMY
 const char BALLITEM_TEXTURE[] = "Resources\\Items\\BallItems\\animation_ball.png";
 const char BATITEM_TEXTURE[] = "Resources\\Items\\BatItems\\bat.png";
-//const char BARRIERITEM_TEXTURE[] = "Resources\\Items\\BarrierItems\\barrierItem.png";
-const char BUTTRESSITEM_TEXTURE[] = "Resources\\Items\\ButtressItems\\animation_buttress2.png";
-//const char CHAINITEM_TEXTURE[] = "Resources\\Items\\ChainItems\\chain.png";
+const char BUTTRESSITEM_TEXTURE[] = "Resources\\Items\\ButtressItems\\animation_buttress.png";
 const char COLUMN1_OUTITEM_TEXTURE[] = "Resources\\Items\\Column_OutItems\\column1.png";
 const char COLUMN2_OUTITEM_TEXTURE[] = "Resources\\Items\\Column_OutItems\\column2.png";
 const char COLUMN3_OUTITEM_TEXTURE[] = "Resources\\Items\\Column_OutItems\\column3.png";
@@ -55,8 +61,9 @@ const char NAHBIITEM_TEXTURE[] = "Resources\\Items\\Nahbi\\nahbi.png";
 
 //files json
 const char SULTAN_TILEMAP[] = "Resources\\Maps\\SultansDungeon\\tiledMap_SultansDungeon.json";
-const char OBJECT_MAP1_POSITION[] = "Resources\\Items\\objects_map1.json";
-const char OBJECT_GRID_MAP1[] = "Resources\\Items\\objects_grid_map1.json";
+const char JAFAR_TILEMAP[] = "Resources\\Maps\\JafarsPalace\\tiledMap_JajarsPalace.json";
+const char OBJECT_GRID_MAP_SULTAN[] = "Resources\\Items\\objects_grid_map_sultan.json";
+const char OBJECT_GRID_MAP_JAFAR[] = "Resources\\Items\\objects_grid_map_jafar.json";
 // window
 const char CLASS_NAME[] = "ALADDIN";
 const char GAME_TITLE[] = "ALADDIN";
@@ -86,6 +93,8 @@ const UCHAR ALADDIN_RIGHT_KEY = VK_RIGHT;
 const UCHAR ALADDIN_ATTACK_KEY = 'X';
 const UCHAR ALADDIN_THROW_KEY = 'Z';
 const UCHAR ALADDIN_JUMP_KEY = 'C';
+const UCHAR MAP_SULTAN_KEY = VK_F1;
+const UCHAR MAP_JAFAR_KEY = VK_F2;
 
 
 //=============================================================================

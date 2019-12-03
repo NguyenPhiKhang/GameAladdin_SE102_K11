@@ -110,6 +110,9 @@ public:
 	// Set Y location.
 	virtual void setY(float newY) { spriteData.y = newY; }
 
+	// Set Position XY
+	virtual void setXY(float newX, float newY) { spriteData.x = newX; spriteData.y = newY; }
+
 	// Set scale.
 	virtual void setScale(float s) { spriteData.scale = s; }
 

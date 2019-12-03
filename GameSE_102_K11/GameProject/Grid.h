@@ -28,6 +28,7 @@
 #include "HakimItem.h"
 #include "Ground.h"
 #include "Iron_StepItem.h"
+#include "PillarItem.h"
 
 
 namespace gridNS {
@@ -48,7 +49,10 @@ private:
 	//std::vector<Entity*> cells[GRID_CELL_MAX];
 
 	std::unordered_map<int, std::vector<Entity*>> cells;
+	std::unordered_map<int, Entity*> allObjects;
 	std::string filepath;
+
+	int cols_gridMap;
 
 public:
 	Grid();
@@ -61,7 +65,7 @@ public:
 	Entity* GetNewEntity(int id, int type, float x, float y, int width, int height);
 	//void Insert(int id, int type, float x, float y, int w, int h); //Thêm object vào grid
 	void GetListEntity(std::vector<Entity*>& ListObj, Camera* camera);
-
+	bool CheckObjectInit(int id);	// kiểm tra object đã khởi tạo chưa? false: chưa, true: rồi
 };
 
 #endif // !_GRID_H

@@ -16,7 +16,7 @@ void PodiumItem::update(float frameTime)
 	Entity::update(frameTime);
 	if (currentFrame == 0 || currentFrame == 4)
 	{
-		frameDelay = 3.0f;
+		frameDelay = 2.0f;
 	}
 	else
 	{
@@ -39,7 +39,7 @@ void PodiumItem::update(float frameTime)
 
 void PodiumItem::getBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	if (currentFrame == 3 || currentFrame == 4 || currentFrame == 5)
+	if (currentFrame >= 2&& currentFrame <=6)
 	{
 		left = spriteData.x + 7;
 		top = spriteData.y + 1;

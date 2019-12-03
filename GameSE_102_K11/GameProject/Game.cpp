@@ -69,8 +69,12 @@ LRESULT Game::messageHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				sumTimeKeyDown += frameTime;
 			if ((int)wParam == 82)
 				isDebugRenderBBox = !isDebugRenderBBox;
+			if ((int)wParam == 112)
+				setMapCurrent(MAP_SULTAN);
+			if ((int)wParam == 113)
+				setMapCurrent(MAP_JAFAR);
 
-			//DebugOut("Debug RenderBounding Box: %d\n", isDebugRenderBBox);
+			DebugOut("KEY DOWN %d\n", wParam);
 
 			return 0;
 		case WM_KEYUP: case WM_SYSKEYUP:        // key up 

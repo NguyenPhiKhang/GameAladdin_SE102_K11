@@ -34,6 +34,7 @@ protected:
 	float	sumTimeKeyDown;
 
 	bool	isDebugRenderBBox;
+	
 
 public:
 	// Constructor
@@ -108,6 +109,8 @@ public:
 	float getSumTimeKeyUp() { return sumTimeKeyUp; }
 	//
 	float getSumTimeKeyDown() { return sumTimeKeyDown; }
+
+	virtual void setMapCurrent(eType type) = 0;
 };
 
 #endif

@@ -7,10 +7,10 @@ class Ground: public Entity
 {
 private:
 public:
-	Ground(float x, float y);
+	Ground(float x, float y, int width, int height);
 	~Ground();
 
-	void getBoundingBox(float& left, float& top, float& right, float& bottom);
+	//void getBoundingBox(float& left, float& top, float& right, float& bottom);
 };
 
 #endif // !_GROUND_H

@@ -47,24 +47,28 @@ void TextureManager::LoadResources()
 {
 	// maps
 	addTexture(eType::MAP_SULTAN, new CTexture(SULTAN_MAP_BANK_TEXTURE, 100, 8, 8));
+	addTexture(eType::MAP_JAFAR, new CTexture(JAFAR_MAP_BANK_TEXTURE, 13, 64, 64));
+	addTexture(eType::MAP_JAFAR_BACKGROUND, new CTexture(JAFAR_PILLAR_SNAKE));
+	addTexture(eType::MAP_SULTAN_FRONT_BG, new CTexture(SULTAN_FRONT_BACKGROUND));
 
 	// aladdin
-	addTexture(eType::ALADDIN_IDLE,				new CTexture(ALADDIN_IDLE_TEXTURE, 10, 128, /*79*/110));						// trạng thái đứng yên
-	addTexture(eType::ALADDIN_RUN,				new CTexture(ALADDIN_RUN_TEXTURE, 13, 128, /*58*/ 110));						// trạng thái đang chạy
-	addTexture(eType::ALADDIN_STOP_INERTIA,		new CTexture(ALADDIN_STOP_TEXTURE, 9, 128, /*70*/110));						// trạng thái dừng có trượt
-	addTexture(eType::ALADDIN_ATTACK,			new CTexture(ALADDIN_ATTACK_TEXTURE, 7, 128, /*74*/110));					// trạng thái đang đứng đánh
-	addTexture(eType::ALADDIN_THROW,			new CTexture(ALADDIN_THROW_TEXTURE, 7, 128, /*63*/110));						// trạng thái đang ném táo
-	addTexture(eType::ALADDIN_GLANCE_UP,		new CTexture(ALADDIN_GLANCE_UP_TEXTURE, 3, 128, /*59*/110));					// trạng thái đang ngước lên
-	addTexture(eType::ALADDIN_RUN_ATTACK,		new CTexture(ALADDIN_RUN_ATTACK_TEXTURE, 6, 128, /*60*/110));				// trạng thái vừa chạy vừa đánh
-	addTexture(eType::ALADDIN_GLANCE_ATTACK,	new CTexture(ALADDIN_GLANCE_ATTACK_TEXTURE, 10, 128, /*86*/110));			// trạng thái đánh khi đang ngước lên
-	addTexture(eType::ALADDIN_JUMP,				new CTexture(ALADDIN_JUMP_TEXTURE, 10, 128, /*93*/110));						// trạng thái nhảy lên
-	addTexture(eType::ALADDIN_JUMP_ATTACK,		new CTexture(ALADDIN_JUMP_ATTACK_TEXTURE, 7, 128, 110));						// trạng thái nhảy chém
-	addTexture(eType::ALADDIN_RUN_JUMP,			new CTexture(ALADDIN_RUN_JUMP_TEXTURE, 7, 128, 110));						// trạng thái vừa chạy vừa nhảy
-	addTexture(eType::ALADDIN_JUMP_THROW, 		new CTexture(ALADDIN_JUMP_THROW_TEXTURE, 7, 128, 110));						// trạng thái nhảy ném táo
-	addTexture(eType::ALADDIN_RUN_THROW,		new CTexture(ALADDIN_RUN_THROW_TEXTURE, 6, 128, 110));						// trạng thái vừa chạy vừa ném táo
-	addTexture(eType::ALADDIN_SIT,				new CTexture(ALADDIN_SIT_TEXTURE, 4, 128, 110));							// trạng thái ngồi
-	addTexture(eType::ALADDIN_SIT_ATTACK,		new CTexture(ALADDIN_SIT_ATTACK_TEXTURE, 7, 128, 110));						// trạng thái ngồi chém
-	addTexture(eType::ALADDIN_SIT_THROW,		new CTexture(ALADDIN_SIT_THROW_TEXTURE, 7, 128, 110));						// trạng thái ngồi ném táo
+	addTexture(eType::ALADDIN_IDLE,				new CTexture(ALADDIN_IDLE_TEXTURE, 10, 136, /*79*/110));						// trạng thái đứng yên
+	addTexture(eType::ALADDIN_RUN,				new CTexture(ALADDIN_RUN_TEXTURE, 13, 136, /*58*/ 110));						// trạng thái đang chạy
+	addTexture(eType::ALADDIN_STOP_INERTIA,		new CTexture(ALADDIN_STOP_TEXTURE, 9, 136, /*70*/110));						// trạng thái dừng có trượt
+	addTexture(eType::ALADDIN_ATTACK,			new CTexture(ALADDIN_ATTACK_TEXTURE, 7, 136, /*74*/110));					// trạng thái đang đứng đánh
+	addTexture(eType::ALADDIN_THROW,			new CTexture(ALADDIN_THROW_TEXTURE, 7, 136, /*63*/110));						// trạng thái đang ném táo
+	addTexture(eType::ALADDIN_GLANCE_UP,		new CTexture(ALADDIN_GLANCE_UP_TEXTURE, 3, 136, /*59*/110));					// trạng thái đang ngước lên
+	addTexture(eType::ALADDIN_RUN_ATTACK,		new CTexture(ALADDIN_RUN_ATTACK_TEXTURE, 6, 136, /*60*/110));				// trạng thái vừa chạy vừa đánh
+	addTexture(eType::ALADDIN_GLANCE_ATTACK,	new CTexture(ALADDIN_GLANCE_ATTACK_TEXTURE, 10, 136, /*86*/110));			// trạng thái đánh khi đang ngước lên
+	addTexture(eType::ALADDIN_JUMP,				new CTexture(ALADDIN_JUMP_TEXTURE, 10, 136, /*93*/110));						// trạng thái nhảy lên
+	addTexture(eType::ALADDIN_JUMP_ATTACK,		new CTexture(ALADDIN_JUMP_ATTACK_TEXTURE, 7, 136, 110));						// trạng thái nhảy chém
+	addTexture(eType::ALADDIN_RUN_JUMP,			new CTexture(ALADDIN_RUN_JUMP_TEXTURE, 7, 136, 110));						// trạng thái vừa chạy vừa nhảy
+	addTexture(eType::ALADDIN_JUMP_THROW, 		new CTexture(ALADDIN_JUMP_THROW_TEXTURE, 7, 136, 110));						// trạng thái nhảy ném táo
+	addTexture(eType::ALADDIN_RUN_THROW,		new CTexture(ALADDIN_RUN_THROW_TEXTURE, 6, 136, 110));						// trạng thái vừa chạy vừa ném táo
+	addTexture(eType::ALADDIN_SIT,				new CTexture(ALADDIN_SIT_TEXTURE, 4, 136, 110));							// trạng thái ngồi
+	addTexture(eType::ALADDIN_SIT_ATTACK,		new CTexture(ALADDIN_SIT_ATTACK_TEXTURE, 7, 136, 110));						// trạng thái ngồi chém
+	addTexture(eType::ALADDIN_SIT_THROW,		new CTexture(ALADDIN_SIT_THROW_TEXTURE, 7, 136, 110));						// trạng thái ngồi ném táo
+	addTexture(eType::ALADDIN_PUSH,				new CTexture(ALADDIN_PUSH_TEXTURE, 9, 136, 110));							// trạng thái đẩy
 
 
 	// items

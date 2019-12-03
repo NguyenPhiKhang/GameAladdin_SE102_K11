@@ -3,6 +3,33 @@
 #include "Collision.cpp"
 
 
+Aladdin::Aladdin(Camera* camera, MapGame* mapGame): Entity()
+{
+	isSliding = false;
+	marginWhenChangeDirection = cameraNS::marginLeft;
+	marginWhenRun = cameraNS::marginLeft;
+	marginVertical = cameraNS::marginVertical;
+
+	isPressDirectionFirst = 0;
+	checkDirection = true;
+	LoopFinished = true;
+	LoopAttackGlance = true;
+	countLoopAttackGlance = 0;
+	JumpFinsihed = true;
+	holdKeyUP = false;
+	holdKeyDown = false;
+
+	_widthOld = 0;
+	_heightOld = 0;
+	isFalling = false;
+	isPushing = false;
+
+	this->camera = camera;
+	this->mapGame = mapGame;
+
+	type = eType::ALADDIN;
+}
+
 Aladdin::Aladdin(float x, float y) :Entity()
 {
 	spriteData.x = x;
@@ -32,12 +59,13 @@ Aladdin::~Aladdin()
 {
 }
 
-void Aladdin::update(float frameTime, Camera* camera, Game* gamePtr, std::vector<Entity*>* coEntities)
+void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEntities)
 {
 	Entity::update(frameTime);
 	
 	deltaV.y = GRAVITY_JUMP_SPEED * frameTime;
 	CollideWithGround(coEntities, frameTime);
+	CollideWithWall(coEntities, frameTime);
 
 #pragma region Kiểm tra có nhập phím để xét các state
 	if (gamePtr->getIsPress())
@@ -48,7 +76,8 @@ void Aladdin::update(float frameTime, Camera* camera, Game* gamePtr, std::vector
 		{
 			if (state != ALADDIN_GLANCE_UP && LoopAttackGlance == true)
 			{
-				setVelocity(D3DXVECTOR2(0.0f, 0.0f));
+				//setVelocity(D3DXVECTOR2(0.0f, 0.0f));
+				setVelocityX(0.0f);
 				LoopFinished = true;
 				isSliding = false;
 				currentFrame = 0;
@@ -88,7 +117,7 @@ void Aladdin::update(float frameTime, Camera* camera, Game* gamePtr, std::vector
 		if (Input::getInstance()->isKeyDown(ALADDIN_JUMP_KEY) &&
 			state != ALADDIN_RUN && JumpFinsihed &&
 			state != ALADDIN_GLANCE_UP && !holdKeyUP &&
-			state != ALADDIN_SIT && !holdKeyDown
+			state != ALADDIN_SIT && !holdKeyDown && !isFalling
 			)
 		{
 			if (gamePtr->getCountKeyJump() == 0)
@@ -114,7 +143,7 @@ void Aladdin::update(float frameTime, Camera* camera, Game* gamePtr, std::vector
 			state != ALADDIN_GLANCE_UP && !holdKeyUP &&
 			/*state != ALADDIN_JUMP && state!= ALADDIN_JUMP_ATTACK && state!= ALADDIN_JUMP_THROW*/
 			JumpFinsihed &&
-			state != ALADDIN_SIT && !holdKeyDown)
+			state != ALADDIN_SIT && !holdKeyDown && !isPushing)
 		{
 			if (state != ALADDIN_RUN && LoopFinished && JumpFinsihed)
 			{
@@ -127,7 +156,7 @@ void Aladdin::update(float frameTime, Camera* camera, Game* gamePtr, std::vector
 				if (Input::getInstance()->isKeyDown(ALADDIN_LEFT_KEY))
 				{
 					isPressDirectionFirst = -1;
-					setVelocity(D3DXVECTOR2(-ALADDIN_SPEED, 0.0f));
+					setVelocityX(-ALADDIN_SPEED);
 					currentFrame = 0;
 					if (spriteData.flipHorizontal == true)
 						checkDirection = true;
@@ -141,7 +170,7 @@ void Aladdin::update(float frameTime, Camera* camera, Game* gamePtr, std::vector
 				if (Input::getInstance()->isKeyDown(ALADDIN_RIGHT_KEY))
 				{
 					isPressDirectionFirst = 1;
-					setVelocity(D3DXVECTOR2(ALADDIN_SPEED, 0.0f));
+					setVelocityX(ALADDIN_SPEED);
 					currentFrame = 0;
 					if (spriteData.flipHorizontal == false)
 						checkDirection = true;
@@ -161,7 +190,7 @@ void Aladdin::update(float frameTime, Camera* camera, Game* gamePtr, std::vector
 				{
 					if (!spriteData.flipHorizontal)
 					{
-						setVelocity(D3DXVECTOR2(-ALADDIN_SPEED, 0.0f));
+						setVelocityX(-ALADDIN_SPEED);
 						isPressDirectionFirst = -1;
 						checkDirection = false;
 						spriteData.flipHorizontal = true;
@@ -173,7 +202,7 @@ void Aladdin::update(float frameTime, Camera* camera, Game* gamePtr, std::vector
 				{
 					if (spriteData.flipHorizontal)
 					{
-						setVelocity(D3DXVECTOR2(ALADDIN_SPEED, 0.0f));
+						setVelocityX(ALADDIN_SPEED);
 						isPressDirectionFirst = 1;
 						checkDirection = false;
 						spriteData.flipHorizontal = false;
@@ -227,7 +256,7 @@ void Aladdin::update(float frameTime, Camera* camera, Game* gamePtr, std::vector
 			{
 				if (gamePtr->getCountKeyJump() == 0)
 				{
-					if (state != ALADDIN_RUN_JUMP && JumpFinsihed)
+					if (state != ALADDIN_RUN_JUMP && JumpFinsihed && !isFalling)
 					{
 						setVelocityY(-ALADDIN_JUMP_SPEED);
 						holdKeyUP = false;
@@ -388,7 +417,7 @@ void Aladdin::update(float frameTime, Camera* camera, Game* gamePtr, std::vector
 
 		if (isSliding && state != ALADDIN_STOP_INERTIA)
 		{
-			setVelocity(D3DXVECTOR2(0.0f, 0.0f));
+			setVelocityX(0.0f);
 			currentFrame = 0;
 			setFrames(0, 8);
 			frameDelay = 0.1f;
@@ -400,7 +429,7 @@ void Aladdin::update(float frameTime, Camera* camera, Game* gamePtr, std::vector
 		IDLE:
 			if (!isSliding && state != ALADDIN_IDLE && LoopFinished && LoopAttackGlance && JumpFinsihed)
 			{
-				setVelocity(D3DXVECTOR2(0.0f, 0.0f));
+				setVelocityX(0.0f);
 				currentFrame = 0;
 				setFrames(0, 38);
 				setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_IDLE));
@@ -431,11 +460,11 @@ void Aladdin::update(float frameTime, Camera* camera, Game* gamePtr, std::vector
 			isSliding = true;
 		}
 
-		spriteData.x += dx;
+		//spriteData.x += dx;
 		//MoveViewport(camera);
 	}
 	else {
-		if (isSliding && spriteData.x > -10.0f && spriteData.x < MapNS::MAP_WIDTH_1 - spriteData.width)
+		if (isSliding && spriteData.x > -10.0f && spriteData.x < mapGame->getWidthMap() - spriteData.width)
 		{
 			if (currentFrame == 2)
 			{
@@ -464,7 +493,7 @@ void Aladdin::update(float frameTime, Camera* camera, Game* gamePtr, std::vector
 		else frameDelay = 0.08f;
 		if (currentFrame == 5)
 			LoopFinished = true;
-		spriteData.x += dx;
+		//spriteData.x += dx;
 		//MoveViewport(camera);
 	}
 	if (state == ALADDIN_GLANCE_UP)
@@ -609,7 +638,7 @@ void Aladdin::update(float frameTime, Camera* camera, Game* gamePtr, std::vector
 			}
 		}
 
-		spriteData.x += dx;
+		//spriteData.x += dx;
 		/*spriteData.y += dy;
 		MoveViewport(camera);*/
 	}
@@ -704,8 +733,8 @@ void Aladdin::MoveViewport(Camera* camera, bool moveX, bool moveY)
 	{
 		if (spriteData.x > marginWhenChangeDirection&&
 			spriteData.x > marginWhenRun&&
-			spriteData.x < MapNS::MAP_WIDTH_1 - GAME_WIDTH + marginWhenRun &&
-			spriteData.x < MapNS::MAP_WIDTH_1 - GAME_WIDTH + marginWhenChangeDirection
+			spriteData.x < mapGame->getWidthMap() - GAME_WIDTH + marginWhenRun &&
+			spriteData.x < mapGame->getWidthMap() - GAME_WIDTH + marginWhenChangeDirection
 			)
 		{
 			camera->setPositionCam(spriteData.x - marginWhenChangeDirection, camera->getYCamera());
@@ -715,13 +744,13 @@ void Aladdin::MoveViewport(Camera* camera, bool moveX, bool moveY)
 				camera->setPositionCam(spriteData.x - marginWhenChangeDirection, camera->getYCamera());
 			else camera->setPositionCam(0, camera->getYCamera());
 		}
-		if (spriteData.x > MapNS::MAP_WIDTH_1 - GAME_WIDTH + marginWhenRun) {
-			if (camera->getXCamera() < MapNS::MAP_WIDTH_1 - GAME_WIDTH)
+		if (spriteData.x > mapGame->getWidthMap() - GAME_WIDTH + marginWhenRun) {
+			if (camera->getXCamera() < mapGame->getWidthMap() - GAME_WIDTH)
 				camera->setPositionCam(spriteData.x - marginWhenChangeDirection, camera->getYCamera());
-			else camera->setPositionCam(MapNS::MAP_WIDTH_1 - GAME_WIDTH, camera->getYCamera());
+			else camera->setPositionCam((float)(mapGame->getWidthMap() - GAME_WIDTH), camera->getYCamera());
 		}
-		if (spriteData.x > MapNS::MAP_WIDTH_1 - spriteData.width + 50)
-			spriteData.x = (float)MapNS::MAP_WIDTH_1 - spriteData.width + 50;
+		if (spriteData.x > mapGame->getWidthMap() - spriteData.width + 50)
+			spriteData.x = (float)mapGame->getWidthMap() - spriteData.width + 50;
 		if (spriteData.x < -50.0f)
 			spriteData.x = -50.0f;
 	}
@@ -729,9 +758,9 @@ void Aladdin::MoveViewport(Camera* camera, bool moveX, bool moveY)
 	if (moveY)
 	{
 		if (spriteData.y > marginVertical&&
-			//spriteData.y > /*marginWhenGlance*/ cameraNS::marginVertical&&
-			//spriteData.y < MapNS::MAP_HEIGHT_1 - GAME_HEIGHT + /*marginWhenGlance*/ cameraNS::marginVertical &&
-			spriteData.y < MapNS::MAP_HEIGHT_1 - GAME_HEIGHT + marginVertical
+			//spriteData.y > marginWhenGlance &&
+			//spriteData.y < mapGame->getHeightMap() - GAME_HEIGHT + /*marginWhenGlance*/ marginVertical &&
+			spriteData.y < mapGame->getHeightMap() - GAME_HEIGHT + marginVertical
 			)
 		{
 			camera->setPositionCam(camera->getXCamera(), spriteData.y - marginVertical);
@@ -744,14 +773,14 @@ void Aladdin::MoveViewport(Camera* camera, bool moveX, bool moveY)
 			else camera->setPositionCam(camera->getXCamera(), 0.0f);
 		}
 
-		if (spriteData.y > MapNS::MAP_HEIGHT_1 - GAME_HEIGHT + marginVertical)
+		if (spriteData.y > mapGame->getHeightMap() - GAME_HEIGHT + marginVertical)
 		{
-			/*if (camera->getYCamera() < MapNS::MAP_HEIGHT_1 - GAME_HEIGHT)
+			/*if (camera->getYCamera() < mapGame->getHeightMap() - GAME_HEIGHT)
 				camera->setPositionCam(camera->getXCamera(), spriteData.y - marginVertical);
-			else*/ camera->setPositionCam(camera->getXCamera(), MapNS::MAP_HEIGHT_1 - GAME_HEIGHT);
+			else */camera->setPositionCam(camera->getXCamera(), (float)(mapGame->getHeightMap() - GAME_HEIGHT));
 		}
-		if (spriteData.y > MapNS::MAP_HEIGHT_1 - spriteData.height)
-			spriteData.y = (float)MapNS::MAP_HEIGHT_1 - spriteData.height;
+		if (spriteData.y > mapGame->getHeightMap() - spriteData.height)
+			spriteData.y = (float)mapGame->getHeightMap() - spriteData.height;
 		if (spriteData.y < 0.0f)
 			spriteData.y = 0.0f;
 	}
@@ -779,70 +808,40 @@ void Aladdin::getBoundingBox(float& left, float& top, float& right, float& botto
 	switch (state)
 	{
 	case ALADDIN_IDLE:
-		if(!(currentFrame>=0&&currentFrame<9))
-			positionBoundingBox(left, top, right, bottom, 55, 56, 49, 17, 52);
-		else positionBoundingBox(left, top, right, bottom, 43, 57, 53, 28, 48);
+	case ALADDIN_ATTACK:
+	case ALADDIN_RUN_ATTACK:
+		positionBoundingBox(left, top, right, bottom, 61, 61, 55, 14, 46);
 		break;
 	case ALADDIN_GLANCE_UP:
-		positionBoundingBox(left, top, right, bottom, 43, 57, 50, 28, 51);
-		break;
 	case ALADDIN_GLANCE_ATTACK:
-		if (currentFrame == 3 || currentFrame == 4 || currentFrame == 5)
-			positionBoundingBox(left, top, right, bottom, 38, 62, 49, 28, 52);
-		else positionBoundingBox(left, top, right, bottom, 45, 55, 53, 28, 48);
+	case ALADDIN_JUMP_ATTACK:
+	case ALADDIN_JUMP_THROW:
+		positionBoundingBox(left, top, right, bottom, 61, 61, 50, 14, 51);
 		break;
 	case ALADDIN_JUMP:
-		if (currentFrame == 0 || currentFrame == 9)
-			positionBoundingBox(left, top, right, bottom, 41, 59, 68, 28, 34);
-		else positionBoundingBox(left, top, right, bottom, 43, 60, 41, 25, 61);
-		break;
-	case ALADDIN_JUMP_ATTACK:
-		//if (currentFrame == 0 || currentFrame == 6)
-			positionBoundingBox(left, top, right, bottom, 48, 49, 48, 31, 54);
-		//else positionBoundingBox(left, top, right, bottom, 50, 51, 56, 27, 42);
-		break;
-	case ALADDIN_JUMP_THROW:
-		//if (currentFrame == 6)
-			positionBoundingBox(left, top, right, bottom, 47, 57, 51, 24, 51);
-		//else positionBoundingBox(left, top, right, bottom, 47, 53, 51, 28, 48);
+		positionBoundingBox(left, top, right, bottom, 61, 61, 44, 14, 57);
 		break;
 	case ALADDIN_RUN:
-		positionBoundingBox(left, top, right, bottom, 33, 65, 52, 30, 49);
-		break;
-	case ALADDIN_ATTACK:
-		positionBoundingBox(left, top, right, bottom, 44, 58, 53, 26, 48);
+		positionBoundingBox(left, top, right, bottom, 61, 61, 52, 14, 49);
 		break;
 	case ALADDIN_RUN_JUMP:
-		if (currentFrame == 0 || currentFrame == 2 || currentFrame == 3)
-			positionBoundingBox(left, top, right, bottom, 36, 60, 65, 32, 36);
-		else if (currentFrame == 1)
-			positionBoundingBox(left, top, right, bottom, 37, 61, 50, 30, 58);
-		else positionBoundingBox(left, top, right, bottom, 29, 67, 52, 32, 50);
+		positionBoundingBox(left, top, right, bottom, 52, 61, 58, 23, 43);
 		break;
 	case ALADDIN_STOP_INERTIA:
-		positionBoundingBox(left, top, right, bottom, 36, 54, 51, 38, 50);
+		positionBoundingBox(left, top, right, bottom, 61, 61, 58, 14, 43);
 		break;
 	case ALADDIN_THROW:
-		positionBoundingBox(left, top, right, bottom, 42, 58, 48, 28, 53);
-		break;
-	case ALADDIN_RUN_ATTACK:
-		positionBoundingBox(left, top, right, bottom, 36, 62, 53, 30, 48);
-		break;
 	case ALADDIN_RUN_THROW:
-		positionBoundingBox(left, top, right, bottom, 36, 66, 48, 26, 53);
+		positionBoundingBox(left, top, right, bottom, 61, 61, 48, 14, 53);
 		break;
 	case ALADDIN_SIT:
-		if (currentFrame == 0)
-			positionBoundingBox(left, top, right, bottom, 42, 62, 57, 24, 44);
-		else positionBoundingBox(left, top, right, bottom, 45, 51, 73, 32, 28);
-		break;
 	case ALADDIN_SIT_ATTACK:
-		positionBoundingBox(left, top, right, bottom, 36, 50, 73, 42, 28);
-		break;
+		positionBoundingBox(left, top, right, bottom, 61, 61, 73, 14, 28);
 	case ALADDIN_SIT_THROW:
-		if (currentFrame == 2 || currentFrame == 3 || currentFrame == 4)
-			positionBoundingBox(left, top, right, bottom, 44, 56, 66, 28, 35);
-		else positionBoundingBox(left, top, right, bottom, 39, 51, 71, 38, 30);
+		positionBoundingBox(left, top, right, bottom, 61, 61, 71, 14, 30);
+		break;
+	case ALADDIN_PUSH:
+		positionBoundingBox(left, top, right, bottom, 31, 61, 70, 44, 31);
 		break;
 	}
 }
@@ -878,6 +877,7 @@ void Aladdin::CollideWithGround(std::vector<Entity*>* coEntities, float frameTim
 	{
 		//spriteData.x += dx;
 		spriteData.y += dy;
+		isFalling = true;
 	}
 	else
 	{
@@ -907,12 +907,68 @@ void Aladdin::CollideWithGround(std::vector<Entity*>* coEntities, float frameTim
 			{
 				JumpFinsihed = true;
 				marginVertical = cameraNS::marginVertical;
+				setVelocityX(0.0f);
+				currentFrame = 0;
+				setFrames(0, 38);
+				setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_IDLE));
+				frameDelay = 0.08f;
+
+				state = ALADDIN_IDLE;
 			}
+			isFalling = false;
 		}
 		else spriteData.y += dy;
 	}
 
 	for (UINT i = 0; i < coEvents.size(); i++)
 		delete coEvents[i];
+}
+void Aladdin::CollideWithWall(std::vector<Entity*>* coEntities, float frameTime)
+{
+	std::vector<LPCOLLISIONEVENT> coEvents;
+	std::vector<LPCOLLISIONEVENT> coEventsResult;
+
+	coEvents.clear();
+	std::vector<Entity*> list_wall;
+	list_wall.clear();
+
+	for (UINT i = 0; i < coEntities->size(); i++)
+		if (coEntities->at(i)->getType() == eType::PILLAR || coEntities->at(i)->getType()==eType::BARRIERS)
+			list_wall.push_back(coEntities->at(i));
+
+	CalcPotentialCollisions(this, &list_wall, coEvents, frameTime);
+	if (coEvents.size() == 0)
+	{
+		spriteData.x += dx;
+		isPushing = false;
+	}
+	else
+	{
+		float min_tx, min_ty, nx = 0, ny;
+		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+		if (nx != 0)
+		{
+			spriteData.x += min_tx * dx + nx * 0.4f;
+			DebugOut("push wall ! nx= %.2f\n", nx);
+
+			if (state != ALADDIN_PUSH && JumpFinsihed && !isFalling)
+			{
+				isPushing = true;
+				LoopFinished = true;
+				isSliding = false;
+				currentFrame = 0;
+				setFrames(1, 8);
+				setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_PUSH));
+				frameDelay = 0.15f;
+
+				state = ALADDIN_PUSH;
+			}
+		}
+		else spriteData.x += dx;
+	}
+
+	for (UINT i = 0; i < coEvents.size(); i++)
+		delete coEvents[i];
+
 }
 

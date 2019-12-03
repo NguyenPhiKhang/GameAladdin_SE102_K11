@@ -40,12 +40,17 @@ private:
 	bool	holdKeyDown;
 
 	bool	isFalling;
+	bool	isPushing;
+
+	Camera* camera;
+	MapGame* mapGame;
 	
 public:
+	Aladdin(Camera* camera, MapGame* mapGame);
 	Aladdin(float x, float y);
 	~Aladdin();
 
-	void update(float frameTime, Camera* camera, Game* gamePtr, std::vector<Entity*> *coEntities);
+	void update(float frameTime, Game* gamePtr, std::vector<Entity*> *coEntities);
 	void MoveViewport(Camera* camera, bool moveX=true, bool moveY = true);								// thay đổi viewport khi thay đổi hướng nhân vật
 	//void ChangePositionState(int skewX=0, int skewY=0, bool isMoveX = false);	//skewX: vị trí X bị lệch của state so với vị trí mặc định
 																				//skewY: vị trí Y bị lệch ở bottom texture so với chân																	
@@ -57,6 +62,7 @@ public:
 		float bbWidth, float bbHeight);
 
 	void CollideWithGround(std::vector<Entity*> *coEntities, float frameTime);
+	void CollideWithWall(std::vector<Entity*>* coEntities, float frameTime);
 };
 
 #endif

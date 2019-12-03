@@ -1,4 +1,4 @@
-#ifndef _SCENE_GAME_H
+﻿#ifndef _SCENE_GAME_H
 #define _SCENE_GAME_H
 
 #include "Game.h"
@@ -16,6 +16,8 @@ private:
 	Grid* grid;
 
 	Aladdin* aladdin;
+	Image* pillar_snake; // background của map jafar's palace
+	Image* front_hurdle; // front background của map sultan's dungeon
 
 	//Ground* ground;
 
@@ -28,6 +30,10 @@ private:
 	float verticalX;
 	float verticalY;
 
+	eType mapCurrent;
+	float oldXCam;
+	float oldYCam;
+
 public:
 	SceneGame();
 	~SceneGame();
@@ -35,6 +41,10 @@ public:
 	void initialize(HWND hwnd);
 	void update(float frameTime);
 	void render();
+	void LoadMap(eType type);
+	void ResetObjectMap();
+
+	void setMapCurrent(eType type);
 
 };
 

@@ -157,6 +157,7 @@
     <ClInclude Include="MapGame.h" />
     <ClInclude Include="NahbiItem.h" />
     <ClInclude Include="PeddlerItem.h" />
+    <ClInclude Include="PillarItem.h" />
     <ClInclude Include="PodiumItem.h" />
     <ClInclude Include="SceneGame.h" />
     <ClInclude Include="SceneManager.h" />
@@ -199,6 +200,7 @@
     <ClCompile Include="MapGame.cpp" />
     <ClCompile Include="NahbiItem.cpp" />
     <ClCompile Include="PeddlerItem.cpp" />
+    <ClCompile Include="PillarItem.cpp" />
     <ClCompile Include="PodiumItem.cpp" />
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="SceneManager.cpp" />

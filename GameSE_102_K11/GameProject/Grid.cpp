@@ -2,6 +2,7 @@
 
 Grid::Grid()
 {
+	cols_gridMap = 0;
 }
 
 Grid::~Grid()
@@ -12,6 +13,8 @@ Grid::~Grid()
 			x.second.clear();
 	}
 	cells.clear();
+
+	allObjects.clear();
 
 }
 
@@ -29,6 +32,7 @@ void Grid::ReloadGrid()
 			x.second.clear();
 	}
 	cells.clear();
+	allObjects.clear();
 
 
 	int id, type, w, h, n;
@@ -42,6 +46,8 @@ void Grid::ReloadGrid()
 	Json::Value mapItem = root["map_grid"];
 	n = mapItem.size();
 
+	cols_gridMap = root["cols_grid"].asInt();
+
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < mapItem[i]["array_items"].size(); j++)
@@ -52,12 +58,20 @@ void Grid::ReloadGrid()
 			y = mapItem[i]["array_items"][j]["_y"].asFloat();
 			w = mapItem[i]["array_items"][j]["_width"].asInt();
 			h = mapItem[i]["array_items"][j]["_height"].asInt();
-			Entity* ent = GetNewEntity(id, type, x, y, w, h);
+			//DebugOut("Error id: %d\n", id);
+			Entity* ent;
+			if (CheckObjectInit(id))
+				ent = allObjects[id];
+			else { 
+				ent = GetNewEntity(id, type, x, y, w, h);
+				allObjects[id] = ent;
+			}
 			ent->setID(id);
 			cells[mapItem[i]["id_cell"].asInt()].push_back(ent);
 		}
 	}
 	ifs.close();
+	allObjects.clear();
 
 	/*std::ofstream ofs;
 	ofs.open("grid_items.txt");
@@ -71,9 +85,9 @@ void Grid::ReloadGrid()
 				for(int x=0;x<cells[i][j].size();x++)
 				{
 					if(x==cells[i][j].size()-1)
-						ofs << "{\n'_id': " << cells[i][j].at(x)->getID() << ",\n'_type': " << cells[i][j].at(x)->getType() << ",\n'_x': " << cells[i][j].at(x)->getX() 
+						ofs << "{\n'_id': " << cells[i][j].at(x)->getID() << ",\n'_type': " << cells[i][j].at(x)->getType() << ",\n'_x': " << cells[i][j].at(x)->getX()
 						<< ",\n'_y': " << cells[i][j].at(x)->getY() <<",\n'_width': "<< cells[i][j].at(x)->getWidth() <<",\n'_height': " << cells[i][j].at(x)->getHeight()<<"\n}";
-					else ofs << "{\n'id': " << cells[i][j].at(x)->getID() << ",\n'type': " << cells[i][j].at(x)->getType() << ",\n'x': " << cells[i][j].at(x)->getX() 
+					else ofs << "{\n'id': " << cells[i][j].at(x)->getID() << ",\n'type': " << cells[i][j].at(x)->getType() << ",\n'x': " << cells[i][j].at(x)->getX()
 						<< ",\n'y': " << cells[i][j].at(x)->getY() << ",\n'_width': "<< cells[i][j].at(x)->getWidth() << ",\n'_height': "<< cells[i][j].at(x)->getHeight()<< "\n},";
 				}
 				ofs << "\n]\n},";
@@ -90,13 +104,13 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 	{
 	case GROUND:
 	{
-		Ground* ground = new Ground(x, y);
+		Ground* ground = new Ground(x, y, width, height);
 		//ground->setTextureManager(TextureManager::getIntance()->getTexture(eType::BBOX));
 		return ground;
 	}
 	case WOOD:
 	{
-		WoodItem* wood = new WoodItem(x, y, width ,height);
+		WoodItem* wood = new WoodItem(x, y, width, height);
 		return wood;
 	}
 	case IRON_STEP:
@@ -104,13 +118,27 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 		Iron_StepItem* ironStep = new Iron_StepItem(x, y, width, height);
 		return ironStep;
 	}
+	case BARRIERS: 
+	{
+		BarrierItem* barrier = new BarrierItem(x, y, width, height);
+		return barrier;
+	}
+	case CHAINS:
+	{
+		ChainItem* chain = new ChainItem(x, y, width, height);
+		return chain;
+	}
+	case PILLAR:
+	{
+		PillarItem* pillar = new PillarItem(x, y, width, height);
+		return pillar;
+	}
 	case APPLES:
 	{
 		AppleItem* apple = new AppleItem(x, y);
 		apple->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
 		return apple;
 	}
-
 	case BALLS:
 	{
 		BallItem* ball = new BallItem(x, y);
@@ -149,15 +177,16 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 	{
 		ButtressItem* buttress = new ButtressItem(x, y);
 		buttress->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
-		buttress->setCurrentFrame(0);
-		buttress->setFrameDelay(0.2f);
+		buttress->setFrameDelay(0.08f);
 		buttress->setFrames(0, 27);
+		(id%2==0)? buttress->setCurrentFrame(0) : buttress->setCurrentFrame(7);
 		return buttress;
 	}
 	case EXITS:
-	{ExitItem* ent = new ExitItem(x, y);
-	ent->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
-	return ent;
+	{
+		ExitItem* ent = new ExitItem(x, y);
+		ent->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
+		return ent;
 	}
 	case GENIES:
 	{
@@ -183,9 +212,8 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 	{
 		PodiumItem* podium = new PodiumItem(x, y);
 		podium->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
-		podium->setCurrentFrame(0);
 		podium->setFrameDelay(0.1f);
-		//(id % 2 == 0) ? podium->setCurrentFrame(0) : podium->setCurrentFrame(2);
+		(id % 2 == 0) ? podium->setCurrentFrame(0) : podium->setCurrentFrame(4);
 		podium->setFrames(0, 7);
 		return podium;
 	}
@@ -272,7 +300,7 @@ void Grid::GetListEntity(std::vector<Entity*>& ListObj, Camera* camera)
 
 	for (int i = top; i <= bottom; i++)
 		for (int j = left; j <= right; j++)
-			for (auto k: cells[i*29 + j + 1])
+			for (auto k : cells[i * cols_gridMap + j + 1])
 			{
 				if (mapObject.find(k->getID()) == mapObject.end())
 					mapObject[k->getID()] = k;
@@ -296,6 +324,13 @@ void Grid::GetListEntity(std::vector<Entity*>& ListObj, Camera* camera)
 		if (flag == false)
 			x->setCurrentFrame(0);
 	}*/
+}
+
+bool Grid::CheckObjectInit(int id)
+{
+	if (allObjects.find(id) == allObjects.end())
+		return false;
+	return true;
 }
 
 //void Grid::Insert(int id, int type, float x, float y, int w, int h)

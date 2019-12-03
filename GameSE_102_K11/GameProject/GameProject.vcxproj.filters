@@ -73,6 +73,9 @@
     <Filter Include="Entities\Ground">
       <UniqueIdentifier>{1216362b-cb8c-4bb1-852d-87454e73653a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities\Wall">
+      <UniqueIdentifier>{4ea24a06-9170-4c9b-931b-98f06f83d683}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="debug.h">
@@ -144,9 +147,6 @@
     <ClInclude Include="BallItem.h">
       <Filter>Entities\Items</Filter>
     </ClInclude>
-    <ClInclude Include="BarrierItem.h">
-      <Filter>Entities\Items</Filter>
-    </ClInclude>
     <ClInclude Include="BatItem.h">
       <Filter>Entities\Items</Filter>
     </ClInclude>
@@ -171,16 +171,10 @@
     <ClInclude Include="Heart_BalloonItem.h">
       <Filter>Entities\Items</Filter>
     </ClInclude>
-    <ClInclude Include="Iron_StepItem.h">
-      <Filter>Entities\Items</Filter>
-    </ClInclude>
     <ClInclude Include="NahbiItem.h">
       <Filter>Entities\Items</Filter>
     </ClInclude>
     <ClInclude Include="PeddlerItem.h">
-      <Filter>Entities\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="PodiumItem.h">
       <Filter>Entities\Items</Filter>
     </ClInclude>
     <ClInclude Include="SkeletonItem.h">
@@ -196,7 +190,19 @@
       <Filter>Entities\Items</Filter>
     </ClInclude>
     <ClInclude Include="WoodItem.h">
-      <Filter>Entities\Items</Filter>
+      <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="PodiumItem.h">
+      <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Iron_StepItem.h">
+      <Filter>Entities\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="PillarItem.h">
+      <Filter>Entities\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="BarrierItem.h">
+      <Filter>Entities\Wall</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -269,9 +275,6 @@
     <ClCompile Include="BallItem.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
-    <ClCompile Include="BarrierItem.cpp">
-      <Filter>Entities\Items</Filter>
-    </ClCompile>
     <ClCompile Include="BatItem.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
@@ -296,16 +299,10 @@
     <ClCompile Include="Heart_BalloonItem.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
-    <ClCompile Include="Iron_StepItem.cpp">
-      <Filter>Entities\Items</Filter>
-    </ClCompile>
     <ClCompile Include="NahbiItem.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
     <ClCompile Include="PeddlerItem.cpp">
-      <Filter>Entities\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="PodiumItem.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
     <ClCompile Include="SkeletonItem.cpp">
@@ -321,7 +318,19 @@
       <Filter>Entities\Items</Filter>
     </ClCompile>
     <ClCompile Include="WoodItem.cpp">
-      <Filter>Entities\Items</Filter>
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="PodiumItem.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Iron_StepItem.cpp">
+      <Filter>Entities\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="PillarItem.cpp">
+      <Filter>Entities\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="BarrierItem.cpp">
+      <Filter>Entities\Wall</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -22,8 +22,6 @@ enum eType {
 	ALADDIN_RUN_ATTACK		= 123,
 	ALADDIN_RUN_THROW		= 124,
 	ALADDIN_RUN_JUMP		= 125,
-	/*ALADDIN_RUN_JUMP_ATTACK	= 126,
-	ALADDIN_RUN_JUMP_THROW	= 127,*/
 
 	// animation glance up
 	ALADDIN_GLANCE_UP		= 131,
@@ -38,6 +36,9 @@ enum eType {
 	ALADDIN_SIT				= 151,
 	ALADDIN_SIT_ATTACK		= 152,
 	ALADDIN_SIT_THROW		= 153,
+
+	// animation push
+	ALADDIN_PUSH			= 161,
 
 	//ground
 	GROUND					= 200,
@@ -59,7 +60,7 @@ enum eType {
 	IRON_STEP				= 214,
 	PODIUM					= 215,
 	SKELETON				= 216,
-	//SKELETONRIGHT			= 217,
+	PILLAR					= 217,
 	SPEAR					= 218,
 	VASE					= 219,
 	WOOD					= 220,
@@ -70,6 +71,9 @@ enum eType {
 
 	// maps
 	MAP_SULTAN				= 21,
+	MAP_SULTAN_FRONT_BG		= 22,
+	MAP_JAFAR				= 23,
+	MAP_JAFAR_BACKGROUND	= 24,
 
 	BBOX					= 31,
 };

@@ -20,6 +20,14 @@ void MapGame::LoadMap(eType type)
 	case eType::MAP_SULTAN:
 		ReadMapJSON(SULTAN_TILEMAP);
 		map->setTextureManager(TextureManager::getIntance()->getTexture(eType::MAP_SULTAN));
+		_widthMap = MapNS::MAP_WIDTH_SULTAN;
+		_heightMap = MapNS::MAP_HEIGHT_SULTAN;
+		break;
+	case eType::MAP_JAFAR:
+		ReadMapJSON(JAFAR_TILEMAP);
+		map->setTextureManager(TextureManager::getIntance()->getTexture(eType::MAP_JAFAR));
+		_widthMap = MapNS::MAP_WIDTH_JAFAR;
+		_heightMap = MapNS::MAP_HEIGHT_JAFAR;
 		break;
 	}
 }
@@ -40,6 +48,7 @@ void MapGame::ReadMapJSON(std::string filename)
 	bankMapHeight	= infoMap["_height"].asInt();
 	const Json::Value& dataMap = infoMap["data"];
 
+
 	for (int i=0;i<RowsMap;i++){
 		for (int j = 0; j < ColumnsMap; j++) {
 			tileMap[i][j] = dataMap[i * ColumnsMap + j].asInt();
@@ -55,8 +64,8 @@ void MapGame::Render(Camera* camera)
 
 	float xViewPort = -(float)((int)camera->getXCamera() % tileWidth);
 	float YViewPort = -(float)((int)camera->getYCamera() % tileHeight);
-	for (UINT i = 0; i < GAME_HEIGHT / tileHeight + 1; i++) {
-		for (UINT j = 0; j < GAME_WIDTH / tileWidth + 1; j++) {
+	for (UINT i = 0; i <= GAME_HEIGHT / tileHeight + 1; i++) {
+		for (UINT j = 0; j <= GAME_WIDTH / tileWidth + 1; j++) {
 			if (!(row + i < 0 || row + i >= RowsMap || j + col < 0 || j + col >= ColumnsMap))
 			{
 				map->setCurrentFrame(tileMap[row + i][col + j] - 1);
