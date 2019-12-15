@@ -28,10 +28,14 @@ void Grid::ReloadGrid()
 
 	for (auto& x : cells)
 	{
-		for (int i = 0; i < x.second.size(); i++)
-			x.second.clear();
+		x.second.clear();
 	}
 	cells.clear();
+
+	for (auto& obj : allObjects)
+	{
+		safeDelete(obj.second);
+	}
 	allObjects.clear();
 
 
@@ -139,15 +143,15 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 		apple->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
 		return apple;
 	}
-	case BALLS:
+	case GEMS:
 	{
-		BallItem* ball = new BallItem(x, y);
-		ball->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
+		GemItem* gem = new GemItem(x, y);
+		gem->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
 		/*(id % 2 == 0) ? ball->setCurrentFrame(0) : ball->setCurrentFrame(4);*/
-		ball->setCurrentFrame(0);
-		ball->setFrameDelay(0.1f);
-		ball->setFrames(0, 8);
-		return ball;
+		gem->setCurrentFrame(0);
+		gem->setFrameDelay(0.1f);
+		gem->setFrames(0, 8);
+		return gem;
 	}
 	case COLUMN1:
 	{
@@ -194,8 +198,7 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 		genie->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
 		genie->setCurrentFrame(0);
 		genie->setFrameDelay(0.1f);
-
-		genie->setFrames(0, 3);
+		genie->setFrames(0, 0);
 
 		return genie;
 	}
@@ -237,10 +240,8 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 		VaseItem* vase = new VaseItem(x, y);
 		vase->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
 		vase->setCurrentFrame(0);
-
-		// ban đầu vase ở frame(0) khi bị chém bắt đầu chạy animation
 		vase->setFrameDelay(0.1f);
-		vase->setFrames(0, 10);
+		vase->setFrames(0, 0);
 
 		return vase;
 	}
@@ -279,16 +280,18 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 	return NULL;
 }
 
-void Grid::GetListEntity(std::vector<Entity*>& ListObj, Camera* camera)
+void Grid::GetListEntity(std::vector<Entity*>& ListOthers, std::vector<Entity*>& ListEnemies, std::vector<Entity*>& ListItems, Camera* camera)
 {
-	std::vector<Entity*> list;
+	/*std::vector<Entity*> list;
 	for (auto i : ListObj)
 	{
 		list.push_back(i);
-	}
+	}*/
 
 
-	ListObj.clear();
+	ListOthers.clear();
+	ListEnemies.clear();
+	ListItems.clear();
 
 	std::unordered_map<int, Entity*> mapObject;
 
@@ -300,14 +303,35 @@ void Grid::GetListEntity(std::vector<Entity*>& ListObj, Camera* camera)
 
 	for (int i = top; i <= bottom; i++)
 		for (int j = left; j <= right; j++)
-			for (auto k : cells[i * cols_gridMap + j + 1])
+			/*for (auto k : cells[i * cols_gridMap + j + 1])*/
+			for(int k=0;k< cells[i * cols_gridMap + j + 1].size();k++)
 			{
-				if (mapObject.find(k->getID()) == mapObject.end())
-					mapObject[k->getID()] = k;
+				//DebugOut("cells[%d].size() = %d\n", i * cols_gridMap + j + 1, cells[i * cols_gridMap + j + 1].size());
+				if (cells[i * cols_gridMap + j + 1].at(k)->getHealth() > 0.0f || cells[i * cols_gridMap + j + 1].at(k)->getVisible())
+				{
+					if (mapObject.find(cells[i * cols_gridMap + j + 1].at(k)->getID()) == mapObject.end())
+						mapObject[cells[i * cols_gridMap + j + 1].at(k)->getID()] = cells[i * cols_gridMap + j + 1].at(k);
+				}
+				else
+				{
+					cells[i * cols_gridMap + j + 1].erase(cells[i * cols_gridMap + j + 1].begin() + k);
+					k--;
+				}
 			}
 	for (auto& x : mapObject)
 	{
-		ListObj.push_back(x.second);
+		switch (x.second->getKind())
+		{
+		case eKind::ITEM:
+			ListItems.push_back(x.second);
+			break;
+		case eKind::ENEMY:
+			ListEnemies.push_back(x.second);
+			break;
+		default:
+			ListOthers.push_back(x.second);
+			break;
+		}
 	}
 
 	/*for (auto& x : ListObj)

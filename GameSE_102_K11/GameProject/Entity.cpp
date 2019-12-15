@@ -69,6 +69,11 @@ void Entity::update(float frameTime)
 	Image::update(frameTime);
 }
 
+void Entity::draw(COLOR_ARGB color)
+{
+	Image::draw(color);
+}
+
 bool Entity::outsideRect(RECT rect)
 {
 	if (spriteData.x + spriteData.width * getScale() < rect.left ||
@@ -89,7 +94,7 @@ void Entity::damage(int weapon)
 
 #pragma region Collision
 
-LPCOLLISIONEVENT Entity::SweptAABBEx(Entity* ent1, Entity* ent2, float frameTime)
+LPCOLLISIONEVENT Entity::SweptAABBEx(Entity* ent2, float frameTime)
 {
 	float sl, st, sr, sb;		//static object bbox (Rect của object)
 	float ml, mt, mr, mb;		//move object bbox (Rect của main)
@@ -105,10 +110,10 @@ LPCOLLISIONEVENT Entity::SweptAABBEx(Entity* ent1, Entity* ent2, float frameTime
 	float sdx = svx * frameTime; //khoảng cách x object đi được sau khoảng dt
 	float sdy = svy * frameTime; //khoảng cách y object đi được sau khoảng dt
 
-	float dx = ent1->getDX() - sdx; //khoảng cách dx giữa main và object
-	float dy = ent1->getDY() - sdy; //khoảng cách dy giữa main và object
+	float dx = this->getDX() - sdx; //khoảng cách dx giữa main và object
+	float dy = this->getDY() - sdy; //khoảng cách dy giữa main và object
 
-	ent1->getBoundingBox(ml, mt, mr, mb);
+	this->getBoundingBox(ml, mt, mr, mb);
 
 	//Xét va chạm
 	SweptAABB(
@@ -210,11 +215,11 @@ void Entity::SweptAABB(float ml, float mt, float mr, float mb, float dx, float d
 	}
 }
 
-void Entity::CalcPotentialCollisions(Entity* ent, std::vector<Entity*>* coEntities, std::vector<LPCOLLISIONEVENT>& coEvents, float frameTime)
+void Entity::CalcPotentialCollisions(std::vector<Entity*>* coEntities, std::vector<LPCOLLISIONEVENT>& coEvents, float frameTime)
 {
 	for (UINT i = 0; i < coEntities->size(); i++)
 	{
-		LPCOLLISIONEVENT e = SweptAABBEx(ent, coEntities->at(i), frameTime);
+		LPCOLLISIONEVENT e = SweptAABBEx(coEntities->at(i), frameTime);
 
 		if (e->t > 0 && e->t <= 1.0f)
 			coEvents.push_back(e);
@@ -251,6 +256,34 @@ void Entity::FilterCollision(std::vector<LPCOLLISIONEVENT>& coEvents, std::vecto
 	}
 	if (min_ix >= 0) coEventsResult.push_back(coEvents[min_ix]);
 	if (min_iy >= 0) coEventsResult.push_back(coEvents[min_iy]);
+}
+
+bool Entity::checkAABB(Entity* ent)
+{
+	float l, t, r, b;
+	float l1, t1, r1, b1;
+	this->getBoundingBox(l, t, r, b);
+	ent->getBoundingBox(l1, t1, r1, b1);
+
+	if (checkAABB(l, t, r, b, l1, t1, r1, b1))
+		return true;
+	return false;
+}
+
+bool Entity::checkAABB(float b1left, float b1top, float b1right, float b1bottom, float b2left, float b2top, float b2right, float b2bottom)
+{
+	return !(b1right < b2left || b1left > b2right || b1top > b2bottom || b1bottom < b2top);
+}
+
+bool Entity::isCollitionObjectWithObject(Entity* ent, float frameTime)
+{
+	if (checkAABB(ent)) // kiểm tra va chạm bằng AABB trước
+		return true;
+
+	LPCOLLISIONEVENT e = SweptAABBEx(ent, frameTime); // kt va chạm giữa 2 object bằng sweptAABB
+	bool res = e->t > 0 && e->t <= 1.0f; // ĐK va chạm
+	SAFE_DELETE(e);
+	return res;
 }
 
 CCollisionEvent::CCollisionEvent(float t, float nx, float ny, Entity* entity)

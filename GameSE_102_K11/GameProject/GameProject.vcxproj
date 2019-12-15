@@ -129,8 +129,8 @@
   <ItemGroup>
     <ClInclude Include="Aladdin.h" />
     <ClInclude Include="AppleItem.h" />
+    <ClInclude Include="appleWeapon.h" />
     <ClInclude Include="Audio.h" />
-    <ClInclude Include="BallItem.h" />
     <ClInclude Include="BarrierItem.h" />
     <ClInclude Include="BatItem.h" />
     <ClInclude Include="ButtressItem.h" />
@@ -145,6 +145,7 @@
     <ClInclude Include="enum.h" />
     <ClInclude Include="ExitItem.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GemItem.h" />
     <ClInclude Include="GenieItem.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Grid.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="SkeletonItem.h" />
     <ClInclude Include="SpearItem.h" />
     <ClInclude Include="StallItem.h" />
+    <ClInclude Include="SwordWeapon.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />
@@ -174,8 +176,8 @@
     <ClCompile Include="..\Dependencies\JsonCpp\jsoncpp.cpp" />
     <ClCompile Include="Aladdin.cpp" />
     <ClCompile Include="AppleItem.cpp" />
+    <ClCompile Include="appleWeapon.cpp" />
     <ClCompile Include="Audio.cpp" />
-    <ClCompile Include="BallItem.cpp" />
     <ClCompile Include="BarrierItem.cpp" />
     <ClCompile Include="BatItem.cpp" />
     <ClCompile Include="ButtressItem.cpp" />
@@ -188,6 +190,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="ExitItem.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GemItem.cpp" />
     <ClCompile Include="GenieItem.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Grid.cpp" />
@@ -207,6 +210,7 @@
     <ClCompile Include="SkeletonItem.cpp" />
     <ClCompile Include="SpearItem.cpp" />
     <ClCompile Include="StallItem.cpp" />
+    <ClCompile Include="SwordWeapon.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />

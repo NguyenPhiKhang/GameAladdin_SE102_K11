@@ -139,12 +139,12 @@ void Image::update(float frameTime)
 //=============================================================================
 void Image::setCurrentFrame(int c)
 {
-	if (c >= 0)
-	{
+	/*if (c >= 0)
+	{*/
 		currentFrame = c;
 		animComplete = false;
 		setRect();                          // set spriteData.rect
-	}
+	//}
 }
 
 //=============================================================================
@@ -153,10 +153,10 @@ void Image::setCurrentFrame(int c)
 inline void Image::setRect()
 {
 	// configure spriteData.rect to draw currentFrame
-	spriteData.rect.left = (currentFrame % cols) * spriteData.width;
+	spriteData.rect.left = (abs(currentFrame) % cols) * spriteData.width;
 	// right edge + 1
 	spriteData.rect.right = spriteData.rect.left + spriteData.width;
-	spriteData.rect.top = (currentFrame / cols) * spriteData.height;
+	spriteData.rect.top = (abs(currentFrame) / cols) * spriteData.height;
 	// bottom edge + 1
 	spriteData.rect.bottom = spriteData.rect.top + spriteData.height;
 }

@@ -7,6 +7,7 @@ WoodItem::WoodItem(float x, float y, int w, int h)
 	spriteData.width = w;
 	spriteData.height = h;
 	type = eType::WOOD;
+	kind = eKind::FLOOR;
 }
 
 WoodItem::~WoodItem()

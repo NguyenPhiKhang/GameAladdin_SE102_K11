@@ -17,10 +17,10 @@ SceneGame::SceneGame()
 	pillar_snake = new Image();
 	front_hurdle = new Image();
 
-	posX = 0;
+	/*posX = 0;
 	posY = 1134;
 	verticalX = MapNS::MAX_SPEED_KEYB;
-	verticalY = MapNS::MAX_SPEED_KEYB;
+	verticalY = MapNS::MAX_SPEED_KEYB;*/
 
 	oldXCam = 0.0f;
 	oldYCam = 0.0f;
@@ -51,16 +51,16 @@ void SceneGame::initialize(HWND hwnd)
 
 void SceneGame::update(float frameTime)
 {
-	grid->GetListEntity(listEntity, camera);
+	grid->GetListEntity(listOthers, listEnemies, listItems, camera);
 
-	aladdin->update(frameTime, this, &listEntity);
+	aladdin->update(frameTime, this, &listOthers);
 
 	if (mapCurrent == MAP_SULTAN) // Xét camera font background hurdle
 	{
 		float deltaCamX = camera->getXCamera() - oldXCam;
 		float deltaCamY = camera->getYCamera() - oldYCam;
 		front_hurdle->setX(front_hurdle->getX() - ((deltaCamX == 0.0f) ? 0.0f :
-			(deltaCamX > 0.0f)? (deltaCamX + 2.5f) : (deltaCamX - 2.5f)));
+			(deltaCamX > 0.0f) ? (deltaCamX + 2.5f) : (deltaCamX - 2.5f)));
 		front_hurdle->setY(front_hurdle->getY() - ((deltaCamY == 0.0f) ? 0.0f :
 			(deltaCamY > 0.0f) ? (deltaCamY + 0.3f) : (deltaCamY - 0.3f)));
 
@@ -92,9 +92,90 @@ void SceneGame::update(float frameTime)
 		}
 	}
 
-	for (int i = 0; i < listEntity.size(); i++)
+	for (int i = 0; i < listOthers.size(); i++)
 	{
-		listEntity[i]->update(frameTime);
+		listOthers[i]->update(frameTime);
+		if (listOthers[i]->getKind() == eKind::WALL)
+		{
+			if (aladdin->sword->getVisible())
+			{
+				aladdin->setHitWall();
+				DebugOut("TRUNG TUONG\n");
+			}
+		}
+	}
+	for (int i = 0; i < listEnemies.size(); i++)
+	{
+		listEnemies[i]->update(frameTime);
+	}
+	for (int i = 0; i < listItems.size(); i++)
+	{
+		bool wasCollision = false;
+		listItems[i]->update(frameTime);
+		if (listItems[i]->getHealth() > 0.0f)
+		{
+			if (aladdin->sword->isCollitionObjectWithObject(listItems[i], frameTime) && aladdin->sword->getVisible())
+			{
+				switch (listItems[i]->getType())
+				{
+				case eType::APPLES:
+				case eType::GEMS:
+				case eType::HEART_BALLOON:
+					listItems[i]->setState(eType::EXPLOSIVE_ITEM);
+					wasCollision = true;
+					break;
+				case eType::GENIES:
+					listItems[i]->setState(eType::EXPLOSIVE_GENIE);
+					wasCollision = true;
+					break;
+				case eType::VASE:
+					listItems[i]->setState(eType::VASE);
+					wasCollision = true;
+					break;
+				}
+			}
+			if (wasCollision) continue;
+			if (aladdin->isCollisionWithItem(listItems[i], frameTime))
+			{
+				switch (listItems[i]->getType())
+				{
+				case eType::APPLES:
+				case eType::GEMS:
+				case eType::HEART_BALLOON:
+					listItems[i]->setState(eType::EXPLOSIVE_ITEM);
+					break;
+				case eType::CHAINS:
+					if (!aladdin->isClimbingChain() && aladdin->getVelocity().y > 0)
+						aladdin->setState(ALADDIN_CLIMB, listItems[i]->getCenterX(), listItems[i]->getY(), listItems[i]->getHeight());
+					break;
+				case eType::GENIES:
+					listItems[i]->setState(eType::EXPLOSIVE_GENIE);
+					wasCollision = true;
+					break;
+				case eType::VASE:
+					listItems[i]->setState(eType::VASE);
+					wasCollision = true;
+					break;
+				}
+			}
+		}
+	}
+	for (auto& weaponApple : aladdin->WeaponApple)
+	{
+		if (weaponApple->getVisible() && weaponApple->getState() != EXPLOSIVE_APPLE_WEAPON)
+		{
+			for (auto& entOther : listOthers)
+			{
+				if (entOther->getKind() == eKind::WALL)
+				{
+					if (weaponApple->isCollitionObjectWithObject(entOther, frameTime))
+					{
+						weaponApple->setState(eType::EXPLOSIVE_APPLE_WEAPON);
+						break;
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -120,11 +201,11 @@ void SceneGame::render()
 	tileMap->Render(camera);
 
 	listColumns.clear();
-	for (auto& ent : listEntity)
+	for (auto& ent : listOthers)
 	{
 		if (mapCurrent == eType::MAP_SULTAN)
 		{
-			if (ent->getID() >= 172 && ent->getID() <= 175)
+			if (ent->getKind() == eKind::COLUMN_OUT || ent->getType() == eType::EXITS)
 			{
 				listColumns.push_back(ent);
 			}
@@ -145,6 +226,24 @@ void SceneGame::render()
 			if (isDebugRenderBBox)
 				ent->RenderBoundingBox(camera);
 		}
+	}
+
+	for (auto& ent : listItems)
+	{
+		ent->setViewport(camera->CameraTransform(ent->getX(), ent->getY()));
+		ent->draw();
+
+		if (isDebugRenderBBox)
+			ent->RenderBoundingBox(camera); (camera);
+	}
+
+	for (auto& ent : listEnemies)
+	{
+		ent->setViewport(camera->CameraTransform(ent->getX(), ent->getY()));
+		ent->draw();
+
+		if (isDebugRenderBBox)
+			ent->RenderBoundingBox(camera);
 	}
 
 	aladdin->setViewport(camera->CameraTransform(aladdin->getX(), aladdin->getY()));
@@ -175,6 +274,8 @@ void SceneGame::render()
 		front_hurdle->setXY(hurdleX, hurdleY);
 	}
 
+
+
 	Graphics::getInstance()->spriteEnd();
 }
 
@@ -193,7 +294,10 @@ void SceneGame::LoadMap(eType type)
 
 		front_hurdle->setTextureManager(TextureManager::getIntance()->getTexture(eType::MAP_SULTAN_FRONT_BG));
 
-		aladdin->setXY(84.0f, 956.0f);
+		//aladdin->setXY(84.0f, 956.0f);
+		aladdin->setXY(516.0f, 553.0f);
+		//aladdin->setXY(1440.0f, 250.0f);
+		//aladdin->setXY(2079.0f, 60.0f);
 
 		tileMap->LoadMap(eType::MAP_SULTAN);
 		break;
@@ -206,7 +310,8 @@ void SceneGame::LoadMap(eType type)
 
 		pillar_snake->setTextureManager(TextureManager::getIntance()->getTexture(eType::MAP_JAFAR_BACKGROUND));
 
-		aladdin->setXY(8.0f, 250.0f);
+		aladdin->setXY(8.0f, 245.0f);
+		aladdin->setCurrentFrame(0);
 
 		tileMap->LoadMap(eType::MAP_JAFAR);
 		break;
@@ -217,7 +322,9 @@ void SceneGame::LoadMap(eType type)
 
 void SceneGame::ResetObjectMap()
 {
-	listEntity.clear();
+	listOthers.clear();
+	listEnemies.clear();
+	listItems.clear();
 	listColumns.clear();
 
 	isDebugRenderBBox = false;

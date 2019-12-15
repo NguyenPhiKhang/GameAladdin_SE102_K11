@@ -11,7 +11,7 @@
 enum eType {
 	// main character
 	// animation idle
-	ALADDIN					= 100,
+	/*ALADDIN					= 100,*/
 	ALADDIN_IDLE			= 111,
 	ALADDIN_ATTACK			= 112,
 	ALADDIN_THROW			= 113,
@@ -40,12 +40,21 @@ enum eType {
 	// animation push
 	ALADDIN_PUSH			= 161,
 
+	// animation climb
+	ALADDIN_CLIMB			= 171,
+	ALADDIN_CLIMB_ATTACK	= 172,
+	ALADDIN_CLIMB_THROW		= 173,
+	ALADDIN_CLIMB_JUMP		= 174,
+
 	//ground
 	GROUND					= 200,
+	WOOD					= 220,
+	IRON_STEP				= 214,
+	PODIUM					= 215,
 
 	// items
 	APPLES					= 201,
-	BALLS					= 202,
+	GEMS					= 202,
 	BARRIERS				= 203,
 	BATS					= 204,
 	BUTTRESS				= 205,
@@ -57,17 +66,21 @@ enum eType {
 	EXITS					= 211,
 	GENIES					= 212,
 	HEART_BALLOON			= 213,
-	IRON_STEP				= 214,
-	PODIUM					= 215,
 	SKELETON				= 216,
 	PILLAR					= 217,
 	SPEAR					= 218,
 	VASE					= 219,
-	WOOD					= 220,
 	STALL					= 221,
 	PEDDLER					= 222,
 	NAHBI					= 301,
 	HAKIM					= 401,
+
+
+	// effect
+	EXPLOSIVE_ITEM			= 501,
+	EXPLOSIVE_ENEMY			= 502,
+	EXPLOSIVE_APPLE_WEAPON	= 503,
+	EXPLOSIVE_GENIE			= 504,
 
 	// maps
 	MAP_SULTAN				= 21,
@@ -76,6 +89,18 @@ enum eType {
 	MAP_JAFAR_BACKGROUND	= 24,
 
 	BBOX					= 31,
+
+	SWORD_WEAPON			= 41,
+	APPLE_WEAPON			= 51,
+};
+
+enum eKind {
+	FLOOR = 1001,	// sàn
+	ENEMY  = 2001,
+	ITEM   = 3001,
+	ALADDIN = 4001,
+	WALL = 5001,
+	COLUMN_OUT = 6001,
 };
 
 namespace graphicsNS

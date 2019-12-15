@@ -21,18 +21,25 @@ private:
 
 	//Ground* ground;
 
-	std::vector<Entity*> listEntity;
-
+	std::vector<Entity*> listEnemies;
+	std::vector<Entity*> listItems;
+	std::vector<Entity*> listOthers;
 	std::vector<Entity*> listColumns;
 
-	float posX;
+
+	/*float posX;
 	float posY;
 	float verticalX;
-	float verticalY;
+	float verticalY;*/
 
 	eType mapCurrent;
 	float oldXCam;
 	float oldYCam;
+
+	int allScore;		// all score ALADDIN
+	int allPower;		// all power ALAADIN
+	int allChance;		// tổng số mạng của ALADDIN
+	int allGem;			// tổng số Gem
 
 public:
 	SceneGame();

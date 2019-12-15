@@ -8,7 +8,7 @@
 #include "Camera.h"
 #include "constants.h"
 #include "AppleItem.h"
-#include "BallItem.h"
+#include "GemItem.h"
 #include "BarrierItem.h"
 #include "BatItem.h"
 #include "ButtressItem.h"
@@ -64,7 +64,7 @@ public:
 
 	Entity* GetNewEntity(int id, int type, float x, float y, int width, int height);
 	//void Insert(int id, int type, float x, float y, int w, int h); //Thêm object vào grid
-	void GetListEntity(std::vector<Entity*>& ListObj, Camera* camera);
+	void GetListEntity(std::vector<Entity*>& ListOthers, std::vector<Entity*>& ListEnemies, std::vector<Entity*>& ListItems, Camera* camera);
 	bool CheckObjectInit(int id);	// kiểm tra object đã khởi tạo chưa? false: chưa, true: rồi
 };
 

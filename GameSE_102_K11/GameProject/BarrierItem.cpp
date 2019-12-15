@@ -7,6 +7,7 @@ BarrierItem::BarrierItem(float x, float y, int width, int height)
 	spriteData.width = width;
 	spriteData.height = height;
 	type = eType::BARRIERS;
+	kind = eKind::WALL;
 }
 
 BarrierItem::~BarrierItem()

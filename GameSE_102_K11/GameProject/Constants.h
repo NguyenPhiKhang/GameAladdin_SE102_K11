@@ -16,7 +16,6 @@ const char JAFAR_PILLAR_SNAKE[] = "Resources\\Maps\\JafarsPalace\\pillar_snake.p
 
 //ALADDIN
 const char BOUNDING_BOX_TEXTURE[] = "Resources\\bbox.png";
-const char APPLEITEM_TEXTURE[] = "Resources\\Items\\AppleItems\\appleItem.png";
 const char ALADDIN_IDLE_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_idle.png";
 const char ALADDIN_RUN_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_run.png";
 const char ALADDIN_STOP_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_stop_inertia.png";
@@ -34,17 +33,23 @@ const char ALADDIN_SIT_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_sit.pn
 const char ALADDIN_SIT_ATTACK_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_sit_attack.png";
 const char ALADDIN_SIT_THROW_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_sit_throw.png";
 const char ALADDIN_PUSH_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_push.png";
+const char ALADDIN_CLIMB_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_climb.png";
+const char ALADDIN_CLIMB_ATTACK_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_climb_attack.png";
+const char ALADDIN_CLIMB_THROW_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_climb_throw.png";
+const char ALADDIN_CLIMB_JUMP_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_climb_jump.png";
+
 
 
 // ITEM + ENEMY
-const char BALLITEM_TEXTURE[] = "Resources\\Items\\BallItems\\animation_ball.png";
+const char APPLEITEM_TEXTURE[] = "Resources\\Items\\AppleItems\\appleItem.png";
+const char GEMITEM_TEXTURE[] = "Resources\\Items\\GemItems\\animation_gem.png";
 const char BATITEM_TEXTURE[] = "Resources\\Items\\BatItems\\bat.png";
 const char BUTTRESSITEM_TEXTURE[] = "Resources\\Items\\ButtressItems\\animation_buttress.png";
 const char COLUMN1_OUTITEM_TEXTURE[] = "Resources\\Items\\Column_OutItems\\column1.png";
 const char COLUMN2_OUTITEM_TEXTURE[] = "Resources\\Items\\Column_OutItems\\column2.png";
 const char COLUMN3_OUTITEM_TEXTURE[] = "Resources\\Items\\Column_OutItems\\column3.png";
 const char COLUMN4_OUTITEM_TEXTURE[] = "Resources\\Items\\Column_OutItems\\column4.png";
-const char EXITITEM_TEXTURE[] = "Resources\\Items\\ExitItems\\exititem.png";
+const char EXITITEM_TEXTURE[] = "Resources\\Items\\ExitItems\\exit.png";
 const char GENIETEM_TEXTURE[] = "Resources\\Items\\GenieItems\\animation_genie.png";
 const char HEART_BALLOONITEM_TEXTURE[] = "Resources\\Items\\Heart_BalloonItems\\animation_heart-balloon.png";
 const char PODIUMITEM_TEXTURE[] = "Resources\\Items\\PodiumItems\\animation_podium.png";
@@ -57,13 +62,21 @@ const char PEDDLERITEM_TEXTURE[] = "Resources\\Items\\Peddler\\animation_peddler
 const char HAKIMRITEM_TEXTURE[] = "Resources\\Items\\Hakim\\hakim.png";
 const char NAHBIITEM_TEXTURE[] = "Resources\\Items\\Nahbi\\nahbi.png";
 
+// WEAPON
+const char APPLE_WEAPON_TEXTURE[] = "Resources\\Items\\animation_appleWeapon.png";
+
+
+// EFFECT
+const char EXPLOSIVE_ITEMS_TEXTURE[] = "Resources\\Effect\\ExplosiveItems.png";
+const char EXPLOSIVE_APPLE_WEAPON_TEXTURE[] = "Resources\\Effect\\Explosive_appleWeapon.png";
+const char EXPLOSIVE_GENIE_TEXTURE[] = "Resources\\Effect\\ExplosiveGenie.png";
 
 
 //files json
 const char SULTAN_TILEMAP[] = "Resources\\Maps\\SultansDungeon\\tiledMap_SultansDungeon.json";
 const char JAFAR_TILEMAP[] = "Resources\\Maps\\JafarsPalace\\tiledMap_JajarsPalace.json";
 const char OBJECT_GRID_MAP_SULTAN[] = "Resources\\Items\\objects_grid_map_sultan.json";
-const char OBJECT_GRID_MAP_JAFAR[] = "Resources\\Items\\objects_grid_map_jafar.json";
+const char OBJECT_GRID_MAP_JAFAR[] = "Resources\\Items\\objects_grid_map_jafar1.json";
 // window
 const char CLASS_NAME[] = "ALADDIN";
 const char GAME_TITLE[] = "ALADDIN";

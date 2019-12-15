@@ -7,6 +7,7 @@ Ground::Ground(float x, float y, int width, int height)
 	spriteData.width = width;
 	spriteData.height = height;
 	type = eType::GROUND;
+	kind = eKind::FLOOR;
 }
 
 Ground::~Ground()

@@ -76,6 +76,15 @@
     <Filter Include="Entities\Wall">
       <UniqueIdentifier>{4ea24a06-9170-4c9b-931b-98f06f83d683}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities\Enemies">
+      <UniqueIdentifier>{97185c40-3a3d-4617-ac83-aaea41864a30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Obstacles">
+      <UniqueIdentifier>{a2e30b28-a4c1-4e10-922f-188e86a154f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Weapon">
+      <UniqueIdentifier>{9bf2f806-04ff-4d94-9c64-f5abbe652e3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="debug.h">
@@ -144,43 +153,16 @@
     <ClInclude Include="Ground.h">
       <Filter>Entities\Ground</Filter>
     </ClInclude>
-    <ClInclude Include="BallItem.h">
-      <Filter>Entities\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="BatItem.h">
-      <Filter>Entities\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="ButtressItem.h">
-      <Filter>Entities\Items</Filter>
-    </ClInclude>
     <ClInclude Include="ChainItem.h">
-      <Filter>Entities\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Column_OutItem.h">
-      <Filter>Entities\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="ExitItem.h">
       <Filter>Entities\Items</Filter>
     </ClInclude>
     <ClInclude Include="GenieItem.h">
       <Filter>Entities\Items</Filter>
     </ClInclude>
-    <ClInclude Include="HakimItem.h">
-      <Filter>Entities\Items</Filter>
-    </ClInclude>
     <ClInclude Include="Heart_BalloonItem.h">
       <Filter>Entities\Items</Filter>
     </ClInclude>
-    <ClInclude Include="NahbiItem.h">
-      <Filter>Entities\Items</Filter>
-    </ClInclude>
     <ClInclude Include="PeddlerItem.h">
-      <Filter>Entities\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="SkeletonItem.h">
-      <Filter>Entities\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="SpearItem.h">
       <Filter>Entities\Items</Filter>
     </ClInclude>
     <ClInclude Include="StallItem.h">
@@ -203,6 +185,39 @@
     </ClInclude>
     <ClInclude Include="BarrierItem.h">
       <Filter>Entities\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="HakimItem.h">
+      <Filter>Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="NahbiItem.h">
+      <Filter>Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="BatItem.h">
+      <Filter>Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletonItem.h">
+      <Filter>Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="GemItem.h">
+      <Filter>Entities\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtressItem.h">
+      <Filter>Entities\Obstacles</Filter>
+    </ClInclude>
+    <ClInclude Include="SpearItem.h">
+      <Filter>Entities\Obstacles</Filter>
+    </ClInclude>
+    <ClInclude Include="Column_OutItem.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="ExitItem.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordWeapon.h">
+      <Filter>Entities\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="appleWeapon.h">
+      <Filter>Entities\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -272,43 +287,16 @@
     <ClCompile Include="Ground.cpp">
       <Filter>Entities\Ground</Filter>
     </ClCompile>
-    <ClCompile Include="BallItem.cpp">
-      <Filter>Entities\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="BatItem.cpp">
-      <Filter>Entities\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="ButtressItem.cpp">
-      <Filter>Entities\Items</Filter>
-    </ClCompile>
     <ClCompile Include="ChainItem.cpp">
-      <Filter>Entities\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="Column_OutItem.cpp">
-      <Filter>Entities\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="ExitItem.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
     <ClCompile Include="GenieItem.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
-    <ClCompile Include="HakimItem.cpp">
-      <Filter>Entities\Items</Filter>
-    </ClCompile>
     <ClCompile Include="Heart_BalloonItem.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
-    <ClCompile Include="NahbiItem.cpp">
-      <Filter>Entities\Items</Filter>
-    </ClCompile>
     <ClCompile Include="PeddlerItem.cpp">
-      <Filter>Entities\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="SkeletonItem.cpp">
-      <Filter>Entities\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="SpearItem.cpp">
       <Filter>Entities\Items</Filter>
     </ClCompile>
     <ClCompile Include="StallItem.cpp">
@@ -331,6 +319,39 @@
     </ClCompile>
     <ClCompile Include="BarrierItem.cpp">
       <Filter>Entities\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="HakimItem.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="NahbiItem.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="BatItem.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="SkeletonItem.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="GemItem.cpp">
+      <Filter>Entities\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtressItem.cpp">
+      <Filter>Entities\Obstacles</Filter>
+    </ClCompile>
+    <ClCompile Include="SpearItem.cpp">
+      <Filter>Entities\Obstacles</Filter>
+    </ClCompile>
+    <ClCompile Include="Column_OutItem.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="ExitItem.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="SwordWeapon.cpp">
+      <Filter>Entities\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="appleWeapon.cpp">
+      <Filter>Entities\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

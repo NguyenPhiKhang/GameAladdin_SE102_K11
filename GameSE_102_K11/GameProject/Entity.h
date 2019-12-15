@@ -1,4 +1,4 @@
-#ifndef _ENTITY_H               // Prevent multiple definitions if this 
+﻿#ifndef _ENTITY_H               // Prevent multiple definitions if this 
 #define _ENTITY_H               // file is included in more than one place
 #define WIN32_LEAN_AND_MEAN
 
@@ -42,9 +42,12 @@ protected:
 
 	int state;
 
-	int type;
+	int type;	// loại object để phân biệt nhau
+	int kind;	// loại chung của object. (ex: apple, gem, heart -> items, nahbi ->enemies)
 
 	float dx, dy;
+
+	bool finished;
 
 public:
 	// Constructor
@@ -85,6 +88,7 @@ public:
 	virtual float getDY() { return dy; }
 
 	virtual int   getType() { return type; }
+	virtual int	  getKind() { return kind; }
 
 	virtual void getBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void RenderBoundingBox(Camera* camera);
@@ -118,6 +122,10 @@ public:
 
 	// Set state
 	virtual void setState(int state) { this->state = state; }
+	virtual void setKind(int kind) { this->kind = kind; }
+
+	virtual void setFinished(bool finish) { this->finished = finish; }
+	virtual bool getFinished() { return this->finished; }
 	////////////////////////////////////////
 	//         Other functions            //
 	////////////////////////////////////////
@@ -126,6 +134,13 @@ public:
 	// typically called once per frame
 	// frameTime is used to regulate the speed of movement and animation
 	virtual void update(float frameTime);
+
+	virtual void update(std::vector<Entity*>* listObj, float frameTime)
+	{
+		update(frameTime);
+	};
+
+	virtual void draw(COLOR_ARGB color = graphicsNS::WHITE);
 
 	// Activate Entity.
 	virtual void activate();
@@ -137,7 +152,7 @@ public:
 	virtual void damage(int weapon);
 
 
-	LPCOLLISIONEVENT SweptAABBEx(Entity* ent1, Entity* ent2, float frameTime);
+	LPCOLLISIONEVENT SweptAABBEx(Entity* ent2, float frameTime);
 
 	void SweptAABB(
 		float ml, //move left
@@ -154,7 +169,7 @@ public:
 		float& nx,
 		float& ny);
 
-	void CalcPotentialCollisions(Entity* ent, std::vector<Entity*>* coEntities, std::vector<LPCOLLISIONEVENT>& coEvents, float frameTime);
+	void CalcPotentialCollisions(std::vector<Entity*>* coEntities, std::vector<LPCOLLISIONEVENT>& coEvents, float frameTime);
 	void FilterCollision(
 		std::vector<LPCOLLISIONEVENT>& coEvents,
 		std::vector<LPCOLLISIONEVENT>& coEventsResult,
@@ -162,6 +177,11 @@ public:
 		float& min_ty,
 		float& nx,
 		float& ny);
+
+	bool checkAABB(Entity* ent);
+	bool checkAABB(float b1left, float b1top, float b1right, float b1bottom, float b2left, float b2top, float b2right, float b2bottom);
+	bool isCollitionObjectWithObject(Entity* ent, float frameTime);	// kiểm tra bằng AABB và Sweept AABB
+
 };
 
 #endif

@@ -4,6 +4,10 @@
 #include "Entity.h"
 #include "Camera.h"
 #include "MapGame.h"
+#include "AppleItem.h"
+#include "SwordWeapon.h"
+#include "appleWeapon.h"
+
 
 namespace aladdinNS {
 	const int ALADDIN_SPEED = 140;
@@ -41,9 +45,20 @@ private:
 
 	bool	isFalling;
 	bool	isPushing;
+	bool	isClimbing;
+
+
+	float yChain;		// y của dây xích để ngăn chặn đi tiếp
+	int	hChain;	// height của dây xích 
 
 	Camera* camera;
 	MapGame* mapGame;
+
+
+	int totalAppleCollect;
+public:
+	std::vector<Entity*> WeaponApple;
+	SwordWeapon* sword;
 	
 public:
 	Aladdin(Camera* camera, MapGame* mapGame);
@@ -51,18 +66,30 @@ public:
 	~Aladdin();
 
 	void update(float frameTime, Game* gamePtr, std::vector<Entity*> *coEntities);
+	void draw(COLOR_ARGB color = graphicsNS::WHITE);
 	void MoveViewport(Camera* camera, bool moveX=true, bool moveY = true);								// thay đổi viewport khi thay đổi hướng nhân vật
 	//void ChangePositionState(int skewX=0, int skewY=0, bool isMoveX = false);	//skewX: vị trí X bị lệch của state so với vị trí mặc định
 																				//skewY: vị trí Y bị lệch ở bottom texture so với chân																	
 																				//isMoveX: có cho phép di chuyển X khi flipHorizontal = true hay k?
 	void getBoundingBox(float& left, float& top, float& right, float& bottom);
+	void RenderBoundingBox(Camera* camera);
 	void positionBoundingBox(
 		float& left, float& top, float& right, float& bottom,
 		float posLeft, float posLeftFlip, float posTop,
 		float bbWidth, float bbHeight);
 
+	void setState(int state, float xCenterChain = 0.0f, float yChain = 0.0f, int hChain = 0); // vị trí x của item...nếu cần
+	bool isClimbingChain();
+	void setIsClimbing(bool climbing) { this->isClimbing = climbing; }
+
 	void CollideWithGround(std::vector<Entity*> *coEntities, float frameTime);
-	void CollideWithWall(std::vector<Entity*>* coEntities, float frameTime);
+	void CollideWithWall(std::vector<Entity*>* coEntities, float frameTime, Game* gamePtr);
+	//void CollideWithEntity(std::vector<Entity*>* coEntities, /*Entity * objEntity,*/ float frameTime);
+	bool isCollisionWithItem(Entity* entItem, float frameTime);
+	void setHitWall();
+
+	void setAppleCollect(int appleCollect) { this->totalAppleCollect = appleCollect; }
+	int getAppleCollect() { return totalAppleCollect; }
 };
 
 #endif

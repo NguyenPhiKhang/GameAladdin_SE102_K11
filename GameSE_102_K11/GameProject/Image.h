@@ -91,7 +91,7 @@ public:
 	virtual COLOR_ARGB	getColorFilter() { return colorFilter; }
 
 	// Return direction
-	virtual int			getDirection() { return spriteData.direction; }
+	virtual int			getDirection() { return spriteData.flipHorizontal; }
 
 	//Return position of sprite in Viewport
 	virtual float		getXViewport() { return spriteData.xViewport; }
