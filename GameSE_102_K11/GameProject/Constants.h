@@ -37,8 +37,7 @@ const char ALADDIN_CLIMB_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_clim
 const char ALADDIN_CLIMB_ATTACK_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_climb_attack.png";
 const char ALADDIN_CLIMB_THROW_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_climb_throw.png";
 const char ALADDIN_CLIMB_JUMP_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_climb_jump.png";
-
-
+const char ALADDIN_HURT_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_hurt.png";
 
 // ITEM + ENEMY
 const char APPLEITEM_TEXTURE[] = "Resources\\Items\\AppleItems\\appleItem.png";
@@ -54,13 +53,29 @@ const char GENIETEM_TEXTURE[] = "Resources\\Items\\GenieItems\\animation_genie.p
 const char HEART_BALLOONITEM_TEXTURE[] = "Resources\\Items\\Heart_BalloonItems\\animation_heart-balloon.png";
 const char PODIUMITEM_TEXTURE[] = "Resources\\Items\\PodiumItems\\animation_podium.png";
 
-const char SKELETON_ITEM_TEXTURE[] = "Resources\\Items\\SkeletonItems\\skeleton-right.png";
+const char SKELETON_TEXTURE[] = "Resources\\Enemy\\Skeleton\\animation_skeleton.png";
 const char SPEARITEM_TEXTURE[] = "Resources\\Items\\SpearItems\\animation_spear.png";
 const char VASEITEM_TEXTURE[] = "Resources\\Items\\VaseItems\\animation_vase.png";
 const char STALLITEM_TEXTURE[] = "Resources\\Items\\Stall\\stall.png";
 const char PEDDLERITEM_TEXTURE[] = "Resources\\Items\\Peddler\\animation_peddler.png";
 const char HAKIMRITEM_TEXTURE[] = "Resources\\Items\\Hakim\\hakim.png";
-const char NAHBIITEM_TEXTURE[] = "Resources\\Items\\Nahbi\\nahbi.png";
+//const char NAHBIITEM_TEXTURE[] = "Resources\\Items\\Nahbi\\nahbi.png";
+
+//Enemy Nahbi
+const char NAHBI_RUN_TEXTURE[] = "Resources\\Enemy\\Nahbi\\animation_nahbi_run1.png";
+const char NAHBI_LEAD_TEXTURE[] = "Resources\\Enemy\\Nahbi\\animation_nahbi_lead1.png";
+const char NAHBI_STAB_TEXTURE[] = "Resources\\Enemy\\Nahbi\\animation_nahbi_stab1.png";
+const char NAHBI_ATTACK_TEXTURE[] = "Resources\\Enemy\\Nahbi\\animation_nahbi_attack1.png";
+const char NAHBI_BEHIT_TEXTURE[] = "Resources\\Enemy\\Nahbi\\animation_nahbi_behit1.png";
+
+//Enemy Hakim
+const char HAKIM_ATTACK_TEXTURE[] = "Resources\\Enemy\\Hakim\\animation_hakim_attack1.png";
+const char HAKIM_RUN_TEXTURE[] = "Resources\\Enemy\\Hakim\\animation_hakim_run1.png";
+const char HAKIM_BEHIT_TEXTURE[] = "Resources\\Enemy\\Hakim\\animation_hakim_behit1.png";
+const char HAKIM_IDLE_TEXTURE[] = "Resources\\Enemy\\Hakim\\animation_hakim_idle.png";
+
+//Bone
+const char BONE_TEXTURE[] = "Resources\\Enemy\\Skeleton\\animation_bone.png";
 
 // WEAPON
 const char APPLE_WEAPON_TEXTURE[] = "Resources\\Items\\animation_appleWeapon.png";
@@ -70,13 +85,30 @@ const char APPLE_WEAPON_TEXTURE[] = "Resources\\Items\\animation_appleWeapon.png
 const char EXPLOSIVE_ITEMS_TEXTURE[] = "Resources\\Effect\\ExplosiveItems.png";
 const char EXPLOSIVE_APPLE_WEAPON_TEXTURE[] = "Resources\\Effect\\Explosive_appleWeapon.png";
 const char EXPLOSIVE_GENIE_TEXTURE[] = "Resources\\Effect\\ExplosiveGenie.png";
+const char EXPLOSIVE_ENEMY_TEXTURE[] = "Resources\\Effect\\ExplosiveEnemy.png";
+const char EXPLOSIVE_BONE_TEXTURE[] = "Resources\\Effect\\ExplosiveBone.png";
 
+// FONT
+const char FONT_TOTAL_TEXTURE[] = "Resources\\Font\\font_TOTAL.png";
+const char FONT_SCORE_TEXTURE[] = "Resources\\Font\\font_SCORE.png";
+
+// icon
+const char ICON_GEM_TEXTURE[] = "Resources\\Items\\Icon\\gemIcon.png";
+const char ICON_CHANCE_TEXTURE[] = "Resources\\Items\\Icon\\chanceIcon.png";
+const char HEALTH_METER_TEXTURE[] = "Resources\\Items\\Icon\\HeathMeter.png";
 
 //files json
 const char SULTAN_TILEMAP[] = "Resources\\Maps\\SultansDungeon\\tiledMap_SultansDungeon.json";
 const char JAFAR_TILEMAP[] = "Resources\\Maps\\JafarsPalace\\tiledMap_JajarsPalace.json";
 const char OBJECT_GRID_MAP_SULTAN[] = "Resources\\Items\\objects_grid_map_sultan.json";
 const char OBJECT_GRID_MAP_JAFAR[] = "Resources\\Items\\objects_grid_map_jafar1.json";
+
+
+// AUDIO
+const char MUSIC_MAP_SULTAN_WAV[] = "Resources\\Audio\\Music\\music_map_sultan.wav";
+const char MUSIC_MAP_JAFAR_WAV[] = "Resources\\Audio\\Music\\music_map_jafar.wav";
+
+
 // window
 const char CLASS_NAME[] = "ALADDIN";
 const char GAME_TITLE[] = "ALADDIN";

@@ -29,6 +29,7 @@
 #include "Ground.h"
 #include "Iron_StepItem.h"
 #include "PillarItem.h"
+#include "Aladdin.h"
 
 
 namespace gridNS {
@@ -53,16 +54,18 @@ private:
 	std::string filepath;
 
 	int cols_gridMap;
+	std::vector<Entity*> *listWeaponOfEnemy;
+	std::vector<Entity*> listOldEnemy;
 
 public:
-	Grid();
+	Grid(std::vector<Entity*> *listWeaponOfEnemy);
 	~Grid();
 
 	void SetFile(std::string str); // Đọc các object từ file
-	void ReloadGrid();
+	void ReloadGrid(Aladdin* aladdin);
 
 
-	Entity* GetNewEntity(int id, int type, float x, float y, int width, int height);
+	Entity* GetNewEntity(int id, int type, float x, float y, int width, int height, Aladdin* aladdin);
 	//void Insert(int id, int type, float x, float y, int w, int h); //Thêm object vào grid
 	void GetListEntity(std::vector<Entity*>& ListOthers, std::vector<Entity*>& ListEnemies, std::vector<Entity*>& ListItems, Camera* camera);
 	bool CheckObjectInit(int id);	// kiểm tra object đã khởi tạo chưa? false: chưa, true: rồi

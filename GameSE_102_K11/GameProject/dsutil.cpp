@@ -159,7 +159,7 @@ HRESULT CSoundManager::Get3DListenerInterface(LPDIRECTSOUND3DLISTENER* ppDSListe
 // Desc: 
 //-----------------------------------------------------------------------------
 HRESULT CSoundManager::Create(CSound** ppSound,
-	LPTSTR strWaveFileName,
+	std::string strWaveFileName,
 	DWORD dwCreationFlags,
 	GUID guid3DAlgorithm,
 	DWORD dwNumBuffers)
@@ -173,7 +173,7 @@ HRESULT CSoundManager::Create(CSound** ppSound,
 
 	if (m_pDS == NULL)
 		return CO_E_NOTINITIALIZED;
-	if (strWaveFileName == NULL || ppSound == NULL || dwNumBuffers < 1)
+	if (strWaveFileName.c_str() == NULL || ppSound == NULL || dwNumBuffers < 1)
 		return E_INVALIDARG;
 
 	apDSBuffer = new LPDIRECTSOUNDBUFFER[dwNumBuffers];
@@ -190,7 +190,7 @@ HRESULT CSoundManager::Create(CSound** ppSound,
 		goto LFail;
 	}
 
-	pWaveFile->Open(strWaveFileName, NULL, WAVEFILE_READ);
+	pWaveFile->Open((LPTSTR)(strWaveFileName.c_str()), NULL, WAVEFILE_READ);
 
 	if (pWaveFile->GetSize() == 0)
 	{

@@ -1,6 +1,5 @@
 #include "Text.h"
 
-Text* Text::_instance = NULL;
 
 //=============================================================================
 // default constructor
@@ -38,16 +37,7 @@ Text::Text() : Image()
 //=============================================================================
 Text::~Text()
 {
-	safeDelete(_instance);
-}
-
-//=============================================================================
-// Get instance
-//=============================================================================
-Text* Text::getInstance()
-{
-	if (_instance == NULL) _instance = new Text();
-	return _instance;
+	Image::~Image();
 }
 
 //=============================================================================
@@ -56,7 +46,7 @@ Text* Text::getInstance()
 // Post: returns true if successful, false if failed
 //       fontData array contains left and right edge of each character
 //=============================================================================
-bool Text::initialize(std::string filename)
+bool Text::initialize(std::string filename, int type)
 {
 	try {
 		//-------------------------------------------------------------
@@ -133,7 +123,7 @@ bool Text::initialize(std::string filename)
 		//if (!Image::initialize(graphics, textNS::FONT_WIDTH, textNS::FONT_HEIGHT, 0, &fontTexture))
 		//	return false;                   // if failed
 
-		//Image::setTextureManager(TextureManager::getIntance()->getTexture(0));
+		Image::setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
 	}
 	catch (...)
 	{
@@ -194,12 +184,14 @@ void Text::print(const std::string& str, int x, int y)
 
 	spriteData.x = (float)x;
 	spriteData.y = (float)y;
+	spriteData.xViewport = (float)x;
+	spriteData.yViewport = (float)y;
 	doAlign(str);
 
 	for (UINT i = 0; i < str.length(); i++)
 	{
 		ch = str.at(i);
-		if (ch > textNS::MIN_CHAR&& ch <= textNS::MAX_CHAR)    // if displayable character
+		if (ch >= textNS::MIN_CHAR&& ch <= textNS::MAX_CHAR)    // if displayable character
 		{
 			chN = ch - textNS::MIN_CHAR;                // make min_char index 0
 			spriteData.rect.top = chN / textNS::COLUMNS * textNS::GRID_HEIGHT + 1;
@@ -229,6 +221,7 @@ void Text::print(const std::string& str, int x, int y)
 				drawChar(ch);
 			}
 			spriteData.x += scaledWidth;
+			spriteData.xViewport = spriteData.x;
 		}
 		else    // else, non displayable character
 		{
@@ -242,19 +235,24 @@ void Text::print(const std::string& str, int x, int y)
 				}
 				drawChar(' ');
 				spriteData.x += scaledWidth;
+				spriteData.xViewport = spriteData.x;
 				break;
 				// newline advances 1 line down and sets left edge to starting x screen position,
 				// not left edge of screen
 			case '\n':                            // newline
 				spriteData.x = (float)x;
+				spriteData.xViewport = spriteData.x;
 				spriteData.y += static_cast<int>(height * spriteData.scale);
+				spriteData.yViewport = spriteData.y;
 				saveY = spriteData.y;
 				str2 = str.substr(i, str.length());
 				doAlign(str2);
 				spriteData.y = saveY;
+				spriteData.yViewport = spriteData.y;
 				break;
 			case '\r':                            // return to starting x position
 				spriteData.x = (float)x;
+				spriteData.xViewport = spriteData.x;
 				str2 = str.substr(i, str.length());
 				doAlign(str2);
 				break;
@@ -270,12 +268,14 @@ void Text::print(const std::string& str, int x, int y)
 					{
 						drawChar(' ');
 						spriteData.x += scaledWidth;
+						spriteData.xViewport = spriteData.x;
 					}
 					else
 					{
 						width = tabW;        // fractional part of character to align with tab stop
 						drawChar(' ');
 						spriteData.x += tabW;
+						spriteData.xViewport = spriteData.x;
 					}
 					tabW -= scaledWidth;
 				}
@@ -283,10 +283,14 @@ void Text::print(const std::string& str, int x, int y)
 			case '\b':                            // backspace
 				spriteData.x -= scaledWidth;
 				if (spriteData.x < 0)
+				{
 					spriteData.x = 0;
+					spriteData.xViewport = spriteData.x;
+				}
 				break;
 			case '\v':                            // vertical tab
 				spriteData.y += static_cast<int>(height * spriteData.scale);
+				spriteData.yViewport = spriteData.y;
 				break;
 			case 0x01:                            // font signature character
 				spriteData.rect.top = 1;
@@ -295,6 +299,7 @@ void Text::print(const std::string& str, int x, int y)
 				spriteData.rect.right = 1 + textNS::FONT_WIDTH;
 				draw(spriteData);
 				spriteData.x += scaledWidth;
+				spriteData.xViewport = spriteData.x;
 				break;
 			}
 		}
@@ -316,29 +321,38 @@ void Text::doAlign(const std::string& str)
 	case textNS::CENTER:            // center at x and align top to y
 		getWidthHeight(str, w, h);
 		spriteData.x -= w / 2;
+		spriteData.xViewport = spriteData.x;
 		break;
 	case textNS::RIGHT:             // right justify at x,y
 		getWidthHeight(str, w, h);
 		spriteData.x -= w;
+		spriteData.xViewport = spriteData.x;
 		break;
 	case textNS::CENTER_MIDDLE:     // center at x and vertical middle to y
 		getWidthHeight(str, w, h);
 		spriteData.x -= w / 2;
 		spriteData.y -= h / 2;
+		spriteData.xViewport = spriteData.x;
+		spriteData.yViewport = spriteData.y;
 		break;
 	case textNS::CENTER_BOTTOM:     // center at x and align bottom to y
 		getWidthHeight(str, w, h);
 		spriteData.x -= w / 2;
 		spriteData.y -= h;
+		spriteData.xViewport = spriteData.x;
+		spriteData.yViewport = spriteData.y;
 		break;
 	case textNS::LEFT_BOTTOM:       // left justify at x and align bottom to y
 		getWidthHeight(str, w, h);
 		spriteData.y -= h;
+		spriteData.yViewport = spriteData.y;
 		break;
 	case textNS::RIGHT_BOTTOM:      // right justify at x and align bottom to y
 		getWidthHeight(str, w, h);
 		spriteData.x -= w;
 		spriteData.y -= h;
+		spriteData.xViewport = spriteData.x;
+		spriteData.yViewport = spriteData.y;
 		break;
 	}
 }
@@ -476,14 +490,16 @@ void Text::drawChar(UCHAR ch)
 	}
 
 	// display character
-	if (ch > textNS::MIN_CHAR&& ch <= textNS::MAX_CHAR) // if displayable character
+	if (ch >= textNS::MIN_CHAR&& ch <= textNS::MAX_CHAR) // if displayable character
 	{
 		draw(spriteData, color);
 		if (bold)   // bold is done by displaying the character twice with offset x
 		{
 			spriteData.x += textNS::BOLD_SIZE * spriteData.scale;
+			spriteData.xViewport = spriteData.x;
 			draw(spriteData, color);
 			spriteData.x = sd2.x;
+			spriteData.xViewport = spriteData.x;
 		}
 	}
 }

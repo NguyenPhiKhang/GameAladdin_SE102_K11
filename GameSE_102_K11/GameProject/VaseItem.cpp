@@ -23,13 +23,13 @@ void VaseItem::getBoundingBox(float& left, float& top, float& right, float& bott
 void VaseItem::setState(int state)
 {
 	health = 0.0f;
-	setFrames(1, 8);
+	setFrames(1, 9);
 	setCurrentFrame(1);
 }
 
-void VaseItem::update(float frameTime)
+void VaseItem::update(std::vector<Entity*>* listObj, float frameTime)
 {
-	Entity::update(frameTime);
-	if (currentFrame == 8)
+	Entity::update(listObj, frameTime);
+	if (currentFrame == 9)
 		setFrames(0, 0);
 }

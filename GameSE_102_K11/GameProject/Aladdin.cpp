@@ -26,7 +26,8 @@ Aladdin::Aladdin(Camera* camera, MapGame* mapGame) : Entity()
 	isClimbing = false;
 	yChain = 0.0f;
 	hChain = 0;
-	totalAppleCollect = 20;
+	totalAppleCollect = 8;
+	health = 100.0f;
 
 	this->camera = camera;
 	this->mapGame = mapGame;
@@ -65,7 +66,8 @@ Aladdin::Aladdin(float x, float y) :Entity()
 	isClimbing = false;
 	yChain = 0.0f;
 	hChain = 0;
-	totalAppleCollect = 1;
+	totalAppleCollect = 8;
+	health = 90.0f;
 	
 
 	//WeaponApple.push_back(new SwordWeapon(this));
@@ -79,6 +81,7 @@ Aladdin::Aladdin(float x, float y) :Entity()
 
 Aladdin::~Aladdin()
 {
+	safeDelete(sword);
 }
 
 void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEntities)
@@ -99,7 +102,7 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 #pragma region PRESS KEY UP
 		if (Input::getInstance()->isKeyDown(ALADDIN_UP_KEY) &&
 			state != ALADDIN_RUN && state != ALADDIN_SIT && state != ALADDIN_SIT_ATTACK &&
-			state != ALADDIN_SIT_THROW && JumpFinsihed && !holdKeyDown && !isClimbing && !isFalling)
+			state != ALADDIN_SIT_THROW && JumpFinsihed && !holdKeyDown && !isClimbing && !isFalling && state!=ALADDIN_HURT)
 		{
 			if (state != ALADDIN_GLANCE_UP && LoopAttackGlance == true)
 			{
@@ -380,7 +383,7 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 #pragma region PRESS KEY DOWN
 		if (Input::getInstance()->isKeyDown(ALADDIN_DOWN_KEY) &&
 			state != ALADDIN_RUN && JumpFinsihed &&
-			state != ALADDIN_GLANCE_UP && !holdKeyUP && !isClimbing && !isFalling
+			state != ALADDIN_GLANCE_UP && !holdKeyUP && !isClimbing && !isFalling && state!=ALADDIN_HURT
 			)
 		{
 			if (state != ALADDIN_SIT && LoopFinished)
@@ -475,7 +478,7 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 		}
 		else {
 		IDLE:
-			if (!isSliding && state != ALADDIN_IDLE && LoopFinished && LoopAttackGlance && JumpFinsihed && !isClimbing)
+			if (!isSliding && state != ALADDIN_IDLE && LoopFinished && LoopAttackGlance && JumpFinsihed && !isClimbing&& state!=ALADDIN_HURT)
 			{
 				setVelocityX(0.0f);
 				currentFrame = 0;
@@ -588,6 +591,13 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 			sword->setVisible(false);
 		}
 	}
+	
+	if (state == ALADDIN_HURT)
+	{
+		if (currentFrame == 5)
+			setState(eType::ALADDIN_IDLE);
+	}
+
 	if (!JumpFinsihed)
 	{
 		if (Input::getInstance()->isKeyDown(ALADDIN_LEFT_KEY))
@@ -938,10 +948,21 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 	}
 #pragma endregion
 
+#pragma region Kiểm tra có được va chạm hay không
+	if (unTouchable == true)
+	{
+		QueryPerformanceCounter(&timeEnd);
+		if (((float)(timeEnd.QuadPart - timeStart.QuadPart) / gamePtr->getTimeFreq().QuadPart) > 1.0f)
+		{
+			unTouchable = false;
+		}
+	}
+#pragma endregion
+	
 
 	if (sword->getVisible())
 	{
-		sword->update(frameTime);
+		sword->update(coEntities, frameTime);
 	}
 	for (int i=0;i< WeaponApple.size();i++)
 	{
@@ -957,7 +978,7 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 		}
 	}
 
-	DebugOut("SO TAO: %d\n", totalAppleCollect);
+	//DebugOut("SO TAO: %d\n", totalAppleCollect);
 
 	MoveViewport(camera);
 	//DebugOut("Vy: %.2f\n", velocity.y);
@@ -965,7 +986,9 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 
 void Aladdin::draw(COLOR_ARGB color)
 {
-	Entity::draw(color);
+	if (unTouchable == false)
+		Entity::draw(color);
+	else Entity::draw((rand()%2 ==0)?graphicsNS::ALPHA25 & colorFilter: graphicsNS::ALPHA75 & colorFilter);
 
 	if (sword->getVisible())
 	{
@@ -1037,8 +1060,8 @@ void Aladdin::MoveViewport(Camera* camera, bool moveX, bool moveY)
 		}
 		if (spriteData.y > mapGame->getHeightMap() - spriteData.height)
 			spriteData.y = (float)mapGame->getHeightMap() - spriteData.height;
-		if (spriteData.y < -30.0f)
-			spriteData.y = -30.0f;
+		if (spriteData.y < -60.0f)
+			spriteData.y = -60.0f;
 	}
 }
 
@@ -1049,6 +1072,7 @@ void Aladdin::getBoundingBox(float& left, float& top, float& right, float& botto
 	case ALADDIN_IDLE:
 	case ALADDIN_ATTACK:
 	case ALADDIN_RUN_ATTACK:
+	case ALADDIN_HURT:
 		positionBoundingBox(left, top, right, bottom, 61, 61, 55, 14, 46);
 		break;
 	case ALADDIN_GLANCE_UP:
@@ -1119,12 +1143,13 @@ void Aladdin::positionBoundingBox(float& left, float& top, float& right, float& 
 	bottom = top + bbHeight;
 }
 
-void Aladdin::setState(int state, float xCenterChain, float yChain, int hChain)
+void Aladdin::setState(int statenew, float xCenterChain, float yChain, int hChain)
 {
-	Entity::setState(state);
-	switch ((eType)state)
+	//Entity::setState(state);
+	switch ((eType)statenew)
 	{
 	case ALADDIN_CLIMB:
+		Entity::setState(statenew);
 		if (!isClimbing)
 		{
 			isClimbing = true;
@@ -1140,6 +1165,47 @@ void Aladdin::setState(int state, float xCenterChain, float yChain, int hChain)
 			sword->setVisible(false);
 			this->yChain = yChain;
 			this->hChain = hChain;
+		}
+		break;
+	case ALADDIN_IDLE:
+		Entity::setState(statenew);
+		setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_IDLE));
+		setVelocityX(0.0f);
+		currentFrame = 0;
+		setFrames(0, 38);
+		frameDelay = 0.08f;
+		isFalling = true;
+		isPushing = false;
+		isClimbing = false;
+		isSliding = false;
+		LoopFinished = true;
+		LoopAttackGlance = true;
+		JumpFinsihed = true;
+		break;
+	case ALADDIN_HURT:
+		if (state == ALADDIN_IDLE || state == ALADDIN_SIT || state == ALADDIN_GLANCE_UP || state == ALADDIN_STOP_INERTIA||state==ALADDIN_PUSH)
+		{
+			Entity::setState(statenew);
+			setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_HURT));
+			setVelocityX(0.0f);
+			currentFrame = 0;
+			setFrames(0, 5);
+			frameDelay = 0.18f;
+			isFalling = true;
+			isPushing = false;
+			isClimbing = false;
+			isSliding = false;
+			LoopFinished = true;
+			LoopAttackGlance = true;
+			JumpFinsihed = true;
+			unTouchable = true;
+			health -= 10.0f;
+			QueryPerformanceCounter(&timeStart);
+		}
+		else {
+			unTouchable = true;
+			health -= 10.0f;
+			QueryPerformanceCounter(&timeStart);
 		}
 		break;
 	}
@@ -1161,8 +1227,6 @@ void Aladdin::CollideWithGround(std::vector<Entity*>* coEntities, float frameTim
 	list_ground.clear();
 
 	for (UINT i = 0; i < coEntities->size(); i++)
-		/*if (coEntities->at(i)->getType()==eType::GROUND|| coEntities->at(i)->getType() == eType::WOOD ||
-			coEntities->at(i)->getType() == eType::IRON_STEP || coEntities->at(i)->getType()== eType::PODIUM)*/
 		if (coEntities->at(i)->getKind() == eKind::FLOOR)
 			list_ground.push_back(coEntities->at(i));
 
@@ -1177,20 +1241,6 @@ void Aladdin::CollideWithGround(std::vector<Entity*>* coEntities, float frameTim
 	{
 		float min_tx, min_ty, nx = 0, ny;
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
-
-		//////spriteData.x += min_tx * dx + nx * 0.4f;
-		//for (UINT i = 0; i < coEventsResult.size(); i++)
-		//{
-		//	LPCOLLISIONEVENT e = coEventsResult[i];
-		//	/*if (dynamic_cast<CGoomba*>(e->obj))
-		//	{*/
-		//	if (e->entity->getType() == eType::WOOD)
-		//	{
-		//		//DebugOut("wood, nx = %.2f, ny = %.2f, t= %.2f\n", e->nx, e->ny, e->t);
-		//		DebugOut("aladdin, nx = %.2f, ny = %.2f, min_tx= %.2f, min_ty = %.2f\n", nx, ny, min_tx, min_ty);
-		//	}
-		//}
-
 		if (ny == -1)
 		{
 			spriteData.y += min_ty * dy + ny * 0.4f;

@@ -1,8 +1,10 @@
 ﻿#include "Grid.h"
+#include <ctime>
 
-Grid::Grid()
+Grid::Grid(std::vector<Entity*> *listWeaponOfEnemy)
 {
 	cols_gridMap = 0;
+	this->listWeaponOfEnemy = listWeaponOfEnemy;
 }
 
 Grid::~Grid()
@@ -23,7 +25,7 @@ void Grid::SetFile(std::string str)
 	filepath = str;
 }
 
-void Grid::ReloadGrid()
+void Grid::ReloadGrid(Aladdin* aladdin)
 {
 
 	for (auto& x : cells)
@@ -37,6 +39,7 @@ void Grid::ReloadGrid()
 		safeDelete(obj.second);
 	}
 	allObjects.clear();
+	srand((unsigned)time(NULL));
 
 
 	int id, type, w, h, n;
@@ -67,7 +70,7 @@ void Grid::ReloadGrid()
 			if (CheckObjectInit(id))
 				ent = allObjects[id];
 			else { 
-				ent = GetNewEntity(id, type, x, y, w, h);
+				ent = GetNewEntity(id, type, x, y, w, h, aladdin);
 				allObjects[id] = ent;
 			}
 			ent->setID(id);
@@ -102,7 +105,7 @@ void Grid::ReloadGrid()
 
 }
 
-Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int height)
+Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int height, Aladdin* aladdin)
 {
 	switch (type)
 	{
@@ -147,8 +150,7 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 	{
 		GemItem* gem = new GemItem(x, y);
 		gem->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
-		/*(id % 2 == 0) ? ball->setCurrentFrame(0) : ball->setCurrentFrame(4);*/
-		gem->setCurrentFrame(0);
+		gem->setCurrentFrame(rand() % 9);
 		gem->setFrameDelay(0.1f);
 		gem->setFrames(0, 8);
 		return gem;
@@ -181,9 +183,9 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 	{
 		ButtressItem* buttress = new ButtressItem(x, y);
 		buttress->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
-		buttress->setFrameDelay(0.08f);
+		buttress->setFrameDelay(0.1f);
 		buttress->setFrames(0, 27);
-		(id%2==0)? buttress->setCurrentFrame(0) : buttress->setCurrentFrame(7);
+		buttress->setCurrentFrame(rand()%28);
 		return buttress;
 	}
 	case EXITS:
@@ -222,17 +224,22 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 	}
 	case SKELETON:
 	{
-		SkeletonItem* ent = new SkeletonItem(x, y);
-		ent->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
+		SkeletonItem* ent = new SkeletonItem(x, y, aladdin, listWeaponOfEnemy);
+		ent->setTextureManager(TextureManager::getIntance()->getTexture(SKELETON));
+		//ent->setFrameDelay(0.15f);
+		//ent->setState(1000);
+		ent->setCurrentFrame(0);
+
 		return ent;
+		break;
 	}
 	case SPEAR:
 	{
 		SpearItem* spear = new SpearItem(x, y);
 		spear->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
-		spear->setCurrentFrame(0);
-		spear->setFrameDelay(0.2f);
-		spear->setFrames(0, 13);
+		(id % 2 == 0) ? spear->setCurrentFrame(4) : spear->setCurrentFrame(0);
+		spear->setFrameDelay(0.3f);
+		spear->setFrames(0, 7);
 		return spear;
 	}
 	case VASE:
@@ -264,15 +271,19 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 	}
 	case HAKIM:
 	{
-		HakimItem* ent = new HakimItem(x, y);
-
-		ent->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
+		HakimItem* ent = new HakimItem(x, y, aladdin);
+		ent->setState(HAKIM_ATTACK);
+		ent->setTextureManager(TextureManager::getIntance()->getTexture(HAKIM_ATTACK));
 		return ent;
 	}
 	case NAHBI:
 	{
-		NahbiItem* ent = new NahbiItem(x, y);
-		ent->setTextureManager(TextureManager::getIntance()->getTexture((eType)type));
+		NahbiItem* ent = new NahbiItem(x, y, aladdin);
+		ent->setState(NAHBI_LEAD);
+		ent->setTextureManager(TextureManager::getIntance()->getTexture(NAHBI_LEAD));
+		ent->setFrames(0, 5);
+		ent->setCurrentFrame(0);
+		ent->setFrameDelay(0.1f);
 		return ent;
 	}
 	}
@@ -282,11 +293,12 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 
 void Grid::GetListEntity(std::vector<Entity*>& ListOthers, std::vector<Entity*>& ListEnemies, std::vector<Entity*>& ListItems, Camera* camera)
 {
-	/*std::vector<Entity*> list;
-	for (auto i : ListObj)
+	listOldEnemy.clear();
+	for (auto i : ListEnemies)
 	{
-		list.push_back(i);
-	}*/
+		if(i->getType()!=eType::BUTTRESS&&i->getType()!=eType::SPEAR)
+			listOldEnemy.push_back(i);
+	}
 
 
 	ListOthers.clear();
@@ -334,20 +346,23 @@ void Grid::GetListEntity(std::vector<Entity*>& ListOthers, std::vector<Entity*>&
 		}
 	}
 
-	/*for (auto& x : ListObj)
+	for (auto& enemyOld : listOldEnemy)
 	{
 		bool flag = false;
-		for (auto y : list)
+		for (auto& enemy : ListEnemies)
 		{
-			if (x->getID() == y->getID())
+			if (enemyOld->getID() == enemy->getID())
 			{
 				flag = true;
 				break;
 			}
 		}
 		if (flag == false)
-			x->setCurrentFrame(0);
-	}*/
+		{
+			enemyOld->setCurrentFrame(0);
+			enemyOld->setXY(enemyOld->getFirstX(), enemyOld->getFirstY());
+		}
+	}
 }
 
 bool Grid::CheckObjectInit(int id)
@@ -356,20 +371,3 @@ bool Grid::CheckObjectInit(int id)
 		return false;
 	return true;
 }
-
-//void Grid::Insert(int id, int type, float x, float y, int w, int h)
-//{
-//	int top = (int)(y / GRID_CELL_HEIGHT);
-//	int bottom = (int)((y + h) / GRID_CELL_HEIGHT);
-//	int left = (int)(x / GRID_CELL_WIDTH);
-//	int right = (int)((x + w) / GRID_CELL_WIDTH);
-//
-//	Entity* ent = GetNewEntity(id, type, x, y, w, h);
-//	if (ent == NULL)
-//		return;
-//	ent->setID(id);
-//
-//	/*for (int i = top; i <= bottom; i++)
-//		for (int j = left; j <= right; j++)
-//			cells[i][j].push_back(ent);*/
-//}

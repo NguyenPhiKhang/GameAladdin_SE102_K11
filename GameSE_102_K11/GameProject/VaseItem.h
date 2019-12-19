@@ -12,7 +12,7 @@ public:
 	~VaseItem();
 	void getBoundingBox(float& left, float& top, float& right, float& bottom);
 	void setState(int state);
-	void update(float frameTime);
+	void update(std::vector<Entity*>* listObj, float frameTime);
 };
 
 #endif

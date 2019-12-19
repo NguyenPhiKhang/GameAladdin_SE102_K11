@@ -46,6 +46,9 @@ enum eType {
 	ALADDIN_CLIMB_THROW		= 173,
 	ALADDIN_CLIMB_JUMP		= 174,
 
+	// animation hurt
+	ALADDIN_HURT			= 175,
+
 	//ground
 	GROUND					= 200,
 	WOOD					= 220,
@@ -67,13 +70,25 @@ enum eType {
 	GENIES					= 212,
 	HEART_BALLOON			= 213,
 	SKELETON				= 216,
+	BONE					= 2161,
 	PILLAR					= 217,
 	SPEAR					= 218,
 	VASE					= 219,
 	STALL					= 221,
 	PEDDLER					= 222,
+
 	NAHBI					= 301,
+	NAHBI_RUN				= 311,
+	NAHBI_LEAD				= 321,
+	NAHBI_STAB				= 331,
+	NAHBI_ATTACK			= 341,
+	NAHBI_BEHIT				= 351,
+
 	HAKIM					= 401,
+	HAKIM_RUN				= 411,
+	HAKIM_ATTACK			= 421,
+	HAKIM_BEHIT				= 431,
+	HAKIM_IDLE				= 441,
 
 
 	// effect
@@ -81,6 +96,7 @@ enum eType {
 	EXPLOSIVE_ENEMY			= 502,
 	EXPLOSIVE_APPLE_WEAPON	= 503,
 	EXPLOSIVE_GENIE			= 504,
+	EXPLOSIVE_BONE			= 505,
 
 	// maps
 	MAP_SULTAN				= 21,
@@ -92,6 +108,15 @@ enum eType {
 
 	SWORD_WEAPON			= 41,
 	APPLE_WEAPON			= 51,
+
+	HEALTH_METER				= 61,
+	ICON_CHANCE				= 71,
+	ICON_GEM				= 81,
+	ICON_APPLE				= 91,
+
+	// font
+	FONT_TOTAL				= 1001,
+	FONT_SCORE				= 1002,
 };
 
 enum eKind {
@@ -101,6 +126,12 @@ enum eKind {
 	ALADDIN = 4001,
 	WALL = 5001,
 	COLUMN_OUT = 6001,
+};
+
+
+enum eAudio {
+	MUSIC_MAP_SULTAN = 100,
+	MUSIC_MAP_JAFAR = 101,
 };
 
 namespace graphicsNS
@@ -130,6 +161,7 @@ namespace graphicsNS
 	const COLOR_ARGB FILTER = D3DCOLOR_ARGB(0, 0, 0, 0);  // use to specify drawing with colorFilter
 	const COLOR_ARGB ALPHA25 = D3DCOLOR_ARGB(64, 255, 255, 255);  // AND with color to get 25% alpha
 	const COLOR_ARGB ALPHA50 = D3DCOLOR_ARGB(128, 255, 255, 255);  // AND with color to get 50% alpha
+	const COLOR_ARGB ALPHA75 = D3DCOLOR_ARGB(192, 255, 255, 255);  // AND with color to get 75% alpha
 	const COLOR_ARGB BACK_COLOR = BLACK;                         // background color of game
 	const COLOR_ARGB TRANSCOLOR = MAGENTA;						// transparent color
 
@@ -157,18 +189,18 @@ namespace textNS
 		UINT right;
 	};
 	// Actual font width is 48, font height is 62
-	const int FONT_BORDER = 3;      // 1 pixel wide transparent border + visible cell border on right and bottom
-	const int FONT_WIDTH = 48;
-	const int FONT_HEIGHT = 62;     // font is 62 pixels high
+	const int FONT_BORDER = 0;      // 1 pixel wide transparent border + visible cell border on right and bottom
+	const int FONT_WIDTH = 18;
+	const int FONT_HEIGHT = 18;     // font is 62 pixels high
 	const int GRID_WIDTH = FONT_WIDTH + FONT_BORDER;
 	const int GRID_HEIGHT = FONT_HEIGHT + FONT_BORDER;
-	const int COLUMNS = 16;         // number of columns in font image
-	const int ROWS = 14;            // number of rows in font image
+	const int COLUMNS = 10;         // number of columns in font image
+	const int ROWS = 1;            // number of rows in font image
 	const int FRAMES = 1;           // how many frames of animation (1 = not animated)
 	const double ANIM_DELAY = 0.0;  // delay between animation frames
-	const int MAX_FONT_HEIGHT = 1000;
-	const int MIN_CHAR = 0x0020;    // minimum character code
-	const int MAX_CHAR = 0x00FF;    // maximum character code
+	const int MAX_FONT_HEIGHT = 18;
+	const int MIN_CHAR = 0x0030;    // minimum character code
+	const int MAX_CHAR = 0x0039;    // maximum character code
 	const int PROPORTIONAL_SPACING = 5; // pixels between 1:1 scaled characters
 	const int TAB_SIZE = 8;
 	const char UNDERLINE = '_';

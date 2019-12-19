@@ -10,7 +10,7 @@ private:
 public:
 	SwordWeapon(Entity* ent);
 	~SwordWeapon();
-	void update(float frameTime);
+	void update(std::vector<Entity*>* listObj, float frameTime);
 	void getBoundingBox(float& left, float& top, float& right, float& bottom);
 	void fixBounding(float& left, float& top, float& right, float& bottom,
 					int addX, int addY, int w, int h); // fix lại bounding của weapon so với nhân vật

@@ -219,6 +219,15 @@
     <ClInclude Include="appleWeapon.h">
       <Filter>Entities\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="HUD_Info.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="dxutil.h">
+      <Filter>Framework\ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="BoneWeapon.h">
+      <Filter>Entities\Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -351,6 +360,15 @@
       <Filter>Entities\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="appleWeapon.cpp">
+      <Filter>Entities\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD_Info.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="dxutil.cpp">
+      <Filter>Framework\ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="BoneWeapon.cpp">
       <Filter>Entities\Weapon</Filter>
     </ClCompile>
   </ItemGroup>

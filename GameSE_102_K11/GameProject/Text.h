@@ -12,7 +12,6 @@
 class Text :public Image
 {
 private:
-	static Text* _instance;
 	LPDIRECT3DTEXTURE9 textureData;         // temp font texture
 	char* file;                  // name of texture file            // save pointer to graphics
 	UINT width, height;             // width & height of 1 character
@@ -26,11 +25,10 @@ private:
 	bool underline;
 	bool bold;
 	textNS::Alignment align;        // how is text aligned (center, left, etc)
+public:
 
 	// default constructor (sprite text)
 	Text();
-public:
-
 	// destructor
 	virtual ~Text();
 
@@ -39,7 +37,7 @@ public:
 	//=============================================================
 
 	// Initialize font using file texture image.
-	virtual bool initialize(std::string filename);
+	virtual bool initialize(std::string filename, int type);
 	// disable inherited update()
 	virtual void update(float frameTime) {};
 	virtual void onLostDevice();
@@ -130,8 +128,6 @@ public:
 	// Display character sprite described by spriteData using color and fill
 	// Does underline and bold
 	virtual void drawChar(UCHAR ch);
-
-	static Text* getInstance();
 };
 
 #endif

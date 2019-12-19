@@ -4,6 +4,7 @@
 
 #include "textureManager.h"
 #include "constants.h"
+#include "Camera.h"
 
 class Image
 {
@@ -52,10 +53,10 @@ public:
 	virtual float		getScale() { return spriteData.scale; }
 
 	// Return width.
-	virtual int			getWidth() { return spriteData.width; }
+	virtual int			getWidth() { return (int)(spriteData.width*spriteData.scale); }
 
 	// Return height.
-	virtual int			getHeight() { return spriteData.height; }
+	virtual int			getHeight() { return (int)(spriteData.height*spriteData.scale); }
 
 	// Return center X.
 	virtual float		getCenterX() { return spriteData.x + spriteData.width / 2 * getScale(); }
@@ -163,6 +164,7 @@ public:
 
 	// Set position of Sprite in Viewport
 	virtual void setViewport(D3DXVECTOR2 pos) { spriteData.xViewport = pos.x; spriteData.yViewport = pos.y; }
+	virtual void setViewport(Camera* camera) { setViewport(camera->CameraTransform(spriteData.x, spriteData.y)); }
 	virtual void setXViewport(float x) { spriteData.xViewport = x; }
 	virtual void setYViewport(float y) { spriteData.yViewport = y; }
 

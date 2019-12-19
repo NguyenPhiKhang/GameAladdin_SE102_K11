@@ -12,7 +12,7 @@ PodiumItem::~PodiumItem()
 {
 }
 
-void PodiumItem::update(float frameTime)
+void PodiumItem::update(std::vector<Entity*>* listObj, float frameTime)
 {
 	Entity::update(frameTime);
 	if (currentFrame == 0 || currentFrame == 4)

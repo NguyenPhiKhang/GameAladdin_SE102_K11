@@ -24,6 +24,7 @@ Game::Game()
 
 	/*graphics = Graphics::getInstance();*/
 	input = Input::getInstance();
+	audio = Audio::getInstance();
 }
 
 //=============================================================================
@@ -119,6 +120,8 @@ void Game::initialize(HWND hw)
 
 	// initialize input, do not capture mouse
 	input->initialize(hwnd, false);             // throws GameError
+	audio->Init(hwnd);
+	audio->LoadResourceAudio();
 
 	// attempt to set up high resolution timer
 	if (QueryPerformanceFrequency(&timerFreq) == false)
@@ -268,6 +271,7 @@ void Game::deleteAll()
 	releaseAll();               // call onLostDevice() for every graphics item
 	/*safeDelete(graphics);*/
 	safeDelete(input);
+	safeDelete(audio);
 	initialized = false;
 }
 

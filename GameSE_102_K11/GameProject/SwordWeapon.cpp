@@ -11,9 +11,9 @@ SwordWeapon::~SwordWeapon()
 {
 }
 
-void SwordWeapon::update(float frameTime)
+void SwordWeapon::update(std::vector<Entity*>* listObj, float frameTime)
 {
-	Entity::update(frameTime);
+	Entity::update(listObj, frameTime);
 }
 
 void SwordWeapon::getBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -123,6 +123,63 @@ void SwordWeapon::getBoundingBox(float& left, float& top, float& right, float& b
 				fixBounding(left, top, right, bottom, -33, -22, 43, 56);
 			else fixBounding(left, top, right, bottom, 4, -22, 43, 56);
 			break;*/
+		}
+		break;
+	case NAHBI_ATTACK:
+		switch (ent->getCurrentFrame())
+		{
+		case 3:
+			ent->getBoundingBox(left, top, right, bottom);
+			if (!ent->getDirection())
+				fixBounding(left, top, right, bottom, 36, 2, 46, 10);
+			else fixBounding(left, top, right, bottom, -62, 2, 46, 10);
+			break;
+		case 4:
+			ent->getBoundingBox(left, top, right, bottom);
+			if (!ent->getDirection())
+				fixBounding(left, top, right, bottom, 10, -26, 46, 10);
+			else fixBounding(left, top, right, bottom, -36, -26, 46, 10);
+			break;
+		}
+		break;
+	case NAHBI_STAB:
+		switch (ent->getCurrentFrame())
+		{
+		case 4:
+			ent->getBoundingBox(left, top, right, bottom);
+			if (!ent->getDirection())
+				fixBounding(left, top, right, bottom, 53, 21, 22, 6);
+			else fixBounding(left, top, right, bottom, -55, 21, 22, 6);
+			break;
+		case 5:
+			ent->getBoundingBox(left, top, right, bottom);
+			if (!ent->getDirection())
+				fixBounding(left, top, right, bottom, 59, 21, 22, 6);
+			else fixBounding(left, top, right, bottom, -42, 21, 22, 6);
+			break;
+		}
+		break;
+	case HAKIM_ATTACK:
+		switch (ent->getCurrentFrame())
+		{
+		case 2:
+			ent->getBoundingBox(left, top, right, bottom);
+			if (!ent->getDirection())
+				fixBounding(left, top, right, bottom, 55, 30, 26, 5);
+			else fixBounding(left, top, right, bottom, -67, 30, 26, 5);
+			break;
+		case 3:
+			ent->getBoundingBox(left, top, right, bottom);
+			if (!ent->getDirection())
+				fixBounding(left, top, right, bottom, 60, 13, 18, 3);
+			else fixBounding(left, top, right, bottom, -64, 13, 18, 3);
+			break;
+		case 4:
+			ent->getBoundingBox(left, top, right, bottom);
+			if (!ent->getDirection())
+				fixBounding(left, top, right, bottom, 38, 34, 30, 3);
+			else fixBounding(left, top, right, bottom, -54, 34, 30, 3);
+			break;
 		}
 		break;
 #pragma endregion

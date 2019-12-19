@@ -136,6 +136,8 @@ public:
 	// Return handle to device context (window).
 	HDC     getDC() { return GetDC(hwnd); }
 
+	HWND getWindowHandle() { return hwnd; }
+
 	// Test for lost device
 	HRESULT getDeviceState();
 

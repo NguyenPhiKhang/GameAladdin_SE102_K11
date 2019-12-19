@@ -7,6 +7,7 @@
 #include "Grid.h"
 #include "Aladdin.h"
 #include "Ground.h"
+#include "HUD_Info.h"
 
 class SceneGame: public Game
 {
@@ -19,12 +20,15 @@ private:
 	Image* pillar_snake; // background của map jafar's palace
 	Image* front_hurdle; // front background của map sultan's dungeon
 
+	HUD_Info* hud;
+
 	//Ground* ground;
 
 	std::vector<Entity*> listEnemies;
 	std::vector<Entity*> listItems;
 	std::vector<Entity*> listOthers;
 	std::vector<Entity*> listColumns;
+	std::vector<Entity*> listWeaponOfEnemy;
 
 
 	/*float posX;
@@ -37,7 +41,6 @@ private:
 	float oldYCam;
 
 	int allScore;		// all score ALADDIN
-	int allPower;		// all power ALAADIN
 	int allChance;		// tổng số mạng của ALADDIN
 	int allGem;			// tổng số Gem
 
@@ -48,10 +51,18 @@ public:
 	void initialize(HWND hwnd);
 	void update(float frameTime);
 	void render();
-	void LoadMap(eType type);
+	void LoadMap(eType type, bool isChange = false);
 	void ResetObjectMap();
 
-	void setMapCurrent(eType type);
+	void setMapCurrent(eType type, bool isChange = false);
+
+
+	void CheckCollision();
+	void CheckCollisionWeapon(std::vector<Entity*> listEnt);
+	void CheckCollisionAladdinWithItem();
+	void CheckCollisionWithEnemy();
+	void CheckCollisionAladdinWithEnemy();
+	void CheckCollisionWithBoss();
 
 };
 

@@ -17,9 +17,9 @@ GenieItem::~GenieItem()
 {
 }
 
-void GenieItem::update(float frameTime)
+void GenieItem::update(std::vector<Entity*>* listObj, float frameTime)
 {
-	Entity::update(frameTime);
+	Entity::update(listObj, frameTime);
 	if (state == GENIES)
 	{
 		spriteData.y += dy;

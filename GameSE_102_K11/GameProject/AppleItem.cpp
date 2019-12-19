@@ -12,9 +12,9 @@ AppleItem::~AppleItem()
 {
 }
 
-void AppleItem::update(float frameTime)
+void AppleItem::update(std::vector<Entity*>* listObj, float frameTime)
 {
-	Entity::update(frameTime);
+	Entity::update(listObj, frameTime);
 	if (health == 0.0f)
 	{
 		if (currentFrame > 5 && currentFrame < 9)

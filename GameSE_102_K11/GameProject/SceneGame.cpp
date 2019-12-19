@@ -1,10 +1,10 @@
-#include "SceneGame.h"
+﻿#include "SceneGame.h"
 
 SceneGame::SceneGame()
 {
 	camera = new Camera();
 	tileMap = new MapGame();
-	grid = new Grid();
+	grid = new Grid(&listWeaponOfEnemy);
 
 	//ground = new Ground(0.0f, 1097.0f);
 
@@ -17,6 +17,8 @@ SceneGame::SceneGame()
 	pillar_snake = new Image();
 	front_hurdle = new Image();
 
+	hud = new HUD_Info();
+
 	/*posX = 0;
 	posY = 1134;
 	verticalX = MapNS::MAX_SPEED_KEYB;
@@ -24,6 +26,10 @@ SceneGame::SceneGame()
 
 	oldXCam = 0.0f;
 	oldYCam = 0.0f;
+
+	allScore = 0;
+	allChance = 2;
+	allGem = 3;
 }
 
 SceneGame::~SceneGame()
@@ -42,6 +48,8 @@ void SceneGame::initialize(HWND hwnd)
 
 	LoadMap(eType::MAP_SULTAN);
 
+	hud->initialize(FONT_TOTAL_TEXTURE, FONT_SCORE_TEXTURE);
+
 	aladdin->setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_IDLE));
 	aladdin->setFrameDelay(0.12f);
 	aladdin->setFrames(0, 38);
@@ -55,7 +63,7 @@ void SceneGame::update(float frameTime)
 
 	aladdin->update(frameTime, this, &listOthers);
 
-	if (mapCurrent == MAP_SULTAN) // X�t camera font background hurdle
+	if (mapCurrent == MAP_SULTAN) // Xét camera font background hurdle
 	{
 		float deltaCamX = camera->getXCamera() - oldXCam;
 		float deltaCamY = camera->getYCamera() - oldYCam;
@@ -78,7 +86,7 @@ void SceneGame::update(float frameTime)
 	}
 	else
 	{
-		if (mapCurrent == MAP_JAFAR) // X�t camera font background pillar snake
+		if (mapCurrent == MAP_JAFAR) // Xét camera font background pillar snake
 		{
 			float deltaCamX = camera->getXCamera() - oldXCam;
 			pillar_snake->setX(pillar_snake->getX() - ((deltaCamX == 0.0f) ? 0.0f :
@@ -92,90 +100,43 @@ void SceneGame::update(float frameTime)
 		}
 	}
 
-	for (int i = 0; i < listOthers.size(); i++)
+	for (auto& ent : listOthers)
 	{
-		listOthers[i]->update(frameTime);
-		if (listOthers[i]->getKind() == eKind::WALL)
+		ent->update(&listOthers, frameTime);
+	}
+	for (auto& item : listItems)
+	{
+		item->update(&listOthers, frameTime);
+	}
+	for (auto& enemy : listEnemies)
+	{
+		enemy->update(&listOthers, frameTime);
+	}
+	for (int i = 0; i < listWeaponOfEnemy.size(); i++)
+	{
+		if (listWeaponOfEnemy[i]->getVisible() == true)
 		{
-			if (aladdin->sword->getVisible())
+			if (listWeaponOfEnemy[i]->getType() == BONE && listWeaponOfEnemy[i]->getFinished())
 			{
-				aladdin->setHitWall();
-				DebugOut("TRUNG TUONG\n");
+				listWeaponOfEnemy.erase(listWeaponOfEnemy.begin() + i);
+				i--;
+				continue;
 			}
+			listWeaponOfEnemy[i]->update(&listOthers, frameTime);
+		}
+		else {
+			listWeaponOfEnemy.erase(listWeaponOfEnemy.begin() + i);
+			i--;
 		}
 	}
-	for (int i = 0; i < listEnemies.size(); i++)
+
+	CheckCollision();
+	hud->update(frameTime);
+
+	if (aladdin->getHealth() <= 10.0f)
 	{
-		listEnemies[i]->update(frameTime);
-	}
-	for (int i = 0; i < listItems.size(); i++)
-	{
-		bool wasCollision = false;
-		listItems[i]->update(frameTime);
-		if (listItems[i]->getHealth() > 0.0f)
-		{
-			if (aladdin->sword->isCollitionObjectWithObject(listItems[i], frameTime) && aladdin->sword->getVisible())
-			{
-				switch (listItems[i]->getType())
-				{
-				case eType::APPLES:
-				case eType::GEMS:
-				case eType::HEART_BALLOON:
-					listItems[i]->setState(eType::EXPLOSIVE_ITEM);
-					wasCollision = true;
-					break;
-				case eType::GENIES:
-					listItems[i]->setState(eType::EXPLOSIVE_GENIE);
-					wasCollision = true;
-					break;
-				case eType::VASE:
-					listItems[i]->setState(eType::VASE);
-					wasCollision = true;
-					break;
-				}
-			}
-			if (wasCollision) continue;
-			if (aladdin->isCollisionWithItem(listItems[i], frameTime))
-			{
-				switch (listItems[i]->getType())
-				{
-				case eType::APPLES:
-				case eType::GEMS:
-				case eType::HEART_BALLOON:
-					listItems[i]->setState(eType::EXPLOSIVE_ITEM);
-					break;
-				case eType::CHAINS:
-					if (!aladdin->isClimbingChain() && aladdin->getVelocity().y > 0)
-						aladdin->setState(ALADDIN_CLIMB, listItems[i]->getCenterX(), listItems[i]->getY(), listItems[i]->getHeight());
-					break;
-				case eType::GENIES:
-					listItems[i]->setState(eType::EXPLOSIVE_GENIE);
-					wasCollision = true;
-					break;
-				case eType::VASE:
-					listItems[i]->setState(eType::VASE);
-					wasCollision = true;
-					break;
-				}
-			}
-		}
-	}
-	for (auto& weaponApple : aladdin->WeaponApple)
-	{
-		if (weaponApple->getVisible() && weaponApple->getState() != EXPLOSIVE_APPLE_WEAPON)
-		{
-			for (auto& entOther : listOthers)
-			{
-				if (entOther->getKind() == eKind::WALL)
-				{
-					if (weaponApple->isCollitionObjectWithObject(entOther, frameTime))
-					{
-						weaponApple->setState(eType::EXPLOSIVE_APPLE_WEAPON);
-						break;
-					}
-				}
-			}
-		}
+		setMapCurrent(mapCurrent, true);
+		allChance--;
 	}
 }
 
@@ -239,6 +200,15 @@ void SceneGame::render()
 
 	for (auto& ent : listEnemies)
 	{
+		ent->setViewport(camera);
+		ent->draw();
+
+		if (isDebugRenderBBox)
+			ent->RenderBoundingBox(camera);
+	}
+
+	for (auto& ent : listWeaponOfEnemy)
+	{
 		ent->setViewport(camera->CameraTransform(ent->getX(), ent->getY()));
 		ent->draw();
 
@@ -274,12 +244,14 @@ void SceneGame::render()
 		front_hurdle->setXY(hurdleX, hurdleY);
 	}
 
+	hud->Render(aladdin->getAppleCollect(), allChance, allGem, allScore, (int)aladdin->getHealth());
 
+	//DebugOut("Y aladdin: %.2f\n", aladdin->getY());
 
 	Graphics::getInstance()->spriteEnd();
 }
 
-void SceneGame::LoadMap(eType type)
+void SceneGame::LoadMap(eType type, bool isChange)
 {
 	mapCurrent = type;
 	switch (type)
@@ -290,30 +262,54 @@ void SceneGame::LoadMap(eType type)
 		oldYCam = camera->getYCamera();
 
 		grid->SetFile(OBJECT_GRID_MAP_SULTAN);
-		grid->ReloadGrid();
+		grid->ReloadGrid(aladdin);
 
 		front_hurdle->setTextureManager(TextureManager::getIntance()->getTexture(eType::MAP_SULTAN_FRONT_BG));
 
-		//aladdin->setXY(84.0f, 956.0f);
-		aladdin->setXY(516.0f, 553.0f);
+		aladdin->setXY(84.0f, 956.0f);
+		//aladdin->setXY(516.0f, 553.0f);
 		//aladdin->setXY(1440.0f, 250.0f);
 		//aladdin->setXY(2079.0f, 60.0f);
+		//aladdin->setXY(800.0f, 694.0f);
+
+		aladdin->setState(ALADDIN_IDLE);
+		if (isChange)
+		{
+			aladdin->setHealth(100.0f);
+			aladdin->setAppleCollect(10);
+			allGem = 3;
+			allScore = 0;
+		}
 
 		tileMap->LoadMap(eType::MAP_SULTAN);
+		if (!audio->isPlaying(eAudio::MUSIC_MAP_SULTAN))
+			audio->Play(eAudio::MUSIC_MAP_SULTAN, true);
+		if (audio->isPlaying(eAudio::MUSIC_MAP_JAFAR))
+			audio->Stop(eAudio::MUSIC_MAP_JAFAR);
 		break;
 	case MAP_JAFAR:
 		camera->setPositionCam(0.0f, 192.0f);
 		oldXCam = camera->getXCamera();
 
 		grid->SetFile(OBJECT_GRID_MAP_JAFAR);
-		grid->ReloadGrid();
+		grid->ReloadGrid(aladdin);
 
 		pillar_snake->setTextureManager(TextureManager::getIntance()->getTexture(eType::MAP_JAFAR_BACKGROUND));
 
-		aladdin->setXY(8.0f, 245.0f);
-		aladdin->setCurrentFrame(0);
+		aladdin->setXY(8.0f, 200.0f);
+		if (isChange)
+		{
+			aladdin->setHealth(100.0f);
+			aladdin->setAppleCollect(10);
+			allGem = 3;
+			allScore = 0;
+		}
 
 		tileMap->LoadMap(eType::MAP_JAFAR);
+		if (!audio->isPlaying(eAudio::MUSIC_MAP_JAFAR))
+			audio->Play(eAudio::MUSIC_MAP_JAFAR, true);
+		if (audio->isPlaying(eAudio::MUSIC_MAP_SULTAN))
+			audio->Stop(eAudio::MUSIC_MAP_SULTAN);
 		break;
 	}
 
@@ -326,13 +322,297 @@ void SceneGame::ResetObjectMap()
 	listEnemies.clear();
 	listItems.clear();
 	listColumns.clear();
+	listWeaponOfEnemy.clear();
 
 	isDebugRenderBBox = false;
 }
 
-void SceneGame::setMapCurrent(eType type)
+void SceneGame::setMapCurrent(eType type, bool isChange)
 {
-	if (mapCurrent != type)
-		LoadMap(type);
+	//if (mapCurrent != type)
+	LoadMap(type, isChange);
+}
+
+void SceneGame::CheckCollision()
+{
+	CheckCollisionWeapon(listOthers);
+	CheckCollisionAladdinWithItem();
+	CheckCollisionWithEnemy();
+	CheckCollisionWithBoss();
+}
+
+void SceneGame::CheckCollisionWeapon(std::vector<Entity*> listEnt)
+{
+	for (auto* weaponApple : aladdin->WeaponApple)
+	{
+		if (weaponApple->getVisible() && weaponApple->getState() != EXPLOSIVE_APPLE_WEAPON)
+		{
+			for (auto& entOther : listEnt)
+			{
+				if (entOther->getKind() == eKind::WALL || entOther->getKind() == eKind::ENEMY)
+				{
+					if (weaponApple->isCollitionObjectWithObject(entOther, frameTime))
+					{
+						weaponApple->setState(eType::EXPLOSIVE_APPLE_WEAPON);
+						switch (entOther->getType())
+						{
+						case HAKIM:
+							if (entOther->getHealth() == 100.0f)
+							{
+								entOther->setState(eType::HAKIM_BEHIT);
+								entOther->setHealth(50.0f);
+							}
+							else
+								if (entOther->getState() != EXPLOSIVE_ENEMY)
+									entOther->setState(eType::EXPLOSIVE_ENEMY);
+							break;
+						case NAHBI:
+							if (entOther->getHealth() == 100.0f)
+							{
+								entOther->setState(eType::NAHBI_BEHIT);
+								entOther->setHealth(50.0f);
+							}
+							else
+								if (entOther->getState() != EXPLOSIVE_ENEMY)
+									entOther->setState(eType::EXPLOSIVE_ENEMY);
+							break;
+						case SKELETON:
+							if (entOther->getHealth() == 100.0f)
+								entOther->setHealth(50.0f);
+							else entOther->setState(eType::EXPLOSIVE_ENEMY);
+							break;
+						}
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	if (aladdin->sword->getVisible())
+	{
+		for (int i = 0; i < listEnt.size(); i++)
+		{
+			if (listEnt[i]->getKind() == eKind::WALL || listEnt[i]->getKind() == eKind::ENEMY)
+			{
+				//aladdin->setHitWall();
+				//DebugOut("TRUNG TUONG\n");
+				if (aladdin->sword->isCollitionObjectWithObject(listEnt[i], frameTime))
+				{
+					switch (listEnt[i]->getType())
+					{
+					case HAKIM:
+						if (listEnt[i]->getHealth() == 100.0f)
+						{
+							listEnt[i]->setState(eType::HAKIM_BEHIT);
+							listEnt[i]->setHealth(50.0f);
+						}
+						else if (listEnt[i]->getState() != EXPLOSIVE_ENEMY)
+							listEnt[i]->setState(eType::EXPLOSIVE_ENEMY);
+						break;
+					case NAHBI:
+						//case BAT:
+						if (listEnt[i]->getHealth() == 100.0f)
+						{
+							listEnt[i]->setState(eType::NAHBI_BEHIT);
+							listEnt[i]->setHealth(50.0f);
+						}
+						else
+							if (listEnt[i]->getState() != EXPLOSIVE_ENEMY)
+								listEnt[i]->setState(eType::EXPLOSIVE_ENEMY);
+						break;
+					case SKELETON:
+						if (listEnt[i]->getHealth() == 100.0f)
+							listEnt[i]->setHealth(50.0f);
+						else listEnt[i]->setState(eType::EXPLOSIVE_ENEMY);
+						break;
+					case BONE:
+						if (listEnt[i]->getHealth() == 100.0f || listEnt[i]->getFinished() == false)
+						{
+							listEnt[i]->setFinished(true);
+						}
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+
+void SceneGame::CheckCollisionAladdinWithItem()
+{
+	for (int i = 0; i < listItems.size(); i++)
+	{
+		bool wasCollision = false;
+		if (listItems[i]->getHealth() > 0.0f)
+		{
+			if (aladdin->sword->isCollitionObjectWithObject(listItems[i], frameTime) && aladdin->sword->getVisible())
+			{
+				switch (listItems[i]->getType())
+				{
+				case eType::APPLES:
+					listItems[i]->setState(eType::EXPLOSIVE_ITEM);
+					wasCollision = true;
+					aladdin->setAppleCollect(aladdin->getAppleCollect() + 1);
+					break;
+				case eType::GEMS:
+					listItems[i]->setState(eType::EXPLOSIVE_ITEM);
+					wasCollision = true;
+					allScore += 150;
+					allGem++;
+					break;
+				case eType::HEART_BALLOON:
+					listItems[i]->setState(eType::EXPLOSIVE_ITEM);
+					wasCollision = true;
+					aladdin->setHealth(100.0f);
+					allScore += 150;
+					break;
+				case eType::GENIES:
+					listItems[i]->setState(eType::EXPLOSIVE_GENIE);
+					wasCollision = true;
+					allScore += 250;
+					break;
+				case eType::VASE:
+					listItems[i]->setState(eType::VASE);
+					wasCollision = true;
+					break;
+				}
+			}
+			if (wasCollision) continue;
+			if (aladdin->isCollisionWithItem(listItems[i], frameTime))
+			{
+				switch (listItems[i]->getType())
+				{
+				case eType::APPLES:
+					listItems[i]->setState(eType::EXPLOSIVE_ITEM);
+					aladdin->setAppleCollect(aladdin->getAppleCollect() + 1);
+					break;
+				case eType::GEMS:
+					listItems[i]->setState(eType::EXPLOSIVE_ITEM);
+					allGem++;
+					allScore += 150;
+					break;
+				case eType::HEART_BALLOON:
+					listItems[i]->setState(eType::EXPLOSIVE_ITEM);
+					aladdin->setHealth(100.0f);
+					allScore += 150;
+					break;
+				case eType::CHAINS:
+					if (!aladdin->isClimbingChain() && aladdin->getVelocity().y > 0)
+						aladdin->setState(ALADDIN_CLIMB, listItems[i]->getCenterX(), listItems[i]->getY(), listItems[i]->getHeight());
+					break;
+				case eType::GENIES:
+					listItems[i]->setState(eType::EXPLOSIVE_GENIE);
+					wasCollision = true;
+					allScore += 250;
+					break;
+				case eType::VASE:
+					listItems[i]->setState(eType::VASE);
+					wasCollision = true;
+					break;
+				}
+			}
+		}
+	}
+}
+
+void SceneGame::CheckCollisionWithEnemy()
+{
+	CheckCollisionWeapon(listEnemies);
+	CheckCollisionWeapon(listWeaponOfEnemy);
+	CheckCollisionAladdinWithEnemy();
+}
+
+void SceneGame::CheckCollisionAladdinWithEnemy()
+{
+	if (!aladdin->isUntouchable())
+	{
+		for (int i = 0; i < listEnemies.size(); i++)
+		{
+			if (dynamic_cast<NahbiItem*>(listEnemies[i])&&listEnemies[i]->getHealth()>.0f)
+			{
+				NahbiItem* nahbi = dynamic_cast<NahbiItem*>(listEnemies[i]);
+				if (nahbi->getSword()->getVisible())
+				{
+					if (nahbi->getSword()->isCollitionObjectWithObject(aladdin, frameTime))
+					{
+						aladdin->setState(eType::ALADDIN_HURT);
+						return;
+
+					}
+				}
+			}
+			else {
+				if (dynamic_cast<HakimItem*>(listEnemies[i]) && listEnemies[i]->getHealth() > .0f)
+				{
+					HakimItem* hakim = dynamic_cast<HakimItem*>(listEnemies[i]);
+					if (hakim->getSword()->getVisible())
+					{
+						if (hakim->getSword()->isCollitionObjectWithObject(aladdin, frameTime))
+						{
+							aladdin->setState(eType::ALADDIN_HURT);
+							return;
+
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if (!aladdin->isUntouchable())
+	{
+		for (int i = 0; i < listEnemies.size(); i++)
+		{
+			if (listEnemies[i]->getHealth() > 0.0f)
+			{
+				if (aladdin->isCollitionObjectWithObject(listEnemies[i], frameTime))
+				{
+					switch (listEnemies[i]->getType())
+					{
+					case SPEAR:
+					case BUTTRESS:
+					case NAHBI:
+					case HAKIM:
+					case SKELETON:
+						aladdin->setState(eType::ALADDIN_HURT);
+						return;
+						break;
+					default:
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	if (!aladdin->isUntouchable())
+	{
+#pragma region Collision With Weapon of Enemy
+		for (UINT i = 0; i < listWeaponOfEnemy.size(); i++)
+		{
+			if (listWeaponOfEnemy[i]->getFinished() == false)
+			{
+				LPCOLLISIONEVENT e = aladdin->SweptAABBEx(listWeaponOfEnemy[i], frameTime);
+				if (e->t > 0 && e->t <= 1) // có va chạm
+				{
+					aladdin->setState(ALADDIN_HURT);
+					return; // giảm chi phí duyệt, vì nếu có va chạm thì cũng đang untouchable
+				}
+
+				if (aladdin->checkAABB(listWeaponOfEnemy[i]) == true)
+				{
+					aladdin->setState(ALADDIN_HURT);
+					return;
+				}
+			}
+		}
+#pragma endregion
+	}
+}
+
+void SceneGame::CheckCollisionWithBoss()
+{
+
 }
 

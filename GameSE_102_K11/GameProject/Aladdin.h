@@ -46,7 +46,7 @@ private:
 	bool	isFalling;
 	bool	isPushing;
 	bool	isClimbing;
-
+	bool	isHurt;
 
 	float yChain;		// y của dây xích để ngăn chặn đi tiếp
 	int	hChain;	// height của dây xích 
@@ -54,6 +54,8 @@ private:
 	Camera* camera;
 	MapGame* mapGame;
 
+	LARGE_INTEGER timeStart;    // Performance Counter start value
+	LARGE_INTEGER timeEnd;      // Performance Counter end value
 
 	int totalAppleCollect;
 public:
@@ -66,13 +68,13 @@ public:
 	~Aladdin();
 
 	void update(float frameTime, Game* gamePtr, std::vector<Entity*> *coEntities);
-	void draw(COLOR_ARGB color = graphicsNS::WHITE);
 	void MoveViewport(Camera* camera, bool moveX=true, bool moveY = true);								// thay đổi viewport khi thay đổi hướng nhân vật
 	//void ChangePositionState(int skewX=0, int skewY=0, bool isMoveX = false);	//skewX: vị trí X bị lệch của state so với vị trí mặc định
 																				//skewY: vị trí Y bị lệch ở bottom texture so với chân																	
 																				//isMoveX: có cho phép di chuyển X khi flipHorizontal = true hay k?
 	void getBoundingBox(float& left, float& top, float& right, float& bottom);
 	void RenderBoundingBox(Camera* camera);
+	void draw(COLOR_ARGB color = graphicsNS::WHITE);
 	void positionBoundingBox(
 		float& left, float& top, float& right, float& bottom,
 		float posLeft, float posLeftFlip, float posTop,

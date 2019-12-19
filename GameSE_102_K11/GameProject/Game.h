@@ -7,10 +7,12 @@
 #include "Graphics.h"
 #include "Constants.h"
 #include "Input.h"
+#include "Audio.h"
 
 class Game
 {
 protected:
+	Audio* audio;
 	Input* input;
 	HWND    hwnd;               // window handle
 	HRESULT hr;                 // standard return type
@@ -82,6 +84,8 @@ public:
 	// Update game items.
 	virtual void update(float frametime) = 0;
 
+	LARGE_INTEGER getTimeFreq() { return timerFreq; }
+
 	// Perform AI calculations.
 	//virtual void ai() = 0;
 
@@ -110,7 +114,7 @@ public:
 	//
 	float getSumTimeKeyDown() { return sumTimeKeyDown; }
 
-	virtual void setMapCurrent(eType type) = 0;
+	virtual void setMapCurrent(eType type, bool isChange=false) = 0;
 };
 
 #endif

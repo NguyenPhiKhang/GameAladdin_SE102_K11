@@ -3,6 +3,10 @@
 
 #include "Entity.h"
 
+//namespace batNS{
+//	const 
+//}
+
 class BatItem : public Entity
 {
 private:

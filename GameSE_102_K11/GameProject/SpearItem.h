@@ -10,6 +10,8 @@ private:
 public:
 	SpearItem(float x, float y);
 	~SpearItem();
+	void update(std::vector<Entity*>* listObj, float frameTime);
+	void getBoundingBox(float& left, float& top, float& right, float& bottom);
 };
 
 #endif

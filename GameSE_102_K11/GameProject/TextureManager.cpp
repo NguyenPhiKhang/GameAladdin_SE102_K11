@@ -73,7 +73,20 @@ void TextureManager::LoadResources()
 	addTexture(eType::ALADDIN_CLIMB_ATTACK,		new CTexture(ALADDIN_CLIMB_ATTACK_TEXTURE, 8, 136, 110));
 	addTexture(eType::ALADDIN_CLIMB_THROW,		new CTexture(ALADDIN_CLIMB_THROW_TEXTURE, 6, 136, 110));
 	addTexture(eType::ALADDIN_CLIMB_JUMP,		new CTexture(ALADDIN_CLIMB_JUMP_TEXTURE, 9, 136, 110));
+	addTexture(eType::ALADDIN_HURT,				new CTexture(ALADDIN_HURT_TEXTURE, 6, 136, 110));
 
+	// Enemy Nahbi
+	addTexture(eType::NAHBI_RUN,				new CTexture(NAHBI_RUN_TEXTURE, 8, 166, 73));
+	addTexture(eType::NAHBI_LEAD,				new CTexture(NAHBI_LEAD_TEXTURE, 6, 166, 73));
+	addTexture(eType::NAHBI_STAB,				new CTexture(NAHBI_STAB_TEXTURE, 7, 166, 73));
+	addTexture(eType::NAHBI_ATTACK,				new CTexture(NAHBI_ATTACK_TEXTURE, 6, 166, 73));
+	addTexture(eType::NAHBI_BEHIT,				new CTexture(NAHBI_BEHIT_TEXTURE, 6, 166, 73));
+
+	// Enemy Hakim
+	addTexture(eType::HAKIM_RUN, new CTexture(HAKIM_RUN_TEXTURE, 8, 156, 74));
+	addTexture(eType::HAKIM_ATTACK, new CTexture(HAKIM_ATTACK_TEXTURE, 6, 156, 74));
+	addTexture(eType::HAKIM_BEHIT, new CTexture(HAKIM_BEHIT_TEXTURE, 9, 156, 74));
+	addTexture(eType::HAKIM_IDLE, new CTexture(HAKIM_IDLE_TEXTURE));
 
 	// items
 	addTexture(eType::APPLES,					new CTexture(APPLEITEM_TEXTURE));
@@ -90,13 +103,15 @@ void TextureManager::LoadResources()
 	addTexture(eType::PODIUM, new CTexture(PODIUMITEM_TEXTURE, 8, 40, 24));
 
 	//addTexture(eType::SKELETONLEFT, new CTexture(SKELETON_LEFTITEM_TEXTURE));
-	addTexture(eType::SKELETON, new CTexture(SKELETON_ITEM_TEXTURE));
-	addTexture(eType::SPEAR, new CTexture(SPEARITEM_TEXTURE, 14, 49, 35));
+	addTexture(eType::SKELETON, new CTexture(SKELETON_TEXTURE, 22, 112, 103));
+	addTexture(eType::SPEAR, new CTexture(SPEARITEM_TEXTURE, 8, 49, 35));
 	addTexture(eType::VASE, new CTexture(VASEITEM_TEXTURE, 10, 34, 34));
 	addTexture(eType::STALL, new CTexture(STALLITEM_TEXTURE));
 	addTexture(eType::PEDDLER, new CTexture(PEDDLERITEM_TEXTURE, 14, 74, 60));
-	addTexture(eType::HAKIM, new CTexture(HAKIMRITEM_TEXTURE));
-	addTexture(eType::NAHBI, new CTexture(NAHBIITEM_TEXTURE));
+	//addTexture(eType::HAKIM, new CTexture(HAKIMRITEM_TEXTURE));
+	//addTexture(eType::NAHBI, new CTexture(NAHBIITEM_TEXTURE));
+	// Bone
+	addTexture(eType::BONE, new CTexture(BONE_TEXTURE, 4, 16, 15));
 
 	// weapon
 	addTexture(eType::APPLE_WEAPON, new CTexture(APPLE_WEAPON_TEXTURE, 4, 9, 9));
@@ -106,6 +121,18 @@ void TextureManager::LoadResources()
 	addTexture(eType::EXPLOSIVE_ITEM, new CTexture(EXPLOSIVE_ITEMS_TEXTURE, 12, 19, 17));
 	addTexture(eType::EXPLOSIVE_APPLE_WEAPON, new CTexture(EXPLOSIVE_APPLE_WEAPON_TEXTURE, 5, 31, 27));
 	addTexture(eType::EXPLOSIVE_GENIE, new CTexture(EXPLOSIVE_GENIE_TEXTURE, 15, 48, 44));
+	addTexture(eType::EXPLOSIVE_ENEMY, new CTexture(EXPLOSIVE_ENEMY_TEXTURE, 10, 88, 55));
+	addTexture(eType::EXPLOSIVE_BONE, new CTexture(EXPLOSIVE_BONE_TEXTURE));
+
+	//icon
+	addTexture(eType::ICON_APPLE, new CTexture(APPLEITEM_TEXTURE));
+	addTexture(eType::ICON_CHANCE, new CTexture(ICON_CHANCE_TEXTURE));
+	addTexture(eType::ICON_GEM, new CTexture(ICON_GEM_TEXTURE));
+	addTexture(eType::HEALTH_METER, new CTexture(HEALTH_METER_TEXTURE, 4, 120, 32));
+
+	// font
+	addTexture(eType::FONT_TOTAL, new CTexture(FONT_TOTAL_TEXTURE, 10, 18, 18));
+	addTexture(eType::FONT_SCORE, new CTexture(FONT_SCORE_TEXTURE, 10, 18, 18));
 
 	// bbox
 	addTexture(eType::BBOX, new CTexture(BOUNDING_BOX_TEXTURE));

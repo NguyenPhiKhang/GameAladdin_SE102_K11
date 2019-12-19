@@ -39,6 +39,7 @@ protected:
 	
 	HRESULT hr;             // standard return type
 	bool    active;         // only active entities may collide
+	bool unTouchable;
 
 	int state;
 
@@ -47,8 +48,11 @@ protected:
 
 	float dx, dy;
 
+	float firstX, firstY; // vị trí đầu tiên của entity
+
 	bool finished;
 
+	float LimitLeft, LimitRight;
 public:
 	// Constructor
 	Entity();
@@ -60,10 +64,10 @@ public:
 	////////////////////////////////////////
 
 	// Return center of scaled Entity as screen x,y.
-	virtual const D3DXVECTOR2* getCenter()
+	virtual D3DXVECTOR2 getCenter()
 	{
 		center = D3DXVECTOR2(getCenterX(), getCenterY());
-		return &center;
+		return center;
 	}
 
 	// Return RECT structure used for BOX and ROTATED_BOX collision detection.
@@ -74,6 +78,8 @@ public:
 
 	// Return active.
 	virtual bool  getActive()         const { return active; }
+
+	virtual bool  isUntouchable() const { return unTouchable; }
 
 	// Return gravitational constant.
 	virtual float getGravity()        const { return gravity; }
@@ -93,6 +99,11 @@ public:
 	virtual void getBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void RenderBoundingBox(Camera* camera);
 
+	virtual float getFirstX() { return firstX; }
+	virtual float getFirstY() { return firstY; }
+
+	virtual D3DXVECTOR2 getFirstPosition() { return D3DXVECTOR2(firstX, firstY); }
+
 	////////////////////////////////////////
 	//           Set functions            //
 	////////////////////////////////////////
@@ -107,6 +118,8 @@ public:
 
 	// Set active.
 	virtual void  setActive(bool a) { active = a; }
+
+	virtual void setUntouchable(bool a) { unTouchable = a; }
 
 	// Set health.
 	virtual void setHealth(float h) { health = h; }
@@ -182,6 +195,79 @@ public:
 	bool checkAABB(float b1left, float b1top, float b1right, float b1bottom, float b2left, float b2top, float b2right, float b2bottom);
 	bool isCollitionObjectWithObject(Entity* ent, float frameTime);	// kiểm tra bằng AABB và Sweept AABB
 
+
+
+
+	float getLimitLeft()
+	{
+		return LimitLeft;
+	}
+	float getLimitRight()
+	{
+		return LimitRight;
+	}
+
+	void setLimit()
+	{
+		switch (spriteData.id)
+		{
+		case 315:
+			LimitLeft = 0;
+			LimitRight = 84;
+			break;
+		case 316:
+
+			LimitLeft = 134;
+			LimitRight = 210;
+			break;
+		case 317:
+
+			LimitLeft = 625;
+			LimitRight = 754;
+			break;
+		case 318:
+			LimitLeft = 1250;
+			LimitRight = 1430;
+			break;
+		case 319:
+
+			LimitLeft = 935;
+			LimitRight = 1040;
+			break;
+		case 320:
+			LimitLeft = 1100;
+			LimitRight = 1200;
+			break;
+		case 321:
+
+			LimitLeft = 1268;
+			LimitRight = 1444;
+			break;
+		case 322:
+
+			LimitLeft = 1878;
+			LimitRight = 2024;
+			break;
+		case 323:
+			LimitLeft = 2090;
+			LimitRight = 2210;
+			break;
+		case 324:
+			LimitLeft = 1965;
+			LimitRight = 2164;
+			break;
+		case 325:
+			LimitLeft = 1584;
+			LimitRight = 1680;
+			break;
+		case 326:
+			LimitLeft = 2170;
+			LimitRight = 2260;
+			break;
+		default:
+			break;
+		}
+	}
 };
 
 #endif

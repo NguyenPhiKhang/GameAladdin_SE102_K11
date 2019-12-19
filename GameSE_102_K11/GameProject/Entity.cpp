@@ -18,6 +18,8 @@ Entity::Entity() :Image()
 	health = 100;
 	dx = 0.0f;
 	dy = 0.0f;
+	unTouchable = false;
+	firstX = firstY = 0.0f;
 }
 
 
@@ -282,7 +284,7 @@ bool Entity::isCollitionObjectWithObject(Entity* ent, float frameTime)
 
 	LPCOLLISIONEVENT e = SweptAABBEx(ent, frameTime); // kt va chạm giữa 2 object bằng sweptAABB
 	bool res = e->t > 0 && e->t <= 1.0f; // ĐK va chạm
-	SAFE_DELETE(e);
+	safeDelete(e);
 	return res;
 }
 

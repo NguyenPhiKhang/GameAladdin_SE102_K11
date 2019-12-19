@@ -11,7 +11,7 @@ public:
 	PodiumItem(float x, float y);
 	~PodiumItem();
 
-	void update(float frameTime);
+	void update(std::vector<Entity*>* listObj, float frameTime);
 	void getBoundingBox(float& left, float& top, float& right, float& bottom);
 };
 
