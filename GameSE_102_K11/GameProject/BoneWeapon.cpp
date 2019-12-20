@@ -61,21 +61,20 @@ void BoneWeapon::update(std::vector<Entity*>* listObj, float frameTime)
 		spriteData.x += dx;
 		spriteData.y += dy;
 		QueryPerformanceCounter(&timeEnd);
-		if (((float)(timeEnd.QuadPart - timeStart.QuadPart) / timerFreq.QuadPart) > 2.5f)
+		if (((float)(timeEnd.QuadPart - timeStart.QuadPart) / timerFreq.QuadPart) > 1.5f)
 		{
-			//setState(EXPLOSIVE_BONE);
+			setState(EXPLOSIVE_BONE);
 			health = 0.0f;
 			QueryPerformanceCounter(&timeStart);
+			//finished = true;
+		}
+	}
+	else {
+		if (currentFrame == 3 && state == EXPLOSIVE_BONE)
+		{
 			finished = true;
 		}
 	}
-	/*else {
-		QueryPerformanceCounter(&timeEnd);
-		if (((float)(timeEnd.QuadPart - timeStart.QuadPart) / timerFreq.QuadPart) > 1.0f)
-		{
-			finished = true;
-		}
-	}*/
 }
 
 void BoneWeapon::getBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -95,8 +94,9 @@ void BoneWeapon::setState(int state)
 	if (state == eType::EXPLOSIVE_BONE)
 	{
 		setTextureManager(TextureManager::getIntance()->getTexture(eType::EXPLOSIVE_BONE));
-		setFrames(0, 0);
+		setFrames(0, 3);
 		setCurrentFrame(0);
+		frameDelay = 0.1f;
 		health = .0f;
 	}
 }

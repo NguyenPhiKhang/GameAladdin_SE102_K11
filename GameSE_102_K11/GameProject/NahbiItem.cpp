@@ -191,6 +191,7 @@ void NahbiItem::setState(int state)
 		setXY(centerNahbi.x - spriteData.width / 2, centerNahbi.y - spriteData.height / 2);
 		return;
 	}
+	break;
 	case NAHBI_BEHIT:
 		setCurrentFrame(0);
 		setTextureManager(TextureManager::getIntance()->getTexture((eType)state));

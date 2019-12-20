@@ -30,6 +30,7 @@
 #include "Iron_StepItem.h"
 #include "PillarItem.h"
 #include "Aladdin.h"
+#include "BossJafar.h"
 
 
 namespace gridNS {

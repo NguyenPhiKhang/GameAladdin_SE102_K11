@@ -2,6 +2,337 @@
   "cols_grid": 11,
   "map_grid": [
     {
+      "id_cell": 34,
+      "array_items": [
+        {
+          "_id": 334,
+          "_type": 203,
+          "_x": 0,
+          "_y": 180,
+          "_width": 30,
+          "_height": 193
+        }
+      ]
+    },
+    {
+      "id_cell": 44,
+      "array_items": [
+        {
+          "_id": 333,
+          "_type": 203,
+          "_x": 800,
+          "_y": 180,
+          "_width": 30,
+          "_height": 193
+        }
+      ]
+    },
+    {
+      "id_cell": 45,
+      "array_items": [
+        {
+          "_id": 334,
+          "_type": 203,
+          "_x": 0,
+          "_y": 180,
+          "_width": 30,
+          "_height": 193
+        }
+      ]
+    },
+    {
+      "id_cell": 46,
+      "array_items": [
+        {
+          "_id": 5000,
+          "_type": 601,
+          "_x": 359,
+          "_y": 263,
+          "_width": 114,
+          "_height": 84
+        }
+      ]
+    },
+    {
+      "id_cell": 47,
+      "array_items": [
+        {
+          "_id": 5000,
+          "_type": 601,
+          "_x": 359,
+          "_y": 263,
+          "_width": 114,
+          "_height": 84
+        }
+      ]
+    },
+    {
+      "id_cell": 48,
+      "array_items": [
+        {
+          "_id": 5000,
+          "_type": 601,
+          "_x": 359,
+          "_y": 263,
+          "_width": 114,
+          "_height": 84
+        }
+      ]
+    },
+    {
+      "id_cell": 49,
+      "array_items": [
+        {
+          "_id": 5000,
+          "_type": 601,
+          "_x": 359,
+          "_y": 263,
+          "_width": 114,
+          "_height": 84
+        }
+      ]
+    },
+    {
+      "id_cell": 50,
+      "array_items": [
+        {
+          "_id": 5000,
+          "_type": 601,
+          "_x": 359,
+          "_y": 263,
+          "_width": 114,
+          "_height": 84
+        }
+      ]
+    },
+    {
+      "id_cell": 51,
+      "array_items": [
+        {
+          "_id": 5000,
+          "_type": 601,
+          "_x": 359,
+          "_y": 263,
+          "_width": 114,
+          "_height": 84
+        }
+      ]
+    },
+    {
+      "id_cell": 52,
+      "array_items": [
+        {
+          "_id": 5000,
+          "_type": 601,
+          "_x": 359,
+          "_y": 263,
+          "_width": 114,
+          "_height": 84
+        }
+      ]
+    },
+    {
+      "id_cell": 53,
+      "array_items": [
+        {
+          "_id": 5000,
+          "_type": 601,
+          "_x": 359,
+          "_y": 263,
+          "_width": 114,
+          "_height": 84
+        }
+      ]
+    },
+    {
+      "id_cell": 54,
+      "array_items": [
+        {
+          "_id": 5000,
+          "_type": 601,
+          "_x": 359,
+          "_y": 263,
+          "_width": 114,
+          "_height": 84
+        }
+      ]
+    },
+    {
+      "id_cell": 55,
+      "array_items": [
+        {
+          "_id": 333,
+          "_type": 203,
+          "_x": 800,
+          "_y": 180,
+          "_width": 30,
+          "_height": 193
+        }
+      ]
+    },
+    {
+      "id_cell": 56,
+      "array_items": [
+        {
+          "_id": 328,
+          "_type": 214,
+          "_x": 21,
+          "_y": 301,
+          "_width": 129,
+          "_height": 7
+        },
+        {
+          "_id": 334,
+          "_type": 203,
+          "_x": 0,
+          "_y": 180,
+          "_width": 30,
+          "_height": 193
+        }
+      ]
+    },
+    {
+      "id_cell": 57,
+      "array_items": [
+        {
+          "_id": 328,
+          "_type": 214,
+          "_x": 21,
+          "_y": 301,
+          "_width": 129,
+          "_height": 7
+        }
+      ]
+    },
+    {
+      "id_cell": 59,
+      "array_items": [
+        {
+          "_id": 329,
+          "_type": 214,
+          "_x": 256,
+          "_y": 301,
+          "_width": 106,
+          "_height": 7
+        }
+      ]
+    },
+    {
+      "id_cell": 60,
+      "array_items": [
+        {
+          "_id": 329,
+          "_type": 214,
+          "_x": 256,
+          "_y": 301,
+          "_width": 106,
+          "_height": 7
+        },
+        {
+          "_id": 5000,
+          "_type": 601,
+          "_x": 359,
+          "_y": 263,
+          "_width": 114,
+          "_height": 84
+        }
+      ]
+    },
+    {
+      "id_cell": 61,
+      "array_items": [
+        {
+          "_id": 330,
+          "_type": 214,
+          "_x": 468,
+          "_y": 301,
+          "_width": 106,
+          "_height": 7
+        },
+        {
+          "_id": 5000,
+          "_type": 601,
+          "_x": 359,
+          "_y": 263,
+          "_width": 114,
+          "_height": 84
+        }
+      ]
+    },
+    {
+      "id_cell": 62,
+      "array_items": [
+        {
+          "_id": 330,
+          "_type": 214,
+          "_x": 468,
+          "_y": 301,
+          "_width": 106,
+          "_height": 7
+        }
+      ]
+    },
+    {
+      "id_cell": 63,
+      "array_items": [
+        {
+          "_id": 330,
+          "_type": 214,
+          "_x": 468,
+          "_y": 301,
+          "_width": 106,
+          "_height": 7
+        }
+      ]
+    },
+    {
+      "id_cell": 64,
+      "array_items": [
+        {
+          "_id": 331,
+          "_type": 214,
+          "_x": 680,
+          "_y": 301,
+          "_width": 129,
+          "_height": 7
+        }
+      ]
+    },
+    {
+      "id_cell": 65,
+      "array_items": [
+        {
+          "_id": 331,
+          "_type": 214,
+          "_x": 680,
+          "_y": 301,
+          "_width": 129,
+          "_height": 7
+        }
+      ]
+    },
+    {
+      "id_cell": 66,
+      "array_items": [
+        {
+          "_id": 331,
+          "_type": 214,
+          "_x": 680,
+          "_y": 301,
+          "_width": 129,
+          "_height": 7
+        },
+        {
+          "_id": 333,
+          "_type": 203,
+          "_x": 800,
+          "_y": 180,
+          "_width": 30,
+          "_height": 193
+        }
+      ]
+    },
+    {
       "id_cell": 67,
       "array_items": [
         {

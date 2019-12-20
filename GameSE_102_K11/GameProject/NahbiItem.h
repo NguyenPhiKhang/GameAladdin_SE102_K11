@@ -12,8 +12,6 @@ private:
 	bool isAttack;
 	bool isHurt;
 	SwordWeapon* sword;
-
-	std::vector<Entity*>* listWeaponOfEnemy;
 public:
 	NahbiItem(float x, float y, Aladdin* aladdin);
 	~NahbiItem();

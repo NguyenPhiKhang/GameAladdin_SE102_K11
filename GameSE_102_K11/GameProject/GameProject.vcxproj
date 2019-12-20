@@ -135,6 +135,7 @@
     <ClInclude Include="BarrierItem.h" />
     <ClInclude Include="BatItem.h" />
     <ClInclude Include="BoneWeapon.h" />
+    <ClInclude Include="BossJafar.h" />
     <ClInclude Include="ButtressItem.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ChainItem.h" />
@@ -147,6 +148,8 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="enum.h" />
     <ClInclude Include="ExitItem.h" />
+    <ClInclude Include="FireIdle.h" />
+    <ClInclude Include="FireRun.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GemItem.h" />
     <ClInclude Include="GenieItem.h" />
@@ -185,6 +188,7 @@
     <ClCompile Include="BarrierItem.cpp" />
     <ClCompile Include="BatItem.cpp" />
     <ClCompile Include="BoneWeapon.cpp" />
+    <ClCompile Include="BossJafar.cpp" />
     <ClCompile Include="ButtressItem.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ChainItem.cpp" />
@@ -195,6 +199,8 @@
     <ClCompile Include="dxutil.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="ExitItem.cpp" />
+    <ClCompile Include="FireIdle.cpp" />
+    <ClCompile Include="FireRun.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GemItem.cpp" />
     <ClCompile Include="GenieItem.cpp" />

@@ -49,6 +49,9 @@ enum eType {
 	// animation hurt
 	ALADDIN_HURT			= 175,
 
+	// animation touchground
+	ALADDIN_TOUCHGROUND		= 176,
+
 	//ground
 	GROUND					= 200,
 	WOOD					= 220,
@@ -89,6 +92,12 @@ enum eType {
 	HAKIM_ATTACK			= 421,
 	HAKIM_BEHIT				= 431,
 	HAKIM_IDLE				= 441,
+
+	// Boss
+	JAFAR_BOSS				= 601,
+	SNAKE_BOSS				= 602,
+	FIRE_IDLE				= 603,
+	FIRE_RUN				= 604,
 
 
 	// effect

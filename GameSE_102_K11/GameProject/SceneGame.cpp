@@ -195,7 +195,7 @@ void SceneGame::render()
 		ent->draw();
 
 		if (isDebugRenderBBox)
-			ent->RenderBoundingBox(camera); (camera);
+			ent->RenderBoundingBox(camera);
 	}
 
 	for (auto& ent : listEnemies)
@@ -353,10 +353,11 @@ void SceneGame::CheckCollisionWeapon(std::vector<Entity*> listEnt)
 				{
 					if (weaponApple->isCollitionObjectWithObject(entOther, frameTime))
 					{
-						weaponApple->setState(eType::EXPLOSIVE_APPLE_WEAPON);
+						appleWeapon* aWeapon = dynamic_cast<appleWeapon*>(weaponApple);
 						switch (entOther->getType())
 						{
 						case HAKIM:
+							aWeapon->setState(eType::EXPLOSIVE_APPLE_WEAPON);
 							if (entOther->getHealth() == 100.0f)
 							{
 								entOther->setState(eType::HAKIM_BEHIT);
@@ -367,6 +368,7 @@ void SceneGame::CheckCollisionWeapon(std::vector<Entity*> listEnt)
 									entOther->setState(eType::EXPLOSIVE_ENEMY);
 							break;
 						case NAHBI:
+							aWeapon->setState(eType::EXPLOSIVE_APPLE_WEAPON);
 							if (entOther->getHealth() == 100.0f)
 							{
 								entOther->setState(eType::NAHBI_BEHIT);
@@ -377,10 +379,22 @@ void SceneGame::CheckCollisionWeapon(std::vector<Entity*> listEnt)
 									entOther->setState(eType::EXPLOSIVE_ENEMY);
 							break;
 						case SKELETON:
+							aWeapon->setState(eType::EXPLOSIVE_APPLE_WEAPON);
 							if (entOther->getHealth() == 100.0f)
 								entOther->setHealth(50.0f);
 							else entOther->setState(eType::EXPLOSIVE_ENEMY);
 							break;
+						case BATS:
+							aWeapon->setState(eType::EXPLOSIVE_APPLE_WEAPON);
+							if(entOther->getHealth()==100.0f)
+								entOther->setState(eType::EXPLOSIVE_ENEMY);
+							break;
+						case JAFAR_BOSS:
+							aWeapon->setState(eType::EXPLOSIVE_GENIE, entOther);
+							if (entOther->getHealth() > 0.0f)
+							{
+								entOther->setHealth(entOther->getHealth() - 5);
+							}
 						}
 						break;
 					}
@@ -429,8 +443,12 @@ void SceneGame::CheckCollisionWeapon(std::vector<Entity*> listEnt)
 					case BONE:
 						if (listEnt[i]->getHealth() == 100.0f || listEnt[i]->getFinished() == false)
 						{
-							listEnt[i]->setFinished(true);
+							listEnt[i]->setState(eType::EXPLOSIVE_BONE);
 						}
+						break;
+					case BATS:
+						if (listEnt[i]->getHealth() != 0.0f)
+							listEnt[i]->setState(eType::EXPLOSIVE_ENEMY);
 						break;
 					}
 				}
@@ -575,6 +593,8 @@ void SceneGame::CheckCollisionAladdinWithEnemy()
 					case NAHBI:
 					case HAKIM:
 					case SKELETON:
+					case BATS:
+					case JAFAR_BOSS:
 						aladdin->setState(eType::ALADDIN_HURT);
 						return;
 						break;

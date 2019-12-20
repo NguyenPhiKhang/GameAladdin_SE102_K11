@@ -130,12 +130,16 @@ void appleWeapon::update(std::vector<Entity*>* listObj, float frameTime)
 			break;
 		}
 	}
-	if (velocity.y > 0.0f)
-		deltaV.y = 3.0f;
-	else deltaV.y = 0.0f;
 
-	spriteData.x += dx;
-	spriteData.y += dy;
+	if (health != 0.0f)
+	{
+		if (velocity.y > 0.0f)
+			deltaV.y = 3.0f;
+		else deltaV.y = 0.0f;
+
+		spriteData.x += dx;
+		spriteData.y += dy;
+	}
 
 	if (startFly)
 	{
@@ -150,7 +154,15 @@ void appleWeapon::update(std::vector<Entity*>* listObj, float frameTime)
 
 	if (health == 0.0f)
 	{
-		if (currentFrame == 4)
+		if (currentFrame == 4&&state==EXPLOSIVE_APPLE_WEAPON)
+		{
+			finished = true;
+		}
+		if (currentFrame > 8 && state == EXPLOSIVE_GENIE)
+		{
+			frameDelay = 0.04f;
+		}
+		if (currentFrame == 14 && state == EXPLOSIVE_GENIE)
 		{
 			finished = true;
 		}
@@ -166,7 +178,7 @@ void appleWeapon::getBoundingBox(float& left, float& top, float& right, float& b
 	}
 }
 
-void appleWeapon::setState(int state)
+void appleWeapon::setState(int state, Entity* obj)
 {
 	Entity::setState(state);
 	switch (state)
@@ -178,7 +190,16 @@ void appleWeapon::setState(int state)
 		currentFrame = 0;
 		frameDelay = 0.04f;
 		setVelocity(D3DXVECTOR2(0.0f, 0.0f));
+		break;
+	case EXPLOSIVE_GENIE:
 		health = 0.0f;
+		setTextureManager(TextureManager::getIntance()->getTexture((eType)state));
+		setFrames(0, 14);
+		setCurrentFrame(0);
+		frameDelay = 0.08f;
+		if(obj != NULL)
+			setXY(obj->getCenterX() - spriteData.width / 2, obj->getCenterY() - spriteData.height / 2 + 20);
+		setVelocity(D3DXVECTOR2(0.0f, 0.0f));
 		break;
 	case APPLE_WEAPON:
 		setTextureManager(TextureManager::getIntance()->getTexture((eType)state));

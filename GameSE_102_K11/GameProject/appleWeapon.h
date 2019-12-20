@@ -17,7 +17,7 @@ public:
 	~appleWeapon();
 	void update(std::vector<Entity*>* listObj, float frameTime);
 	void getBoundingBox(float& left, float& top, float& right, float& bottom);
-	void setState(int state);
+	void setState(int state, Entity* obj=NULL);
 	void CollideWithGround(std::vector<Entity*>* coEntities, float frameTime);
 };
 

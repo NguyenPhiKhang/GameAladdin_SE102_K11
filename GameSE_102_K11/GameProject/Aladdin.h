@@ -58,6 +58,8 @@ private:
 	LARGE_INTEGER timeEnd;      // Performance Counter end value
 
 	int totalAppleCollect;
+
+	DWORD colorUntounchable;
 public:
 	std::vector<Entity*> WeaponApple;
 	SwordWeapon* sword;

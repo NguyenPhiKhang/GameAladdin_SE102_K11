@@ -228,6 +228,15 @@
     <ClInclude Include="BoneWeapon.h">
       <Filter>Entities\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="BossJafar.h">
+      <Filter>Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="FireIdle.h">
+      <Filter>Entities\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="FireRun.h">
+      <Filter>Entities\Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -369,6 +378,15 @@
       <Filter>Framework\ThirdParty</Filter>
     </ClCompile>
     <ClCompile Include="BoneWeapon.cpp">
+      <Filter>Entities\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="BossJafar.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="FireIdle.cpp">
+      <Filter>Entities\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="FireRun.cpp">
       <Filter>Entities\Weapon</Filter>
     </ClCompile>
   </ItemGroup>

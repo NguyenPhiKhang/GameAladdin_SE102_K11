@@ -8,6 +8,7 @@
 #include "Aladdin.h"
 #include "Ground.h"
 #include "HUD_Info.h"
+#include "appleWeapon.h"
 
 class SceneGame: public Game
 {

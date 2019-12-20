@@ -38,11 +38,11 @@ const char ALADDIN_CLIMB_ATTACK_TEXTURE[] = "Resources\\Aladdin\\animation_aladd
 const char ALADDIN_CLIMB_THROW_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_climb_throw.png";
 const char ALADDIN_CLIMB_JUMP_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_climb_jump.png";
 const char ALADDIN_HURT_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_hurt.png";
+const char ALADDIN_TOUCHGROUND_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_touchground.png";
 
 // ITEM + ENEMY
 const char APPLEITEM_TEXTURE[] = "Resources\\Items\\AppleItems\\appleItem.png";
 const char GEMITEM_TEXTURE[] = "Resources\\Items\\GemItems\\animation_gem.png";
-const char BATITEM_TEXTURE[] = "Resources\\Items\\BatItems\\bat.png";
 const char BUTTRESSITEM_TEXTURE[] = "Resources\\Items\\ButtressItems\\animation_buttress.png";
 const char COLUMN1_OUTITEM_TEXTURE[] = "Resources\\Items\\Column_OutItems\\column1.png";
 const char COLUMN2_OUTITEM_TEXTURE[] = "Resources\\Items\\Column_OutItems\\column2.png";
@@ -74,6 +74,15 @@ const char HAKIM_RUN_TEXTURE[] = "Resources\\Enemy\\Hakim\\animation_hakim_run1.
 const char HAKIM_BEHIT_TEXTURE[] = "Resources\\Enemy\\Hakim\\animation_hakim_behit1.png";
 const char HAKIM_IDLE_TEXTURE[] = "Resources\\Enemy\\Hakim\\animation_hakim_idle.png";
 
+//Enemy bat
+const char BAT_TEXTURE[] = "Resources\\Enemy\\Bat\\animation_bat.png";
+
+// BOSS
+const char BOSS_JAFAR_TEXTURE[] = "Resources\\Enemy\\Boss\\animation_jafar_boss.png";
+const char BOSS_SNAKE_TEXTURE[] = "Resources\\Enemy\\Boss\\animation_snake_boss.png";
+const char FiRE_IDLE_TEXTURE[] = "Resources\\Enemy\\Boss\\animation_fireIDLE.png";
+const char FiRE_RUN_TEXTURE[] = "Resources\\Enemy\\Boss\\animation_fireRUN.png";
+
 //Bone
 const char BONE_TEXTURE[] = "Resources\\Enemy\\Skeleton\\animation_bone.png";
 
@@ -101,7 +110,7 @@ const char HEALTH_METER_TEXTURE[] = "Resources\\Items\\Icon\\HeathMeter.png";
 const char SULTAN_TILEMAP[] = "Resources\\Maps\\SultansDungeon\\tiledMap_SultansDungeon.json";
 const char JAFAR_TILEMAP[] = "Resources\\Maps\\JafarsPalace\\tiledMap_JajarsPalace.json";
 const char OBJECT_GRID_MAP_SULTAN[] = "Resources\\Items\\objects_grid_map_sultan.json";
-const char OBJECT_GRID_MAP_JAFAR[] = "Resources\\Items\\objects_grid_map_jafar1.json";
+const char OBJECT_GRID_MAP_JAFAR[] = "Resources\\Items\\objects_grid_map_jafar.json";
 
 
 // AUDIO

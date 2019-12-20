@@ -17,6 +17,7 @@ HakimItem::HakimItem(float x, float y, Aladdin* aladdin)
 
 HakimItem::~HakimItem()
 {
+	safeDelete(sword);
 }
 
 void HakimItem::update(std::vector<Entity*>* listObj, float frameTime)
