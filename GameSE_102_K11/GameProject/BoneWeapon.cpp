@@ -40,16 +40,30 @@ void BoneWeapon::update(std::vector<Entity*>* listObj, float frameTime)
 	{
 		float min_tx, min_ty, nx = 0, ny;
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
-		spriteData.y += min_ty * dy + ny * 0.4f;
-		spriteData.x += min_tx * dx + nx * 0.4f;
+		/*spriteData.y += min_ty * dy + ny * 0.4f;
+		spriteData.x += min_tx * dx + nx * 0.4f;*/
 		for (auto& obj : coEventsResult)
 		{
-			if(obj->entity->getKind()==FLOOR)
+			if (obj->entity->getKind() == FLOOR)
+			{
 				if (ny != 0)
+				{
+					spriteData.y += min_ty * dy + ny * 0.4f;
 					velocity.y = -velocity.y;
+				}
+				else spriteData.y += dy;
+			}
+			else spriteData.y += dy;
 			if (obj->entity->getKind() == WALL)
+			{
 				if (nx != 0)
+				{
+					spriteData.x += min_tx * dx + nx * 0.4f;
 					velocity.x = -velocity.x;
+				}
+				else spriteData.x += dx;
+			}
+			else spriteData.x += dx;
 		}
 	}
 

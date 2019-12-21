@@ -36,8 +36,9 @@ protected:
 	float	sumTimeKeyDown;
 
 	bool	isDebugRenderBBox;
+	bool	isKeyUpApple;
+	bool	isKeyUPHealth;
 	
-
 public:
 	// Constructor
 	Game();

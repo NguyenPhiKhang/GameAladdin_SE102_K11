@@ -172,6 +172,7 @@
     <ClInclude Include="SkeletonItem.h" />
     <ClInclude Include="SpearItem.h" />
     <ClInclude Include="StallItem.h" />
+    <ClInclude Include="StarWeapon.h" />
     <ClInclude Include="SwordWeapon.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Texture.h" />
@@ -223,6 +224,7 @@
     <ClCompile Include="SkeletonItem.cpp" />
     <ClCompile Include="SpearItem.cpp" />
     <ClCompile Include="StallItem.cpp" />
+    <ClCompile Include="StarWeapon.cpp" />
     <ClCompile Include="SwordWeapon.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />

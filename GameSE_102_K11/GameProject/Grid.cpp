@@ -283,7 +283,7 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 		ent->setTextureManager(TextureManager::getIntance()->getTexture(NAHBI_LEAD));
 		ent->setFrames(0, 5);
 		ent->setCurrentFrame(0);
-		ent->setFrameDelay(0.1f);
+		ent->setFrameDelay(0.15f);
 		return ent;
 	}
 	case BATS:
@@ -295,7 +295,7 @@ Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int he
 	}
 	case JAFAR_BOSS:
 	{
-		BossJafar* boss = new BossJafar(x, y, aladdin);
+		BossJafar* boss = new BossJafar(x, y, aladdin, listWeaponOfEnemy);
 		boss->setState(JAFAR_BOSS);
 		boss->setTextureManager(TextureManager::getIntance()->getTexture(JAFAR_BOSS));
 		boss->setCurrentFrame(0);
@@ -313,7 +313,7 @@ void Grid::GetListEntity(std::vector<Entity*>& ListOthers, std::vector<Entity*>&
 	listOldEnemy.clear();
 	for (auto i : ListEnemies)
 	{
-		if(i->getType()!=eType::BUTTRESS&&i->getType()!=eType::SPEAR&&i->getType()!=JAFAR_BOSS|| i->getType() != SNAKE_BOSS)
+		if(i->getType()!=eType::BUTTRESS&&i->getType()!=eType::SPEAR&&i->getType()!=JAFAR_BOSS)
 			listOldEnemy.push_back(i);
 	}
 

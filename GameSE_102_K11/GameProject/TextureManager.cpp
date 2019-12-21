@@ -95,8 +95,9 @@ void TextureManager::LoadResources()
 	// Boss
 	addTexture(eType::JAFAR_BOSS, new CTexture(BOSS_JAFAR_TEXTURE, 8, 114, 84));
 	addTexture(eType::SNAKE_BOSS, new CTexture(BOSS_SNAKE_TEXTURE, 11, 114, 84));
-	addTexture(eType::FIRE_IDLE, new CTexture(FiRE_IDLE_TEXTURE, 5, 35, 53));
-	addTexture(eType::FIRE_RUN, new CTexture(FiRE_RUN_TEXTURE, 8, 99, 51));
+	addTexture(eType::FIRE_IDLE, new CTexture(FIRE_IDLE_TEXTURE, 5, 35, 53));
+	addTexture(eType::FIRE_RUN, new CTexture(FIRE_RUN_TEXTURE, 8, 99, 51));
+	addTexture(eType::STAR, new CTexture(STAR_TEXTURE, 3, 28, 16));
 
 	// items
 	addTexture(eType::APPLES,					new CTexture(APPLEITEM_TEXTURE));

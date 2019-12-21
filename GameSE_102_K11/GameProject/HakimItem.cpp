@@ -30,7 +30,7 @@ void HakimItem::update(std::vector<Entity*>* listObj, float frameTime)
 	}
 	else {
 		deltaV.y = GRAVITY_JUMP_SPEED * frameTime;
-		#pragma region Xu li va cham Ground
+#pragma region Xu li va cham Ground
 		std::vector<LPCOLLISIONEVENT> coEvents;
 		std::vector<LPCOLLISIONEVENT> coEventsResult;
 		coEvents.clear();

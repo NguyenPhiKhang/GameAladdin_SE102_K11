@@ -80,8 +80,9 @@ const char BAT_TEXTURE[] = "Resources\\Enemy\\Bat\\animation_bat.png";
 // BOSS
 const char BOSS_JAFAR_TEXTURE[] = "Resources\\Enemy\\Boss\\animation_jafar_boss.png";
 const char BOSS_SNAKE_TEXTURE[] = "Resources\\Enemy\\Boss\\animation_snake_boss.png";
-const char FiRE_IDLE_TEXTURE[] = "Resources\\Enemy\\Boss\\animation_fireIDLE.png";
-const char FiRE_RUN_TEXTURE[] = "Resources\\Enemy\\Boss\\animation_fireRUN.png";
+const char FIRE_IDLE_TEXTURE[]	= "Resources\\Enemy\\Boss\\animation_fireIDLE.png";
+const char FIRE_RUN_TEXTURE[]	= "Resources\\Enemy\\Boss\\animation_fireRun.png";
+const char STAR_TEXTURE[]		= "Resources\\Enemy\\Boss\\animation_star.png";
 
 //Bone
 const char BONE_TEXTURE[] = "Resources\\Enemy\\Skeleton\\animation_bone.png";

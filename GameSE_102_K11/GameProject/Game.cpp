@@ -22,6 +22,9 @@ Game::Game()
 
 	isDebugRenderBBox = false;
 
+	isKeyUpApple = false;
+	isKeyUPHealth = false;
+
 	/*graphics = Graphics::getInstance();*/
 	input = Input::getInstance();
 	audio = Audio::getInstance();
@@ -74,6 +77,12 @@ LRESULT Game::messageHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				setMapCurrent(MAP_SULTAN);
 			if ((int)wParam == 113)
 				setMapCurrent(MAP_JAFAR);
+			if ((int)wParam == 49)
+				isKeyUPHealth = true;
+			if ((int)wParam == 50)
+			{
+				isKeyUpApple = true;
+			}
 
 			DebugOut("KEY DOWN %d\n", wParam);
 
@@ -92,6 +101,12 @@ LRESULT Game::messageHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				sumTimeKeyUp = 0.0f;
 			if ((int)wParam == 40)
 				sumTimeKeyDown = 0.0f;
+			if ((int)wParam == 49)
+				isKeyUPHealth = false;
+			if ((int)wParam == 50)
+			{
+				isKeyUpApple = false;
+			}
 
 			//DebugOut("[KEY UP]: %d\n", CountKeyAttack);
 			return 0;

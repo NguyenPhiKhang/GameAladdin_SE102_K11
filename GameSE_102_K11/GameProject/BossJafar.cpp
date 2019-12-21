@@ -1,6 +1,6 @@
 #include "BossJafar.h"
 
-BossJafar::BossJafar(float x, float y, Aladdin* aladdin)
+BossJafar::BossJafar(float x, float y, Aladdin* aladdin, std::vector<Entity*>* listWeaponOfEnemy)
 {
 	spriteData.x = x;
 	spriteData.y = y;
@@ -8,6 +8,9 @@ BossJafar::BossJafar(float x, float y, Aladdin* aladdin)
 	kind = eKind::ENEMY;
 	type = eType::JAFAR_BOSS;
 	health = 160.0f;
+	this->listWeaponOfEnemy = listWeaponOfEnemy;
+	isSpray = false;
+
 }
 
 BossJafar::~BossJafar()
@@ -45,13 +48,44 @@ void BossJafar::update(std::vector<Entity*>* listObj, float frameTime)
 		fire1 = new FireIdle(380.0f, 294.0f);
 		fire2 = new FireIdle(411.0f, 294.0f);
 	}
+
+	if (state == JAFAR_BOSS)
+	{
+		if (currentFrame == 6)
+		{
+			frameDelay = 3.0f;
+			StarWeapon* star = new StarWeapon(spriteData.x + 103.0f, spriteData.y + 26.0f);
+			star->flipHorizontal((spriteData.flipHorizontal) ? false : true);
+			star->setVelocityX((spriteData.flipHorizontal) ? -300.0f : 300.0f);
+			listWeaponOfEnemy->push_back(star);
+		}
+		else
+			if (currentFrame == 0)
+				frameDelay = 0.5f;
+			else frameDelay = 0.15f;
+		//if()
+	}
+
 	if (state == SNAKE_BOSS)
 	{
 		if (currentFrame == 8)
+		{
 			frameDelay = 0.25f;
-		else frameDelay = 0.1f;
+			if (isSpray)
+				isSpray = false;
+		}
+		else frameDelay = 0.12f;
+		if (currentFrame == 10 && !isSpray)
+		{
+			Entity* fire = new FireRun((!spriteData.flipHorizontal) ? 370.0f : 356.0f, 297.0f);
+			fire->setVelocityX((!spriteData.flipHorizontal) ? 100.0f : -100.0f);
+			fire->flipHorizontal(spriteData.flipHorizontal);
+			listWeaponOfEnemy->push_back(fire);
+			isSpray = true;
+		}
+
 	}
-	DebugOut("HEALTH: %.2f\n", health);
+	//DebugOut("HEALTH: %.2f\n", health);
 }
 
 void BossJafar::getBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -74,7 +108,7 @@ void BossJafar::setState(int state)
 		setTextureManager(TextureManager::getIntance()->getTexture((eType)state));
 		setCurrentFrame(0);
 		setFrames(0, 10);
-		setFrameDelay(0.1f);
+		setFrameDelay(0.12f);
 		break;
 	default:
 		break;

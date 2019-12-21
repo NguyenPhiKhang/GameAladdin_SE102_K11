@@ -30,6 +30,7 @@ SceneGame::SceneGame()
 	allScore = 0;
 	allChance = 2;
 	allGem = 3;
+	//isTouchPodiumFire = false;
 }
 
 SceneGame::~SceneGame()
@@ -116,7 +117,7 @@ void SceneGame::update(float frameTime)
 	{
 		if (listWeaponOfEnemy[i]->getVisible() == true)
 		{
-			if (listWeaponOfEnemy[i]->getType() == BONE && listWeaponOfEnemy[i]->getFinished())
+			if ((listWeaponOfEnemy[i]->getType() == BONE || listWeaponOfEnemy[i]->getType() == FIRE_RUN) && listWeaponOfEnemy[i]->getFinished())
 			{
 				listWeaponOfEnemy.erase(listWeaponOfEnemy.begin() + i);
 				i--;
@@ -132,11 +133,25 @@ void SceneGame::update(float frameTime)
 
 	CheckCollision();
 	hud->update(frameTime);
+	if (mapCurrent == eType::MAP_JAFAR)
+	{
+		if (fire != NULL)
+			fire->update(frameTime);
+	}
 
 	if (aladdin->getHealth() <= 10.0f)
 	{
 		setMapCurrent(mapCurrent, true);
 		allChance--;
+	}
+
+	if (isKeyUPHealth)
+	{
+		aladdin->setHealth(100.0f);
+	}
+	if (isKeyUpApple)
+	{
+		aladdin->setAppleCollect(aladdin->getAppleCollect() + 5);
 	}
 }
 
@@ -216,6 +231,15 @@ void SceneGame::render()
 			ent->RenderBoundingBox(camera);
 	}
 
+	if (mapCurrent == eType::MAP_JAFAR)
+	{
+		if (fire != NULL)
+		{
+			fire->setViewport(camera);
+			fire->draw();
+		}
+	}
+
 	aladdin->setViewport(camera->CameraTransform(aladdin->getX(), aladdin->getY()));
 	aladdin->draw();
 	if (isDebugRenderBBox)
@@ -276,7 +300,7 @@ void SceneGame::LoadMap(eType type, bool isChange)
 		if (isChange)
 		{
 			aladdin->setHealth(100.0f);
-			aladdin->setAppleCollect(10);
+			aladdin->setAppleCollect(50);
 			allGem = 3;
 			allScore = 0;
 		}
@@ -286,6 +310,8 @@ void SceneGame::LoadMap(eType type, bool isChange)
 			audio->Play(eAudio::MUSIC_MAP_SULTAN, true);
 		if (audio->isPlaying(eAudio::MUSIC_MAP_JAFAR))
 			audio->Stop(eAudio::MUSIC_MAP_JAFAR);
+
+		if (fire != NULL) safeDelete(fire);
 		break;
 	case MAP_JAFAR:
 		camera->setPositionCam(0.0f, 192.0f);
@@ -300,7 +326,7 @@ void SceneGame::LoadMap(eType type, bool isChange)
 		if (isChange)
 		{
 			aladdin->setHealth(100.0f);
-			aladdin->setAppleCollect(10);
+			aladdin->setAppleCollect(50);
 			allGem = 3;
 			allScore = 0;
 		}
@@ -310,6 +336,9 @@ void SceneGame::LoadMap(eType type, bool isChange)
 			audio->Play(eAudio::MUSIC_MAP_JAFAR, true);
 		if (audio->isPlaying(eAudio::MUSIC_MAP_SULTAN))
 			audio->Stop(eAudio::MUSIC_MAP_SULTAN);
+
+		fire = new FireIdle(0.0f, 0.0f);
+
 		break;
 	}
 
@@ -338,7 +367,7 @@ void SceneGame::CheckCollision()
 	CheckCollisionWeapon(listOthers);
 	CheckCollisionAladdinWithItem();
 	CheckCollisionWithEnemy();
-	CheckCollisionWithBoss();
+	CheckCollisionWithPodiumFire();
 }
 
 void SceneGame::CheckCollisionWeapon(std::vector<Entity*> listEnt)
@@ -386,7 +415,7 @@ void SceneGame::CheckCollisionWeapon(std::vector<Entity*> listEnt)
 							break;
 						case BATS:
 							aWeapon->setState(eType::EXPLOSIVE_APPLE_WEAPON);
-							if(entOther->getHealth()==100.0f)
+							if (entOther->getHealth() == 100.0f)
 								entOther->setState(eType::EXPLOSIVE_ENEMY);
 							break;
 						case JAFAR_BOSS:
@@ -395,6 +424,7 @@ void SceneGame::CheckCollisionWeapon(std::vector<Entity*> listEnt)
 							{
 								entOther->setHealth(entOther->getHealth() - 5);
 							}
+							break;
 						}
 						break;
 					}
@@ -547,7 +577,7 @@ void SceneGame::CheckCollisionAladdinWithEnemy()
 	{
 		for (int i = 0; i < listEnemies.size(); i++)
 		{
-			if (dynamic_cast<NahbiItem*>(listEnemies[i])&&listEnemies[i]->getHealth()>.0f)
+			if (dynamic_cast<NahbiItem*>(listEnemies[i]) && listEnemies[i]->getHealth() > .0f)
 			{
 				NahbiItem* nahbi = dynamic_cast<NahbiItem*>(listEnemies[i]);
 				if (nahbi->getSword()->getVisible())
@@ -631,8 +661,49 @@ void SceneGame::CheckCollisionAladdinWithEnemy()
 	}
 }
 
-void SceneGame::CheckCollisionWithBoss()
+void SceneGame::CheckCollisionWithPodiumFire()
 {
-
+	if (mapCurrent == eType::MAP_JAFAR)
+	{
+		//("SL ENEMY: %d\n", listEnemies.size());
+		if (listEnemies[0]->getState() == eType::SNAKE_BOSS)
+		{
+			bool isTouchPodiumFire = false;
+			for (auto& podium : listOthers)
+			{
+				if (podium->getType() == eType::IRON_STEP)
+				{
+					float lA, tA, rA, bA;
+					aladdin->getBoundingBox(lA, tA, rA, bA);
+					float lP, tP, rP, bP;
+					podium->getBoundingBox(lP, tP, rP, bP);
+					/*DebugOut("bA = %.2f\n", bA);
+					DebugOut("Y of podium: %.2f\n", podium->getY());*/
+					if (bA + 5.0f >= tP && bA < bP&& rA >= lP && lA <= rP && aladdin->getVelocity().y>0)
+					{
+						//DebugOut("CHAMJ\n");
+						fire->setVisible(true);
+						if(lA<lP)
+							fire->setXY(lP - 10.0f, bA - fire->getHeight());
+						else {
+							if(rA>rP)
+								fire->setXY(rP-30.0f, bA - fire->getHeight());
+							else fire->setXY(aladdin->getCenterX() - fire->getWidth() / 2, bA - fire->getHeight());
+						}
+						isTouchPodiumFire = true;
+						if (!aladdin->isUntouchable())
+							aladdin->setState(ALADDIN_HURT);
+						break;
+					}
+				}
+			}
+			if(!isTouchPodiumFire)
+			{
+				//DebugOut("VISIBLE = %s\n", fire->getVisible() ? "true" : "false");
+				if(fire->getVisible())
+					fire->setVisible(false);
+			}
+		}
+	}
 }
 

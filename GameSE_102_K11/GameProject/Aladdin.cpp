@@ -26,7 +26,7 @@ Aladdin::Aladdin(Camera* camera, MapGame* mapGame) : Entity()
 	isClimbing = false;
 	yChain = 0.0f;
 	hChain = 0;
-	totalAppleCollect = 40;
+	totalAppleCollect = 50;
 	health = 100.0f;
 
 	this->camera = camera;
@@ -1010,7 +1010,7 @@ void Aladdin::draw(COLOR_ARGB color)
 {
 	if (unTouchable == false)
 		Entity::draw(color);
-	else Entity::draw((rand()%3<1)?graphicsNS::ALPHA25 & colorFilter: graphicsNS::ALPHA75 & colorFilter);
+	else Entity::draw((rand()%3<1)?graphicsNS::ALPHA40 & colorFilter: graphicsNS::ALPHA80 & colorFilter);
 
 	if (sword->getVisible())
 	{
@@ -1287,6 +1287,7 @@ void Aladdin::CollideWithGround(std::vector<Entity*>* coEntities, float frameTim
 			if (isFalling == true)
 			{
 				isFalling = false;
+				isSliding = false;
 				/*setVelocityY(200.0f);
 				JumpFinsihed = false;
 				LoopAttackGlance = true;

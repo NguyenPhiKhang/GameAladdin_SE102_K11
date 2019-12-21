@@ -98,6 +98,7 @@ enum eType {
 	SNAKE_BOSS				= 602,
 	FIRE_IDLE				= 603,
 	FIRE_RUN				= 604,
+	STAR					= 605,
 
 
 	// effect
@@ -169,8 +170,10 @@ namespace graphicsNS
 	const COLOR_ARGB BLACK = D3DCOLOR_ARGB(255, 0, 0, 0);
 	const COLOR_ARGB FILTER = D3DCOLOR_ARGB(0, 0, 0, 0);  // use to specify drawing with colorFilter
 	const COLOR_ARGB ALPHA25 = D3DCOLOR_ARGB(64, 255, 255, 255);  // AND with color to get 25% alpha
+	const COLOR_ARGB ALPHA40 = D3DCOLOR_ARGB(102, 255, 255, 255);  // AND with color to get 40% alpha
 	const COLOR_ARGB ALPHA50 = D3DCOLOR_ARGB(128, 255, 255, 255);  // AND with color to get 50% alpha
 	const COLOR_ARGB ALPHA75 = D3DCOLOR_ARGB(192, 255, 255, 255);  // AND with color to get 75% alpha
+	const COLOR_ARGB ALPHA80 = D3DCOLOR_ARGB(204, 255, 255, 255);  // AND with color to get 80% alpha
 	const COLOR_ARGB BACK_COLOR = BLACK;                         // background color of game
 	const COLOR_ARGB TRANSCOLOR = MAGENTA;						// transparent color
 

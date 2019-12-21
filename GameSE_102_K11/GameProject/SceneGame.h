@@ -9,6 +9,7 @@
 #include "Ground.h"
 #include "HUD_Info.h"
 #include "appleWeapon.h"
+#include "FireIdle.h"
 
 class SceneGame: public Game
 {
@@ -45,6 +46,8 @@ private:
 	int allChance;		// tổng số mạng của ALADDIN
 	int allGem;			// tổng số Gem
 
+	FireIdle* fire;
+
 public:
 	SceneGame();
 	~SceneGame();
@@ -63,7 +66,7 @@ public:
 	void CheckCollisionAladdinWithItem();
 	void CheckCollisionWithEnemy();
 	void CheckCollisionAladdinWithEnemy();
-	void CheckCollisionWithBoss();
+	void CheckCollisionWithPodiumFire();
 
 };
 

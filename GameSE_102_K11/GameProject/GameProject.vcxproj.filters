@@ -237,6 +237,9 @@
     <ClInclude Include="FireRun.h">
       <Filter>Entities\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="StarWeapon.h">
+      <Filter>Entities\Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -387,6 +390,9 @@
       <Filter>Entities\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="FireRun.cpp">
+      <Filter>Entities\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="StarWeapon.cpp">
       <Filter>Entities\Weapon</Filter>
     </ClCompile>
   </ItemGroup>

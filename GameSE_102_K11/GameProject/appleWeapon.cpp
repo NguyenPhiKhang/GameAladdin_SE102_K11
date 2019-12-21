@@ -146,7 +146,7 @@ void appleWeapon::update(std::vector<Entity*>* listObj, float frameTime)
 		if (spriteData.x - camera->getXCamera() > GAME_WIDTH || spriteData.x - camera->getXCamera() < 0 ||
 			spriteData.y - camera->getYCamera() > GAME_HEIGHT || spriteData.y - camera->getYCamera() < 0)
 		{
-			visible = false;
+			//visible = false;
 			startFly = false;
 			finished = true;
 		}
