@@ -98,6 +98,11 @@ const char EXPLOSIVE_GENIE_TEXTURE[] = "Resources\\Effect\\ExplosiveGenie.png";
 const char EXPLOSIVE_ENEMY_TEXTURE[] = "Resources\\Effect\\ExplosiveEnemy.png";
 const char EXPLOSIVE_BONE_TEXTURE[] = "Resources\\Effect\\ExplosiveBone.png";
 
+//Intro
+const char INTRO_MENU_TEXTURE[] = "Resources\\Intro\\Menu.png";
+const char INTRO_SELECTOR_TEXTURE[] = "Resources\\Intro\\Selector.png";
+
+
 // FONT
 const char FONT_TOTAL_TEXTURE[] = "Resources\\Font\\font_TOTAL.png";
 const char FONT_SCORE_TEXTURE[] = "Resources\\Font\\font_SCORE.png";

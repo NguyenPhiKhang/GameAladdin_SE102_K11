@@ -10,6 +10,7 @@
 #include "HUD_Info.h"
 #include "appleWeapon.h"
 #include "FireIdle.h"
+#include "SceneIntro.h"
 
 class SceneGame: public Game
 {
@@ -47,6 +48,8 @@ private:
 	int allGem;			// tổng số Gem
 
 	FireIdle* fire;
+
+	SceneIntro* sceneIntro;
 
 public:
 	SceneGame();

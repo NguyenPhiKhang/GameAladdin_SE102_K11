@@ -240,6 +240,9 @@
     <ClInclude Include="StarWeapon.h">
       <Filter>Entities\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="SceneIntro.h">
+      <Filter>Scenes\IntroScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -394,6 +397,9 @@
     </ClCompile>
     <ClCompile Include="StarWeapon.cpp">
       <Filter>Entities\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneIntro.cpp">
+      <Filter>Scenes\IntroScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

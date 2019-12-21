@@ -144,5 +144,9 @@ void TextureManager::LoadResources()
 
 	// bbox
 	addTexture(eType::BBOX, new CTexture(BOUNDING_BOX_TEXTURE));
+
+	// Intro
+	addTexture(eType::MENU, new CTexture(INTRO_MENU_TEXTURE));
+	addTexture(eType::SELECTOR, new CTexture(INTRO_SELECTOR_TEXTURE));
 }
 

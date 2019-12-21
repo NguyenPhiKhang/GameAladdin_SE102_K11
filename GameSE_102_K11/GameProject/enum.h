@@ -113,6 +113,7 @@ enum eType {
 	MAP_SULTAN_FRONT_BG		= 22,
 	MAP_JAFAR				= 23,
 	MAP_JAFAR_BACKGROUND	= 24,
+	MAP_INTRO				= 25,
 
 	BBOX					= 31,
 
@@ -127,6 +128,10 @@ enum eType {
 	// font
 	FONT_TOTAL				= 1001,
 	FONT_SCORE				= 1002,
+
+	//Intro 
+	MENU = 9000,
+	SELECTOR = 9001,
 };
 
 enum eKind {

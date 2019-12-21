@@ -13,6 +13,7 @@ public:
 	StarWeapon(float x, float y);
 	~StarWeapon();
 	void update(std::vector<Entity*>* listObj, float frameTime);
+	void setState(int state);
 };
 
 #endif
