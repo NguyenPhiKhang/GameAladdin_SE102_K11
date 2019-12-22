@@ -75,6 +75,9 @@ void TextureManager::LoadResources()
 	addTexture(eType::ALADDIN_CLIMB_JUMP,		new CTexture(ALADDIN_CLIMB_JUMP_TEXTURE, 9, 136, 110));
 	addTexture(eType::ALADDIN_HURT,				new CTexture(ALADDIN_HURT_TEXTURE, 6, 136, 110));
 	addTexture(eType::ALADDIN_TOUCHGROUND,		new CTexture(ALADDIN_TOUCHGROUND_TEXTURE, 16, 136, 110));
+	addTexture(eType::ALADDIN_SHAKE,			new CTexture(ALADDIN_SHAKE_TEXTURE, 9, 80, 86));
+	addTexture(eType::ALADDIN_CARRIED,			new CTexture(ALADDIN_CARRIED_TEXTURE, 19, 80, 86));
+	addTexture(eType::ABU,						new CTexture(ABU_TEXTURE, 6, 68, 58));
 
 	// Enemy Nahbi
 	addTexture(eType::NAHBI_RUN,				new CTexture(NAHBI_RUN_TEXTURE, 8, 166, 73));
@@ -148,5 +151,6 @@ void TextureManager::LoadResources()
 	// Intro
 	addTexture(eType::MENU, new CTexture(INTRO_MENU_TEXTURE));
 	addTexture(eType::SELECTOR, new CTexture(INTRO_SELECTOR_TEXTURE));
+	addTexture(eType::MEMBER, new CTexture(MEMBER_TEXTURE));
 }
 

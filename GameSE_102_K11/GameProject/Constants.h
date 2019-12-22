@@ -39,6 +39,9 @@ const char ALADDIN_CLIMB_THROW_TEXTURE[] = "Resources\\Aladdin\\animation_aladdi
 const char ALADDIN_CLIMB_JUMP_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_climb_jump.png";
 const char ALADDIN_HURT_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_hurt.png";
 const char ALADDIN_TOUCHGROUND_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_touchground.png";
+const char ALADDIN_SHAKE_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_shake.png";
+const char ALADDIN_CARRIED_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_carried.png";
+const char ABU_TEXTURE[] = "Resources\\Aladdin\\animation_abu.png";
 
 // ITEM + ENEMY
 const char APPLEITEM_TEXTURE[] = "Resources\\Items\\AppleItems\\appleItem.png";
@@ -101,6 +104,7 @@ const char EXPLOSIVE_BONE_TEXTURE[] = "Resources\\Effect\\ExplosiveBone.png";
 //Intro
 const char INTRO_MENU_TEXTURE[] = "Resources\\Intro\\Menu.png";
 const char INTRO_SELECTOR_TEXTURE[] = "Resources\\Intro\\Selector.png";
+const char MEMBER_TEXTURE[] = "Resources\\Intro\\Member.png";
 
 
 // FONT

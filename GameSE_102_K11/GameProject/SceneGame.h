@@ -62,6 +62,7 @@ public:
 	void ResetObjectMap();
 
 	void setMapCurrent(eType type, bool isChange = false);
+	int getMapCurrent() { return mapCurrent; }
 
 
 	void CheckCollision();

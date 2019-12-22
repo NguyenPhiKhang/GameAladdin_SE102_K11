@@ -12,6 +12,10 @@ SceneIntro::SceneIntro()
 	QueryPerformanceCounter(&timeStart);
 
 	velocityY = 50.0f;
+	selected = 0;
+	isMoveMap = false;
+	isMember = false;
+	isMenu = true;
 }
 SceneIntro::~SceneIntro()
 {
@@ -24,7 +28,7 @@ void SceneIntro::initialize()
 	Menu->setTextureManager(TextureManager::getIntance()->getTexture(eType::MENU));
 	Selector->setTextureManager(TextureManager::getIntance()->getTexture(eType::SELECTOR));
 	
-	Selector->setX(73);
+	Selector->setX(77);
 	Selector->setY(125);
 }
 
@@ -40,21 +44,54 @@ void SceneIntro::update(float frameTime)
 		Selector->setX(Selector->getX() + velocityY * frameTime);
 	}
 	
-	if (Input::getInstance()->isKeyDown(VK_UP))
+	if (isMenu)
 	{
-		if (Selector->getY() == 141)
+		if (Input::getInstance()->isKeyDown(VK_UP))
 		{
-			Selector->setY(125);
+			if (Selector->getY() == 141)
+			{
+				Selector->setY(125);
+				selected = 0;
+			}
 		}
-    }
-	if (Input::getInstance()->isKeyDown(VK_DOWN))
-	{
-		if (Selector->getY()==125)
+		if (Input::getInstance()->isKeyDown(VK_DOWN))
 		{
-			Selector->setY(141);
+			if (Selector->getY() == 125)
+			{
+				Selector->setY(141);
+				selected = 1;
+			}
+		}
+		if (Input::getInstance()->isKeyDown(VK_RETURN) && selected == 0)
+		{
+			isMoveMap = true;
+			Input::getInstance()->keyUp(13);
+		}
+		if (Input::getInstance()->isKeyDown(VK_RETURN) && selected == 1)
+		{
+			Menu->setTextureManager(TextureManager::getIntance()->getTexture(eType::MEMBER));
+			Selector->setXY(110.0f, 181.0f);
+			isMenu = false;
+			isMember = true;
+			selected = 2;
+			Input::getInstance()->keyUp(13);
 		}
 	}
-
+	else {
+		if (isMember)
+		{
+			if (Input::getInstance()->isKeyDown(VK_RETURN) && selected == 2)
+			{
+				isMenu = true;
+				isMember = false;
+				Menu->setTextureManager(TextureManager::getIntance()->getTexture(eType::MENU));
+				selected = 0;
+				Selector->setX(73);
+				Selector->setY(125);
+				Input::getInstance()->keyUp(13);
+			}
+		}
+	}
 }
 
 void SceneIntro::render()

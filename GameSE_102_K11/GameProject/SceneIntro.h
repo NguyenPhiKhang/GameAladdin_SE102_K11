@@ -18,6 +18,12 @@ private:
 	LARGE_INTEGER timeEnd;      // Performance Counter end value
 
 	float velocityY;
+
+	int selected;
+	bool isMoveMap;
+
+	bool isMenu;
+	bool isMember;
 public:
 	SceneIntro();
 	~SceneIntro();
@@ -26,6 +32,9 @@ public:
 	void update(float frameTime);
 	void render();
 
+	int getSelected() { return selected; }
+	bool isMoveMainMap() { return isMoveMap; }
+	void setIsMoveMainMap(bool is) { this->isMoveMap = is; }
 };
 
 #endif // !_SCENE_GAME_H

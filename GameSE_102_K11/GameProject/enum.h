@@ -52,6 +52,11 @@ enum eType {
 	// animation touchground
 	ALADDIN_TOUCHGROUND		= 176,
 
+	// animation die
+	ALADDIN_SHAKE			= 177,
+	ALADDIN_CARRIED			= 178,
+	ABU						= 179,
+
 	//ground
 	GROUND					= 200,
 	WOOD					= 220,
@@ -132,6 +137,7 @@ enum eType {
 	//Intro 
 	MENU = 9000,
 	SELECTOR = 9001,
+	MEMBER = 9002,
 };
 
 enum eKind {

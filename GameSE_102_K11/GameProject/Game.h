@@ -116,6 +116,7 @@ public:
 	float getSumTimeKeyDown() { return sumTimeKeyDown; }
 
 	virtual void setMapCurrent(eType type, bool isChange=false) = 0;
+	virtual int getMapCurrent() = 0;
 };
 
 #endif
