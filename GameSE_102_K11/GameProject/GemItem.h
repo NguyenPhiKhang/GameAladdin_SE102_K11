@@ -4,13 +4,12 @@
 #include "Entity.h"
 #include "Camera.h"
 #include "MapGame.h"
-#include "Audio.h"
 
 
 class GemItem : public Entity
 {
 private:
-	bool isSound;
+
 public:
 	GemItem(float x, float y);
 	~GemItem();

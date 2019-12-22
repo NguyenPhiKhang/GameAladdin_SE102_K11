@@ -517,12 +517,9 @@ void SceneGame::CheckCollisionWeapon(std::vector<Entity*> listEnt)
 							break;
 						case JAFAR_BOSS:
 							aWeapon->setState(eType::EXPLOSIVE_GENIE, entOther);
-							
 							if (entOther->getHealth() > 0.0f)
 							{
 								entOther->setHealth(entOther->getHealth() - 5);
-								Audio::getInstance()->Play(MUSIC_GENIE_SMOKE);
-								Audio::getInstance()->Play(MUSIC_JAFAR_BEHIT);
 							}
 							break;
 						}
@@ -736,7 +733,6 @@ void SceneGame::CheckCollisionAladdinWithEnemy()
 		}
 	}
 
-<<<<<<< Updated upstream
 	if (!aladdin->isUntouchable())
 	{
 #pragma region Collision With Weapon of Enemy
@@ -779,29 +775,6 @@ void SceneGame::CheckCollisionAladdinWithEnemy()
 				}
 			}
 		}
-=======
-	if (!aladdin->isUntouchable())
-	{
-#pragma region Collision With Weapon of Enemy
-		for (UINT i = 0; i < listWeaponOfEnemy.size(); i++)
-		{
-			if (listWeaponOfEnemy[i]->getFinished() == false)
-			{
-				LPCOLLISIONEVENT e = aladdin->SweptAABBEx(listWeaponOfEnemy[i], frameTime);
-				if (e->t > 0 && e->t <= 1) // có va chạm
-				{
-					aladdin->setState(ALADDIN_HURT);
-					return; // giảm chi phí duyệt, vì nếu có va chạm thì cũng đang untouchable
-				}
-
-				if (aladdin->checkAABB(listWeaponOfEnemy[i]) == true)
-				{
-					aladdin->setState(ALADDIN_HURT);
-					return;
-				}
-			}
-		}
->>>>>>> Stashed changes
 #pragma endregion
 	}
 }

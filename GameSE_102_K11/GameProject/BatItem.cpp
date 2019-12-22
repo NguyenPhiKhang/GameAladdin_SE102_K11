@@ -112,7 +112,6 @@ void BatItem::setState(int state)
 		setTextureManager(TextureManager::getIntance()->getTexture((eType)state));
 		setFrames(0, 9);
 		frameDelay = 0.08f;
-		Audio::getInstance()->Play(MUSIC_EXPLOSION_ENEMY);
 		setXY(centerBat.x - spriteData.width / 2, centerBat.y - spriteData.height / 2 - 5);
 		return;
 	}

@@ -2,12 +2,11 @@
 #define _PODIUMITEM_H
 
 #include "Entity.h"
-#include "Audio.h"
 
 class PodiumItem : public Entity
 {
 private:
-	bool isSound;
+
 public:
 	PodiumItem(float x, float y);
 	~PodiumItem();

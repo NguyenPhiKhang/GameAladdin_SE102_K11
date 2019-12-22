@@ -6,7 +6,6 @@ SpearItem::SpearItem(float x, float y)
 	spriteData.y = y;
 	type = eType::SPEAR;
 	kind = eKind::ENEMY;
-	isSound = false;
 }
 
 SpearItem::~SpearItem()
@@ -17,23 +16,10 @@ void SpearItem::update(std::vector<Entity*>* listObj, float frameTime)
 {
 	Entity::update(listObj, frameTime);
 	if (currentFrame == 0)
-	{
 		frameDelay = 3.5f;
-		isSound = false;
-	}
-	else if (currentFrame == 4&& !isSound)
-	{
+	else if (currentFrame == 4)
 		frameDelay = 2.2f;
-		/*if (!Audio::getInstance()->isPlaying(MUSIC_SPEAR))
-		{*/
-			Audio::getInstance()->Play(MUSIC_SPEAR);
-			isSound = true;
-		//}
-	}
-	else {
-		if(currentFrame!=4)
-			frameDelay = 0.08f;
-	}
+	else frameDelay = 0.08f;
 }
 
 void SpearItem::getBoundingBox(float& left, float& top, float& right, float& bottom)

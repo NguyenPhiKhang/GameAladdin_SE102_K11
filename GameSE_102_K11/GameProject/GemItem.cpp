@@ -6,7 +6,6 @@ GemItem::GemItem(float x, float y) :Entity()
 	spriteData.y = y;
 	type = eType::GEMS;
 	kind = eKind::ITEM;
-	isSound = false;
 }
 
 GemItem::~GemItem()
@@ -47,6 +46,5 @@ void GemItem::setState(int state)
 		setFrames(0, 11);
 		setCurrentFrame(0);
 		frameDelay = 0.05f;
-		Audio::getInstance()->Play(MUSIC_GEM_COLLECT);
 	}
 }

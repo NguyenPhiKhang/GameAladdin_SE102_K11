@@ -4,7 +4,6 @@
 #include "Entity.h"
 #include "Aladdin.h"
 #include "SwordWeapon.h"
-#include "Audio.h"
 
 class NahbiItem : public Entity
 {
@@ -13,9 +12,6 @@ private:
 	bool isAttack;
 	bool isHurt;
 	SwordWeapon* sword;
-	bool isSound;
-	int countLead;
-	bool isLoop;
 public:
 	NahbiItem(float x, float y, Aladdin* aladdin);
 	~NahbiItem();
