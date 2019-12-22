@@ -34,6 +34,7 @@ SceneGame::SceneGame()
 
 	sceneIntro = new SceneIntro();
 	mapCurrent = eType::MAP_INTRO;
+	redIntro = new RedIntro_Map();
 }
 
 SceneGame::~SceneGame()
@@ -62,117 +63,139 @@ void SceneGame::update(float frameTime)
 		sceneIntro->update(frameTime);
 		if (sceneIntro->isMoveMainMap())
 		{
-			setMapCurrent(MAP_SULTAN);
+			setMapCurrent(eType::SULTAN_INTRO);
 			sceneIntro->setIsMoveMainMap(false);
 		}
 	}
-	else {
-		if (!aladdin->getIsDeath())
+	else
+		if (mapCurrent == SULTAN_INTRO || mapCurrent == JAFAR_INTRO)
 		{
-			grid->GetListEntity(listOthers, listEnemies, listItems, camera);
-
-			aladdin->update(frameTime, this, &listOthers);
-
-			if (mapCurrent == MAP_SULTAN) // Xét camera font background hurdle
+			redIntro->update(frameTime);
+			if (redIntro->getIsFinished() && mapCurrent == SULTAN_INTRO)
 			{
-				float deltaCamX = camera->getXCamera() - oldXCam;
-				float deltaCamY = camera->getYCamera() - oldYCam;
-				front_hurdle->setX(front_hurdle->getX() - ((deltaCamX == 0.0f) ? 0.0f :
-					(deltaCamX > 0.0f) ? (deltaCamX + 2.5f) : (deltaCamX - 2.5f)));
-				front_hurdle->setY(front_hurdle->getY() - ((deltaCamY == 0.0f) ? 0.0f :
-					(deltaCamY > 0.0f) ? (deltaCamY + 0.3f) : (deltaCamY - 0.3f)));
-
-				if (front_hurdle->getX() > 0.0f)
-					front_hurdle->setX(front_hurdle->getX() - 512.0f);
-				if (front_hurdle->getX() < -512.0f)
-					front_hurdle->setX(front_hurdle->getX() + 512.0f);
-				if (front_hurdle->getY() > 0.0f)
-					front_hurdle->setY(front_hurdle->getY() - 256.0f);
-				if (front_hurdle->getY() < -256.0f)
-					front_hurdle->setY(front_hurdle->getY() + 256.0f);
-
-				oldXCam = camera->getXCamera();
-				oldYCam = camera->getYCamera();
+				setMapCurrent(eType::MAP_SULTAN);
+				redIntro->setIsFinished(false);
 			}
-			else
+			else {
+				if (redIntro->getIsFinished() && mapCurrent == JAFAR_INTRO)
+				{
+					setMapCurrent(eType::MAP_JAFAR);
+					redIntro->setIsFinished(false);
+				}
+			}
+		}
+		else {
+			if (!aladdin->getIsDeath())
 			{
-				if (mapCurrent == MAP_JAFAR) // Xét camera font background pillar snake
+				grid->GetListEntity(listOthers, listEnemies, listItems, camera);
+
+				aladdin->update(frameTime, this, &listOthers);
+
+				if (aladdin->getIsCompletedLevel())
+					return;
+
+				if (mapCurrent == MAP_SULTAN) // Xét camera font background hurdle
 				{
 					float deltaCamX = camera->getXCamera() - oldXCam;
-					pillar_snake->setX(pillar_snake->getX() - ((deltaCamX == 0.0f) ? 0.0f :
-						(deltaCamX > 0.0f) ? (deltaCamX + 0.5f) : (deltaCamX - 0.5f)));
+					float deltaCamY = camera->getYCamera() - oldYCam;
+					front_hurdle->setX(front_hurdle->getX() - ((deltaCamX == 0.0f) ? 0.0f :
+						(deltaCamX > 0.0f) ? (deltaCamX + 2.5f) : (deltaCamX - 2.5f)));
+					front_hurdle->setY(front_hurdle->getY() - ((deltaCamY == 0.0f) ? 0.0f :
+						(deltaCamY > 0.0f) ? (deltaCamY + 0.3f) : (deltaCamY - 0.3f)));
 
-					if (pillar_snake->getX() > 0)
-						pillar_snake->setX(pillar_snake->getX() - 128);
-					if (pillar_snake->getX() < -128)
-						pillar_snake->setX(pillar_snake->getX() + 128);
+					if (front_hurdle->getX() > 0.0f)
+						front_hurdle->setX(front_hurdle->getX() - 512.0f);
+					if (front_hurdle->getX() < -512.0f)
+						front_hurdle->setX(front_hurdle->getX() + 512.0f);
+					if (front_hurdle->getY() > 0.0f)
+						front_hurdle->setY(front_hurdle->getY() - 256.0f);
+					if (front_hurdle->getY() < -256.0f)
+						front_hurdle->setY(front_hurdle->getY() + 256.0f);
+
 					oldXCam = camera->getXCamera();
+					oldYCam = camera->getYCamera();
 				}
-			}
-
-			for (auto& ent : listOthers)
-			{
-				ent->update(&listOthers, frameTime);
-			}
-			for (auto& item : listItems)
-			{
-				item->update(&listOthers, frameTime);
-			}
-			for (auto& enemy : listEnemies)
-			{
-				enemy->update(&listOthers, frameTime);
-			}
-			for (int i = 0; i < listWeaponOfEnemy.size(); i++)
-			{
-				if (listWeaponOfEnemy[i]->getVisible() == true)
+				else
 				{
-					if ((listWeaponOfEnemy[i]->getType() == BONE || listWeaponOfEnemy[i]->getType() == FIRE_RUN || listWeaponOfEnemy[i]->getType() == STAR) && listWeaponOfEnemy[i]->getFinished())
+					if (mapCurrent == MAP_JAFAR) // Xét camera font background pillar snake
 					{
+						float deltaCamX = camera->getXCamera() - oldXCam;
+						pillar_snake->setX(pillar_snake->getX() - ((deltaCamX == 0.0f) ? 0.0f :
+							(deltaCamX > 0.0f) ? (deltaCamX + 0.5f) : (deltaCamX - 0.5f)));
+
+						if (pillar_snake->getX() > 0)
+							pillar_snake->setX(pillar_snake->getX() - 128);
+						if (pillar_snake->getX() < -128)
+							pillar_snake->setX(pillar_snake->getX() + 128);
+						oldXCam = camera->getXCamera();
+					}
+				}
+
+				for (auto& ent : listOthers)
+				{
+					ent->update(&listOthers, frameTime);
+				}
+				for (auto& item : listItems)
+				{
+					item->update(&listOthers, frameTime);
+				}
+				for (auto& enemy : listEnemies)
+				{
+					enemy->update(&listOthers, frameTime);
+				}
+				for (int i = 0; i < listWeaponOfEnemy.size(); i++)
+				{
+					if (listWeaponOfEnemy[i]->getVisible() == true)
+					{
+						if ((listWeaponOfEnemy[i]->getType() == BONE || listWeaponOfEnemy[i]->getType() == FIRE_RUN || listWeaponOfEnemy[i]->getType() == STAR) && listWeaponOfEnemy[i]->getFinished())
+						{
+							listWeaponOfEnemy.erase(listWeaponOfEnemy.begin() + i);
+							i--;
+							continue;
+						}
+						listWeaponOfEnemy[i]->update(&listOthers, frameTime);
+					}
+					else {
 						listWeaponOfEnemy.erase(listWeaponOfEnemy.begin() + i);
 						i--;
-						continue;
 					}
-					listWeaponOfEnemy[i]->update(&listOthers, frameTime);
 				}
-				else {
-					listWeaponOfEnemy.erase(listWeaponOfEnemy.begin() + i);
-					i--;
+
+				CheckCollision();
+				hud->update(frameTime);
+				if (mapCurrent == eType::MAP_JAFAR)
+				{
+					if (fire != NULL)
+						fire->update(frameTime);
+				}
+
+				if (aladdin->getHealth() <= 10.0f)
+				{
+					//setMapCurrent(mapCurrent, true);
+					allChance--;
+					aladdin->setIsDeath(true);
+					aladdin->setState(eType::ALADDIN_SHAKE);
+				}
+
+				if (input->isKeyDown('1'))
+				{
+					aladdin->setHealth(100.0f);
+					input->keyUp(49);
+				}
+				if (input->isKeyDown('2'))
+				{
+					aladdin->setAppleCollect(aladdin->getAppleCollect() + 5);
+					input->keyUp(50);
 				}
 			}
 
-			CheckCollision();
-			hud->update(frameTime);
-			if (mapCurrent == eType::MAP_JAFAR)
-			{
-				if (fire != NULL)
-					fire->update(frameTime);
-			}
-
-			if (aladdin->getHealth() <= 10.0f)
-			{
-				//setMapCurrent(mapCurrent, true);
-				allChance--;
-				aladdin->setIsDeath(true);
-				aladdin->setState(eType::ALADDIN_SHAKE);
-			}
-
-			if (input->isKeyDown('1'))
-			{
-				aladdin->setHealth(100.0f);
-				input->keyUp(49);
-			}
-			if (input->isKeyDown('2'))
-			{
-				aladdin->setAppleCollect(aladdin->getAppleCollect() + 5);
-				input->keyUp(50);
+			else {
+				aladdin->update(frameTime, this);
 			}
 		}
 
-		else {
-			aladdin->update(frameTime, this);
-		}
-	}
 }
+
 
 void SceneGame::render()
 {
@@ -183,47 +206,73 @@ void SceneGame::render()
 		sceneIntro->render();
 	}
 	else
-	{
-		if (!aladdin->getIsDeath())
+		if (mapCurrent == SULTAN_INTRO || mapCurrent == JAFAR_INTRO)
 		{
-			if (input->isKeyDown(VK_F1))
+			redIntro->render();
+		}
+		else
+		{
+			if (!aladdin->getIsDeath())
 			{
-				setMapCurrent(MAP_SULTAN);
-				return;
-			}
-			if (input->isKeyDown(VK_F2))
-			{
-				setMapCurrent(MAP_JAFAR);
-				return;
-			}
-
-			if (mapCurrent == eType::MAP_JAFAR)
-			{
-				float pillarX = pillar_snake->getX();
-				float pillarY = pillar_snake->getY();
-
-				for (int col = 0; col < GAME_WIDTH + 128; col += 128)
+				if (!aladdin->getIsCompletedLevel())
 				{
-					pillar_snake->setX(pillarX + col);
-					pillar_snake->setViewport(D3DXVECTOR2(pillar_snake->getX(), pillar_snake->getY()));
-					pillar_snake->draw();           // draw the ocean
-				}
-
-				pillar_snake->setXY(pillarX, pillarY);
-			}
-
-			tileMap->Render(camera);
-
-			listColumns.clear();
-			for (auto& ent : listOthers)
-			{
-				if (mapCurrent == eType::MAP_SULTAN)
-				{
-					if (ent->getKind() == eKind::COLUMN_OUT || ent->getType() == eType::EXITS)
+					if (input->isKeyDown(VK_F1))
 					{
-						listColumns.push_back(ent);
+						setMapCurrent(MAP_SULTAN);
+						return;
 					}
-					else
+					if (input->isKeyDown(VK_F2))
+					{
+						setMapCurrent(MAP_JAFAR);
+						return;
+					}
+
+					if (mapCurrent == eType::MAP_JAFAR)
+					{
+						float pillarX = pillar_snake->getX();
+						float pillarY = pillar_snake->getY();
+
+						for (int col = 0; col < GAME_WIDTH + 128; col += 128)
+						{
+							pillar_snake->setX(pillarX + col);
+							pillar_snake->setViewport(D3DXVECTOR2(pillar_snake->getX(), pillar_snake->getY()));
+							pillar_snake->draw();           // draw the ocean
+						}
+
+						pillar_snake->setXY(pillarX, pillarY);
+					}
+
+					tileMap->Render(camera);
+
+					listColumns.clear();
+					for (auto& ent : listOthers)
+					{
+						if (mapCurrent == eType::MAP_SULTAN)
+						{
+							if (ent->getKind() == eKind::COLUMN_OUT || ent->getType() == eType::EXITS)
+							{
+								listColumns.push_back(ent);
+							}
+							else
+							{
+								ent->setViewport(camera->CameraTransform(ent->getX(), ent->getY()));
+								ent->draw();
+
+								if (isDebugRenderBBox)
+									ent->RenderBoundingBox(camera);
+							}
+						}
+						else if (mapCurrent == eType::MAP_JAFAR)
+						{
+							ent->setViewport(camera->CameraTransform(ent->getX(), ent->getY()));
+							ent->draw();
+
+							if (isDebugRenderBBox)
+								ent->RenderBoundingBox(camera);
+						}
+					}
+
+					for (auto& ent : listItems)
 					{
 						ent->setViewport(camera->CameraTransform(ent->getX(), ent->getY()));
 						ent->draw();
@@ -231,90 +280,75 @@ void SceneGame::render()
 						if (isDebugRenderBBox)
 							ent->RenderBoundingBox(camera);
 					}
-				}
-				else if (mapCurrent == eType::MAP_JAFAR)
-				{
-					ent->setViewport(camera->CameraTransform(ent->getX(), ent->getY()));
-					ent->draw();
 
-					if (isDebugRenderBBox)
-						ent->RenderBoundingBox(camera);
-				}
-			}
-
-			for (auto& ent : listItems)
-			{
-				ent->setViewport(camera->CameraTransform(ent->getX(), ent->getY()));
-				ent->draw();
-
-				if (isDebugRenderBBox)
-					ent->RenderBoundingBox(camera);
-			}
-
-			for (auto& ent : listEnemies)
-			{
-				ent->setViewport(camera);
-				ent->draw();
-
-				if (isDebugRenderBBox)
-					ent->RenderBoundingBox(camera);
-			}
-
-			for (auto& ent : listWeaponOfEnemy)
-			{
-				ent->setViewport(camera->CameraTransform(ent->getX(), ent->getY()));
-				ent->draw();
-
-				if (isDebugRenderBBox)
-					ent->RenderBoundingBox(camera);
-			}
-
-			if (mapCurrent == eType::MAP_JAFAR)
-			{
-				if (fire != NULL)
-				{
-					fire->setViewport(camera);
-					fire->draw();
-				}
-			}
-
-			aladdin->setViewport(camera->CameraTransform(aladdin->getX(), aladdin->getY()));
-			aladdin->draw();
-			if (isDebugRenderBBox)
-				aladdin->RenderBoundingBox(camera);
-
-			if (mapCurrent == eType::MAP_SULTAN)
-			{
-				for (auto& column : listColumns)
-				{
-					column->setViewport(camera->CameraTransform(column->getX(), column->getY()));
-					column->draw();
-				}
-				float hurdleX = front_hurdle->getX();
-				float hurdleY = front_hurdle->getY();
-
-				for (int row = 0; row < GAME_HEIGHT + 256; row += 256)
-				{
-					for (int col = 0; col < GAME_WIDTH + 512; col += 512)
+					for (auto& ent : listEnemies)
 					{
-						front_hurdle->setX(hurdleX + col);
-						front_hurdle->setY(hurdleY + row);
-						front_hurdle->setViewport(D3DXVECTOR2(front_hurdle->getX(), front_hurdle->getY()));
-						front_hurdle->draw();           // draw the ocean
+						ent->setViewport(camera);
+						ent->draw();
+
+						if (isDebugRenderBBox)
+							ent->RenderBoundingBox(camera);
 					}
+
+					for (auto& ent : listWeaponOfEnemy)
+					{
+						ent->setViewport(camera->CameraTransform(ent->getX(), ent->getY()));
+						ent->draw();
+
+						if (isDebugRenderBBox)
+							ent->RenderBoundingBox(camera);
+					}
+
+					if (mapCurrent == eType::MAP_JAFAR)
+					{
+						if (fire != NULL)
+						{
+							fire->setViewport(camera);
+							fire->draw();
+						}
+					}
+
+					aladdin->setViewport(camera->CameraTransform(aladdin->getX(), aladdin->getY()));
+					aladdin->draw();
+					if (isDebugRenderBBox)
+						aladdin->RenderBoundingBox(camera);
+
+					if (mapCurrent == eType::MAP_SULTAN)
+					{
+						for (auto& column : listColumns)
+						{
+							column->setViewport(camera->CameraTransform(column->getX(), column->getY()));
+							column->draw();
+						}
+						float hurdleX = front_hurdle->getX();
+						float hurdleY = front_hurdle->getY();
+
+						for (int row = 0; row < GAME_HEIGHT + 256; row += 256)
+						{
+							for (int col = 0; col < GAME_WIDTH + 512; col += 512)
+							{
+								front_hurdle->setX(hurdleX + col);
+								front_hurdle->setY(hurdleY + row);
+								front_hurdle->setViewport(D3DXVECTOR2(front_hurdle->getX(), front_hurdle->getY()));
+								front_hurdle->draw();           // draw the ocean
+							}
+						}
+						front_hurdle->setXY(hurdleX, hurdleY);
+					}
+
+					hud->Render(aladdin->getAppleCollect(), allChance, allGem, allScore, (int)aladdin->getHealth());
+
+					//DebugOut("Y aladdin: %.2f\n", aladdin->getY());
 				}
-				front_hurdle->setXY(hurdleX, hurdleY);
+				else {
+					aladdin->draw();
+				}
+			}
+			else {
+				aladdin->draw();
 			}
 
-			hud->Render(aladdin->getAppleCollect(), allChance, allGem, allScore, (int)aladdin->getHealth());
-
-			//DebugOut("Y aladdin: %.2f\n", aladdin->getY());
 		}
-		else {
-			aladdin->draw();
-		}
-	}
-
 	Graphics::getInstance()->spriteEnd();
 }
 
@@ -333,10 +367,10 @@ void SceneGame::LoadMap(eType type, bool isChange)
 
 		front_hurdle->setTextureManager(TextureManager::getIntance()->getTexture(eType::MAP_SULTAN_FRONT_BG));
 
-		aladdin->setXY(84.0f, 956.0f);
+		//aladdin->setXY(84.0f, 956.0f);
 		//aladdin->setXY(516.0f, 553.0f);
 		//aladdin->setXY(1440.0f, 250.0f);
-		//aladdin->setXY(2079.0f, 60.0f);
+		aladdin->setXY(2079.0f, 60.0f);
 		//aladdin->setXY(800.0f, 694.0f);
 
 		aladdin->setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_IDLE));
@@ -393,6 +427,15 @@ void SceneGame::LoadMap(eType type, bool isChange)
 
 		fire = new FireIdle(0.0f, 0.0f);
 
+		break;
+	case SULTAN_INTRO:
+	case JAFAR_INTRO:
+		redIntro->LoadIntroMap(type);
+		break;
+	case MAP_INTRO:
+		sceneIntro->initialize();
+		break;
+	case LEVEL_COMPLETED:
 		break;
 	}
 

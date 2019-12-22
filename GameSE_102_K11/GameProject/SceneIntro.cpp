@@ -70,7 +70,7 @@ void SceneIntro::update(float frameTime)
 		if (Input::getInstance()->isKeyDown(VK_RETURN) && selected == 1)
 		{
 			Menu->setTextureManager(TextureManager::getIntance()->getTexture(eType::MEMBER));
-			Selector->setXY(110.0f, 181.0f);
+			Selector->setXY(112.0f, 181.0f);
 			isMenu = false;
 			isMember = true;
 			selected = 2;

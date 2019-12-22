@@ -11,6 +11,7 @@
 #include "appleWeapon.h"
 #include "FireIdle.h"
 #include "SceneIntro.h"
+#include "RedIntro_Map.h"
 
 class SceneGame: public Game
 {
@@ -50,7 +51,7 @@ private:
 	FireIdle* fire;
 
 	SceneIntro* sceneIntro;
-
+	RedIntro_Map* redIntro;
 public:
 	SceneGame();
 	~SceneGame();

@@ -46,10 +46,10 @@ LPTEXTURE TextureManager::getTexture(eType type)
 void TextureManager::LoadResources()
 {
 	// maps
-	addTexture(eType::MAP_SULTAN, new CTexture(SULTAN_MAP_BANK_TEXTURE, 100, 8, 8));
-	addTexture(eType::MAP_JAFAR, new CTexture(JAFAR_MAP_BANK_TEXTURE, 13, 64, 64));
-	addTexture(eType::MAP_JAFAR_BACKGROUND, new CTexture(JAFAR_PILLAR_SNAKE));
-	addTexture(eType::MAP_SULTAN_FRONT_BG, new CTexture(SULTAN_FRONT_BACKGROUND));
+	addTexture(eType::MAP_SULTAN,				new CTexture(SULTAN_MAP_BANK_TEXTURE, 100, 8, 8));
+	addTexture(eType::MAP_JAFAR,				new CTexture(JAFAR_MAP_BANK_TEXTURE, 13, 64, 64));
+	addTexture(eType::MAP_JAFAR_BACKGROUND,		new CTexture(JAFAR_PILLAR_SNAKE));
+	addTexture(eType::MAP_SULTAN_FRONT_BG,		new CTexture(SULTAN_FRONT_BACKGROUND));
 
 	// aladdin
 	addTexture(eType::ALADDIN_IDLE,				new CTexture(ALADDIN_IDLE_TEXTURE, 10, 136, /*79*/110));						// trạng thái đứng yên
@@ -77,7 +77,9 @@ void TextureManager::LoadResources()
 	addTexture(eType::ALADDIN_TOUCHGROUND,		new CTexture(ALADDIN_TOUCHGROUND_TEXTURE, 16, 136, 110));
 	addTexture(eType::ALADDIN_SHAKE,			new CTexture(ALADDIN_SHAKE_TEXTURE, 9, 80, 86));
 	addTexture(eType::ALADDIN_CARRIED,			new CTexture(ALADDIN_CARRIED_TEXTURE, 19, 80, 86));
-	addTexture(eType::ABU,						new CTexture(ABU_TEXTURE, 6, 68, 58));
+	addTexture(eType::ALADDIN_RUN_COMPLETED,	new CTexture(ALADDIN_RUN_COMPLETED_TEXTURE, 10, 50, 61));
+	addTexture(eType::ABU_FAN,					new CTexture(ABU_TEXTURE, 6, 68, 58));
+	addTexture(eType::ABU_RUN,					new CTexture(ABU_RUN_TEXTURE, 8, 52, 37));
 
 	// Enemy Nahbi
 	addTexture(eType::NAHBI_RUN,				new CTexture(NAHBI_RUN_TEXTURE, 8, 166, 73));
@@ -152,5 +154,8 @@ void TextureManager::LoadResources()
 	addTexture(eType::MENU, new CTexture(INTRO_MENU_TEXTURE));
 	addTexture(eType::SELECTOR, new CTexture(INTRO_SELECTOR_TEXTURE));
 	addTexture(eType::MEMBER, new CTexture(MEMBER_TEXTURE));
+	addTexture(eType::LEVEL_COMPLETED, new CTexture(LEVEL_COMPLETE_TEXTURE));
+	addTexture(eType::SULTAN_INTRO, new CTexture(SULTAN_INTRO_TEXTURE, 4, 320, 240));
+	addTexture(eType::JAFAR_INTRO, new CTexture(JAFAR_INTRO_TEXTURE, 4, 320, 240));
 }
 
