@@ -190,6 +190,7 @@ void appleWeapon::setState(int state, Entity* obj)
 		currentFrame = 0;
 		frameDelay = 0.04f;
 		setVelocity(D3DXVECTOR2(0.0f, 0.0f));
+		Audio::getInstance()->Play(MUSIC_APPLE_SPLAT);
 		break;
 	case EXPLOSIVE_GENIE:
 		health = 0.0f;

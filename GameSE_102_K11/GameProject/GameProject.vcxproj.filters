@@ -210,9 +210,6 @@
     <ClInclude Include="Column_OutItem.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="ExitItem.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="SwordWeapon.h">
       <Filter>Entities\Weapon</Filter>
     </ClInclude>
@@ -240,6 +237,7 @@
     <ClInclude Include="StarWeapon.h">
       <Filter>Entities\Weapon</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="SceneIntro.h">
       <Filter>Scenes\IntroScene</Filter>
     </ClInclude>
@@ -248,6 +246,10 @@
     </ClInclude>
     <ClInclude Include="CompleteScreen.h">
       <Filter>Scenes</Filter>
+=======
+    <ClInclude Include="ExitItem.h">
+      <Filter>Entities</Filter>
+>>>>>>> Stashed changes
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -368,9 +370,6 @@
     <ClCompile Include="ButtressItem.cpp">
       <Filter>Entities\Obstacles</Filter>
     </ClCompile>
-    <ClCompile Include="SpearItem.cpp">
-      <Filter>Entities\Obstacles</Filter>
-    </ClCompile>
     <ClCompile Include="Column_OutItem.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
@@ -404,6 +403,7 @@
     <ClCompile Include="StarWeapon.cpp">
       <Filter>Entities\Weapon</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="SceneIntro.cpp">
       <Filter>Scenes\IntroScene</Filter>
     </ClCompile>
@@ -412,6 +412,10 @@
     </ClCompile>
     <ClCompile Include="CompleteScreen.cpp">
       <Filter>Scenes</Filter>
+=======
+    <ClCompile Include="SpearItem.cpp">
+      <Filter>Entities\Obstacles</Filter>
+>>>>>>> Stashed changes
     </ClCompile>
   </ItemGroup>
 </Project>

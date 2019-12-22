@@ -178,6 +178,7 @@ void HakimItem::setState(int state)
 		setFrames(0, 9);
 		frameDelay = 0.1f;
 		setXY(centerHakim.x - spriteData.width / 2, centerHakim.y - spriteData.height / 2);
+		Audio::getInstance()->Play(MUSIC_EXPLOSION_ENEMY);
 		return;
 	}
 	case HAKIM_BEHIT:
@@ -188,6 +189,7 @@ void HakimItem::setState(int state)
 		isHurt = true;
 		isAttack = false;
 		sword->setVisible(false);
+		Audio::getInstance()->Play(MUSIC_HAKIM_BEHIT);
 		break;
 	case HAKIM_IDLE:
 		setCurrentFrame(0);

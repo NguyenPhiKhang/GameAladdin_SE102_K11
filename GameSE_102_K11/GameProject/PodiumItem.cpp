@@ -6,6 +6,7 @@ PodiumItem::PodiumItem(float x, float y)
 	spriteData.y = y;
 	type = eType::PODIUM;
 	kind = eKind::FLOOR;
+	isSound = false;
 }
 
 PodiumItem::~PodiumItem()
@@ -18,10 +19,14 @@ void PodiumItem::update(std::vector<Entity*>* listObj, float frameTime)
 	if (currentFrame == 0 || currentFrame == 4)
 	{
 		frameDelay = 2.0f;
+		isSound = false;
 	}
-	else
+	else if((currentFrame == 1||currentFrame == 5)&&!isSound)
 	{
+		Audio::getInstance()->Play(MUSIC_PODIUM);
+		isSound = true;
 		frameDelay = 0.15f;
+
 	}
 
 	/*std::vector<Entity*> listEnt;

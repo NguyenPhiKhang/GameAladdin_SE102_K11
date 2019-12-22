@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Aladdin.h"
 #include "Camera.h"
+#include "Audio.h"
 
 
 class appleWeapon : public Entity
@@ -12,6 +13,7 @@ private:
 	Entity* ent;
 	Camera* camera;
 	bool startFly;
+	bool isSound;
 public:
 	appleWeapon(Entity* ent, Camera* camera);
 	~appleWeapon();

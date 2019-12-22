@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Aladdin.h"
 #include "SwordWeapon.h"
+#include "Audio.h"
 
 class HakimItem : public Entity
 {
