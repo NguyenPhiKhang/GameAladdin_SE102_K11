@@ -27,14 +27,9 @@ Aladdin::Aladdin(Camera* camera, MapGame* mapGame) : Entity()
 	yChain = 0.0f;
 	hChain = 0;
 	totalAppleCollect = 50;
-<<<<<<< Updated upstream
 	health = 20.0f;
 	isDeath = false;
 	isCompletedLevel = false;
-=======
-	health = 100.0f;
-	isSound = false;
->>>>>>> Stashed changes
 
 	this->camera = camera;
 	this->mapGame = mapGame;
@@ -105,40 +100,7 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 	{
 		if (!isCompletedLevel)
 		{
-<<<<<<< Updated upstream
 			if (!isClimbing)
-=======
-			if (state != ALADDIN_GLANCE_UP && LoopAttackGlance == true)
-			{
-				//setVelocity(D3DXVECTOR2(0.0f, 0.0f));
-				setVelocityX(0.0f);
-				LoopFinished = true;
-				sword->setVisible(false);
-				isSliding = false;
-				currentFrame = 0;
-				setFrames(0, 2);
-				setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_GLANCE_UP));
-				frameDelay = 0.15f;
-
-				state = ALADDIN_GLANCE_UP;
-			}
-			if (Input::getInstance()->isKeyDown(ALADDIN_LEFT_KEY) && !spriteData.flipHorizontal && LoopAttackGlance) spriteData.flipHorizontal = true;
-			if (Input::getInstance()->isKeyDown(ALADDIN_RIGHT_KEY) && spriteData.flipHorizontal && LoopAttackGlance) spriteData.flipHorizontal = false;
-			if (Input::getInstance()->isKeyDown(ALADDIN_ATTACK_KEY)) {
-				if (state != ALADDIN_GLANCE_ATTACK && LoopAttackGlance)
-				{
-					LoopAttackGlance = false;
-					currentFrame = 0;
-					setFrames(0, 9);
-					setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_GLANCE_ATTACK));
-					frameDelay = 0.075f;
-					//Audio::getInstance()->Play(MUSIC_ALADDIN_ATK_HIGH);
-					state = ALADDIN_GLANCE_ATTACK;
-					sword->setVisible(true);
-				}
-			}
-			if (gamePtr->getSumTimeKeyUp() > 0.001f && !holdKeyUP)
->>>>>>> Stashed changes
 			{
 				deltaV.y = GRAVITY_JUMP_SPEED * frameTime;
 				CollideWithGround(coEntities, frameTime);
@@ -299,7 +261,6 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 
 					if (Input::getInstance()->isKeyDown(ALADDIN_ATTACK_KEY))
 					{
-<<<<<<< Updated upstream
 						if (gamePtr->getCountKeyAttack() == 0)
 						{
 							if (LoopFinished)
@@ -324,18 +285,6 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 						if (gamePtr->getCountKeyThrow() == 0)
 						{
 							if (LoopFinished)
-=======
-						if (state != ALADDIN_RUN_THROW) {
-							frameDelay = 0.08f;
-							currentFrame = 0;
-							isSliding = false;
-							LoopFinished = false;
-							setFrames(0, 5);
-							setTextureManager(TextureManager::getIntance()->getTexture(ALADDIN_RUN_THROW));
-							Audio::getInstance()->Play(MUSIC_ALADDIN_THROW);
-							state = ALADDIN_RUN_THROW;
-							if (totalAppleCollect > 0)
->>>>>>> Stashed changes
 							{
 								if (state != ALADDIN_RUN_THROW) {
 									frameDelay = 0.08f;
@@ -389,7 +338,6 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 					state != ALADDIN_SIT && !holdKeyDown && !holdKeyUP &&
 					JumpFinsihed && !isClimbing)
 				{
-<<<<<<< Updated upstream
 					if (gamePtr->getCountKeyAttack() == 0)
 					{
 						if (LoopFinished)
@@ -406,19 +354,6 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 								sword->setVisible(true);
 							}
 						}
-=======
-					if (state != ALADDIN_ATTACK) {
-						setVelocity(D3DXVECTOR2(0.0f, 0.0f));
-						LoopFinished = false;
-						isSliding = false;
-						currentFrame = 0;
-						setFrames(0, 6);
-						frameDelay = 0.06f;
-						Audio::getInstance()->Play(MUSIC_ALADDIN_ATK_HIGH);
-						setTextureManager(TextureManager::getIntance()->getTexture(ALADDIN_ATTACK));
-						state = ALADDIN_ATTACK;
-						sword->setVisible(true);
->>>>>>> Stashed changes
 					}
 					else goto IDLE;
 				}
@@ -431,23 +366,9 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 					state != ALADDIN_SIT && !holdKeyDown && !holdKeyUP &&
 					JumpFinsihed && !isClimbing && totalAppleCollect > 0)
 				{
-<<<<<<< Updated upstream
 					if (gamePtr->getCountKeyThrow() == 0)
 					{
 						if (LoopFinished)
-=======
-					if (state != ALADDIN_THROW) {
-						setVelocity(D3DXVECTOR2(0.0f, 0.0f));
-						frameDelay = 0.08f;
-						currentFrame = 0;
-						isSliding = false;
-						LoopFinished = false;
-						setFrames(0, 6);
-						setTextureManager(TextureManager::getIntance()->getTexture(ALADDIN_THROW));
-						Audio::getInstance()->Play(MUSIC_ALADDIN_THROW);
-						state = ALADDIN_THROW;
-						if (totalAppleCollect > 0)
->>>>>>> Stashed changes
 						{
 							if (state != ALADDIN_THROW) {
 								setVelocity(D3DXVECTOR2(0.0f, 0.0f));
@@ -486,7 +407,6 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 						LoopAttackGlance = true;
 						if (!holdKeyDown)
 							currentFrame = 0;
-<<<<<<< Updated upstream
 						else currentFrame = 3;
 						setFrames(0, 3);
 						setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_SIT));
@@ -513,14 +433,6 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 									sword->setVisible(true);
 								}
 							}
-=======
-							setFrames(0, 6);
-							setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_SIT_ATTACK));
-							frameDelay = 0.1f;
-							Audio::getInstance()->Play(MUSIC_ALADDIN_ATK_LOW);
-							state = ALADDIN_SIT_ATTACK;
-							sword->setVisible(true);
->>>>>>> Stashed changes
 						}
 					}
 					else {
@@ -528,19 +440,7 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 						{
 							if (gamePtr->getCountKeyThrow() == 0)
 							{
-<<<<<<< Updated upstream
 								if (LoopFinished)
-=======
-								LoopAttackGlance = true;
-								LoopFinished = false;
-								currentFrame = 0;
-								setFrames(0, 6);
-								setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_SIT_THROW));
-								frameDelay = 0.1f;
-								Audio::getInstance()->Play(MUSIC_ALADDIN_THROW);
-								state = ALADDIN_SIT_THROW;
-								if (totalAppleCollect > 0)
->>>>>>> Stashed changes
 								{
 									if (state != ALADDIN_SIT_THROW)
 									{
@@ -628,7 +528,6 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 				//spriteData.x += dx;
 				//MoveViewport(camera);
 			}
-<<<<<<< Updated upstream
 			else {
 				if (isSliding && spriteData.x > -10.0f && spriteData.x < mapGame->getWidthMap() - spriteData.width)
 				{
@@ -646,63 +545,6 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 				else isSliding = false;
 			}
 			if (state == ALADDIN_ATTACK || state == ALADDIN_THROW)
-=======
-			else frameDelay = 0.08f;
-			if (currentFrame == 8)
-				isSliding = false;
-		}
-		else isSliding = false;
-	}
-	if (state == ALADDIN_ATTACK || state == ALADDIN_THROW)
-	{
-		if (currentFrame == 6)
-		{
-			LoopFinished = true;
-			sword->setVisible(false);
-		}
-	}
-	if (state == ALADDIN_RUN_ATTACK || state == ALADDIN_RUN_THROW)
-	{
-		if (currentFrame == 3)
-			frameDelay = 0.15f;
-		else frameDelay = 0.08f;
-		if (currentFrame == 5)
-		{
-			LoopFinished = true;
-			sword->setVisible(false);
-		}
-		//spriteData.x += dx;
-		//MoveViewport(camera);
-	}
-	if (state == ALADDIN_CLIMB_ATTACK || state == ALADDIN_CLIMB_THROW)
-	{
-		if ((state == ALADDIN_CLIMB_ATTACK && currentFrame == 7) || (state == ALADDIN_CLIMB_THROW && currentFrame == 5))
-		{
-			LoopFinished = true;
-			sword->setVisible(false);
-		}
-		if ((state == ALADDIN_CLIMB_ATTACK && currentFrame == 2) || (state == ALADDIN_CLIMB_ATTACK && currentFrame == 5))
-		{
-			Audio::getInstance()->Play(MUSIC_ALADDIN_ATK_HIGH);
-		}
-	}
-	if (state == ALADDIN_GLANCE_UP)
-	{
-		if (currentFrame == 2)
-			setFrames(2, 2);
-	}
-	if (state == ALADDIN_SIT)
-	{
-		if (currentFrame == 3)
-			setFrames(3, 3);
-	}
-	if (state == ALADDIN_GLANCE_ATTACK)
-	{
-		if (currentFrame == 9)
-		{
-			countLoopAttackGlance++;
-			if (countLoopAttackGlance > 2)
->>>>>>> Stashed changes
 			{
 				if (currentFrame == 6)
 				{
@@ -710,41 +552,7 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 					sword->setVisible(false);
 				}
 			}
-<<<<<<< Updated upstream
 			if (state == ALADDIN_RUN_ATTACK || state == ALADDIN_RUN_THROW)
-=======
-			else { currentFrame = 1; }
-		}
-		if (currentFrame == 2 || currentFrame == 6)
-		{
-			Audio::getInstance()->Play(MUSIC_ALADDIN_ATK_HIGH);
-		}
-	}
-	if (state == ALADDIN_SIT_ATTACK || state == ALADDIN_SIT_THROW)
-	{
-		if (currentFrame == 6)
-		{
-			LoopFinished = true;
-			sword->setVisible(false);
-		}
-	}
-	
-	if (state == ALADDIN_HURT)
-	{
-		if (currentFrame == 5)
-			setState(eType::ALADDIN_IDLE);
-	}
-
-	if (!JumpFinsihed)
-	{
-		if (Input::getInstance()->isKeyDown(ALADDIN_LEFT_KEY))
-		{
-			setVelocityX(-ALADDIN_SPEED);
-			spriteData.flipHorizontal = true;
-		}
-		else
-			if (Input::getInstance()->isKeyDown(ALADDIN_RIGHT_KEY))
->>>>>>> Stashed changes
 			{
 				if (currentFrame == 3)
 					frameDelay = 0.15f;
@@ -1072,49 +880,10 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 						currentFrame = 0;
 					}
 
-<<<<<<< Updated upstream
 				}
-=======
-		if (Input::getInstance()->isKeyDown(ALADDIN_ATTACK_KEY) && state != ALADDIN_JUMP_ATTACK)
-		{
-			currentFrame = 0;
-			setFrames(0, 6);
-			setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_JUMP_ATTACK));
-			frameDelay = 0.08f;
-			Audio::getInstance()->Play(MUSIC_ALADDIN_ATK_HIGH);
-			state = ALADDIN_JUMP_ATTACK;
-			sword->setVisible(true);
-		}
-		else
-		{
-			if (state == ALADDIN_JUMP_ATTACK)
-			{
-				if (currentFrame == 3)
-					frameDelay = 0.18f;
-				else frameDelay = 0.08f;
->>>>>>> Stashed changes
 			}
 
-<<<<<<< Updated upstream
 			if (isFalling && state == ALADDIN_IDLE)
-=======
-		if (Input::getInstance()->isKeyDown(ALADDIN_THROW_KEY) && state != ALADDIN_JUMP_THROW && totalAppleCollect>0)
-		{
-			currentFrame = 0;
-			setFrames(0, 6);
-			setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_JUMP_THROW));
-			frameDelay = 0.08f;
-			Audio::getInstance()->Play(MUSIC_ALADDIN_THROW);
-			state = ALADDIN_JUMP_THROW;
-			if (totalAppleCollect > 0)
-			{
-				WeaponApple.push_back(new appleWeapon(this, camera));
-				totalAppleCollect--;
-			}
-		}
-		else {
-			if (state == ALADDIN_JUMP_THROW)
->>>>>>> Stashed changes
 			{
 				if (JumpFinsihed)
 				{
@@ -1186,62 +955,19 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 				{
 					if (marginVertical > cameraNS::marginWhenSit)
 					{
-<<<<<<< Updated upstream
 						marginVertical += -4.0f;
 						if (marginVertical < cameraNS::marginWhenSit)
 							marginVertical = cameraNS::marginWhenSit;
 						MoveViewport(camera);
-=======
-						if (LoopFinished)
-						{
-							if (state != ALADDIN_CLIMB_ATTACK)
-							{
-								frameDelay = 0.08f;
-								currentFrame = 0;
-								LoopFinished = false;
-								setFrames(0, 7);
-								setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_CLIMB_ATTACK));
-								//Audio::getInstance()->Play(MUSIC_ALADDIN_ATK_HIGH);
-								state = ALADDIN_CLIMB_ATTACK;
-								sword->setVisible(true);
-							}
-
-						}
->>>>>>> Stashed changes
 					}
 				}
 				else
 					if (marginVertical < cameraNS::marginVertical)
 					{
-<<<<<<< Updated upstream
 						marginVertical += 4.0f;
 						if (marginVertical > cameraNS::marginVertical)
 							marginVertical = cameraNS::marginVertical;
 						MoveViewport(camera);
-=======
-						if (gamePtr->getCountKeyThrow() == 0)
-						{
-							if (LoopFinished)
-							{
-								if (state != ALADDIN_CLIMB_THROW)
-								{
-									frameDelay = 0.08f;
-									currentFrame = 0;
-									LoopFinished = false;
-									setFrames(0, 5);
-									
-									setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_CLIMB_THROW));
-									Audio::getInstance()->Play(MUSIC_ALADDIN_THROW);
-									state = ALADDIN_CLIMB_THROW;
-									if (totalAppleCollect > 0)
-									{
-										WeaponApple.push_back(new appleWeapon(this, camera));
-										totalAppleCollect--;
-									}
-								}
-							}
-						}
->>>>>>> Stashed changes
 					}
 					else
 						if (marginVertical > cameraNS::marginVertical)
@@ -1582,15 +1308,12 @@ void Aladdin::setState(int statenew, float xCenterChain, float yChain, int hChai
 			unTouchable = true;
 			health -= 10.0f;
 			QueryPerformanceCounter(&timeStart);
-			
 		}
 		else {
 			unTouchable = true;
 			health -= 10.0f;
 			QueryPerformanceCounter(&timeStart);
 		}
-		
-		Audio::getInstance()->Play(MUSIC_ALADDIN_HURT);
 		break;
 	case ALADDIN_SHAKE:
 		Entity::setState(statenew);
@@ -1753,29 +1476,19 @@ void Aladdin::CollideWithWall(std::vector<Entity*>* coEntities, float frameTime,
 			spriteData.x += min_tx * dx + nx * 0.4f;
 			DebugOut("push wall ! nx= %.2f\n", nx);
 
-			if (state == ALADDIN_PUSH && currentFrame == 1 && !isSound)
-			{
-				Audio::getInstance()->Play(MUSIC_ALADDIN_PUSH);
-				isSound = true;
-			}
-			else
-			{
-				isSound = false;
-			}
-
 			if (state != ALADDIN_PUSH && JumpFinsihed && !isFalling)
 			{
 				isPushing = true;
 				LoopFinished = true;
 				sword->setVisible(false);
+
 				isSliding = false;
 				currentFrame = 0;
 				setFrames(1, 8);
 				setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_PUSH));
 				frameDelay = 0.15f;
-				//Audio::getInstance()->Play(MUSIC_ALADDIN_PUSH);
+
 				state = ALADDIN_PUSH;
-				
 			}
 		}
 		else spriteData.x += dx;
@@ -1807,5 +1520,4 @@ bool Aladdin::isCollisionWithItem(Entity* entItem, float frameTime)
 void Aladdin::setHitWall()
 {
 	sword->setCurrentFrame(endFrame);
-	//Audio::getInstance()->Play(MUSIC_ALADDIN_ATK_WALL);
 }

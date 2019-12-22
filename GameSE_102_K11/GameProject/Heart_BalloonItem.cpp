@@ -43,6 +43,5 @@ void Heart_BalloonItem::setState(int state)
 		setFrames(0, 11);
 		 setCurrentFrame(0);
 		frameDelay = 0.05f;
-		Audio::getInstance()->Play(MUSIC_HEART);
 	}
 }

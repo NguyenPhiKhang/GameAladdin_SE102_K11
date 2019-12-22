@@ -13,9 +13,6 @@ NahbiItem::NahbiItem(float x, float y, Aladdin* aladdin)
 	sword = new SwordWeapon(this);
 	firstX = spriteData.x;
 	firstY = spriteData.y;
-	countLead = 0;
-	isSound = false;
-	isLoop = false;
 }
 
 NahbiItem::~NahbiItem()
@@ -26,19 +23,6 @@ NahbiItem::~NahbiItem()
 void NahbiItem::update(std::vector<Entity*>* listObj, float frameTime)
 {
 	Entity::update(listObj, frameTime);
-
-	if (currentFrame == 5)
-	{
-		countLead++;
-		if (countLead > 4)
-		{
-			isLoop = true;
-			countLead = 0;
-			sword->setVisible(false);
-		}
-		else { currentFrame = 1; }
-	}
-	
 	if (health == 0.0f && state == EXPLOSIVE_ENEMY)
 	{
 		if (currentFrame == 9)
@@ -91,26 +75,7 @@ void NahbiItem::update(std::vector<Entity*>* listObj, float frameTime)
 			if (((tE - bA) > 2 || (bE - tA) < -10) && state != NAHBI_LEAD)
 			{
 				setState(NAHBI_LEAD);
-				
 			}
-
-			if (state == NAHBI_LEAD && currentFrame == 1&&!isSound)
-			{
-				isSound = true;
-				Audio::getInstance()->Play(MUSIC_NAHBI_LEAD);
-			}
-			else {
-				isSound = false;
-			}
-
-			/*if (state == NAHBI_ATTACK && currentFrame == 0 && !isSound)
-			{
-				isSound = true;
-				Audio::getInstance()->Play(MUSIC_NAHBI_ATK);
-			}
-			else {
-				isSound = false;
-			}*/
 
 			if ((lA - lE) <= 0)
 			{
@@ -131,12 +96,8 @@ void NahbiItem::update(std::vector<Entity*>* listObj, float frameTime)
 						spriteData.x = LimitLeft - 73;
 					if ((lA - rE) < -80 && spriteData.x == LimitLeft - 73)
 					{
-						if (state != NAHBI_LEAD /*&& !isSound*/)
-						{
+						if (state != NAHBI_LEAD)
 							setState(NAHBI_LEAD);
-							/*Audio::getInstance()->Play(MUSIC_NAHBI_LEAD,true);
-							isSound = true;*/
-						}
 					}
 					else {
 						if (state != NAHBI_RUN)
@@ -168,11 +129,8 @@ void NahbiItem::update(std::vector<Entity*>* listObj, float frameTime)
 						}
 						if ((lA - rE) > 80 && spriteData.x == LimitRight - 93)
 						{
-							if (state != NAHBI_LEAD) {
+							if (state != NAHBI_LEAD)
 								setState(NAHBI_LEAD);
-								/*Audio::getInstance()->Play(MUSIC_NAHBI_LEAD,true);
-								isSound = true;*/
-							}
 						}
 						else {
 							if (state != NAHBI_RUN)
@@ -231,7 +189,6 @@ void NahbiItem::setState(int state)
 		setFrames(0, 9);
 		frameDelay = 0.1f;
 		setXY(centerNahbi.x - spriteData.width / 2, centerNahbi.y - spriteData.height / 2);
-		Audio::getInstance()->Play(MUSIC_EXPLOSION_ENEMY);
 		return;
 	}
 	break;
@@ -243,15 +200,13 @@ void NahbiItem::setState(int state)
 		isHurt = true;
 		isAttack = false;
 		sword->setVisible(false);
-		Audio::getInstance()->Play(MUSIC_NAHBI_BEHIT);
 		break;
 	case NAHBI_LEAD:
 		setCurrentFrame(0);
 		setTextureManager(TextureManager::getIntance()->getTexture((eType)state));
 		setFrames(0, 5);
-		frameDelay = 0.13f;
+		frameDelay = 0.2f;
 		isAttack = false;
-		isLoop = true;
 		sword->setVisible(false);
 		break;
 	case NAHBI_ATTACK:
@@ -261,7 +216,6 @@ void NahbiItem::setState(int state)
 		frameDelay = 0.1f;
 		isAttack = true;
 		sword->setVisible(true);
-		Audio::getInstance()->Play(MUSIC_NAHBI_ATK);
 		break;
 	case NAHBI_STAB:
 		setCurrentFrame(0);

@@ -5,7 +5,6 @@
 #include "Aladdin.h"
 #include "BoneWeapon.h"
 #include <time.h>
-#include "Audio.h"
 
 namespace SkeletonNS {
 	const int arrBoneX[] =
@@ -31,7 +30,6 @@ private:
 
 	bool isBoom;
 	std::vector<Entity*> *listWeaponOfEnemy;
-	bool isSound;
 
 public:
 	SkeletonItem(float x, float y, Aladdin* aladdin, std::vector<Entity*>* listWeaponOfEnemy);

@@ -7,7 +7,6 @@
 #include "AppleItem.h"
 #include "SwordWeapon.h"
 #include "appleWeapon.h"
-#include "Audio.h"
 
 
 namespace aladdinNS {
@@ -48,12 +47,8 @@ private:
 	bool	isPushing;
 	bool	isClimbing;
 	bool	isHurt;
-<<<<<<< Updated upstream
 	bool	isDeath;
 	bool	isCompletedLevel;
-=======
-	bool	isSound;
->>>>>>> Stashed changes
 
 	float yChain;		// y của dây xích để ngăn chặn đi tiếp
 	int	hChain;	// height của dây xích 

@@ -11,7 +11,6 @@ SkeletonItem::SkeletonItem(float x, float y, Aladdin* aladdin, std::vector<Entit
 	isBoom = false;
 	firstX = spriteData.x;
 	firstY = spriteData.y;
-	isSound = false;
 }
 
 SkeletonItem::~SkeletonItem()
@@ -23,9 +22,6 @@ void SkeletonItem::update(std::vector<Entity*>* listObj, float frameTime)
 {
 	srand(unsigned(time(NULL)));
 	Entity::update(listObj, frameTime);
-	if (currentFrame != 20) {
-		isSound = false;
-	}
 	if (health == 0.0f && state == EXPLOSIVE_ENEMY)
 	{
 		if (currentFrame == 9)
@@ -46,13 +42,11 @@ void SkeletonItem::update(std::vector<Entity*>* listObj, float frameTime)
 			if (currentFrame == 19)
 				frameDelay = 0.4f;
 			else frameDelay = 0.14f;
-			if (currentFrame == 20 && !isSound)
+			if (currentFrame == 20)
 			{
 				if (!isBoom)
 				{
 					isBoom = true;
-					Audio::getInstance()->Play(MUSIC_SKELETON);
-					isSound = true;
 					for (int i = 0; i < 15; i++)
 					{
 						Entity* bone = new BoneWeapon(getCenterX() - 5, getCenterY() - 10);
@@ -66,7 +60,7 @@ void SkeletonItem::update(std::vector<Entity*>* listObj, float frameTime)
 				}
 				else return;
 			}
-			
+
 			if (currentFrame == 21)
 			{
 				visible = false;
@@ -105,7 +99,6 @@ void SkeletonItem::setState(int state)
 		setFrames(0, 9);
 		frameDelay = 0.1f;
 		setXY(centerSkeleton.x - spriteData.width / 2, centerSkeleton.y - spriteData.height / 2);
-		Audio::getInstance()->Play(MUSIC_EXPLOSION_ENEMY);
 		return;
 	}
 	case SKELETON:
