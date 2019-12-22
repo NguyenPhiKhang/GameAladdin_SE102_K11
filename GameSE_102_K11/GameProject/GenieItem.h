@@ -2,6 +2,7 @@
 #define _GENIEITEM_H
 
 #include "Entity.h"
+#include "Audio.h"
 
 class GenieItem : public Entity
 {

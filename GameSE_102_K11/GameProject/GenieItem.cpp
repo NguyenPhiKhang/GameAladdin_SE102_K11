@@ -79,5 +79,7 @@ void GenieItem::setState(int state)
 		setFrames(0, 14);
 		setCurrentFrame(0);
 		frameDelay = 0.05f;
+		Audio::getInstance()->Play(MUSIC_GENIE_SMOKE);
+		Audio::getInstance()->Play(MUSIC_GENIE_WOW);
 	}
 }

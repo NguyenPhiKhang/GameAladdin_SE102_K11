@@ -39,11 +39,6 @@ const char ALADDIN_CLIMB_THROW_TEXTURE[] = "Resources\\Aladdin\\animation_aladdi
 const char ALADDIN_CLIMB_JUMP_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_climb_jump.png";
 const char ALADDIN_HURT_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_hurt.png";
 const char ALADDIN_TOUCHGROUND_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_touchground.png";
-const char ALADDIN_SHAKE_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_shake.png";
-const char ALADDIN_CARRIED_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_carried.png";
-const char ALADDIN_RUN_COMPLETED_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_run_completed.png";
-const char ABU_TEXTURE[] = "Resources\\Aladdin\\animation_abu.png";
-const char ABU_RUN_TEXTURE[] = "Resources\\Aladdin\\animation_abu_run.png";
 
 // ITEM + ENEMY
 const char APPLEITEM_TEXTURE[] = "Resources\\Items\\AppleItems\\appleItem.png";
@@ -103,14 +98,6 @@ const char EXPLOSIVE_GENIE_TEXTURE[] = "Resources\\Effect\\ExplosiveGenie.png";
 const char EXPLOSIVE_ENEMY_TEXTURE[] = "Resources\\Effect\\ExplosiveEnemy.png";
 const char EXPLOSIVE_BONE_TEXTURE[] = "Resources\\Effect\\ExplosiveBone.png";
 
-//Intro
-const char INTRO_MENU_TEXTURE[] = "Resources\\Intro\\Menu.png";
-const char INTRO_SELECTOR_TEXTURE[] = "Resources\\Intro\\Selector.png";
-const char MEMBER_TEXTURE[] = "Resources\\Intro\\Member.png";
-const char SULTAN_INTRO_TEXTURE[] = "Resources\\Intro\\sultanIntro.png";
-const char JAFAR_INTRO_TEXTURE[] = "Resources\\Intro\\jafarIntro.png";
-const char LEVEL_COMPLETE_TEXTURE[] = "Resources\\Intro\\Level_Complete.png";
-
 // FONT
 const char FONT_TOTAL_TEXTURE[] = "Resources\\Font\\font_TOTAL.png";
 const char FONT_SCORE_TEXTURE[] = "Resources\\Font\\font_SCORE.png";
@@ -130,6 +117,33 @@ const char OBJECT_GRID_MAP_JAFAR[] = "Resources\\Items\\objects_grid_map_jafar.j
 // AUDIO
 const char MUSIC_MAP_SULTAN_WAV[] = "Resources\\Audio\\Music\\music_map_sultan.wav";
 const char MUSIC_MAP_JAFAR_WAV[] = "Resources\\Audio\\Music\\music_map_jafar.wav";
+const char MUSIC_SPEAR_WAV[] = "Resources\\Audio\\Music\\spear.wav";
+const char MUSIC_PODIUM_WAV[] = "Resources\\Audio\\Music\\podium.wav";
+const char MUSIC_SKELETON_WAV[] = "Resources\\Audio\\Music\\skeleton.wav";
+const char MUSIC_NAHBI_LEAD_WAV[] = "Resources\\Audio\\Music\\nahbi_lead.wav";
+const char MUSIC_NAHBI_ATK_WAV[] = "Resources\\Audio\\Music\\nahbi_atk.wav";
+const char MUSIC_ALADDIN_HURT_WAV[] = "Resources\\Audio\\Music\\aladdin_hurt.wav";
+const char MUSIC_ALADDIN_PUSH_WAV[] = "Resources\\Audio\\Music\\aladdin_push.wav";
+const char MUSIC_APPLE_COLLECT_WAV[] = "Resources\\Audio\\Music\\apple_collect.wav";
+//const char MUSIC_ALADDIN_ATK_WALL_WAV[] = "Resources\\Audio\\Music\\aladdin_atk_wall.wav";
+const char MUSIC_APPLE_SPLAT_WAV[] = "Resources\\Audio\\Music\\apple_splat.wav";
+const char MUSIC_NAHBI_BEHIT_WAV[] = "Resources\\Audio\\Music\\nahbi_behit.wav";
+const char MUSIC_GENIE_WOW_WAV[] = "Resources\\Audio\\Music\\genie_wow.wav";
+const char MUSIC_ALADDIN_THROW_WAV[] = "Resources\\Audio\\Music\\aladdin_throw.wav";
+const char MUSIC_VASE_WAV[] = "Resources\\Audio\\Music\\vase.wav";
+const char MUSIC_GEM_COLLECT_WAV[] = "Resources\\Audio\\Music\\gem_collect.wav";
+const char MUSIC_HEART_WAV[] = "Resources\\Audio\\Music\\heart.wav";
+const char MUSIC_GENIE_SMOKE_WAV[] = "Resources\\Audio\\Music\\genie_smoke.wav";
+const char MUSIC_HIGH_SWORD_WAV[] = "Resources\\Audio\\Music\\high_sword.wav";
+const char MUSIC_LOW_SWORD_WAV[] = "Resources\\Audio\\Music\\low_sword.wav";
+const char MUSIC_HAKIM_BEHIT_WAV[] = "Resources\\Audio\\Music\\hakim_behit.wav";
+const char MUSIC_EXPLOSION_ENEMY_WAV[] = "Resources\\Audio\\Music\\explosion_enemy.wav";
+const char MUSIC_EXIT_WAV[] = "Resources\\Audio\\Music\\exit.wav";
+const char MUSIC_JAFAR_BEHIT_WAV[] = "Resources\\Audio\\Music\\jafar_behit.wav";
+//const char MUSIC_HEAD_BOP_WAV[] = "Resources\\Audio\\Music\\head_bop.wav";
+const char MUSIC_JAFAR_TRACTOR_WAV[] = "Resources\\Audio\\Music\\jafar_tractor.wav";
+const char MUSIC_BONE_WAV[] = "Resources\\Audio\\Music\\bone.wav";
+//const char MUSIC_ALADDIN_LANDING_WAV[] = "Resources\\Audio\\Music\\aladdin_landing.wav";
 
 
 // window

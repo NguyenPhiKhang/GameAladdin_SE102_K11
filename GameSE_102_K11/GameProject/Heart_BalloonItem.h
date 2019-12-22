@@ -2,6 +2,7 @@
 #define _HEART_BALLOONITEM_H
 
 #include "Entity.h"
+#include "Audio.h"
 
 class Heart_BalloonItem : public Entity
 {

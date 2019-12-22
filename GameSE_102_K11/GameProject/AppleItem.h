@@ -2,11 +2,12 @@
 #define _APPLEITEM_H
 
 #include "Entity.h"
+#include "Audio.h"
 
 class AppleItem: public Entity
 {
 private:
-
+	bool isSound;
 public:
 	AppleItem(float x, float y);
 	~AppleItem();

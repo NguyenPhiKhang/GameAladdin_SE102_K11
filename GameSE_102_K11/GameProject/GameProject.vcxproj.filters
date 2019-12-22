@@ -210,9 +210,6 @@
     <ClInclude Include="Column_OutItem.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="ExitItem.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="SwordWeapon.h">
       <Filter>Entities\Weapon</Filter>
     </ClInclude>
@@ -240,14 +237,8 @@
     <ClInclude Include="StarWeapon.h">
       <Filter>Entities\Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="SceneIntro.h">
-      <Filter>Scenes\IntroScene</Filter>
-    </ClInclude>
-    <ClInclude Include="RedIntro_Map.h">
-      <Filter>Scenes\IntroScene</Filter>
-    </ClInclude>
-    <ClInclude Include="CompleteScreen.h">
-      <Filter>Scenes</Filter>
+    <ClInclude Include="ExitItem.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -368,9 +359,6 @@
     <ClCompile Include="ButtressItem.cpp">
       <Filter>Entities\Obstacles</Filter>
     </ClCompile>
-    <ClCompile Include="SpearItem.cpp">
-      <Filter>Entities\Obstacles</Filter>
-    </ClCompile>
     <ClCompile Include="Column_OutItem.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
@@ -404,14 +392,8 @@
     <ClCompile Include="StarWeapon.cpp">
       <Filter>Entities\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="SceneIntro.cpp">
-      <Filter>Scenes\IntroScene</Filter>
-    </ClCompile>
-    <ClCompile Include="RedIntro_Map.cpp">
-      <Filter>Scenes\IntroScene</Filter>
-    </ClCompile>
-    <ClCompile Include="CompleteScreen.cpp">
-      <Filter>Scenes</Filter>
+    <ClCompile Include="SpearItem.cpp">
+      <Filter>Entities\Obstacles</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

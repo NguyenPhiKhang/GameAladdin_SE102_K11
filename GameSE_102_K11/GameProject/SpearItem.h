@@ -2,11 +2,12 @@
 #define _SPEARITEM_H
 
 #include "Entity.h"
+#include "Audio.h"
 
 class SpearItem : public Entity
 {
 private:
-
+	bool isSound;
 public:
 	SpearItem(float x, float y);
 	~SpearItem();

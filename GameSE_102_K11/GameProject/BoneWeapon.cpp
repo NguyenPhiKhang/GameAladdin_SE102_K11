@@ -50,20 +50,38 @@ void BoneWeapon::update(std::vector<Entity*>* listObj, float frameTime)
 				{
 					spriteData.y += min_ty * dy + ny * 0.4f;
 					velocity.y = -velocity.y;
+					Audio::getInstance()->Play(MUSIC_BONE);
 				}
-				else spriteData.y += dy;
+				else
+				{
+					spriteData.y += dy;
+					Audio::getInstance()->Play(MUSIC_BONE);
+				}
 			}
-			else spriteData.y += dy;
+			else
+			{
+				spriteData.y += dy;
+				Audio::getInstance()->Play(MUSIC_BONE);
+			}
 			if (obj->entity->getKind() == WALL)
 			{
 				if (nx != 0)
 				{
 					spriteData.x += min_tx * dx + nx * 0.4f;
 					velocity.x = -velocity.x;
+					Audio::getInstance()->Play(MUSIC_BONE);
 				}
-				else spriteData.x += dx;
+				else
+				{
+					spriteData.x += dx;
+					Audio::getInstance()->Play(MUSIC_BONE);
+				}
 			}
-			else spriteData.x += dx;
+			else
+			{
+				spriteData.x += dx;
+				Audio::getInstance()->Play(MUSIC_BONE);
+			}
 		}
 	}
 
@@ -112,5 +130,6 @@ void BoneWeapon::setState(int state)
 		setCurrentFrame(0);
 		frameDelay = 0.1f;
 		health = .0f;
+		
 	}
 }
