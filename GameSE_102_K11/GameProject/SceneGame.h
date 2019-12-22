@@ -10,6 +10,8 @@
 #include "HUD_Info.h"
 #include "appleWeapon.h"
 #include "FireIdle.h"
+#include "SceneIntro.h"
+#include "RedIntro_Map.h"
 
 class SceneGame: public Game
 {
@@ -48,6 +50,8 @@ private:
 
 	FireIdle* fire;
 
+	SceneIntro* sceneIntro;
+	RedIntro_Map* redIntro;
 public:
 	SceneGame();
 	~SceneGame();
@@ -59,6 +63,7 @@ public:
 	void ResetObjectMap();
 
 	void setMapCurrent(eType type, bool isChange = false);
+	int getMapCurrent() { return mapCurrent; }
 
 
 	void CheckCollision();

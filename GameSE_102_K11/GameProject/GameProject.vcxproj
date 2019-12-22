@@ -141,6 +141,7 @@
     <ClInclude Include="ChainItem.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Column_OutItem.h" />
+    <ClInclude Include="CompleteScreen.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="dsutil.h" />
@@ -167,7 +168,9 @@
     <ClInclude Include="PeddlerItem.h" />
     <ClInclude Include="PillarItem.h" />
     <ClInclude Include="PodiumItem.h" />
+    <ClInclude Include="RedIntro_Map.h" />
     <ClInclude Include="SceneGame.h" />
+    <ClInclude Include="SceneIntro.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SkeletonItem.h" />
     <ClInclude Include="SpearItem.h" />
@@ -195,6 +198,7 @@
     <ClCompile Include="ChainItem.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Column_OutItem.cpp" />
+    <ClCompile Include="CompleteScreen.cpp" />
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="dsutil.cpp" />
     <ClCompile Include="dxutil.cpp" />
@@ -219,7 +223,9 @@
     <ClCompile Include="PeddlerItem.cpp" />
     <ClCompile Include="PillarItem.cpp" />
     <ClCompile Include="PodiumItem.cpp" />
+    <ClCompile Include="RedIntro_Map.cpp" />
     <ClCompile Include="SceneGame.cpp" />
+    <ClCompile Include="SceneIntro.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SkeletonItem.cpp" />
     <ClCompile Include="SpearItem.cpp" />

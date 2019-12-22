@@ -10,7 +10,9 @@ BossJafar::BossJafar(float x, float y, Aladdin* aladdin, std::vector<Entity*>* l
 	health = 160.0f;
 	this->listWeaponOfEnemy = listWeaponOfEnemy;
 	isSpray = false;
-
+	if (QueryPerformanceFrequency(&timerFreq) == false)
+		DebugOut("Error initializing high resolution timer");
+	QueryPerformanceCounter(&timeStart);
 }
 
 BossJafar::~BossJafar()
@@ -51,18 +53,40 @@ void BossJafar::update(std::vector<Entity*>* listObj, float frameTime)
 
 	if (state == JAFAR_BOSS)
 	{
+		if (checkAABB(aladdin)||lA>690.0f||rA<140.0f)
+		{
+			setFrames(0, 0);
+			setCurrentFrame(0);
+		}
+		else {
+			setFrames(0, 7);
+		}
+
 		if (currentFrame == 6)
 		{
-			frameDelay = 3.0f;
-			StarWeapon* star = new StarWeapon(spriteData.x + 103.0f, spriteData.y + 26.0f);
-			star->flipHorizontal((spriteData.flipHorizontal) ? false : true);
-			star->setVelocityX((spriteData.flipHorizontal) ? -300.0f : 300.0f);
-			listWeaponOfEnemy->push_back(star);
+			frameDelay = 3.5f;
+			QueryPerformanceCounter(&timeEnd);
+			if (((float)(timeEnd.QuadPart - timeStart.QuadPart) / timerFreq.QuadPart) > 0.1f)
+			{
+				StarWeapon* star = new StarWeapon((!spriteData.flipHorizontal)?spriteData.x + 103.0f: spriteData.x - 17.0f, spriteData.y + 26.0f);
+				star->flipHorizontal((spriteData.flipHorizontal) ? false : true);
+				if (lA > 320 && lA<420)
+				{
+					star->setVelocityX((spriteData.flipHorizontal) ? 400.0f : -400.0f);
+					star->setVelocityY(600.0f);
+				}
+				else {
+					star->setVelocityX((spriteData.flipHorizontal) ? -300.0f : 300.0f);
+					star->setVelocityY(100.0f);
+				}
+				listWeaponOfEnemy->push_back(star);
+				timeStart = timeEnd;
+			}
 		}
 		else
 			if (currentFrame == 0)
-				frameDelay = 0.5f;
-			else frameDelay = 0.15f;
+				frameDelay = 0.3f;
+			else frameDelay = 0.12f;
 		//if()
 	}
 
@@ -83,7 +107,6 @@ void BossJafar::update(std::vector<Entity*>* listObj, float frameTime)
 			listWeaponOfEnemy->push_back(fire);
 			isSpray = true;
 		}
-
 	}
 	//DebugOut("HEALTH: %.2f\n", health);
 }

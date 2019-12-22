@@ -29,7 +29,7 @@ void FireRun::update(std::vector<Entity*>* listObj, float frameTime)
 	list_floor.clear();
 
 	for (UINT i = 0; i < listObj->size(); i++)
-		if (listObj->at(i)->getKind() == eKind::FLOOR|| listObj->at(i)->getKind() == eKind::WALL)
+		if (listObj->at(i)->getType() == eType::GROUND|| listObj->at(i)->getKind() == eKind::WALL)
 			list_floor.push_back(listObj->at(i));
 
 	CalcPotentialCollisions(&list_floor, coEvents, frameTime);
@@ -45,7 +45,7 @@ void FireRun::update(std::vector<Entity*>* listObj, float frameTime)
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
 		for (auto& coEnt : coEventsResult)
 		{
-			if (coEnt->entity->getKind() == eKind::FLOOR)
+			if (coEnt->entity->getType()==eType::GROUND)
 			{
 				if (ny == -1)
 				{

@@ -15,6 +15,9 @@ private:
 	FireIdle* fire1;	// lửa kế bên snake
 	FireIdle* fire2;
 	bool isSpray;
+	LARGE_INTEGER timerFreq;
+	LARGE_INTEGER timeStart;    // Performance Counter start value
+	LARGE_INTEGER timeEnd;      // Performance Counter end value
 
 	std::vector<Entity*>* listWeaponOfEnemy;
 public:
