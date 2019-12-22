@@ -41,7 +41,9 @@ const char ALADDIN_HURT_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_hurt.
 const char ALADDIN_TOUCHGROUND_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_touchground.png";
 const char ALADDIN_SHAKE_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_shake.png";
 const char ALADDIN_CARRIED_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_carried.png";
+const char ALADDIN_RUN_COMPLETED_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_run_completed.png";
 const char ABU_TEXTURE[] = "Resources\\Aladdin\\animation_abu.png";
+const char ABU_RUN_TEXTURE[] = "Resources\\Aladdin\\animation_abu_run.png";
 
 // ITEM + ENEMY
 const char APPLEITEM_TEXTURE[] = "Resources\\Items\\AppleItems\\appleItem.png";
@@ -105,7 +107,9 @@ const char EXPLOSIVE_BONE_TEXTURE[] = "Resources\\Effect\\ExplosiveBone.png";
 const char INTRO_MENU_TEXTURE[] = "Resources\\Intro\\Menu.png";
 const char INTRO_SELECTOR_TEXTURE[] = "Resources\\Intro\\Selector.png";
 const char MEMBER_TEXTURE[] = "Resources\\Intro\\Member.png";
-
+const char SULTAN_INTRO_TEXTURE[] = "Resources\\Intro\\sultanIntro.png";
+const char JAFAR_INTRO_TEXTURE[] = "Resources\\Intro\\jafarIntro.png";
+const char LEVEL_COMPLETE_TEXTURE[] = "Resources\\Intro\\Level_Complete.png";
 
 // FONT
 const char FONT_TOTAL_TEXTURE[] = "Resources\\Font\\font_TOTAL.png";

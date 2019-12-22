@@ -107,7 +107,6 @@ void BossJafar::update(std::vector<Entity*>* listObj, float frameTime)
 			listWeaponOfEnemy->push_back(fire);
 			isSpray = true;
 		}
-
 	}
 	//DebugOut("HEALTH: %.2f\n", health);
 }

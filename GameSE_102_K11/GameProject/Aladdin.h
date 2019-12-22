@@ -48,6 +48,7 @@ private:
 	bool	isClimbing;
 	bool	isHurt;
 	bool	isDeath;
+	bool	isCompletedLevel;
 
 	float yChain;		// y của dây xích để ngăn chặn đi tiếp
 	int	hChain;	// height của dây xích 
@@ -64,7 +65,9 @@ private:
 
 	int CountShake;
 
-	Image* abu;
+	Entity* abuFan;
+	Entity* abuRun;
+	Image* imgCompleted;
 public:
 	std::vector<Entity*> WeaponApple;
 	SwordWeapon* sword;
@@ -102,6 +105,9 @@ public:
 
 	bool getIsDeath() { return isDeath; }
 	void setIsDeath(bool is) { this->isDeath = is; }
+
+	bool getIsCompletedLevel() { return isCompletedLevel; }
+	void setIsCompletedLevel(bool is) { this->isCompletedLevel = is; }
 };
 
 #endif
