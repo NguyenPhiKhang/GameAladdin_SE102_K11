@@ -1,69 +1,14 @@
-﻿  jsoncpp.cpp
-  Aladdin.cpp
-  AppleItem.cpp
-  appleWeapon.cpp
-  Audio.cpp
-  BarrierItem.cpp
-  BatItem.cpp
-  BoneWeapon.cpp
-  BossJafar.cpp
-  ButtressItem.cpp
-  Camera.cpp
-  ChainItem.cpp
-  Collision.cpp
-  Column_OutItem.cpp
-  debug.cpp
-  dsutil.cpp
-  dxutil.cpp
-  Entity.cpp
-  ExitItem.cpp
-  FireIdle.cpp
-  Generating Code...
-  Compiling...
-  FireRun.cpp
-  Game.cpp
-  GemItem.cpp
-  GenieItem.cpp
-  Graphics.cpp
-  Grid.cpp
-  Ground.cpp
-  HakimItem.cpp
-  Heart_BalloonItem.cpp
-  HUD_Info.cpp
-  Image.cpp
-  Input.cpp
-  Iron_StepItem.cpp
-  MapGame.cpp
-  NahbiItem.cpp
-  PeddlerItem.cpp
-  PillarItem.cpp
-  PodiumItem.cpp
-  RedIntro_Map.cpp
+﻿  Grid.cpp
   SceneGame.cpp
-  Generating Code...
-  Compiling...
-  SceneIntro.cpp
-  SceneManager.cpp
-  SkeletonItem.cpp
-  SpearItem.cpp
-  StallItem.cpp
-  StarWeapon.cpp
-  SwordWeapon.cpp
-  Text.cpp
-  Texture.cpp
-  TextureManager.cpp
-  VaseItem.cpp
-  WinMain.cpp
-  WoodItem.cpp
   Generating Code...
   GameProject.vcxproj -> \\Mac\Home\Documents\GitHub\GameAladdin_SE102_K11\GameSE_102_K11\Debug\GameProject.exe
 
 Project Performance Summary:
-    41156 ms  \\Mac\Home\Documents\GitHub\GameAladdin_SE102_K11\GameSE_102_K11\GameProject\GameProject.vcxproj   1 calls
-              41156 ms  Build                                      1 calls
+     3750 ms  \\Mac\Home\Documents\GitHub\GameAladdin_SE102_K11\GameSE_102_K11\GameProject\GameProject.vcxproj   1 calls
+               3750 ms  Build                                      1 calls
 
 Target Performance Summary:
-        0 ms  _CheckForInvalidConfigurationAndPlatform   1 calls
+        0 ms  AfterResourceCompile                       1 calls
         0 ms  PreLinkEvent                               1 calls
         0 ms  DoLinkOutputFilesMatch                     1 calls
         0 ms  MakeDirsForLink                            1 calls
@@ -74,7 +19,7 @@ Target Performance Summary:
         0 ms  ComputeManifestInputsTargets               1 calls
         0 ms  ComputeLinkInputsFromProject               1 calls
         0 ms  ComputeCLGeneratedLinkInputs               1 calls
-        0 ms  ComputeLinkSwitches                        1 calls
+        0 ms  ComputeLinkImportLibraryOutputsForClean    1 calls
         0 ms  ComputeCLOutputs                           1 calls
         0 ms  ComputeManifestGeneratedLinkerInputs       1 calls
         0 ms  ComputeRCGeneratedLinkInputs               1 calls
@@ -115,58 +60,58 @@ Target Performance Summary:
         0 ms  _Manifest                                  1 calls
         0 ms  FinalizeBuildStatus                        1 calls
         0 ms  MakeDirsForResourceCompile                 1 calls
-        0 ms  AfterResourceCompile                       1 calls
+        0 ms  Build                                      1 calls
         0 ms  _ClCompile                                 1 calls
+        0 ms  BuildGenerateSourcesTraverse               1 calls
         0 ms  InitializeBuildStatus                      1 calls
         0 ms  ResolveReferences                          1 calls
         0 ms  AfterResolveReferences                     1 calls
         0 ms  ResolveAssemblyReferences                  1 calls
         0 ms  ExpandSDKReferences                        1 calls
         0 ms  ResolveSDKReferences                       1 calls
+        0 ms  PrepareForBuild                            1 calls
         0 ms  SetCABuildNativeEnvironmentVariables       1 calls
         0 ms  _CheckWindowsSDKInstalled                  1 calls
+        0 ms  BeforeResourceCompile                      1 calls
         0 ms  PlatformPrepareForBuild                    1 calls
-        0 ms  BuildGenerateSourcesTraverse               1 calls
-        0 ms  GetResolvedWinMD                           1 calls
         0 ms  GetReferenceAssemblyPaths                  1 calls
         0 ms  GetFrameworkPaths                          1 calls
+        0 ms  ResolveProjectReferences                   1 calls
         0 ms  PrepareProjectReferences                   1 calls
         0 ms  _GetProjectReferenceTargetFrameworkProperties   1 calls
         0 ms  _SplitProjectReferencesByFileExistence     1 calls
-        0 ms  AssignProjectConfiguration                 1 calls
         0 ms  BeforeResolveReferences                    1 calls
         0 ms  _PrepareForReferenceResolution             1 calls
         0 ms  _PrepareForBuild                           1 calls
-        0 ms  SetBuildDefaultEnvironmentVariables        1 calls
-        0 ms  BeforeResourceCompile                      1 calls
+        0 ms  SetTelemetryEnvironmentVariables           1 calls
+        0 ms  GetResolvedWinMD                           1 calls
+        0 ms  PreBuildEvent                              1 calls
         0 ms  BeforeBuildGenerateSources                 1 calls
-        0 ms  BuildGenerateSources                       1 calls
-        0 ms  AfterClCompile                             1 calls
-        0 ms  SelectClCompile                            1 calls
-        0 ms  SelectCustomBuild                          1 calls
+        0 ms  BuildCompileTraverse                       1 calls
         0 ms  MakeDirsForCl                              1 calls
         0 ms  FixupCLCompileOptions                      1 calls
+        0 ms  WarnCompileDuplicatedFilename              1 calls
         0 ms  ComputeReferenceCLInput                    1 calls
         0 ms  ComputeCLInputPDBName                      1 calls
         0 ms  BeforeClCompile                            1 calls
-        0 ms  BuildCompileTraverse                       1 calls
-        0 ms  PreBuildEvent                              1 calls
-        0 ms  _BuildGenerateSourcesAction                1 calls
-        0 ms  Build                                      1 calls
-        0 ms  MakeDirsForMidl                            1 calls
-        0 ms  AfterBuildGenerateSources                  1 calls
-        0 ms  _Midl                                      1 calls
-        0 ms  _SelectedFiles                             1 calls
-        0 ms  AfterMidl                                  1 calls
-        0 ms  ComputeMIDLGeneratedCompileInputs          1 calls
+        0 ms  SelectClCompile                            1 calls
+        0 ms  BuildGenerateSources                       1 calls
         0 ms  AfterBuildGenerateSourcesEvent             1 calls
+        0 ms  _BuildGenerateSourcesAction                1 calls
+        0 ms  _Midl                                      1 calls
+        0 ms  AfterMidl                                  1 calls
+        0 ms  AfterClCompile                             1 calls
+        0 ms  ComputeMIDLGeneratedCompileInputs          1 calls
+        0 ms  MakeDirsForMidl                            1 calls
         0 ms  _Xsd                                       1 calls
-       16 ms  WarnCompileDuplicatedFilename              1 calls
-       16 ms  ResolveProjectReferences                   1 calls
+        0 ms  _SelectedFiles                             1 calls
+        0 ms  AfterBuildGenerateSources                  1 calls
+        0 ms  SelectCustomBuild                          1 calls
+       16 ms  SetBuildDefaultEnvironmentVariables        1 calls
        16 ms  CopyFileToFolders                          1 calls
-       16 ms  PrepareForBuild                            1 calls
-       16 ms  ComputeLinkImportLibraryOutputsForClean    1 calls
-       16 ms  SetTelemetryEnvironmentVariables           1 calls
+       16 ms  AssignProjectConfiguration                 1 calls
+       16 ms  ComputeLinkSwitches                        1 calls
        16 ms  _HandlePackageFileConflicts                1 calls
-      937 ms  Link                                       1 calls
-    40109 ms  ClCompile                                  1 calls
+       31 ms  _CheckForInvalidConfigurationAndPlatform   1 calls
+      890 ms  Link                                       1 calls
+     2750 ms  ClCompile                                  1 calls

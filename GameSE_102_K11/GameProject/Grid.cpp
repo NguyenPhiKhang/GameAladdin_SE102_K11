@@ -79,30 +79,6 @@ void Grid::ReloadGrid(Aladdin* aladdin)
 	}
 	ifs.close();
 	allObjects.clear();
-
-	/*std::ofstream ofs;
-	ofs.open("grid_items.txt");
-	for (int i = 0; i < 19; i++)
-	{
-		for (int j = 0; j < 29; j++)
-		{
-			if (!cells[i][j].empty())
-			{
-				ofs << "{\n'id_cells': " << i*29 + j + 1 << ",\n'array_items':[\n";
-				for(int x=0;x<cells[i][j].size();x++)
-				{
-					if(x==cells[i][j].size()-1)
-						ofs << "{\n'_id': " << cells[i][j].at(x)->getID() << ",\n'_type': " << cells[i][j].at(x)->getType() << ",\n'_x': " << cells[i][j].at(x)->getX()
-						<< ",\n'_y': " << cells[i][j].at(x)->getY() <<",\n'_width': "<< cells[i][j].at(x)->getWidth() <<",\n'_height': " << cells[i][j].at(x)->getHeight()<<"\n}";
-					else ofs << "{\n'id': " << cells[i][j].at(x)->getID() << ",\n'type': " << cells[i][j].at(x)->getType() << ",\n'x': " << cells[i][j].at(x)->getX()
-						<< ",\n'y': " << cells[i][j].at(x)->getY() << ",\n'_width': "<< cells[i][j].at(x)->getWidth() << ",\n'_height': "<< cells[i][j].at(x)->getHeight()<< "\n},";
-				}
-				ofs << "\n]\n},";
-			}
-		}
-	}
-	ofs.close();*/
-
 }
 
 Entity* Grid::GetNewEntity(int id, int type, float x, float y, int width, int height, Aladdin* aladdin)

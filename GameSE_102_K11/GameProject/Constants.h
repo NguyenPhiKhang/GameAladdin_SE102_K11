@@ -68,16 +68,16 @@ const char HAKIMRITEM_TEXTURE[] = "Resources\\Items\\Hakim\\hakim.png";
 //const char NAHBIITEM_TEXTURE[] = "Resources\\Items\\Nahbi\\nahbi.png";
 
 //Enemy Nahbi
-const char NAHBI_RUN_TEXTURE[] = "Resources\\Enemy\\Nahbi\\animation_nahbi_run1.png";
-const char NAHBI_LEAD_TEXTURE[] = "Resources\\Enemy\\Nahbi\\animation_nahbi_lead1.png";
-const char NAHBI_STAB_TEXTURE[] = "Resources\\Enemy\\Nahbi\\animation_nahbi_stab1.png";
-const char NAHBI_ATTACK_TEXTURE[] = "Resources\\Enemy\\Nahbi\\animation_nahbi_attack1.png";
-const char NAHBI_BEHIT_TEXTURE[] = "Resources\\Enemy\\Nahbi\\animation_nahbi_behit1.png";
+const char NAHBI_RUN_TEXTURE[] = "Resources\\Enemy\\Nahbi\\animation_nahbi_run.png";
+const char NAHBI_LEAD_TEXTURE[] = "Resources\\Enemy\\Nahbi\\animation_nahbi_lead.png";
+const char NAHBI_STAB_TEXTURE[] = "Resources\\Enemy\\Nahbi\\animation_nahbi_stab.png";
+const char NAHBI_ATTACK_TEXTURE[] = "Resources\\Enemy\\Nahbi\\animation_nahbi_attack.png";
+const char NAHBI_BEHIT_TEXTURE[] = "Resources\\Enemy\\Nahbi\\animation_nahbi_behit.png";
 
 //Enemy Hakim
-const char HAKIM_ATTACK_TEXTURE[] = "Resources\\Enemy\\Hakim\\animation_hakim_attack1.png";
-const char HAKIM_RUN_TEXTURE[] = "Resources\\Enemy\\Hakim\\animation_hakim_run1.png";
-const char HAKIM_BEHIT_TEXTURE[] = "Resources\\Enemy\\Hakim\\animation_hakim_behit1.png";
+const char HAKIM_ATTACK_TEXTURE[] = "Resources\\Enemy\\Hakim\\animation_hakim_attack.png";
+const char HAKIM_RUN_TEXTURE[] = "Resources\\Enemy\\Hakim\\animation_hakim_run.png";
+const char HAKIM_BEHIT_TEXTURE[] = "Resources\\Enemy\\Hakim\\animation_hakim_behit.png";
 const char HAKIM_IDLE_TEXTURE[] = "Resources\\Enemy\\Hakim\\animation_hakim_idle.png";
 
 //Enemy bat

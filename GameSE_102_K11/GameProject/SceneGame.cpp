@@ -433,11 +433,14 @@ void SceneGame::LoadMap(eType type, bool isChange)
 		camera->setPositionCam(0.0f, 192.0f);
 		oldXCam = camera->getXCamera();
 
-		grid->SetFile(OBJECT_GRID_MAP_JAFAR);
-		grid->ReloadGrid(aladdin);
+		if (isChange)
+		{
+			grid->SetFile(OBJECT_GRID_MAP_JAFAR);
+			grid->ReloadGrid(aladdin);
+		}
 
 		pillar_snake->setTextureManager(TextureManager::getIntance()->getTexture(eType::MAP_JAFAR_BACKGROUND));
-		posAladdin = D3DXVECTOR2(84.0f, 956.0f);
+		//posAladdin = D3DXVECTOR2(10.0f, 956.0f);
 		aladdin->setIsCompletedLevel(false);
 		aladdin->setXY(10.0f, 229.0f);
 		aladdin->setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_REVIVAL));
@@ -446,9 +449,9 @@ void SceneGame::LoadMap(eType type, bool isChange)
 		aladdin->setCurrentFrame(0);
 		aladdin->setState(eType::ALADDIN_REVIVAL);
 
+		aladdin->setHealth(100.0f);
 		if (isChange)
 		{
-			aladdin->setHealth(100.0f);
 			aladdin->setAppleCollect(50);
 			allGem = 3;
 			allScore = 0;
