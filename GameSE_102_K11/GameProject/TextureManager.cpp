@@ -80,6 +80,7 @@ void TextureManager::LoadResources()
 	addTexture(eType::ALADDIN_RUN_COMPLETED,	new CTexture(ALADDIN_RUN_COMPLETED_TEXTURE, 10, 50, 61));
 	addTexture(eType::ABU_FAN,					new CTexture(ABU_TEXTURE, 6, 68, 58));
 	addTexture(eType::ABU_RUN,					new CTexture(ABU_RUN_TEXTURE, 8, 52, 37));
+	addTexture(eType::ALADDIN_REVIVAL,			new CTexture(ALADDIN_REVIVAL_TEXTURE, 14, 77, 141));
 
 	// Enemy Nahbi
 	addTexture(eType::NAHBI_RUN,				new CTexture(NAHBI_RUN_TEXTURE, 8, 166, 73));

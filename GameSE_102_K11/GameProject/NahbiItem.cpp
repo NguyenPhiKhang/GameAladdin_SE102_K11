@@ -16,6 +16,8 @@ NahbiItem::NahbiItem(float x, float y, Aladdin* aladdin)
 	countLead = 0;
 	isSound = false;
 	isLoop = false;
+	isLoopFinish = true;
+	countLead = 0;
 }
 
 NahbiItem::~NahbiItem()
@@ -27,18 +29,8 @@ void NahbiItem::update(std::vector<Entity*>* listObj, float frameTime)
 {
 	Entity::update(listObj, frameTime);
 
-	if (currentFrame == 5)
-	{
-		countLead++;
-		if (countLead > 4)
-		{
-			isLoop = true;
-			countLead = 0;
-			sword->setVisible(false);
-		}
-		else { currentFrame = 1; }
-	}
-	
+
+
 	if (health == 0.0f && state == EXPLOSIVE_ENEMY)
 	{
 		if (currentFrame == 9)
@@ -91,10 +83,24 @@ void NahbiItem::update(std::vector<Entity*>* listObj, float frameTime)
 			if (((tE - bA) > 2 || (bE - tA) < -10) && state != NAHBI_LEAD)
 			{
 				setState(NAHBI_LEAD);
-				
+			}
+			if (state == NAHBI_LEAD)
+			{
+				if (currentFrame == 5 && countLead < 5)
+				{
+					currentFrame = 1;
+					countLead++;
+				}
+				else {
+					if (currentFrame == 5 && countLead >= 5)
+					{
+						currentFrame = 0;
+						countLead = 0;
+					}
+				}
 			}
 
-			if (state == NAHBI_LEAD && currentFrame == 1&&!isSound)
+			if (state == NAHBI_LEAD && currentFrame == 0&&!isSound)
 			{
 				isSound = true;
 				Audio::getInstance()->Play(MUSIC_NAHBI_LEAD);
@@ -244,6 +250,7 @@ void NahbiItem::setState(int state)
 		isAttack = false;
 		sword->setVisible(false);
 		Audio::getInstance()->Play(MUSIC_NAHBI_BEHIT);
+		countLead = 0;
 		break;
 	case NAHBI_LEAD:
 		setCurrentFrame(0);
@@ -253,6 +260,7 @@ void NahbiItem::setState(int state)
 		isAttack = false;
 		isLoop = true;
 		sword->setVisible(false);
+		countLead = 0;
 		break;
 	case NAHBI_ATTACK:
 		setCurrentFrame(0);
@@ -261,7 +269,9 @@ void NahbiItem::setState(int state)
 		frameDelay = 0.1f;
 		isAttack = true;
 		sword->setVisible(true);
-		Audio::getInstance()->Play(MUSIC_NAHBI_ATK);
+		if(!Audio::getInstance()->isPlaying(MUSIC_NAHBI_ATK))
+			Audio::getInstance()->Play(MUSIC_NAHBI_ATK);
+		countLead = 0;
 		break;
 	case NAHBI_STAB:
 		setCurrentFrame(0);
@@ -270,6 +280,7 @@ void NahbiItem::setState(int state)
 		frameDelay = 0.15f;
 		isAttack = true;
 		sword->setVisible(true);
+		countLead = 0;
 		break;
 	case NAHBI_RUN:
 		setCurrentFrame(0);
@@ -278,6 +289,7 @@ void NahbiItem::setState(int state)
 		frameDelay = 0.15f;
 		isAttack = false;
 		sword->setVisible(false);
+		countLead = 0;
 		break;
 	}
 }

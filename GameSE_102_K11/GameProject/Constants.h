@@ -39,6 +39,12 @@ const char ALADDIN_CLIMB_THROW_TEXTURE[] = "Resources\\Aladdin\\animation_aladdi
 const char ALADDIN_CLIMB_JUMP_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_climb_jump.png";
 const char ALADDIN_HURT_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_hurt.png";
 const char ALADDIN_TOUCHGROUND_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_touchground.png";
+const char ALADDIN_SHAKE_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_shake.png";
+const char ALADDIN_CARRIED_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_carried.png";
+const char ALADDIN_RUN_COMPLETED_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_run_completed.png";
+const char ALADDIN_REVIVAL_TEXTURE[] = "Resources\\Aladdin\\animation_aladdin_revival.png";
+const char ABU_TEXTURE[] = "Resources\\Aladdin\\animation_abu.png";
+const char ABU_RUN_TEXTURE[] = "Resources\\Aladdin\\animation_abu_run.png";
 
 // ITEM + ENEMY
 const char APPLEITEM_TEXTURE[] = "Resources\\Items\\AppleItems\\appleItem.png";
@@ -80,9 +86,9 @@ const char BAT_TEXTURE[] = "Resources\\Enemy\\Bat\\animation_bat.png";
 // BOSS
 const char BOSS_JAFAR_TEXTURE[] = "Resources\\Enemy\\Boss\\animation_jafar_boss.png";
 const char BOSS_SNAKE_TEXTURE[] = "Resources\\Enemy\\Boss\\animation_snake_boss.png";
-const char FIRE_IDLE_TEXTURE[]	= "Resources\\Enemy\\Boss\\animation_fireIDLE.png";
-const char FIRE_RUN_TEXTURE[]	= "Resources\\Enemy\\Boss\\animation_fireRun.png";
-const char STAR_TEXTURE[]		= "Resources\\Enemy\\Boss\\animation_star.png";
+const char FIRE_IDLE_TEXTURE[] = "Resources\\Enemy\\Boss\\animation_fireIDLE.png";
+const char FIRE_RUN_TEXTURE[] = "Resources\\Enemy\\Boss\\animation_fireRun.png";
+const char STAR_TEXTURE[] = "Resources\\Enemy\\Boss\\animation_star.png";
 
 //Bone
 const char BONE_TEXTURE[] = "Resources\\Enemy\\Skeleton\\animation_bone.png";
@@ -97,6 +103,14 @@ const char EXPLOSIVE_APPLE_WEAPON_TEXTURE[] = "Resources\\Effect\\Explosive_appl
 const char EXPLOSIVE_GENIE_TEXTURE[] = "Resources\\Effect\\ExplosiveGenie.png";
 const char EXPLOSIVE_ENEMY_TEXTURE[] = "Resources\\Effect\\ExplosiveEnemy.png";
 const char EXPLOSIVE_BONE_TEXTURE[] = "Resources\\Effect\\ExplosiveBone.png";
+
+//Intro
+const char INTRO_MENU_TEXTURE[] = "Resources\\Intro\\Menu.png";
+const char INTRO_SELECTOR_TEXTURE[] = "Resources\\Intro\\Selector.png";
+const char MEMBER_TEXTURE[] = "Resources\\Intro\\Member.png";
+const char SULTAN_INTRO_TEXTURE[] = "Resources\\Intro\\sultanIntro.png";
+const char JAFAR_INTRO_TEXTURE[] = "Resources\\Intro\\jafarIntro.png";
+const char LEVEL_COMPLETE_TEXTURE[] = "Resources\\Intro\\Level_Complete.png";
 
 // FONT
 const char FONT_TOTAL_TEXTURE[] = "Resources\\Font\\font_TOTAL.png";
@@ -144,7 +158,17 @@ const char MUSIC_JAFAR_BEHIT_WAV[] = "Resources\\Audio\\Music\\jafar_behit.wav";
 const char MUSIC_JAFAR_TRACTOR_WAV[] = "Resources\\Audio\\Music\\jafar_tractor.wav";
 const char MUSIC_BONE_WAV[] = "Resources\\Audio\\Music\\bone.wav";
 //const char MUSIC_ALADDIN_LANDING_WAV[] = "Resources\\Audio\\Music\\aladdin_landing.wav";
-
+const char MUSIC_MUNU_CHANGE_WAV[] = "Resources\\Audio\\Music\\menu_change.wav";
+const char MUSIC_MENU_SELECT_WAV[] = "Resources\\Audio\\Music\\menu_select.wav";
+const char MUSIC_MENU_WAV[] = "Resources\\Audio\\Music\\menu_music.wav";
+const char MUSIC_INTRO_WAV[] = "Resources\\Audio\\Music\\intro_map.wav";
+const char MUSIC_ABU_FAN_WAV[] = "Resources\\Audio\\Music\\abu_fan.wav";
+const char MUSIC_BOXING_WAV[] = "Resources\\Audio\\Music\\boxing_bell.wav";
+const char MUSIC_BOOM_HUG_WAV[] = "Resources\\Audio\\Music\\boom_hug.wav";
+const char MUSIC_REVIVAL_WAV[] = "Resources\\Audio\\Music\\revival.wav";
+const char MUSIC_FIRE_RUN_WAV[] = "Resources\\Audio\\Music\\fire_run.wav";
+const char MUSIC_FIRE_IDLE_WAV[] = "Resources\\Audio\\Music\\fire_idle.wav";
+const char MUSIC_JAFAR_LAUGH_WAV[] = "Resources\\Audio\\Music\\jafar_laugh.wav";
 
 // window
 const char CLASS_NAME[] = "ALADDIN";

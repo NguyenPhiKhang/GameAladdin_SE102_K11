@@ -253,7 +253,7 @@ public:
 			LimitRight = 2210;
 			break;
 		case 324:
-			LimitLeft = 1965;
+			LimitLeft = 2050;
 			LimitRight = 2164;
 			break;
 		case 325:
@@ -261,7 +261,7 @@ public:
 			LimitRight = 1680;
 			break;
 		case 326:
-			LimitLeft = 2170;
+			LimitLeft = 2185;
 			LimitRight = 2260;
 			break;
 		default:

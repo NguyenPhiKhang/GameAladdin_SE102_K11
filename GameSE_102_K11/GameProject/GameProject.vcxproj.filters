@@ -240,6 +240,12 @@
     <ClInclude Include="ExitItem.h">
       <Filter>Entities</Filter>
     </ClInclude>
+    <ClInclude Include="RedIntro_Map.h">
+      <Filter>Scenes\IntroScene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneIntro.h">
+      <Filter>Scenes\IntroScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -394,6 +400,12 @@
     </ClCompile>
     <ClCompile Include="SpearItem.cpp">
       <Filter>Entities\Obstacles</Filter>
+    </ClCompile>
+    <ClCompile Include="RedIntro_Map.cpp">
+      <Filter>Scenes\IntroScene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneIntro.cpp">
+      <Filter>Scenes\IntroScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

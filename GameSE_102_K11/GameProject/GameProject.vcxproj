@@ -167,7 +167,9 @@
     <ClInclude Include="PeddlerItem.h" />
     <ClInclude Include="PillarItem.h" />
     <ClInclude Include="PodiumItem.h" />
+    <ClInclude Include="RedIntro_Map.h" />
     <ClInclude Include="SceneGame.h" />
+    <ClInclude Include="SceneIntro.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SkeletonItem.h" />
     <ClInclude Include="SpearItem.h" />
@@ -219,7 +221,9 @@
     <ClCompile Include="PeddlerItem.cpp" />
     <ClCompile Include="PillarItem.cpp" />
     <ClCompile Include="PodiumItem.cpp" />
+    <ClCompile Include="RedIntro_Map.cpp" />
     <ClCompile Include="SceneGame.cpp" />
+    <ClCompile Include="SceneIntro.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SkeletonItem.cpp" />
     <ClCompile Include="SpearItem.cpp" />

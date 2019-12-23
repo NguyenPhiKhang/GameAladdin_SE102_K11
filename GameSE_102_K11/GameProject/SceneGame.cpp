@@ -14,6 +14,7 @@ SceneGame::SceneGame()
 	//	84.0f, 996.0f	 ||	24.0f, 894.0f
 	//	2085.0f, 108.0f	 ||	2025.0f, 48.0f
 	aladdin = new Aladdin(camera, tileMap);
+	posAladdin = D3DXVECTOR2(84.0f, 956.0f);
 	pillar_snake = new Image();
 	front_hurdle = new Image();
 
@@ -79,7 +80,7 @@ void SceneGame::update(float frameTime)
 			else {
 				if (redIntro->getIsFinished() && mapCurrent == JAFAR_INTRO)
 				{
-					setMapCurrent(eType::MAP_JAFAR);
+					setMapCurrent(eType::MAP_JAFAR, false);
 					redIntro->setIsFinished(false);
 				}
 			}
@@ -142,6 +143,12 @@ void SceneGame::update(float frameTime)
 				for (auto& enemy : listEnemies)
 				{
 					enemy->update(&listOthers, frameTime);
+					if (enemy->getType() == eType::JAFAR_BOSS && enemy->getHealth() == 0.0f)
+					{
+						/*if (Audio::getInstance()->isPlaying(eAudio::MUSIC_MAP_JAFAR))
+							Audio::getInstance()->Stop(eAudio::MUSIC_MAP_JAFAR);*/
+						return;
+					}
 				}
 				for (int i = 0; i < listWeaponOfEnemy.size(); i++)
 				{
@@ -358,40 +365,55 @@ void SceneGame::LoadMap(eType type, bool isChange)
 	switch (type)
 	{
 	case MAP_SULTAN:
-		camera->setPositionCam(24.0f, 894.0f);
+		//camera->setPositionCam(24.0f, 894.0f);
 		oldXCam = camera->getXCamera();
 		oldYCam = camera->getYCamera();
 
-		grid->SetFile(OBJECT_GRID_MAP_SULTAN);
-		grid->ReloadGrid(aladdin);
+		if (isChange)
+		{
+			grid->SetFile(OBJECT_GRID_MAP_SULTAN);
+			grid->ReloadGrid(aladdin);
+			posAladdin = D3DXVECTOR2(2079.0f, 60.0f);
+		}
 
 		front_hurdle->setTextureManager(TextureManager::getIntance()->getTexture(eType::MAP_SULTAN_FRONT_BG));
 
 		//aladdin->setXY(84.0f, 956.0f);
 		//aladdin->setXY(516.0f, 553.0f);
 		//aladdin->setXY(1440.0f, 250.0f);
-		aladdin->setXY(2079.0f, 60.0f);
+		//aladdin->setXY(2079.0f, 60.0f);
 		//aladdin->setXY(800.0f, 694.0f);
 
-		aladdin->setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_IDLE));
-		aladdin->setFrameDelay(0.12f);
-		aladdin->setFrames(0, 38);
+		aladdin->setXY(posAladdin.x, posAladdin.y);
+		camera->setPositionCam(posAladdin.x - 60, posAladdin.y - 60);
+		aladdin->setIsCompletedLevel(false);
+		aladdin->setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_REVIVAL));
+		aladdin->setFrameDelay(0.08f);
+		aladdin->setFrames(0, 13);
 		aladdin->setCurrentFrame(0);
-		aladdin->setState(eType::ALADDIN_IDLE);
+		aladdin->setState(eType::ALADDIN_REVIVAL);
 
+		aladdin->setHealth(100.0f);
 		if (isChange)
 		{
-			aladdin->setHealth(100.0f);
+			//aladdin->setHealth(100.0f);
 			aladdin->setAppleCollect(50);
 			allGem = 3;
 			allScore = 0;
+			//allChance = 2;
 		}
 
 		tileMap->LoadMap(eType::MAP_SULTAN);
 		if (!audio->isPlaying(eAudio::MUSIC_MAP_SULTAN))
+		{
+			Audio::getInstance()->StopAll();
 			audio->Play(eAudio::MUSIC_MAP_SULTAN, true);
+		}
 		if (audio->isPlaying(eAudio::MUSIC_MAP_JAFAR))
+		{
+			//Audio::getInstance()->StopAll();
 			audio->Stop(eAudio::MUSIC_MAP_JAFAR);
+		}
 
 		if (fire != NULL) safeDelete(fire);
 		break;
@@ -403,13 +425,14 @@ void SceneGame::LoadMap(eType type, bool isChange)
 		grid->ReloadGrid(aladdin);
 
 		pillar_snake->setTextureManager(TextureManager::getIntance()->getTexture(eType::MAP_JAFAR_BACKGROUND));
-
-		aladdin->setXY(8.0f, 200.0f);
-		aladdin->setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_IDLE));
-		aladdin->setFrameDelay(0.12f);
-		aladdin->setFrames(0, 38);
+		posAladdin = D3DXVECTOR2(84.0f, 956.0f);
+		aladdin->setIsCompletedLevel(false);
+		aladdin->setXY(10.0f, 229.0f);
+		aladdin->setTextureManager(TextureManager::getIntance()->getTexture(eType::ALADDIN_REVIVAL));
+		aladdin->setFrameDelay(0.08f);
+		aladdin->setFrames(0, 13);
 		aladdin->setCurrentFrame(0);
-		aladdin->setState(eType::ALADDIN_IDLE);
+		aladdin->setState(eType::ALADDIN_REVIVAL);
 
 		if (isChange)
 		{
@@ -421,12 +444,14 @@ void SceneGame::LoadMap(eType type, bool isChange)
 
 		tileMap->LoadMap(eType::MAP_JAFAR);
 		if (!audio->isPlaying(eAudio::MUSIC_MAP_JAFAR))
+		{
+			audio->StopAll();
 			audio->Play(eAudio::MUSIC_MAP_JAFAR, true);
+		}
 		if (audio->isPlaying(eAudio::MUSIC_MAP_SULTAN))
 			audio->Stop(eAudio::MUSIC_MAP_SULTAN);
 
 		fire = new FireIdle(0.0f, 0.0f);
-
 		break;
 	case SULTAN_INTRO:
 	case JAFAR_INTRO:
@@ -439,7 +464,8 @@ void SceneGame::LoadMap(eType type, bool isChange)
 		break;
 	}
 
-	ResetObjectMap();
+	if (isChange)
+		ResetObjectMap();
 }
 
 void SceneGame::ResetObjectMap()
@@ -480,6 +506,11 @@ void SceneGame::CheckCollisionWeapon(std::vector<Entity*> listEnt)
 					if (weaponApple->isCollitionObjectWithObject(entOther, frameTime))
 					{
 						appleWeapon* aWeapon = dynamic_cast<appleWeapon*>(weaponApple);
+						if (entOther->getKind() == eKind::WALL)
+						{
+							aWeapon->setState(eType::EXPLOSIVE_APPLE_WEAPON);
+							return;
+						}
 						switch (entOther->getType())
 						{
 						case HAKIM:
@@ -520,6 +551,8 @@ void SceneGame::CheckCollisionWeapon(std::vector<Entity*> listEnt)
 							if (entOther->getHealth() > 0.0f)
 							{
 								entOther->setHealth(entOther->getHealth() - 5);
+								Audio::getInstance()->Play(MUSIC_GENIE_SMOKE);
+								Audio::getInstance()->Play(MUSIC_JAFAR_BEHIT);
 							}
 							break;
 						}
@@ -565,7 +598,9 @@ void SceneGame::CheckCollisionWeapon(std::vector<Entity*> listEnt)
 					case SKELETON:
 						if (listEnt[i]->getHealth() == 100.0f)
 							listEnt[i]->setHealth(50.0f);
-						else listEnt[i]->setState(eType::EXPLOSIVE_ENEMY);
+						else 
+							if(listEnt[i]->getState() != EXPLOSIVE_ENEMY)
+								listEnt[i]->setState(eType::EXPLOSIVE_ENEMY);
 						break;
 					case BONE:
 						if (listEnt[i]->getHealth() == 100.0f || listEnt[i]->getFinished() == false)
@@ -619,6 +654,7 @@ void SceneGame::CheckCollisionAladdinWithItem()
 					break;
 				case eType::VASE:
 					listItems[i]->setState(eType::VASE);
+					posAladdin = D3DXVECTOR2(listItems[i]->getX() - 24, listItems[i]->getY() - 107);
 					wasCollision = true;
 					break;
 				}
@@ -653,6 +689,7 @@ void SceneGame::CheckCollisionAladdinWithItem()
 					break;
 				case eType::VASE:
 					listItems[i]->setState(eType::VASE);
+					posAladdin = D3DXVECTOR2(listItems[i]->getX() - 24, listItems[i]->getY() - 107);
 					wasCollision = true;
 					break;
 				}
@@ -753,6 +790,10 @@ void SceneGame::CheckCollisionAladdinWithEnemy()
 					}
 					else
 					{
+						if (e->entity->getType() == FIRE_RUN)
+						{
+							Audio::getInstance()->Play(MUSIC_FIRE_RUN);
+						}
 						aladdin->setState(ALADDIN_HURT);
 						return; // giảm chi phí duyệt, vì nếu có va chạm thì cũng đang untouchable
 					}
@@ -813,6 +854,8 @@ void SceneGame::CheckCollisionWithPodiumFire()
 							isTouchPodiumFire = true;
 							if (!aladdin->isUntouchable())
 								aladdin->setState(ALADDIN_HURT);
+							
+							Audio::getInstance()->Play(MUSIC_FIRE_IDLE);
 							break;
 						}
 					}

@@ -3,6 +3,7 @@
 
 #include "Image.h"
 #include "Input.h"
+#include "Audio.h"
 
 class RedIntro_Map
 {

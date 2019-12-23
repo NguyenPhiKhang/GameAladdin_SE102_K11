@@ -7,6 +7,7 @@
 #include "AppleItem.h"
 #include "SwordWeapon.h"
 #include "appleWeapon.h"
+#include "Audio.h"
 
 
 namespace aladdinNS {
@@ -49,6 +50,8 @@ private:
 	bool	isHurt;
 	bool	isDeath;
 	bool	isCompletedLevel;
+	bool	isSound;
+	bool	isRevival;
 
 	float yChain;		// y của dây xích để ngăn chặn đi tiếp
 	int	hChain;	// height của dây xích 

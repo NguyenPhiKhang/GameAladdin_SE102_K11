@@ -16,6 +16,7 @@ private:
 	bool isSound;
 	int countLead;
 	bool isLoop;
+	bool isLoopFinish;
 public:
 	NahbiItem(float x, float y, Aladdin* aladdin);
 	~NahbiItem();

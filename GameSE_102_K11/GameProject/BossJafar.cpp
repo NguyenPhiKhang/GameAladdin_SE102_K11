@@ -7,7 +7,7 @@ BossJafar::BossJafar(float x, float y, Aladdin* aladdin, std::vector<Entity*>* l
 	this->aladdin = aladdin;
 	kind = eKind::ENEMY;
 	type = eType::JAFAR_BOSS;
-	health = 160.0f;
+	health = 30.0f;
 	this->listWeaponOfEnemy = listWeaponOfEnemy;
 	isSpray = false;
 	if (QueryPerformanceFrequency(&timerFreq) == false)
@@ -24,91 +24,118 @@ BossJafar::~BossJafar()
 void BossJafar::update(std::vector<Entity*>* listObj, float frameTime)
 {
 	Entity::update(listObj, frameTime);
-	if (state == SNAKE_BOSS)
+	if (health != 0.0f)
 	{
-		fire1->update(listObj, frameTime);
-		fire2->update(listObj, frameTime);
-	}
-	float lA, tA, bA, rA;
-	aladdin->getBoundingBox(lA, tA, rA, bA);
-	float lE, tE, bE, rE;
-	getBoundingBox(lE, tE, rE, bE);
-
-	if ((lA - lE) <= 0)
-	{
-		if (spriteData.flipHorizontal == false)
-			spriteData.flipHorizontal = true;
-	}
-	else {
-		if (spriteData.flipHorizontal == true)
-			spriteData.flipHorizontal = false;
-	}
-	//if(he)
-	if (health < 110.0f && state != SNAKE_BOSS)
-	{
-		setState(SNAKE_BOSS);
-		fire1 = new FireIdle(380.0f, 294.0f);
-		fire2 = new FireIdle(411.0f, 294.0f);
-	}
-
-	if (state == JAFAR_BOSS)
-	{
-		if (checkAABB(aladdin)||lA>690.0f||rA<140.0f)
+		if (state == SNAKE_BOSS)
 		{
-			setFrames(0, 0);
-			setCurrentFrame(0);
+			fire1->update(listObj, frameTime);
+			fire2->update(listObj, frameTime);
+		}
+		float lA, tA, bA, rA;
+		aladdin->getBoundingBox(lA, tA, rA, bA);
+		float lE, tE, bE, rE;
+		getBoundingBox(lE, tE, rE, bE);
+
+		if ((lA - lE) <= 0)
+		{
+			if (spriteData.flipHorizontal == false)
+				spriteData.flipHorizontal = true;
 		}
 		else {
-			setFrames(0, 7);
+			if (spriteData.flipHorizontal == true)
+				spriteData.flipHorizontal = false;
+		}
+		//if(he)
+		if (health < 110.0f && state != SNAKE_BOSS)
+		{
+			setState(SNAKE_BOSS);
+			fire1 = new FireIdle(380.0f, 294.0f);
+			fire2 = new FireIdle(411.0f, 294.0f);
 		}
 
-		if (currentFrame == 6)
+		if (state == JAFAR_BOSS)
 		{
-			frameDelay = 3.5f;
-			QueryPerformanceCounter(&timeEnd);
-			if (((float)(timeEnd.QuadPart - timeStart.QuadPart) / timerFreq.QuadPart) > 0.1f)
+			if (checkAABB(aladdin) || lA > 690.0f || rA < 140.0f)
 			{
-				StarWeapon* star = new StarWeapon((!spriteData.flipHorizontal)?spriteData.x + 103.0f: spriteData.x - 17.0f, spriteData.y + 26.0f);
-				star->flipHorizontal((spriteData.flipHorizontal) ? false : true);
-				if (lA > 320 && lA<420)
+				setFrames(0, 0);
+				setCurrentFrame(0);
+			}
+			else {
+				setFrames(0, 7);
+			}
+
+			if (currentFrame == 6)
+			{
+				frameDelay = 3.5f;
+				QueryPerformanceCounter(&timeEnd);
+				if (((float)(timeEnd.QuadPart - timeStart.QuadPart) / timerFreq.QuadPart) > 0.1f)
 				{
-					star->setVelocityX((spriteData.flipHorizontal) ? 400.0f : -400.0f);
-					star->setVelocityY(600.0f);
+					if (!aladdin->isUntouchable())
+					{
+						StarWeapon* star = new StarWeapon((!spriteData.flipHorizontal) ? spriteData.x + 103.0f : spriteData.x - 17.0f, spriteData.y + 26.0f);
+
+						star->flipHorizontal((spriteData.flipHorizontal) ? false : true);
+						if (lA > 320 && lA < 420)
+						{
+							/*star->setVelocityX((spriteData.flipHorizontal) ? 400.0f : -400.0f);
+							star->setVelocityY(600.0f);*/
+							star->flag = 1;
+
+							star->setDX(!(spriteData.flipHorizontal) ? (lA - star->getX()) / 15.0f : (lA - star->getX()) / 15.0f);
+							star->setDY((tA - star->getY()) / 15.0f);
+
+						}
+						else if (lA >= 420 && lA < 520)
+						{
+							star->flag = 1;
+
+							star->setDX(!(spriteData.flipHorizontal) ? (rA - 30 - star->getX()) / 15.0f : (rA - 30 - star->getX()) / 15.0f);
+							star->setDY((tA - star->getY()) / 15.0f);
+						}
+						else
+						{
+							star->setVelocityX((spriteData.flipHorizontal) ? -300.0f : 300.0f);
+							star->setVelocityY(100.0f);
+						}
+						listWeaponOfEnemy->push_back(star);
+					}
+					timeStart = timeEnd;
 				}
-				else {
-					star->setVelocityX((spriteData.flipHorizontal) ? -300.0f : 300.0f);
-					star->setVelocityY(100.0f);
-				}
-				listWeaponOfEnemy->push_back(star);
-				timeStart = timeEnd;
+			}
+			else
+				if (currentFrame == 0)
+					frameDelay = 0.3f;
+				else frameDelay = 0.12f;
+			//if()
+		}
+
+		if (state == SNAKE_BOSS)
+		{
+			if (currentFrame == 8)
+			{
+				frameDelay = 0.25f;
+				if (isSpray)
+					isSpray = false;
+			}
+			else frameDelay = 0.12f;
+			if (currentFrame == 10 && !isSpray)
+			{
+				Entity* fire = new FireRun((!spriteData.flipHorizontal) ? 370.0f : 356.0f, 297.0f);
+				fire->setVelocityX((!spriteData.flipHorizontal) ? 100.0f : -100.0f);
+				fire->flipHorizontal(spriteData.flipHorizontal);
+				listWeaponOfEnemy->push_back(fire);
+				isSpray = true;
 			}
 		}
-		else
-			if (currentFrame == 0)
-				frameDelay = 0.3f;
-			else frameDelay = 0.12f;
-		//if()
 	}
-
-	if (state == SNAKE_BOSS)
+	else
 	{
-		if (currentFrame == 8)
-		{
-			frameDelay = 0.25f;
-			if (isSpray)
-				isSpray = false;
-		}
-		else frameDelay = 0.12f;
-		if (currentFrame == 10 && !isSpray)
-		{
-			Entity* fire = new FireRun((!spriteData.flipHorizontal) ? 370.0f : 356.0f, 297.0f);
-			fire->setVelocityX((!spriteData.flipHorizontal) ? 100.0f : -100.0f);
-			fire->flipHorizontal(spriteData.flipHorizontal);
-			listWeaponOfEnemy->push_back(fire);
-			isSpray = true;
-		}
+		//Sleep(500);
+		Audio::getInstance()->StopAll();
+		if (!Audio::getInstance()->isPlaying(MUSIC_EXIT))
+			Audio::getInstance()->Play(MUSIC_EXIT);
+		aladdin->setState(eType::ALADDIN_RUN_COMPLETED);
 	}
-	//DebugOut("HEALTH: %.2f\n", health);
 }
 
 void BossJafar::getBoundingBox(float& left, float& top, float& right, float& bottom)

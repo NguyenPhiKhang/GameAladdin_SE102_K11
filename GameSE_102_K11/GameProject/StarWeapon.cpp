@@ -20,7 +20,15 @@ StarWeapon::~StarWeapon()
 
 void StarWeapon::update(std::vector<Entity*>* listObj, float frameTime)
 {
-	Entity::update(listObj, frameTime);
+	if (flag == 0)
+		Entity::update(listObj, frameTime);
+	else
+	{
+		spriteData.x += dx;
+		spriteData.y += dy;
+		Image::update(frameTime);
+	}
+
 	if (health == 0.0f && state == EXPLOSIVE_BONE)
 	{
 		if (currentFrame == 3)

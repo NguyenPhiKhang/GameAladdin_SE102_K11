@@ -52,6 +52,8 @@ private:
 
 	SceneIntro* sceneIntro;
 	RedIntro_Map* redIntro;
+
+	D3DXVECTOR2 posAladdin;
 public:
 	SceneGame();
 	~SceneGame();
@@ -62,8 +64,9 @@ public:
 	void LoadMap(eType type, bool isChange = false);
 	void ResetObjectMap();
 
-	void setMapCurrent(eType type, bool isChange = false);
+	void setMapCurrent(eType type, bool isChange = true);
 	int getMapCurrent() { return mapCurrent; }
+	int getAllChance() { return allChance; }
 
 
 	void CheckCollision();

@@ -22,6 +22,8 @@ void RedIntro_Map::LoadIntroMap(int state)
 	imgIntro->setCurrentFrame(0);
 	imgIntro->setFrameDelay(0.15f);
 	QueryPerformanceCounter(&timeStart);
+	Audio::getInstance()->StopAll();
+	Audio::getInstance()->Play(MUSIC_INTRO);
 }
 
 void RedIntro_Map::update(float frameTime)
@@ -32,6 +34,7 @@ void RedIntro_Map::update(float frameTime)
 	{
 		isFinished = true;
 		Input::getInstance()->keyUp(13);
+		Audio::getInstance()->StopAll();
 	}
 }
 

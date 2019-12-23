@@ -25,9 +25,10 @@ SceneIntro::~SceneIntro()
 
 void SceneIntro::initialize()
 {
+	Audio::getInstance()->StopAll();
 	Menu->setTextureManager(TextureManager::getIntance()->getTexture(eType::MENU));
 	Selector->setTextureManager(TextureManager::getIntance()->getTexture(eType::SELECTOR));
-	
+	Audio::getInstance()->Play(MUSIC_MENU,true);
 	Selector->setX(77);
 	Selector->setY(125);
 }
@@ -50,6 +51,7 @@ void SceneIntro::update(float frameTime)
 		{
 			if (Selector->getY() == 141)
 			{
+				Audio::getInstance()->Play(MUSIC_SELECTOR);
 				Selector->setY(125);
 				selected = 0;
 			}
@@ -60,12 +62,14 @@ void SceneIntro::update(float frameTime)
 			{
 				Selector->setY(141);
 				selected = 1;
+				Audio::getInstance()->Play(MUSIC_SELECTOR);
 			}
 		}
 		if (Input::getInstance()->isKeyDown(VK_RETURN) && selected == 0)
 		{
 			isMoveMap = true;
 			Input::getInstance()->keyUp(13);
+			Audio::getInstance()->Play(MUSIC_CHANGE);
 		}
 		if (Input::getInstance()->isKeyDown(VK_RETURN) && selected == 1)
 		{
@@ -75,6 +79,7 @@ void SceneIntro::update(float frameTime)
 			isMember = true;
 			selected = 2;
 			Input::getInstance()->keyUp(13);
+			Audio::getInstance()->Play(MUSIC_CHANGE);
 		}
 	}
 	else {
@@ -89,6 +94,7 @@ void SceneIntro::update(float frameTime)
 				Selector->setX(73);
 				Selector->setY(125);
 				Input::getInstance()->keyUp(13);
+				Audio::getInstance()->Play(MUSIC_CHANGE);
 			}
 		}
 	}

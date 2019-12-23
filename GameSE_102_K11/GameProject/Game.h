@@ -117,6 +117,7 @@ public:
 
 	virtual void setMapCurrent(eType type, bool isChange=false) = 0;
 	virtual int getMapCurrent() = 0;
+	virtual int getAllChance() = 0;
 };
 
 #endif

@@ -2,6 +2,7 @@
 #define _FIRE_RUN_H
 
 #include "Entity.h"
+#include "Audio.h"
 
 class FireRun: public Entity
 {
