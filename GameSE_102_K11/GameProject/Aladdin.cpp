@@ -1051,7 +1051,7 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 			spriteData.x += dx;
 			if (state == ALADDIN_RUN_COMPLETED)
 			{
-				if (spriteData.x < 0)
+				if (spriteData.x < 0 || Input::getInstance()->isKeyDown(VK_RETURN))
 				{
 					if (gamePtr->getMapCurrent() == eType::MAP_SULTAN)
 						gamePtr->setMapCurrent(eType::JAFAR_INTRO);
@@ -1066,42 +1066,50 @@ void Aladdin::update(float frameTime, Game* gamePtr, std::vector<Entity*>* coEnt
 	}
 	else
 	{
-		abuFan->update(frameTime);
-		if (abuFan->getCurrentFrame() == 3)
+		if (!Input::getInstance()->isKeyDown(VK_RETURN))
 		{
-			if (!Audio::getInstance()->isPlaying(MUSIC_ABU_FAN))
-				Audio::getInstance()->Play(MUSIC_ABU_FAN);
-		}
-
-		if (state == ALADDIN_SHAKE)
-		{
-			if (currentFrame == 8 && CountShake < 8)
+			abuFan->update(frameTime);
+			if (abuFan->getCurrentFrame() == 3)
 			{
-				setFrames(2, 8);
-				CountShake++;
+				if (!Audio::getInstance()->isPlaying(MUSIC_ABU_FAN))
+					Audio::getInstance()->Play(MUSIC_ABU_FAN);
+			}
+
+			if (state == ALADDIN_SHAKE)
+			{
+				if (currentFrame == 8 && CountShake < 8)
+				{
+					setFrames(2, 8);
+					CountShake++;
+				}
+				else {
+					if (currentFrame == 8 && CountShake >= 8)
+					{
+						CountShake = 0;
+						setState(eType::ALADDIN_CARRIED);
+					}
+				}
 			}
 			else {
-				if (currentFrame == 8 && CountShake >= 8)
+				if (currentFrame == 18 && CountShake < 10)
 				{
-					CountShake = 0;
-					setState(eType::ALADDIN_CARRIED);
+					setFrames(15, 18);
+					CountShake++;
+				}
+				else {
+					if (currentFrame == 18 && CountShake >= 10)
+					{
+						isDeath = false;
+						CountShake = 0;
+						gamePtr->setMapCurrent((eType)gamePtr->getMapCurrent(), gamePtr->getAllChance() < 0 ? true : false);
+					}
 				}
 			}
 		}
 		else {
-			if (currentFrame == 18 && CountShake < 10)
-			{
-				setFrames(15, 18);
-				CountShake++;
-			}
-			else {
-				if (currentFrame == 18 && CountShake >= 10)
-				{
-					isDeath = false;
-					CountShake = 0;
-					gamePtr->setMapCurrent((eType)gamePtr->getMapCurrent(), gamePtr->getAllChance() < 0 ? true : false);
-				}
-			}
+			isDeath = false;
+			CountShake = 0;
+			gamePtr->setMapCurrent((eType)gamePtr->getMapCurrent(), gamePtr->getAllChance() < 0 ? true : false);
 		}
 	}
 
@@ -1395,7 +1403,7 @@ void Aladdin::setState(int statenew, float xCenterChain, float yChain, int hChai
 		setFrames(0, 9);
 		setCurrentFrame(0);
 		frameDelay = 0.12f;
-		velocity.x = -100.0f;
+		velocity.x = -85.0f;
 		setXY(380.0f, 151.0f);
 		spriteData.flipHorizontal = true;
 		abuRun->setTextureManager(TextureManager::getIntance()->getTexture(eType::ABU_RUN));
@@ -1403,9 +1411,12 @@ void Aladdin::setState(int statenew, float xCenterChain, float yChain, int hChai
 		abuRun->setCurrentFrame(0);
 		abuRun->setFrameDelay(0.12f);
 		abuRun->setXY(320.0f, 175.0f);
-		abuRun->setVelocityX(-100.0f);
+		abuRun->setVelocityX(-85.0f);
 		isCompletedLevel = true;
 		imgCompleted->setTextureManager(TextureManager::getIntance()->getTexture(eType::LEVEL_COMPLETED));
+		Audio::getInstance()->StopAll();
+		//if(!Audio::getInstance()->isPlaying(MUSIC_EXIT))
+			Audio::getInstance()->Play(MUSIC_EXIT);
 		break;
 	case ALADDIN_REVIVAL:
 		Entity::setState(ALADDIN_REVIVAL);
@@ -1522,9 +1533,8 @@ void Aladdin::CollideWithWall(std::vector<Entity*>* coEntities, float frameTime,
 				{
 					//gamePtr->setMapCurrent(eType::MAP_JAFAR);
 					//Sleep(500);
-					if (Audio::getInstance()->isPlaying(eAudio::MUSIC_MAP_SULTAN))
-						Audio::getInstance()->Stop(eAudio::MUSIC_MAP_SULTAN);
-					Audio::getInstance()->Play(MUSIC_EXIT);
+					/*Audio::getInstance()->StopAll();
+					Audio::getInstance()->Play(MUSIC_EXIT);*/
 					setState(eType::ALADDIN_RUN_COMPLETED);
 					return;
 				}

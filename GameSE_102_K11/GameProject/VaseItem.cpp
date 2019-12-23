@@ -39,7 +39,7 @@ void VaseItem::update(std::vector<Entity*>* listObj, float frameTime)
 	Entity::update(listObj, frameTime);
 	if (currentFrame == 9)
 	{//setFrames(0, 0);
-		frameDelay = INFINITE;
+		frameDelay = (float)INFINITE;
 	}
 	if (currentFrame == 1)
 	{

@@ -194,6 +194,16 @@ void SceneGame::update(float frameTime)
 					aladdin->setAppleCollect(aladdin->getAppleCollect() + 5);
 					input->keyUp(50);
 				}
+				if (input->isKeyDown('3'))
+				{
+					allChance++;
+					input->keyUp(51);
+				}
+				if (input->isKeyDown('4'))
+				{
+					allGem++;
+					input->keyUp(52);
+				}
 			}
 
 			else {
@@ -362,6 +372,8 @@ void SceneGame::render()
 void SceneGame::LoadMap(eType type, bool isChange)
 {
 	mapCurrent = type;
+	if (allChance < 0)
+		allChance = 2;
 	switch (type)
 	{
 	case MAP_SULTAN:
@@ -373,7 +385,7 @@ void SceneGame::LoadMap(eType type, bool isChange)
 		{
 			grid->SetFile(OBJECT_GRID_MAP_SULTAN);
 			grid->ReloadGrid(aladdin);
-			posAladdin = D3DXVECTOR2(2079.0f, 60.0f);
+			posAladdin = D3DXVECTOR2(84.0f, 956.0f);
 		}
 
 		front_hurdle->setTextureManager(TextureManager::getIntance()->getTexture(eType::MAP_SULTAN_FRONT_BG));
@@ -381,7 +393,7 @@ void SceneGame::LoadMap(eType type, bool isChange)
 		//aladdin->setXY(84.0f, 956.0f);
 		//aladdin->setXY(516.0f, 553.0f);
 		//aladdin->setXY(1440.0f, 250.0f);
-		//aladdin->setXY(2079.0f, 60.0f);
+		//aladdin->setXY(2079.0f, 68.0f);
 		//aladdin->setXY(800.0f, 694.0f);
 
 		aladdin->setXY(posAladdin.x, posAladdin.y);
@@ -406,7 +418,7 @@ void SceneGame::LoadMap(eType type, bool isChange)
 		tileMap->LoadMap(eType::MAP_SULTAN);
 		if (!audio->isPlaying(eAudio::MUSIC_MAP_SULTAN))
 		{
-			Audio::getInstance()->StopAll();
+			audio->StopAll();
 			audio->Play(eAudio::MUSIC_MAP_SULTAN, true);
 		}
 		if (audio->isPlaying(eAudio::MUSIC_MAP_JAFAR))

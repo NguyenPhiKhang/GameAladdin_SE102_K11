@@ -34,7 +34,7 @@ void RedIntro_Map::update(float frameTime)
 	{
 		isFinished = true;
 		Input::getInstance()->keyUp(13);
-		Audio::getInstance()->StopAll();
+		//Audio::getInstance()->StopAll();
 	}
 }
 

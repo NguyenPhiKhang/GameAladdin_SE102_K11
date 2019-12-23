@@ -7,7 +7,7 @@ BossJafar::BossJafar(float x, float y, Aladdin* aladdin, std::vector<Entity*>* l
 	this->aladdin = aladdin;
 	kind = eKind::ENEMY;
 	type = eType::JAFAR_BOSS;
-	health = 30.0f;
+	health = 160.0f;
 	this->listWeaponOfEnemy = listWeaponOfEnemy;
 	isSpray = false;
 	if (QueryPerformanceFrequency(&timerFreq) == false)
@@ -130,10 +130,9 @@ void BossJafar::update(std::vector<Entity*>* listObj, float frameTime)
 	}
 	else
 	{
-		//Sleep(500);
-		Audio::getInstance()->StopAll();
-		if (!Audio::getInstance()->isPlaying(MUSIC_EXIT))
-			Audio::getInstance()->Play(MUSIC_EXIT);
+		Sleep(500);
+		/*Audio::getInstance()->StopAll();
+		Audio::getInstance()->Play(MUSIC_EXIT);*/
 		aladdin->setState(eType::ALADDIN_RUN_COMPLETED);
 	}
 }

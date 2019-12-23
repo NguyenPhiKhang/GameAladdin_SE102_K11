@@ -11,18 +11,6 @@
 
 class Audio
 {
-//private:
-//	LPDIRECTSOUND8        g_pDS;	// The DirectSound Device
-//public:
-//	Audio();
-//	~Audio();
-//	bool initialize(HWND hwnd);
-//	void shutdownDirectSound(void);
-//	LPDIRECTSOUNDBUFFER LoadWaveToSoundBuffer(std::string wavFilename);
-//	void playSound(LPDIRECTSOUNDBUFFER whichBuffer);
-//	void playSoundLoop(LPDIRECTSOUNDBUFFER whichBuffer);
-//	void stopSound(LPDIRECTSOUNDBUFFER whichBuffer);
-
 
 private:
 	std::unordered_map<eAudio, CSound* > _ArrAudio;
