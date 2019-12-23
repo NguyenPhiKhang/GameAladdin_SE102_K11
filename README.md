@@ -60,6 +60,19 @@
   </tr>
 </table>
 
+---
+<table style="width: 100%">
+    <tr>
+        <th colspan="3"><font>Diagnostics process</font></th>
+    </tr>
+    <tr>
+        <td><img src="https://user-images.githubusercontent.com/45101536/71366420-7e458080-25d4-11ea-894c-c69c4c099dc4.png">
+</td>
+       <td><img src="https://user-images.githubusercontent.com/45101536/71366422-7e458080-25d4-11ea-9300-994e3b5c9659.png"></td>
+       <td><img src="https://user-images.githubusercontent.com/45101536/71366424-7ede1700-25d4-11ea-948e-337f72a6486d.png"></td>
+  </tr>
+</table>
+
 ## **Key Controls**
 | Key Control | Default Keyboard  |
 |-------------|------------------ |
