@@ -90,73 +90,73 @@ void TextureManager::LoadResources()
 	addTexture(eType::NAHBI_BEHIT,				new CTexture(NAHBI_BEHIT_TEXTURE, 6, 166, 73));
 
 	// Enemy Hakim
-	addTexture(eType::HAKIM_RUN, new CTexture(HAKIM_RUN_TEXTURE, 8, 156, 74));
-	addTexture(eType::HAKIM_ATTACK, new CTexture(HAKIM_ATTACK_TEXTURE, 6, 156, 74));
-	addTexture(eType::HAKIM_BEHIT, new CTexture(HAKIM_BEHIT_TEXTURE, 9, 156, 74));
-	addTexture(eType::HAKIM_IDLE, new CTexture(HAKIM_IDLE_TEXTURE));
+	addTexture(eType::HAKIM_RUN,				new CTexture(HAKIM_RUN_TEXTURE, 8, 156, 74));
+	addTexture(eType::HAKIM_ATTACK,				new CTexture(HAKIM_ATTACK_TEXTURE, 6, 156, 74));
+	addTexture(eType::HAKIM_BEHIT,				new CTexture(HAKIM_BEHIT_TEXTURE, 9, 156, 74));
+	addTexture(eType::HAKIM_IDLE,				new CTexture(HAKIM_IDLE_TEXTURE));
 
 	// Enemy Bat
-	addTexture(eType::BATS, new CTexture(BAT_TEXTURE, 11, 34, 25));
+	addTexture(eType::BATS,						new CTexture(BAT_TEXTURE, 11, 34, 25));
 
 	// Boss
-	addTexture(eType::JAFAR_BOSS, new CTexture(BOSS_JAFAR_TEXTURE, 8, 114, 84));
-	addTexture(eType::SNAKE_BOSS, new CTexture(BOSS_SNAKE_TEXTURE, 11, 114, 84));
-	addTexture(eType::FIRE_IDLE, new CTexture(FIRE_IDLE_TEXTURE, 5, 35, 53));
-	addTexture(eType::FIRE_RUN, new CTexture(FIRE_RUN_TEXTURE, 8, 99, 51));
-	addTexture(eType::STAR, new CTexture(STAR_TEXTURE, 3, 28, 16));
+	addTexture(eType::JAFAR_BOSS,				new CTexture(BOSS_JAFAR_TEXTURE, 8, 114, 84));
+	addTexture(eType::SNAKE_BOSS,				new CTexture(BOSS_SNAKE_TEXTURE, 11, 114, 84));
+	addTexture(eType::FIRE_IDLE,				new CTexture(FIRE_IDLE_TEXTURE, 5, 35, 53));
+	addTexture(eType::FIRE_RUN,					new CTexture(FIRE_RUN_TEXTURE, 8, 99, 51));
+	addTexture(eType::STAR,						new CTexture(STAR_TEXTURE, 3, 28, 16));
 
 	// items
 	addTexture(eType::APPLES,					new CTexture(APPLEITEM_TEXTURE));
 	addTexture(eType::GEMS,						new CTexture(GEMITEM_TEXTURE, 9, 32, 23));
-	addTexture(eType::BUTTRESS, new CTexture(BUTTRESSITEM_TEXTURE, 28, 34, 67));
-	addTexture(eType::COLUMN1, new CTexture(COLUMN1_OUTITEM_TEXTURE));
-	addTexture(eType::COLUMN2, new CTexture(COLUMN2_OUTITEM_TEXTURE));
-	addTexture(eType::COLUMN3, new CTexture(COLUMN3_OUTITEM_TEXTURE));
-	addTexture(eType::COLUMN4, new CTexture(COLUMN4_OUTITEM_TEXTURE));
-	addTexture(eType::EXITS, new CTexture(EXITITEM_TEXTURE));
-	addTexture(eType::GENIES, new CTexture(GENIETEM_TEXTURE, 4, 46, 52));
-	addTexture(eType::HEART_BALLOON, new CTexture(HEART_BALLOONITEM_TEXTURE, 8, 19, 25));
-	addTexture(eType::PODIUM, new CTexture(PODIUMITEM_TEXTURE, 8, 40, 24));
+	addTexture(eType::BUTTRESS,					new CTexture(BUTTRESSITEM_TEXTURE, 28, 34, 67));
+	addTexture(eType::COLUMN1,					new CTexture(COLUMN1_OUTITEM_TEXTURE));
+	addTexture(eType::COLUMN2,					new CTexture(COLUMN2_OUTITEM_TEXTURE));
+	addTexture(eType::COLUMN3,					new CTexture(COLUMN3_OUTITEM_TEXTURE));
+	addTexture(eType::COLUMN4,					new CTexture(COLUMN4_OUTITEM_TEXTURE));
+	addTexture(eType::EXITS,					new CTexture(EXITITEM_TEXTURE));
+	addTexture(eType::GENIES,					new CTexture(GENIETEM_TEXTURE, 4, 46, 52));
+	addTexture(eType::HEART_BALLOON,			new CTexture(HEART_BALLOONITEM_TEXTURE, 8, 19, 25));
+	addTexture(eType::PODIUM,					new CTexture(PODIUMITEM_TEXTURE, 8, 40, 24));
 
-	addTexture(eType::SKELETON, new CTexture(SKELETON_TEXTURE, 22, 112, 103));
-	addTexture(eType::SPEAR, new CTexture(SPEARITEM_TEXTURE, 8, 49, 35));
-	addTexture(eType::VASE, new CTexture(VASEITEM_TEXTURE, 10, 34, 34));
-	addTexture(eType::STALL, new CTexture(STALLITEM_TEXTURE));
-	addTexture(eType::PEDDLER, new CTexture(PEDDLERITEM_TEXTURE, 14, 74, 60));
+	addTexture(eType::SKELETON,					new CTexture(SKELETON_TEXTURE, 22, 112, 103));
+	addTexture(eType::SPEAR,					new CTexture(SPEARITEM_TEXTURE, 8, 49, 35));
+	addTexture(eType::VASE,						new CTexture(VASEITEM_TEXTURE, 10, 34, 34));
+	addTexture(eType::STALL,					new CTexture(STALLITEM_TEXTURE));
+	addTexture(eType::PEDDLER,					new CTexture(PEDDLERITEM_TEXTURE, 14, 74, 60));
 
 	// Bone
-	addTexture(eType::BONE, new CTexture(BONE_TEXTURE, 4, 16, 15));
+	addTexture(eType::BONE,						new CTexture(BONE_TEXTURE, 4, 16, 15));
 
 	// weapon
-	addTexture(eType::APPLE_WEAPON, new CTexture(APPLE_WEAPON_TEXTURE, 4, 9, 9));
+	addTexture(eType::APPLE_WEAPON,				new CTexture(APPLE_WEAPON_TEXTURE, 4, 9, 9));
 
 
 	//effect
-	addTexture(eType::EXPLOSIVE_ITEM, new CTexture(EXPLOSIVE_ITEMS_TEXTURE, 12, 19, 17));
-	addTexture(eType::EXPLOSIVE_APPLE_WEAPON, new CTexture(EXPLOSIVE_APPLE_WEAPON_TEXTURE, 5, 31, 27));
-	addTexture(eType::EXPLOSIVE_GENIE, new CTexture(EXPLOSIVE_GENIE_TEXTURE, 15, 60, 54));
-	addTexture(eType::EXPLOSIVE_ENEMY, new CTexture(EXPLOSIVE_ENEMY_TEXTURE, 10, 88, 55));
-	addTexture(eType::EXPLOSIVE_BONE, new CTexture(EXPLOSIVE_BONE_TEXTURE, 4, 35, 21));
+	addTexture(eType::EXPLOSIVE_ITEM,			new CTexture(EXPLOSIVE_ITEMS_TEXTURE, 12, 19, 17));
+	addTexture(eType::EXPLOSIVE_APPLE_WEAPON,	new CTexture(EXPLOSIVE_APPLE_WEAPON_TEXTURE, 5, 31, 27));
+	addTexture(eType::EXPLOSIVE_GENIE,			new CTexture(EXPLOSIVE_GENIE_TEXTURE, 15, 60, 54));
+	addTexture(eType::EXPLOSIVE_ENEMY,			new CTexture(EXPLOSIVE_ENEMY_TEXTURE, 10, 88, 55));
+	addTexture(eType::EXPLOSIVE_BONE,			new CTexture(EXPLOSIVE_BONE_TEXTURE, 4, 35, 21));
 
 	//icon
-	addTexture(eType::ICON_APPLE, new CTexture(APPLEITEM_TEXTURE));
-	addTexture(eType::ICON_CHANCE, new CTexture(ICON_CHANCE_TEXTURE));
-	addTexture(eType::ICON_GEM, new CTexture(ICON_GEM_TEXTURE));
-	addTexture(eType::HEALTH_METER, new CTexture(HEALTH_METER_TEXTURE, 4, 120, 32));
+	addTexture(eType::ICON_APPLE,				new CTexture(APPLEITEM_TEXTURE));
+	addTexture(eType::ICON_CHANCE,				new CTexture(ICON_CHANCE_TEXTURE));
+	addTexture(eType::ICON_GEM,					new CTexture(ICON_GEM_TEXTURE));
+	addTexture(eType::HEALTH_METER,				new CTexture(HEALTH_METER_TEXTURE, 4, 120, 32));
 
 	// font
-	addTexture(eType::FONT_TOTAL, new CTexture(FONT_TOTAL_TEXTURE, 10, 18, 18));
-	addTexture(eType::FONT_SCORE, new CTexture(FONT_SCORE_TEXTURE, 10, 18, 18));
+	addTexture(eType::FONT_TOTAL,				new CTexture(FONT_TOTAL_TEXTURE, 10, 18, 18));
+	addTexture(eType::FONT_SCORE,				new CTexture(FONT_SCORE_TEXTURE, 10, 18, 18));
 
 	// bbox
-	addTexture(eType::BBOX, new CTexture(BOUNDING_BOX_TEXTURE));
+	addTexture(eType::BBOX,						new CTexture(BOUNDING_BOX_TEXTURE));
 
 	// Intro
-	addTexture(eType::MENU, new CTexture(INTRO_MENU_TEXTURE));
-	addTexture(eType::SELECTOR, new CTexture(INTRO_SELECTOR_TEXTURE));
-	addTexture(eType::MEMBER, new CTexture(MEMBER_TEXTURE));
-	addTexture(eType::LEVEL_COMPLETED, new CTexture(LEVEL_COMPLETE_TEXTURE));
-	addTexture(eType::SULTAN_INTRO, new CTexture(SULTAN_INTRO_TEXTURE, 4, 320, 240));
-	addTexture(eType::JAFAR_INTRO, new CTexture(JAFAR_INTRO_TEXTURE, 4, 320, 240));
+	addTexture(eType::MENU,						new CTexture(INTRO_MENU_TEXTURE));
+	addTexture(eType::SELECTOR,					new CTexture(INTRO_SELECTOR_TEXTURE));
+	addTexture(eType::MEMBER,					new CTexture(MEMBER_TEXTURE));
+	addTexture(eType::LEVEL_COMPLETED,			new CTexture(LEVEL_COMPLETE_TEXTURE));
+	addTexture(eType::SULTAN_INTRO,				new CTexture(SULTAN_INTRO_TEXTURE, 4, 320, 240));
+	addTexture(eType::JAFAR_INTRO,				new CTexture(JAFAR_INTRO_TEXTURE, 4, 320, 240));
 }
 

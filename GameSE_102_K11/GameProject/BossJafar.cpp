@@ -113,7 +113,7 @@ void BossJafar::update(std::vector<Entity*>* listObj, float frameTime)
 		{
 			if (currentFrame == 8)
 			{
-				frameDelay = 0.25f;
+				frameDelay = 0.4f;
 				if (isSpray)
 					isSpray = false;
 			}

@@ -70,14 +70,14 @@ void appleWeapon::update(std::vector<Entity*>* listObj, float frameTime)
 				setState(APPLE_WEAPON);
 				if (!ent->getDirection())
 				{
-					velocity.x = 250;
-					velocity.y = 150;
+					velocity.x = 350;
+					velocity.y = 100;
 					spriteData.x = ent->getX() + 86;
 					spriteData.y = ent->getY() + 46;
 				}
 				else {
-					velocity.x = -250;
-					velocity.y = 150;
+					velocity.x = -350;
+					velocity.y = 100;
 					spriteData.x = ent->getX() + 47;
 					spriteData.y = ent->getY() + 46;
 				}
