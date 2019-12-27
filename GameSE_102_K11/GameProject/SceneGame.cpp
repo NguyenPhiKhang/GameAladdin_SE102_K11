@@ -88,12 +88,15 @@ void SceneGame::update(float frameTime)
 		else {
 			if (!aladdin->getIsDeath())
 			{
-				grid->GetListEntity(listOthers, listEnemies, listItems, camera);
+				if(!aladdin->getIsCompletedLevel())
+					grid->GetListEntity(listOthers, listEnemies, listItems, camera);
 
 				aladdin->update(frameTime, this, &listOthers);
 
-				if (aladdin->getIsCompletedLevel())
+				if (aladdin->getIsCompletedLevel()) {
+					ResetObjectMap();
 					return;
+				}
 
 				if (mapCurrent == MAP_SULTAN) // Xét camera font background hurdle
 				{
@@ -371,6 +374,7 @@ void SceneGame::render()
 
 void SceneGame::LoadMap(eType type, bool isChange)
 {
+	bool checkSameMap = (type == mapCurrent) ? true : false;
 	mapCurrent = type;
 	if (allChance < 0)
 		allChance = 2;
@@ -385,7 +389,7 @@ void SceneGame::LoadMap(eType type, bool isChange)
 		{
 			grid->SetFile(OBJECT_GRID_MAP_SULTAN);
 			grid->ReloadGrid(aladdin);
-			posAladdin = D3DXVECTOR2(84.0f, 956.0f);
+			posAladdin = D3DXVECTOR2(2079.0f, 68.0f);
 		}
 
 		front_hurdle->setTextureManager(TextureManager::getIntance()->getTexture(eType::MAP_SULTAN_FRONT_BG));
@@ -433,7 +437,7 @@ void SceneGame::LoadMap(eType type, bool isChange)
 		camera->setPositionCam(0.0f, 192.0f);
 		oldXCam = camera->getXCamera();
 
-		if (isChange)
+		if (isChange||!checkSameMap)
 		{
 			grid->SetFile(OBJECT_GRID_MAP_JAFAR);
 			grid->ReloadGrid(aladdin);
@@ -479,7 +483,7 @@ void SceneGame::LoadMap(eType type, bool isChange)
 		break;
 	}
 
-	if (isChange)
+	if (isChange||!checkSameMap)
 		ResetObjectMap();
 }
 

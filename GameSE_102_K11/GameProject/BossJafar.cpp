@@ -104,7 +104,7 @@ void BossJafar::update(std::vector<Entity*>* listObj, float frameTime)
 			}
 			else
 				if (currentFrame == 0)
-					frameDelay = 0.3f;
+					frameDelay = 0.35f;
 				else frameDelay = 0.12f;
 			//if()
 		}
