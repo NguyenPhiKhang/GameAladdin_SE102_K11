@@ -28,7 +28,7 @@ SceneGame::SceneGame()
 	oldXCam = 0.0f;
 	oldYCam = 0.0f;
 
-	allScore = 0;
+	allScore = 100;
 	allChance = 2;
 	allGem = 3;
 	//isTouchPodiumFire = false;
@@ -389,7 +389,7 @@ void SceneGame::LoadMap(eType type, bool isChange)
 		{
 			grid->SetFile(OBJECT_GRID_MAP_SULTAN);
 			grid->ReloadGrid(aladdin);
-			posAladdin = D3DXVECTOR2(2079.0f, 68.0f);
+			posAladdin = D3DXVECTOR2(84.0f, 956.0f);
 		}
 
 		front_hurdle->setTextureManager(TextureManager::getIntance()->getTexture(eType::MAP_SULTAN_FRONT_BG));
@@ -415,7 +415,7 @@ void SceneGame::LoadMap(eType type, bool isChange)
 			//aladdin->setHealth(100.0f);
 			aladdin->setAppleCollect(50);
 			allGem = 3;
-			allScore = 0;
+			allScore = 100;
 			//allChance = 2;
 		}
 
@@ -458,7 +458,7 @@ void SceneGame::LoadMap(eType type, bool isChange)
 		{
 			aladdin->setAppleCollect(50);
 			allGem = 3;
-			allScore = 0;
+			allScore = 100;
 		}
 
 		tileMap->LoadMap(eType::MAP_JAFAR);
