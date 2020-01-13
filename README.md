@@ -7,7 +7,8 @@
 <b>3. Trần Anh Thắng</b>     - 17520159
 </pre>
 
-### Teacher: Nguyễn Vĩnh Kha - gained 9 points
+### Teacher: Nguyễn Vĩnh Kha
+### Score: 9
 ---
 <table style="width:100%">
 <tr>
